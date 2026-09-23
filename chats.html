@@ -1,0 +1,1035 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Glamora - Chats</title>
+
+    <!-- Immediate Theme Initialization (Prevents FOUC) -->
+    <script>
+      (function () {
+        const savedTheme = localStorage.getItem("theme");
+        const systemPrefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        if (savedTheme === "dark" || (!savedTheme && systemPrefersDark)) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      })();
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#949393",
+              "on-primary-fixed-variant": "#474747",
+              "surface-container-highest": "#e3e2df",
+              "inverse-on-surface": "#f2f1ee",
+              "surface-container": "#efeeeb",
+              "on-tertiary-fixed-variant": "#6b392c",
+              "surface-container-lowest": "#ffffff",
+              primary: "#171818",
+              "surface-bright": "#faf9f6",
+              surface: "#faf9f6",
+              "success-green": "#5A705F",
+              "on-primary-fixed": "#1b1c1c",
+              "on-surface": "#1b1c1a",
+              tertiary: "#310b03",
+              "on-secondary-fixed-variant": "#3c4a40",
+              "secondary-fixed-dim": "#bacbbd",
+              "surface-container-high": "#e9e8e5",
+              "primary-container": "#2c2c2c",
+              "on-error-container": "#93000a",
+              secondary: "#536257",
+              "tertiary-container": "#4b1f14",
+              "muted-terracotta": "#BC7C6C",
+              "surface-variant": "#e3e2df",
+              "on-tertiary": "#ffffff",
+              "surface-dim": "#dbdad7",
+              "on-secondary": "#ffffff",
+              "on-surface-variant": "#444748",
+              background: "#faf9f6",
+              "on-error": "#ffffff",
+              "error-container": "#ffdad6",
+              "secondary-container": "#d6e7d8",
+              "outline-variant": "#c4c7c7",
+              "on-secondary-fixed": "#111e16",
+              "parchment-white": "#F7F6F3",
+              outline: "#747878",
+              "on-primary": "#ffffff",
+              "surface-container-low": "#f4f3f0",
+              "soft-border": "#E2E2DE",
+              "primary-fixed": "#e4e2e1",
+              "on-background": "#1b1c1a",
+              "inverse-primary": "#c8c6c5",
+              error: "#ba1a1a",
+              "tertiary-fixed-dim": "#feb5a3",
+              "inverse-surface": "#2f312f",
+              sage: "#8A9A8D",
+              "on-tertiary-container": "#c48373",
+              "warning-amber": "#C49D6A",
+              "secondary-fixed": "#d6e7d8",
+              "on-tertiary-fixed": "#360f06",
+              charcoal: "#2C2C2C",
+              "error-red": "#A64D4D",
+              "tertiary-fixed": "#ffdad2",
+              "surface-tint": "#5f5e5e",
+              "on-secondary-container": "#59685c",
+              "primary-fixed-dim": "#c8c6c5",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              lg: "48px",
+              "margin-desktop": "64px",
+              "margin-mobile": "16px",
+              sm: "12px",
+              xs: "4px",
+              gutter: "24px",
+              xl: "80px",
+              md: "24px",
+              base: "8px",
+            },
+            fontFamily: {
+              "headline-xl-mobile": ["Hanken Grotesk"],
+              "headline-lg-mobile": ["Hanken Grotesk"],
+              "label-md": ["Hanken Grotesk"],
+              "headline-md": ["Hanken Grotesk"],
+              "headline-lg": ["Hanken Grotesk"],
+              "label-sm": ["Hanken Grotesk"],
+              "headline-xl": ["Hanken Grotesk"],
+              "body-lg": ["Hanken Grotesk"],
+              "body-sm": ["Hanken Grotesk"],
+              "body-md": ["Hanken Grotesk"],
+            },
+            fontSize: {
+              "headline-xl-mobile": [
+                "36px",
+                { lineHeight: "1.1", fontWeight: "600" },
+              ],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "label-md": [
+                "14px",
+                { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "500" }],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-sm": [
+                "12px",
+                { lineHeight: "1", letterSpacing: "0.03em", fontWeight: "600" },
+              ],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/chats.css" />
+  </head>
+  <body class="bg-background font-body-md text-on-surface">
+    <!-- Navigation Header -->
+    <header
+      class="fixed top-0 w-full z-40 bg-surface/80 backdrop-blur-xl border-b border-soft-border"
+    >
+      <div
+        class="h-16 max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex items-center justify-between"
+      >
+        <div class="flex items-center gap-base">
+          <button
+            onclick="history.back()"
+            class="p-0 border-none bg-transparent text-on-surface hover:text-primary cursor-pointer flex items-center justify-center leading-none"
+            title="Go Back"
+          >
+            <span class="material-symbols-outlined text-[24px]"
+              >arrow_back</span
+            >
+          </button>
+          <img
+            alt="Glamora Logo"
+            class="h-8 w-auto object-contain hidden sm:block"
+            src="images/glamora_background-removebg-preview.png"
+          />
+          <span
+            class="font-headline-md text-headline-md text-primary tracking-tight"
+            >GLAMORA</span
+          >
+        </div>
+        <nav class="hidden md:flex items-center gap-lg">
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+            href="index.html"
+            >Home</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+            href="services.html"
+            >Services</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+            href="marketplace.html"
+            >Marketplace</a
+          >
+          <a
+            aria-current="page"
+            class="font-label-md text-label-md text-primary font-semibold transition-colors"
+            href="chats.html"
+            >Chats</a
+          >
+        </nav>
+        <div class="flex items-center gap-md">
+          <div class="flex items-center gap-sm cursor-pointer group">
+            <img
+              alt="Profile"
+              class="w-8 h-8 rounded-full object-cover border border-soft-border group-hover:border-primary transition-colors"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAksYm7Vpu3y6nFXAdnowe6h9yhNcma3tOmWqhGqQ-yieKVgv8IOaIQ21a9oK4barmnxBtCbmquE3v8ijlXgSV-zbE8NktlwkPDfGYPsqoh8T0NODzVrMTSMZLOGIWxZ5sK5uG09XBqCUJsvcsc8RrecRsLG5xdSZ2m8MUH3WXsWax75A3uBbiT_shFBUTYsOu9dyHNTK3QCaWYe77GnvN4ZQ-67ApBKuv20ipR9qLJlf0O_ZyvafdN"
+            />
+            <span class="material-symbols-outlined text-on-surface-variant"
+              >expand_more</span
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="w-full pt-16 bg-background">
+      <div class="flex w-full h-[calc(100vh-64px)] overflow-hidden relative">
+        <!-- Sidebar -->
+        <aside
+          id="chat-sidebar"
+          class="w-full lg:w-80 border-r border-soft-border bg-surface-container-lowest flex flex-col h-full shrink-0 transition-transform absolute lg:relative z-20"
+        >
+          <div class="p-md border-b border-soft-border">
+            <div class="relative">
+              <span
+                class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]"
+                >search</span
+              >
+              <input
+                id="chat-search-input"
+                oninput="searchChats(this.value)"
+                class="w-full bg-surface-container-low border border-soft-border rounded-full py-sm pl-[40px] pr-sm text-body-sm font-body-sm text-on-surface focus:outline-none focus:border-charcoal focus:ring-1 focus:ring-charcoal transition-all placeholder:text-on-surface-variant/70"
+                placeholder="Search conversations..."
+                type="text"
+              />
+            </div>
+            <!-- Filters -->
+            <div
+              id="filter-buttons"
+              class="flex gap-sm mt-md overflow-x-auto no-scrollbar"
+            >
+              <button
+                onclick="filterChats('all', this)"
+                class="px-sm py-xs rounded-full bg-charcoal text-white text-label-sm font-label-sm whitespace-nowrap"
+              >
+                All
+              </button>
+              <button
+                onclick="filterChats('unread', this)"
+                class="px-sm py-xs rounded-full border border-soft-border text-on-surface-variant hover:border-charcoal hover:text-on-surface transition-colors text-label-sm font-label-sm whitespace-nowrap"
+              >
+                Unread
+              </button>
+              <button
+                onclick="filterChats('bookings', this)"
+                class="px-sm py-xs rounded-full border border-soft-border text-on-surface-variant hover:border-charcoal hover:text-on-surface transition-colors text-label-sm font-label-sm whitespace-nowrap"
+              >
+                Bookings
+              </button>
+            </div>
+          </div>
+
+          <!-- Dummy Chat List -->
+          <div
+            class="flex-1 overflow-y-auto no-scrollbar"
+            id="conversation-list"
+          >
+            <!-- Chat 1: Elena (Active, Unread, Booking) -->
+            <button
+              class="chat-item w-full text-left p-md border-b border-soft-border bg-surface-container-low flex items-start gap-sm transition-colors relative"
+              data-unread="true"
+              data-booking="true"
+              onclick="openMobileChat()"
+            >
+              <div
+                class="absolute left-0 top-0 bottom-0 w-[3px] bg-charcoal hidden lg:block"
+                id="active-indicator"
+              ></div>
+              <div class="relative shrink-0">
+                <img
+                  class="w-12 h-12 rounded-full object-cover border border-soft-border"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCotSXUzstI3x3Cwg6DfWEmDHo-HDSm400Kr6WF-KD2BE4Ot5kodglfm_f63GdNdS6NXUrSghPktkx-NDPO1mlhiFZN8gjL6zVO1J7XmXO70v3Cxblj5nlsz220WLDg18tETElRMPZqrWImwP-4NSAq9v1s-7E-XHjI81drAFcA4vaOhQhlMmG9l1Kk88iPQhHVf_y4vvaatAgVuvoM0-1oeH3toxMHX3n6tSl_AWEqYpctY7ait2g5"
+                  alt="Elena Rodriguez"
+                />
+                <div
+                  class="absolute bottom-0 right-0 w-3 h-3 bg-success-green border-2 border-surface-container-lowest rounded-full"
+                ></div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-baseline mb-xs">
+                  <h3
+                    class="text-body-md font-body-md font-medium text-on-surface truncate"
+                  >
+                    Elena Rodriguez
+                  </h3>
+                  <span
+                    class="text-label-sm font-label-sm text-on-surface-variant shrink-0 ml-sm text-primary font-bold"
+                    >10:42 AM</span
+                  >
+                </div>
+                <div class="flex justify-between items-center gap-2">
+                  <p
+                    class="text-body-sm font-body-sm text-on-surface truncate font-bold"
+                    id="sidebar-last-msg"
+                  >
+                    Yes, the bridal package includes a trial session.
+                  </p>
+                  <span
+                    class="w-2 h-2 rounded-full bg-charcoal shrink-0"
+                  ></span>
+                </div>
+              </div>
+            </button>
+
+            <!-- Chat 2: Chidinma (Read, No Booking) -->
+            <button
+              class="chat-item w-full text-left p-md border-b border-soft-border hover:bg-surface-container-low flex items-start gap-sm transition-colors"
+              data-unread="false"
+              data-booking="false"
+              onclick="openMobileChat()"
+            >
+              <div class="relative shrink-0">
+                <div
+                  class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center text-headline-md font-headline-md border border-soft-border"
+                >
+                  C
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-baseline mb-xs">
+                  <h3
+                    class="text-body-md font-body-md text-on-surface truncate"
+                  >
+                    Chidinma Okoro
+                  </h3>
+                  <span
+                    class="text-label-sm font-label-sm text-on-surface-variant shrink-0 ml-sm"
+                    >Yesterday</span
+                  >
+                </div>
+                <p
+                  class="text-body-sm font-body-sm text-on-surface-variant truncate"
+                >
+                  Thank you so much! I love the braids.
+                </p>
+              </div>
+            </button>
+
+            <!-- Chat 3: Aisha (Unread, No Booking) -->
+            <button
+              class="chat-item w-full text-left p-md border-b border-soft-border hover:bg-surface-container-low flex items-start gap-sm transition-colors"
+              data-unread="true"
+              data-booking="false"
+              onclick="openMobileChat()"
+            >
+              <div class="relative shrink-0">
+                <img
+                  class="w-12 h-12 rounded-full object-cover border border-soft-border"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4B7GO--UkMfnEdOW-BhSowRtsC-qm_zTA7me4_FpGA-hb0Htp_Bq3Me8VM2--1zkSZ7R_aThGuv_wcBhOaWw1JokJUHto-V71NMbsG06XYIFUtX2r-VmXqG_TmIjqehVK9ELfCY3guvnFK_Foi-a_oHH2raIlKh6_vxIO2MaTZNjrfuucZv5ljb1UFCE1AVUE2JRQqQ_OXiSMifrV4cEqQq33m_3XvweX3NFJJoXKnUWYS6TLXOq9"
+                  alt="Aisha"
+                />
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-baseline mb-xs">
+                  <h3
+                    class="text-body-md font-body-md font-medium text-on-surface truncate"
+                  >
+                    Aisha Bello
+                  </h3>
+                  <span
+                    class="text-label-sm font-label-sm text-primary font-bold shrink-0 ml-sm"
+                    >Tuesday</span
+                  >
+                </div>
+                <div class="flex justify-between items-center gap-2">
+                  <p
+                    class="text-body-sm font-body-sm text-on-surface truncate font-bold"
+                  >
+                    Are you available next week Friday?
+                  </p>
+                  <span
+                    class="w-2 h-2 rounded-full bg-charcoal shrink-0"
+                  ></span>
+                </div>
+              </div>
+            </button>
+
+            <!-- Chat 4: Ngozi (Read, Booking) -->
+            <button
+              class="chat-item w-full text-left p-md border-b border-soft-border hover:bg-surface-container-low flex items-start gap-sm transition-colors"
+              data-unread="false"
+              data-booking="true"
+              onclick="openMobileChat()"
+            >
+              <div class="relative shrink-0">
+                <div
+                  class="w-12 h-12 rounded-full bg-primary-container text-on-primary flex items-center justify-center text-headline-md font-headline-md border border-soft-border"
+                >
+                  N
+                </div>
+                <div
+                  class="absolute bottom-0 right-0 w-3 h-3 bg-success-green border-2 border-surface-container-lowest rounded-full"
+                ></div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-baseline mb-xs">
+                  <h3
+                    class="text-body-md font-body-md text-on-surface truncate"
+                  >
+                    Ngozi Eze
+                  </h3>
+                  <span
+                    class="text-label-sm font-label-sm text-on-surface-variant shrink-0 ml-sm"
+                    >Oct 24</span
+                  >
+                </div>
+                <p
+                  class="text-body-sm font-body-sm text-on-surface-variant truncate"
+                >
+                  I have transferred the balance.
+                </p>
+              </div>
+            </button>
+          </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main
+          id="main-chat-area"
+          class="flex-1 flex-col bg-background relative h-full w-full hidden lg:flex"
+        >
+          <!-- Header -->
+          <header
+            class="h-20 px-md lg:px-lg border-b border-soft-border bg-surface-container-lowest flex items-center justify-between shrink-0"
+          >
+            <div class="flex items-center gap-md">
+              <button
+                onclick="closeMobileChat()"
+                class="lg:hidden text-on-surface-variant hover:text-on-surface flex items-center justify-center"
+              >
+                <span class="material-symbols-outlined">arrow_back</span>
+              </button>
+              <div
+                class="flex items-center gap-sm cursor-pointer"
+                onclick="handleProfileView()"
+              >
+                <img
+                  class="w-10 h-10 rounded-full object-cover border border-soft-border hidden sm:block"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCotSXUzstI3x3Cwg6DfWEmDHo-HDSm400Kr6WF-KD2BE4Ot5kodglfm_f63GdNdS6NXUrSghPktkx-NDPO1mlhiFZN8gjL6zVO1J7XmXO70v3Cxblj5nlsz220WLDg18tETElRMPZqrWImwP-4NSAq9v1s-7E-XHjI81drAFcA4vaOhQhlMmG9l1Kk88iPQhHVf_y4vvaatAgVuvoM0-1oeH3toxMHX3n6tSl_AWEqYpctY7ait2g5"
+                  alt="Elena Rodriguez"
+                />
+                <div>
+                  <h2
+                    class="text-headline-md font-headline-md text-on-surface tracking-tight"
+                    id="chat-user-name"
+                  >
+                    Elena Rodriguez
+                  </h2>
+                  <div class="flex items-center gap-xs" id="chat-user-status">
+                    <div
+                      class="w-1.5 h-1.5 bg-success-green rounded-full"
+                    ></div>
+                    <span
+                      class="text-label-sm font-label-sm text-on-surface-variant"
+                      >Online</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-sm relative">
+              <button
+                class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors"
+                title="Share details"
+              >
+                <span class="material-symbols-outlined">ios_share</span>
+              </button>
+              <button
+                class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors"
+                id="chat-menu-trigger"
+              >
+                <span class="material-symbols-outlined">more_vert</span>
+              </button>
+              <!-- Dropdown -->
+              <div
+                class="absolute right-0 top-12 w-48 bg-surface-container-lowest border border-soft-border shadow-lg rounded-xl overflow-hidden hidden z-50"
+                id="chat-menu"
+              >
+                <div class="py-xs">
+                  <button
+                    class="w-full text-left px-md py-sm text-body-sm font-body-sm text-on-surface hover:bg-surface-container-low flex items-center gap-sm"
+                    onclick="handleProfileView()"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >person</span
+                    >
+                    View Profile
+                  </button>
+                  <div class="h-px bg-soft-border my-xs"></div>
+                  <button
+                    class="w-full text-left px-md py-sm text-body-sm font-body-sm text-error-red hover:bg-error-container hover:text-on-error-container flex items-center gap-sm transition-colors"
+                    onclick="openModal('blockConfirmModal')"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >block</span
+                    >
+                    Block User
+                  </button>
+                  <button
+                    class="w-full text-left px-md py-sm text-body-sm font-body-sm text-error-red hover:bg-error-container hover:text-on-error-container flex items-center gap-sm transition-colors"
+                    onclick="openModal('reportConfirmModal')"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >flag</span
+                    >
+                    Report
+                  </button>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <!-- Message History -->
+          <div
+            class="flex-1 overflow-y-auto p-md lg:p-lg flex flex-col gap-md"
+            id="chat-history"
+          >
+            <div class="flex items-center justify-center my-sm">
+              <div
+                class="px-sm py-xs bg-surface-container border border-soft-border rounded-full text-label-sm font-label-sm text-on-surface-variant"
+              >
+                Today
+              </div>
+            </div>
+            <div
+              class="flex flex-col gap-xs max-w-[85%] md:max-w-[70%] self-start"
+            >
+              <div class="flex items-end gap-sm">
+                <div
+                  class="bg-surface-container-lowest border border-soft-border p-md rounded-2xl rounded-bl-sm"
+                >
+                  <p class="text-body-md font-body-md text-on-surface">
+                    Hi there! I saw your booking request for next Saturday. Just
+                    wanted to confirm a few details before I accept.
+                  </p>
+                </div>
+              </div>
+              <span
+                class="text-label-sm font-label-sm text-on-surface-variant ml-0"
+                >10:30 AM</span
+              >
+            </div>
+            <div
+              class="flex flex-col gap-xs max-w-[85%] md:max-w-[70%] self-end"
+            >
+              <div
+                class="bg-charcoal p-md rounded-2xl rounded-br-sm text-white"
+              >
+                <p class="text-body-md font-body-md">
+                  Hello Elena, absolutely. What do you need to know?
+                </p>
+              </div>
+              <span
+                class="text-label-sm font-label-sm text-on-surface-variant self-end"
+                >10:32 AM • Read</span
+              >
+            </div>
+            <!-- System Message Card -->
+            <div class="w-full flex justify-center my-md">
+              <div
+                class="bg-surface-container-low border border-soft-border rounded-lg p-sm flex items-center gap-sm max-w-sm w-full shadow-sm"
+              >
+                <div
+                  class="w-10 h-10 rounded bg-secondary-container flex items-center justify-center shrink-0"
+                >
+                  <span
+                    class="material-symbols-outlined text-on-secondary-container"
+                    >check_circle</span
+                  >
+                </div>
+                <div>
+                  <p class="text-label-md font-label-md text-on-surface">
+                    Booking Accepted
+                  </p>
+                  <p class="text-body-sm font-body-sm text-on-surface-variant">
+                    Bridal Makeup Package • Nov 12
+                  </p>
+                </div>
+                <button
+                  onclick="openModal('bookingModal')"
+                  class="ml-auto text-label-sm font-label-sm text-primary underline hover:no-underline cursor-pointer"
+                >
+                  View
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Safety Banner -->
+          <div
+            id="safety-banner"
+            class="px-md py-sm bg-surface-container border-t border-soft-border flex items-center justify-between gap-sm transition-all"
+          >
+            <div class="flex items-center gap-sm">
+              <span
+                class="material-symbols-outlined text-on-surface-variant shrink-0"
+                >shield</span
+              >
+              <p class="text-body-sm font-body-sm text-on-surface-variant">
+                For your safety, always communicate and pay through Glamora.
+                Never share personal contact info or transfer money externally.
+              </p>
+            </div>
+            <button
+              onclick="dismissBanner()"
+              class="text-on-surface-variant hover:text-on-surface transition-colors p-1 flex items-center justify-center shrink-0"
+              title="Dismiss warning"
+            >
+              <span class="material-symbols-outlined text-[18px]">close</span>
+            </button>
+          </div>
+
+          <!-- Standard Message Input -->
+          <div
+            id="chat-input-area"
+            class="p-md lg:p-lg bg-surface-container-lowest border-t border-soft-border shrink-0"
+          >
+            <div class="flex items-end gap-sm">
+              <input
+                type="file"
+                id="chat-media-upload"
+                class="hidden"
+                accept="image/*"
+                onchange="handleMediaUpload(event)"
+              />
+              <button
+                onclick="document.getElementById('chat-media-upload').click()"
+                class="w-12 h-12 rounded-full border border-soft-border flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors shrink-0"
+              >
+                <span class="material-symbols-outlined">add</span>
+              </button>
+              <div class="flex-1 relative">
+                <textarea
+                  id="message-input"
+                  class="w-full bg-surface-container border border-soft-border rounded-xl py-sm px-md pr-[50px] text-body-md font-body-md text-on-surface focus:outline-none focus:border-charcoal resize-none overflow-hidden min-h-[48px] max-h-[120px]"
+                  placeholder="Type your message..."
+                  rows="1"
+                  style="line-height: 1.5"
+                  oninput="
+                    this.style.height = '';
+                    this.style.height = this.scrollHeight + 'px';
+                  "
+                ></textarea>
+                <button
+                  id="voice-record-btn"
+                  onclick="toggleVoiceRecord()"
+                  class="absolute right-xs top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-surface-container-low transition-colors"
+                  title="Record Voice Message"
+                >
+                  <span
+                    id="voice-record-icon"
+                    class="material-symbols-outlined transition-colors"
+                    >mic</span
+                  >
+                </button>
+              </div>
+              <button
+                onclick="sendMessage()"
+                class="w-12 h-12 rounded-full bg-charcoal text-white flex items-center justify-center hover:bg-primary-container transition-colors shrink-0 shadow-md"
+              >
+                <span class="material-symbols-outlined">send</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Blocked State Banner -->
+          <div
+            id="blocked-input-area"
+            class="hidden p-md bg-surface-container border-t border-soft-border text-center text-body-sm font-body-sm text-on-surface-variant shrink-0"
+          >
+            <span
+              class="material-symbols-outlined text-[20px] align-middle mr-1"
+              >block</span
+            >
+            You have blocked this user. You cannot send messages or view their
+            profile.
+            <button
+              onclick="unblockUser()"
+              class="ml-2 text-primary font-semibold underline hover:no-underline cursor-pointer"
+            >
+              Unblock
+            </button>
+          </div>
+        </main>
+      </div>
+    </main>
+
+    <!-- Modals Container -->
+
+    <!-- 1. View Profile Modal -->
+    <div
+      id="profileModal"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-md"
+    >
+      <div
+        class="bg-surface-container-lowest border border-soft-border rounded-2xl max-w-md w-full overflow-hidden shadow-xl"
+      >
+        <div class="relative h-24 bg-surface-container">
+          <button
+            onclick="closeModal('profileModal')"
+            class="absolute top-md right-md w-8 h-8 rounded-full bg-surface-container-lowest border border-soft-border flex items-center justify-center text-on-surface-variant hover:text-on-surface z-20"
+          >
+            <span class="material-symbols-outlined text-[18px]">close</span>
+          </button>
+        </div>
+        <div class="px-lg pb-lg relative">
+          <div class="flex justify-center -mt-12 relative z-10 mb-sm">
+            <img
+              class="w-24 h-24 rounded-full object-cover border-4 border-surface-container-lowest bg-surface-container-lowest shadow-md"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCotSXUzstI3x3Cwg6DfWEmDHo-HDSm400Kr6WF-KD2BE4Ot5kodglfm_f63GdNdS6NXUrSghPktkx-NDPO1mlhiFZN8gjL6zVO1J7XmXO70v3Cxblj5nlsz220WLDg18tETElRMPZqrWImwP-4NSAq9v1s-7E-XHjI81drAFcA4vaOhQhlMmG9l1Kk88iPQhHVf_y4vvaatAgVuvoM0-1oeH3toxMHX3n6tSl_AWEqYpctY7ait2g5"
+              alt="Elena Rodriguez"
+            />
+          </div>
+          <div class="text-center">
+            <h3 class="text-headline-md font-headline-md text-on-surface">
+              Elena Rodriguez
+            </h3>
+            <p class="text-label-md font-label-md text-muted-terracotta">
+              Master Bridal Artist
+            </p>
+            <div
+              class="flex items-center justify-center gap-xs mt-xs text-on-surface-variant text-body-sm font-body-sm"
+            >
+              <span class="material-symbols-outlined text-[16px]"
+                >location_on</span
+              >
+              <span>Asaba, Delta State, Nigeria</span>
+            </div>
+            <div
+              class="my-md border-t border-b border-soft-border py-sm flex justify-around"
+            >
+              <div>
+                <p class="text-headline-md font-headline-md text-on-surface">
+                  4.9
+                </p>
+                <p class="text-label-sm font-label-sm text-on-surface-variant">
+                  Rating
+                </p>
+              </div>
+              <div class="w-px bg-soft-border"></div>
+              <div>
+                <p class="text-headline-md font-headline-md text-on-surface">
+                  128
+                </p>
+                <p class="text-label-sm font-label-sm text-on-surface-variant">
+                  Jobs Done
+                </p>
+              </div>
+            </div>
+            <div class="text-left mb-lg">
+              <h4 class="text-label-md font-label-md text-on-surface mb-xs">
+                About
+              </h4>
+              <p class="text-body-sm font-body-sm text-on-surface-variant">
+                Specializing in architectural makeup design, luxury bridal prep,
+                and high-definition event editorial looks with over 8 years of
+                professional studio experience.
+              </p>
+            </div>
+            <button
+              onclick="closeModal('profileModal')"
+              class="w-full py-sm bg-charcoal text-white text-label-md font-label-md rounded-xl hover:bg-primary-container transition-colors"
+            >
+              Close Profile
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Block Confirmation Modal -->
+    <div
+      id="blockConfirmModal"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-md"
+    >
+      <div
+        class="bg-surface-container-lowest border border-soft-border rounded-2xl max-w-sm w-full p-lg shadow-xl"
+      >
+        <div class="flex items-center gap-md mb-sm">
+          <div
+            class="w-12 h-12 rounded-full bg-error-container text-error-red flex items-center justify-center shrink-0"
+          >
+            <span class="material-symbols-outlined text-[24px]">block</span>
+          </div>
+          <h3 class="text-headline-md font-headline-md text-on-surface">
+            Block User?
+          </h3>
+        </div>
+        <p
+          class="text-body-sm font-body-sm text-on-surface-variant mb-lg text-left"
+        >
+          Are you sure you want to block Elena Rodriguez? You won't be able to
+          chat or view their profile details anymore.
+        </p>
+        <div class="flex gap-sm">
+          <button
+            onclick="closeModal('blockConfirmModal')"
+            class="flex-1 py-sm border border-soft-border text-on-surface font-label-md text-label-md rounded-xl hover:bg-surface-container-low transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            onclick="confirmBlockUser()"
+            class="flex-1 py-sm bg-error-red text-white font-label-md text-label-md rounded-xl hover:bg-red-800 transition-colors"
+          >
+            Block
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Report Confirmation Modal -->
+    <div
+      id="reportConfirmModal"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-md"
+    >
+      <div
+        class="bg-surface-container-lowest border border-soft-border rounded-2xl max-w-sm w-full p-lg shadow-xl"
+      >
+        <div class="flex items-center gap-md mb-sm">
+          <div
+            class="w-12 h-12 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center shrink-0"
+          >
+            <span class="material-symbols-outlined text-[24px]">flag</span>
+          </div>
+          <h3 class="text-headline-md font-headline-md text-on-surface">
+            Report User?
+          </h3>
+        </div>
+        <p
+          class="text-body-sm font-body-sm text-on-surface-variant mb-lg text-left"
+        >
+          Are you sure you want to report something inappropriate or suspicious
+          in this chat?
+        </p>
+        <div class="flex gap-sm">
+          <button
+            onclick="closeModal('reportConfirmModal')"
+            class="flex-1 py-sm border border-soft-border text-on-surface font-label-md text-label-md rounded-xl hover:bg-surface-container-low transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            onclick="proceedToReportDetails()"
+            class="flex-1 py-sm bg-charcoal text-white font-label-md text-label-md rounded-xl hover:bg-primary-container transition-colors"
+          >
+            Proceed
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Detailed Report Modal -->
+    <div
+      id="reportDetailModal"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-md"
+    >
+      <div
+        class="bg-surface-container-lowest border border-soft-border rounded-2xl max-w-md w-full p-lg shadow-xl"
+      >
+        <div class="flex justify-between items-center mb-md">
+          <h3 class="text-headline-md font-headline-md text-on-surface">
+            Submit Report
+          </h3>
+          <button
+            onclick="closeModal('reportDetailModal')"
+            class="text-on-surface-variant hover:text-on-surface"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <form onsubmit="submitReport(event)" class="space-y-md">
+          <div>
+            <label
+              class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+              >Reason for Reporting</label
+            >
+            <select
+              class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-body-sm text-on-surface focus:outline-none focus:border-charcoal"
+            >
+              <option>Inappropriate Behavior / Harassment</option>
+              <option>Spam or Fraud Attempt</option>
+              <option>Unsafe Payment Request</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label
+              class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+              >Description</label
+            >
+            <textarea
+              required
+              rows="3"
+              class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-body-sm text-on-surface focus:outline-none focus:border-charcoal resize-none"
+              placeholder="Provide details about what happened..."
+            ></textarea>
+          </div>
+          <div>
+            <label
+              class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+              >Add Media / Screenshots</label
+            >
+            <input
+              type="file"
+              class="w-full text-body-sm text-on-surface-variant file:mr-sm file:py-xs file:px-sm file:rounded-full file:border-0 file:text-label-sm file:bg-surface-container-high file:text-on-surface hover:file:bg-surface-variant"
+            />
+          </div>
+          <div class="flex items-center gap-xs pt-xs">
+            <input
+              type="checkbox"
+              id="blockCheckbox"
+              class="rounded border-soft-border text-charcoal focus:ring-charcoal"
+            />
+            <label
+              for="blockCheckbox"
+              class="text-body-sm font-body-sm text-on-surface"
+              >Also block this user</label
+            >
+          </div>
+          <div class="flex gap-sm pt-sm">
+            <button
+              type="button"
+              onclick="closeModal('reportDetailModal')"
+              class="flex-1 py-sm border border-soft-border text-on-surface font-label-md text-label-md rounded-xl hover:bg-surface-container-low transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="flex-1 py-sm bg-error-red text-white font-label-md text-label-md rounded-xl hover:bg-red-800 transition-colors"
+            >
+              Submit Report
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- 5. Booking Details Modal -->
+    <div
+      id="bookingModal"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-md"
+    >
+      <div
+        class="bg-surface-container-lowest border border-soft-border rounded-2xl max-w-md w-full p-lg shadow-xl"
+      >
+        <div
+          class="flex justify-between items-center border-b border-soft-border pb-md mb-md"
+        >
+          <div>
+            <span
+              class="text-label-sm font-label-sm text-success-green bg-secondary-container px-2 py-0.5 rounded-full"
+              >Accepted</span
+            >
+            <h3 class="text-headline-md font-headline-md text-on-surface mt-xs">
+              Bridal Makeup Package
+            </h3>
+          </div>
+          <button
+            onclick="closeModal('bookingModal')"
+            class="text-on-surface-variant hover:text-on-surface"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="space-y-sm text-body-sm font-body-sm text-on-surface mb-lg">
+          <div
+            class="flex justify-between py-xs border-b border-soft-border/50"
+          >
+            <span class="text-on-surface-variant">Vendor Booked:</span>
+            <span class="font-medium">Elena Rodriguez</span>
+          </div>
+          <div
+            class="flex justify-between py-xs border-b border-soft-border/50"
+          >
+            <span class="text-on-surface-variant">Scheduled Time & Date:</span>
+            <span class="font-medium">Nov 12, 2026 at 10:00 AM</span>
+          </div>
+          <div
+            class="flex justify-between py-xs border-b border-soft-border/50"
+          >
+            <span class="text-on-surface-variant">Location:</span>
+            <span class="font-medium"
+              >Client Residence (Asaba, Delta State)</span
+            >
+          </div>
+          <div
+            class="flex justify-between py-xs border-b border-soft-border/50"
+          >
+            <span class="text-on-surface-variant">Total Payment:</span>
+            <span class="font-medium text-headline-md text-primary"
+              >₦350,000</span
+            >
+          </div>
+        </div>
+        <button
+          onclick="closeModal('bookingModal')"
+          class="w-full py-sm bg-charcoal text-white text-label-md font-label-md rounded-xl hover:bg-primary-container transition-colors"
+        >
+          Close Details
+        </button>
+      </div>
+    </div>
+
+    <script src="js/chats.js"></script>
+  </body>
+</html>

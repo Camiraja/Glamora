@@ -1,0 +1,1919 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Vendor Appointments & Orders — GLAMORA</title>
+
+    <!-- Check Local Storage for Theme -->
+    <script>
+      if (
+        localStorage.getItem("theme") === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed-variant": "#474747",
+              "on-primary-container": "#949393",
+              "surface-container-highest": "#e3e2df",
+              "parchment-white": "#F7F6F3",
+              "secondary-container": "#d6e7d8",
+              "surface-container-low": "#f4f3f0",
+              "on-secondary-fixed-variant": "#3c4a40",
+              "on-error-container": "#93000a",
+              "inverse-surface": "#2f312f",
+              "on-tertiary-container": "#c48373",
+              "on-secondary-container": "#59685c",
+              "surface-variant": "#e3e2df",
+              "inverse-primary": "#c8c6c5",
+              "on-tertiary": "#ffffff",
+              "on-secondary": "#ffffff",
+              error: "#ba1a1a",
+              outline: "#747878",
+              "secondary-fixed-dim": "#bacbbd",
+              "on-surface": "#1b1c1a",
+              "inverse-on-surface": "#f2f1ee",
+              "error-container": "#ffdad6",
+              charcoal: "#2C2C2C",
+              "on-tertiary-fixed": "#360f06",
+              "surface-tint": "#5f5e5e",
+              "error-red": "#A64D4D",
+              "on-background": "#1b1c1a",
+              "surface-container": "#efeeeb",
+              "surface-container-lowest": "#ffffff",
+              "soft-border": "#E2E2DE",
+              background: "#faf9f6",
+              "on-secondary-fixed": "#111e16",
+              "on-surface-variant": "#444748",
+              primary: "#171818",
+              "success-green": "#5A705F",
+              "primary-fixed-dim": "#c8c6c5",
+              "surface-container-high": "#e9e8e5",
+              "secondary-fixed": "#d6e7d8",
+              "surface-dim": "#dbdad7",
+              "tertiary-container": "#4b1f14",
+              "tertiary-fixed-dim": "#feb5a3",
+              sage: "#8A9A8D",
+              "surface-bright": "#faf9f6",
+              "tertiary-fixed": "#ffdad2",
+              surface: "#faf9f6",
+              "outline-variant": "#c4c7c7",
+              "muted-terracotta": "#BC7C6C",
+              "primary-fixed": "#e4e2e1",
+              tertiary: "#310b03",
+              "on-tertiary-fixed-variant": "#6b392c",
+              "warning-amber": "#C49D6A",
+              "on-error": "#ffffff",
+              secondary: "#536257",
+              "primary-container": "#2c2c2c",
+              "on-primary": "#ffffff",
+              "on-primary-fixed": "#1b1c1c",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              xl: "80px",
+              gutter: "24px",
+              "margin-mobile": "16px",
+              lg: "48px",
+              base: "8px",
+              xs: "4px",
+              "margin-desktop": "64px",
+              md: "24px",
+              sm: "12px",
+            },
+            fontFamily: {
+              "label-md": ["Hanken Grotesk"],
+              "body-md": ["Hanken Grotesk"],
+              "label-sm": ["Hanken Grotesk"],
+              "body-sm": ["Hanken Grotesk"],
+              "headline-lg-mobile": ["Hanken Grotesk"],
+              "headline-xl-mobile": ["Hanken Grotesk"],
+              "headline-lg": ["Hanken Grotesk"],
+              "body-lg": ["Hanken Grotesk"],
+              "headline-xl": ["Hanken Grotesk"],
+              "headline-md": ["Hanken Grotesk"],
+            },
+            fontSize: {
+              "label-md": [
+                "14px",
+                { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" },
+              ],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+              "label-sm": [
+                "12px",
+                { lineHeight: "1", letterSpacing: "0.03em", fontWeight: "600" },
+              ],
+              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "headline-xl-mobile": [
+                "36px",
+                { lineHeight: "1.1", fontWeight: "600" },
+              ],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "500" }],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Google Fonts & Material Symbols -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body
+    class="bg-background dark:bg-neutral-950 font-body-md text-on-surface dark:text-parchment-white transition-colors duration-200"
+  >
+    <!-- Mobile Header -->
+    <div
+      class="lg:hidden fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl border-b border-soft-border px-margin-mobile py-sm flex items-center justify-between"
+    >
+      <div class="flex items-center gap-base">
+        <img
+          alt="Glamora Logo"
+          class="h-7 w-auto object-contain"
+          src="images/glamora_background-removebg-preview.png"
+        />
+        <span class="font-headline-md text-[18px] text-primary tracking-tight"
+          >GLAMORA</span
+        >
+      </div>
+
+      <div class="flex items-center gap-sm">
+        <!-- Vendor/Client Toggle (Mobile) -->
+        <div class="flex items-center gap-sm">
+          <div
+            class="bg-surface-container p-1 rounded-full flex text-label-sm border border-soft-border -ml-3 scale-105"
+          >
+            <button
+              type="button"
+              onclick="switchRole('vendor')"
+              class="px-2.5 py-1 rounded-full text-[11px] bg-primary text-on-primary font-semibold shadow-sm transition-all"
+            >
+              Vendor
+            </button>
+            <button
+              type="button"
+              onclick="switchRole('customer')"
+              class="px-2.5 py-1 rounded-full text-[11px] text-on-surface-variant font-medium hover:text-primary transition-all"
+            >
+              Client
+            </button>
+          </div>
+          <!-- Hamburger Menu -->
+          <button
+            class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors"
+            onclick="toggleMobileSidebar()"
+          >
+            <span class="material-symbols-outlined text-[20px]">menu</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Sidebar Drawer -->
+    <div class="hidden fixed inset-0 z-50 lg:hidden" id="mobile-sidebar">
+      <div
+        class="fixed inset-0 bg-primary/40 backdrop-blur-sm"
+        onclick="toggleMobileSidebar()"
+      ></div>
+      <aside
+        class="relative w-72 max-w-[80vw] h-full bg-surface-container-lowest border-r border-soft-border p-md flex flex-col shadow-lg z-10 overflow-y-auto"
+      >
+        <div
+          class="flex items-center justify-between pb-sm border-b border-soft-border mb-md"
+        >
+          <div class="flex items-center gap-base">
+            <img
+              alt="Glamora Logo"
+              class="h-7 w-auto object-contain"
+              src="images/glamora_background-removebg-preview.png"
+            />
+            <span
+              class="font-headline-md text-[18px] text-primary tracking-tight"
+              >GLAMORA</span
+            >
+          </div>
+          <button
+            class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant"
+            onclick="toggleMobileSidebar()"
+          >
+            <span class="material-symbols-outlined text-[18px]">close</span>
+          </button>
+        </div>
+
+        <nav class="flex-1 space-y-xs font-label-md text-label-md">
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-dashboard.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >dashboard</span
+            >
+            Dashboard
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="service-management.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >list_alt</span
+            >
+            Services
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-schedule-and-availability.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >date_range</span
+            >
+            Schedule
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-wallet.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >payments</span
+            >
+            Earnings
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg transition-all group bg-surface-container-high text-primary font-bold"
+            href="vendor-appointment.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >event_available</span
+            >
+            Appointments
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="Products-management.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >inventory_2</span
+            >
+            Products
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-analytics.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >monitoring</span
+            >
+            Analytics
+          </a>
+        </nav>
+
+        <nav class="pt-md border-t border-soft-border">
+          <a
+            class="px-sm py-base rounded-lg text-label-md text-on-surface-variant hover:bg-surface-container transition-colors flex items-center gap-base"
+            data-path="settings"
+            href="vendor-profile.html"
+            ><span class="material-symbols-outlined text-[20px]">settings</span>
+            Settings</a
+          >
+        </nav>
+      </aside>
+    </div>
+
+    <!-- Desktop Sidebar -->
+    <aside
+      class="hidden lg:flex fixed left-0 top-0 h-full w-72 bg-surface-container-lowest border-r border-soft-border z-50 flex-col"
+    >
+      <div
+        class="p-md flex items-center gap-base border-b border-soft-border mb-base"
+      >
+        <img
+          alt="Glamora Logo"
+          class="h-8 w-auto"
+          src="images/glamora_background-removebg-preview.png"
+        />
+        <span class="font-headline-md text-headline-md tracking-tight"
+          >GLAMORA</span
+        >
+      </div>
+      <div class="px-md py-base mb-sm">
+        <div
+          class="bg-surface-container flex rounded-full p-xs border border-soft-border"
+        >
+          <button
+            onclick="switchRole('vendor')"
+            class="flex-1 text-label-sm font-label-sm py-xs rounded-full bg-white shadow-sm text-primary font-semibold"
+          >
+            Vendor Mode
+          </button>
+          <button
+            onclick="switchRole('customer')"
+            class="flex-1 text-label-sm font-label-sm py-xs text-on-surface-variant hover:text-on-surface transition-colors"
+          >
+            Client Mode
+          </button>
+        </div>
+      </div>
+      <nav class="flex-1 px-sm space-y-xs font-label-md text-label-md">
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-dashboard.html"
+        >
+          <span class="material-symbols-outlined mr-md">dashboard</span>
+          Dashboard
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="service-management.html"
+        >
+          <span class="material-symbols-outlined mr-md">list_alt</span> Services
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-schedule-and-availability.html"
+        >
+          <span class="material-symbols-outlined mr-md">date_range</span>
+          Schedule
+        </a>
+        <!-- Updated to vendor-wallet.html -->
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-wallet.html"
+        >
+          <span class="material-symbols-outlined mr-md">payments</span> Earnings
+        </a>
+        <a
+          aria-current="page"
+          class="flex items-center px-md py-sm rounded-lg transition-all group bg-surface-container-high text-primary font-bold"
+          href="vendor-appointments.html"
+        >
+          <span class="material-symbols-outlined mr-md">event_available</span>
+          Appointments
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="products-management.html"
+        >
+          <span class="material-symbols-outlined mr-md">inventory_2</span>
+          Products
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-analytics.html"
+        >
+          <span class="material-symbols-outlined mr-md">monitoring</span>
+          Analytics
+        </a>
+      </nav>
+      <!-- Replace the bottom <nav> in the Desktop Sidebar -->
+      <div class="px-sm pb-md w-full">
+        <nav class="pt-sm border-t border-soft-border">
+          <a
+            class="flex items-center px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            data-path="settings"
+            href="vendor-profile.html"
+          >
+            <span class="material-symbols-outlined mr-md">settings</span>
+            Settings
+          </a>
+        </nav>
+      </div>
+    </aside>
+
+    <div class="w-full lg:pl-72 flex flex-col min-h-screen relative">
+      <!-- Desktop Header -->
+      <header
+        class="hidden lg:flex fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl border-b border-soft-border z-40 items-center justify-end px-margin-desktop gap-md"
+      >
+        <a
+          href="service-management.html"
+          class="flex items-center gap-xs px-md py-xs bg-primary text-on-primary rounded-full font-label-sm text-label-sm hover:bg-surface-tint transition-colors"
+        >
+          <span class="material-symbols-outlined text-[18px]">add</span> New
+          Service
+        </a>
+        <div class="flex items-center gap-sm pl-md border-l border-soft-border">
+          <img
+            alt="Profile"
+            class="w-8 h-8 rounded-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAksYm7Vpu3y6nFXAdnowe6h9yhNcma3tOmWqhGqQ-yieKVgv8IOaIQ21a9oK4barmnxBtCbmquE3v8ijlXgSV-zbE8NktlwkPDfGYPsqoh8T0NODzVrMTSMZLOGIWxZ5sK5uG09XBqCUJsvcsc8RrecRsLG5xdSZ2m8MUH3WXsWax75A3uBbiT_shFBUTYsOu9dyHNTK3QCaWYe77GnvN4ZQ-67ApBKuv20ipR9qLJlf0O_ZyvafdN"
+          />
+          <span class="font-label-md text-label-md text-primary"
+            >Alexander V.</span
+          >
+        </div>
+      </header>
+
+      <!-- MAIN CONTENT AREA -->
+      <main
+        class="pt-16 min-h-screen bg-background dark:bg-neutral-950 transition-colors"
+      >
+        <div class="flex flex-col w-full">
+          <div
+            class="px-margin-mobile md:px-margin-desktop py-lg flex flex-col gap-lg max-w-[1440px] mx-auto w-full"
+          >
+            <!-- PAGE HEADER & ACTION BUTTONS -->
+            <div
+              class="flex flex-col md:flex-row md:items-end justify-between gap-base"
+            >
+              <div class="flex flex-col gap-xs max-w-2xl">
+                <div class="flex items-center gap-sm">
+                  <span
+                    class="font-label-sm text-label-sm uppercase tracking-widest text-secondary dark:text-neutral-400"
+                    >Operations Hub</span
+                  >
+                  <span class="w-1.5 h-1.5 rounded-full bg-sage"></span>
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400"
+                    >Live Studio Sync</span
+                  >
+                </div>
+                <h1
+                  class="font-headline-xl text-headline-xl text-primary dark:text-parchment-white tracking-tight"
+                >
+                  Appointments & Orders
+                </h1>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant dark:text-neutral-400"
+                >
+                  Oversee incoming treatments, finalize clinical sessions to
+                  release wallet payouts instantly, and process fulfillment for
+                  bespoke physical apothecary orders.
+                </p>
+              </div>
+
+              <div class="flex items-center gap-sm self-start md:self-auto">
+                <button
+                  onclick="exportLedger()"
+                  class="flex items-center gap-xs px-md py-sm rounded-lg bg-surface-container-high dark:bg-neutral-800 text-primary dark:text-parchment-white hover:bg-surface-container-highest dark:hover:bg-neutral-700 transition-colors font-label-md text-label-md"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >file_download</span
+                  >
+                  Export Ledger
+                </button>
+                <button
+                  onclick="openModal('manualBookingModal')"
+                  class="flex items-center gap-xs px-md py-sm rounded-lg bg-primary dark:bg-parchment-white text-on-primary dark:text-charcoal hover:bg-primary-container dark:hover:bg-neutral-200 transition-colors font-label-md text-label-md shadow-sm"
+                >
+                  <span class="material-symbols-outlined text-[18px]">add</span>
+                  Manual Booking
+                </button>
+              </div>
+            </div>
+
+            <!-- ESCROW GUARANTEE BANNER -->
+            <div
+              class="bg-surface-container-low dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 rounded-xl p-md flex flex-col md:flex-row items-start md:items-center justify-between gap-base relative overflow-hidden"
+            >
+              <div class="flex items-start gap-md z-10">
+                <div
+                  class="w-10 h-10 rounded-lg bg-secondary-container dark:bg-neutral-800 flex items-center justify-center text-on-secondary-container dark:text-sage shrink-0"
+                >
+                  <span class="material-symbols-outlined text-[22px]"
+                    >verified_user</span
+                  >
+                </div>
+                <div class="flex flex-col">
+                  <span
+                    class="font-label-md text-label-md text-primary dark:text-parchment-white"
+                    >Glamora Breakage & Deposit Guarantee Active</span
+                  >
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant dark:text-neutral-400 max-w-3xl mt-xs"
+                  >
+                    A non-refundable 25% deposit is held escrowed for every
+                    booked session. Cancellations within the &lt;30 min
+                    threshold release directly to your payout balance. Marking
+                    appointments complete disburses remaining studio fees within
+                    seconds.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="flex items-center gap-sm self-end md:self-auto shrink-0 z-10"
+              >
+                <button
+                  onclick="openModal('escrowTermsModal')"
+                  class="font-label-sm text-label-sm text-primary dark:text-parchment-white underline underline-offset-4 hover:text-secondary dark:hover:text-sage transition-colors"
+                >
+                  Review Escrow Terms
+                </button>
+              </div>
+              <div
+                class="absolute -right-8 -bottom-8 w-36 h-36 rounded-full bg-secondary-container/40 pointer-events-none blur-xl"
+              ></div>
+            </div>
+
+            <!-- METRIC KPI CARDS -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-gutter">
+              <div
+                class="bg-surface-container-lowest dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 p-md rounded-xl shadow-sm flex flex-col justify-between h-32"
+              >
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400 uppercase tracking-wider"
+                    >Scheduled Today</span
+                  >
+                  <span class="material-symbols-outlined text-[20px] text-sage"
+                    >calendar_today</span
+                  >
+                </div>
+                <div class="flex items-baseline justify-between">
+                  <span
+                    class="font-headline-lg text-headline-lg text-primary dark:text-parchment-white"
+                    id="kpi-today-count"
+                    >4</span
+                  >
+                  <span
+                    class="font-label-sm text-label-sm text-success-green dark:text-emerald-400 flex items-center gap-xs"
+                  >
+                    <span class="w-2 h-2 rounded-full bg-success-green"></span>
+                    2 Escrow Cleared
+                  </span>
+                </div>
+              </div>
+
+              <div
+                class="bg-surface-container-lowest dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 p-md rounded-xl shadow-sm flex flex-col justify-between h-32"
+              >
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400 uppercase tracking-wider"
+                    >Pending Release</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[20px] text-warning-amber"
+                    >hourglass_top</span
+                  >
+                </div>
+                <div class="flex items-baseline justify-between">
+                  <span
+                    class="font-headline-lg text-headline-lg text-primary dark:text-parchment-white"
+                    >₦418,500</span
+                  >
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400"
+                    >5 client visits</span
+                  >
+                </div>
+              </div>
+
+              <div
+                class="bg-surface-container-lowest dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 p-md rounded-xl shadow-sm flex flex-col justify-between h-32"
+              >
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400 uppercase tracking-wider"
+                    >Dispatched Today</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[20px] text-secondary dark:text-neutral-300"
+                    >package_2</span
+                  >
+                </div>
+                <div class="flex items-baseline justify-between">
+                  <span
+                    class="font-headline-lg text-headline-lg text-primary dark:text-parchment-white"
+                    >6
+                    <span
+                      class="font-body-sm text-body-sm text-on-surface-variant dark:text-neutral-400"
+                      >/ 9 orders</span
+                    ></span
+                  >
+                  <span
+                    class="font-label-sm text-label-sm text-muted-terracotta"
+                    >3 Waiting Print</span
+                  >
+                </div>
+              </div>
+
+              <div
+                class="bg-surface-container-lowest dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 p-md rounded-xl shadow-sm flex flex-col justify-between h-32"
+              >
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400 uppercase tracking-wider"
+                    >Dispute Protection</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[20px] text-success-green dark:text-emerald-400"
+                    >shield_lock</span
+                  >
+                </div>
+                <div class="flex items-baseline justify-between">
+                  <span
+                    class="font-headline-lg text-headline-lg text-primary dark:text-parchment-white"
+                    >100%</span
+                  >
+                  <span class="font-label-sm text-label-sm text-sage"
+                    >Zero Chargebacks</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB SWITCHER & SEARCH / FILTER CONTROL BAR -->
+            <div class="flex flex-col gap-base">
+              <div
+                class="flex flex-col sm:flex-row sm:items-center justify-between gap-base border-b border-soft-border dark:border-neutral-800 pb-base"
+              >
+                <div
+                  class="flex items-center gap-xs bg-surface-container-low dark:bg-neutral-900 p-xs rounded-full border border-soft-border dark:border-neutral-800"
+                  id="tab-group"
+                >
+                  <button
+                    class="px-md py-xs rounded-full font-label-md text-label-md bg-surface-container-lowest dark:bg-neutral-800 text-primary dark:text-parchment-white shadow-sm transition-all flex items-center gap-xs"
+                    id="tab-appointments"
+                    onclick="switchTab('appointments')"
+                  >
+                    <span>Client Appointments</span>
+                    <span
+                      class="px-xs py-[2px] rounded-full bg-surface-container-high dark:bg-neutral-700 text-on-surface dark:text-parchment-white text-label-sm font-label-sm"
+                      id="badge-appointments-count"
+                      >3</span
+                    >
+                  </button>
+                  <button
+                    class="px-md py-xs rounded-full font-label-md text-label-md text-on-surface-variant dark:text-neutral-400 hover:text-primary dark:hover:text-parchment-white transition-all flex items-center gap-xs"
+                    id="tab-orders"
+                    onclick="switchTab('orders')"
+                  >
+                    <span>Product Orders</span>
+                    <span
+                      class="px-xs py-[2px] rounded-full bg-surface-container-high dark:bg-neutral-700 text-on-surface dark:text-parchment-white text-label-sm font-label-sm"
+                      id="badge-orders-count"
+                      >2</span
+                    >
+                  </button>
+                </div>
+
+                <!-- Search and Filter Actions with Absolute Nesting -->
+                <div class="flex items-center gap-sm relative">
+                  <div class="relative min-w-[260px]">
+                    <span
+                      class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-[18px] text-on-surface-variant dark:text-neutral-400"
+                      >search</span
+                    >
+                    <input
+                      id="searchInput"
+                      oninput="handleSearch(this.value)"
+                      class="w-full pl-9 pr-sm py-xs bg-surface-container-lowest dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 rounded-lg font-body-sm text-body-sm text-primary dark:text-parchment-white placeholder:text-on-surface-variant dark:placeholder:text-neutral-500 focus:outline-none focus:bg-surface-container-low transition-colors"
+                      placeholder="Search client, ID, treatment..."
+                      type="text"
+                    />
+                  </div>
+                  <button
+                    onclick="toggleFilterBar()"
+                    class="flex items-center bg-surface-container-lowest dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 rounded-lg px-sm py-xs text-on-surface-variant dark:text-neutral-400 hover:text-primary dark:hover:text-parchment-white transition-colors cursor-pointer"
+                  >
+                    <span class="material-symbols-outlined text-[18px] mr-xs"
+                      >tune</span
+                    >
+                    <span class="font-label-sm text-label-sm">Filters</span>
+                  </button>
+
+                  <!-- EXPANDABLE FILTER OPTIONS PANEL (ABSOLUTE POSITIONING) -->
+                  <div
+                    id="advancedFilterPanel"
+                    class="hidden absolute right-0 top-full mt-2 z-50 w-[340px] max-w-[90vw] bg-surface-container-low dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 rounded-xl p-md transition-all flex flex-col gap-md shadow-2xl"
+                  >
+                    <div
+                      class="flex items-center justify-between border-b border-soft-border dark:border-neutral-800 pb-xs"
+                    >
+                      <span
+                        class="font-label-md text-label-md text-primary dark:text-parchment-white flex items-center gap-xs"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >filter_list</span
+                        >
+                        Filter & Sort Options
+                      </span>
+                      <button
+                        onclick="toggleFilterBar()"
+                        class="text-on-surface-variant hover:text-primary dark:text-neutral-400"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >close</span
+                        >
+                      </button>
+                    </div>
+                    <div class="flex flex-col gap-md">
+                      <div>
+                        <label
+                          class="block font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400 mb-xs"
+                          >Filter by Status</label
+                        >
+                        <select
+                          id="filterStatusSelect"
+                          onchange="applyAdvancedFilters()"
+                          class="w-full bg-surface-container-lowest dark:bg-neutral-800 border border-soft-border dark:border-neutral-700 rounded-lg p-xs font-body-sm text-body-sm text-primary dark:text-parchment-white focus:outline-none"
+                        >
+                          <option value="all">All Statuses</option>
+                          <option value="upcoming">Upcoming Sessions</option>
+                          <option value="action">
+                            Requires Action / Pending
+                          </option>
+                          <option value="completed">Completed & Settled</option>
+                          <option value="cancelled">
+                            Archived / Cancelled
+                          </option>
+                        </select>
+                      </div>
+                      <div>
+                        <label
+                          class="block font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400 mb-xs"
+                          >Sort By</label
+                        >
+                        <select
+                          id="filterSortSelect"
+                          onchange="applyAdvancedFilters()"
+                          class="w-full bg-surface-container-lowest dark:bg-neutral-800 border border-soft-border dark:border-neutral-700 rounded-lg p-xs font-body-sm text-body-sm text-primary dark:text-parchment-white focus:outline-none"
+                        >
+                          <option value="newest">Newest First</option>
+                          <option value="time">
+                            Appointment Schedule Time
+                          </option>
+                        </select>
+                      </div>
+                      <div>
+                        <label
+                          class="block font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400 mb-xs"
+                          >Filter by Date</label
+                        >
+                        <input
+                          type="date"
+                          id="filterDateInput"
+                          onchange="applyAdvancedFilters()"
+                          class="w-full bg-surface-container-lowest dark:bg-neutral-800 border border-soft-border dark:border-neutral-700 rounded-lg p-xs font-body-sm text-body-sm text-primary dark:text-parchment-white focus:outline-none"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="flex justify-end gap-sm pt-xs border-t border-soft-border dark:border-neutral-800"
+                    >
+                      <button
+                        onclick="resetFilters()"
+                        class="px-md py-xs rounded-lg text-label-sm font-label-sm text-on-surface-variant hover:text-primary dark:hover:text-parchment-white transition-colors"
+                      >
+                        Reset Filters
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Filter Status Chips -->
+              <div
+                class="flex items-center gap-xs overflow-x-auto pb-xs"
+                id="filter-chips"
+              >
+                <button
+                  onclick="applyFilter('all', this)"
+                  class="filter-chip px-sm py-xs rounded-full font-label-sm text-label-sm bg-primary text-on-primary dark:bg-parchment-white dark:text-charcoal"
+                >
+                  All Activity
+                </button>
+                <button
+                  onclick="applyFilter('upcoming', this)"
+                  class="filter-chip px-sm py-xs rounded-full font-label-sm text-label-sm bg-surface-container-low dark:bg-neutral-800 text-on-surface-variant dark:text-neutral-400 hover:bg-surface-container-high hover:text-primary transition-colors"
+                >
+                  Upcoming (4)
+                </button>
+                <button
+                  onclick="applyFilter('action', this)"
+                  class="filter-chip px-sm py-xs rounded-full font-label-sm text-label-sm bg-surface-container-low dark:bg-neutral-800 text-on-surface-variant dark:text-neutral-400 hover:bg-surface-container-high hover:text-primary transition-colors flex items-center gap-xs"
+                >
+                  <span>Requires Action</span>
+                  <span class="w-2 h-2 rounded-full bg-muted-terracotta"></span>
+                </button>
+                <button
+                  onclick="applyFilter('completed', this)"
+                  class="filter-chip px-sm py-xs rounded-full font-label-sm text-label-sm bg-surface-container-low dark:bg-neutral-800 text-on-surface-variant dark:text-neutral-400 hover:bg-surface-container-high hover:text-primary transition-colors"
+                >
+                  Completed
+                </button>
+                <button
+                  onclick="applyFilter('cancelled', this)"
+                  class="filter-chip px-sm py-xs rounded-full font-label-sm text-label-sm bg-surface-container-low dark:bg-neutral-800 text-on-surface-variant dark:text-neutral-400 hover:bg-surface-container-high hover:text-primary transition-colors"
+                >
+                  Archived / Cancelled
+                </button>
+              </div>
+            </div>
+
+            <!-- APPOINTMENTS LIST VIEW -->
+            <div class="flex flex-col gap-md" id="appointments-view">
+              <!-- Appointment Card 1: Elena Rostova -->
+              <div
+                class="appointment-card bg-surface-container-lowest dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 rounded-xl p-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden"
+                data-status="upcoming"
+                data-search="elena rostova architectural brow sculpting bk-7704"
+              >
+                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-sage"></div>
+                <div
+                  class="flex flex-col lg:flex-row lg:items-center justify-between gap-md pl-xs"
+                >
+                  <div class="flex items-start gap-md">
+                    <img
+                      class="w-14 h-14 rounded-full object-cover shrink-0"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBepuUkDlNs-CKxs6dj2S7oA2tdKboqZFZrFQ-w3BhslL6T2fFX05ZKbWsdn_NnsDR3DJhA4bnKEoyaHkiOpt7JYWnwi0q8eE0BoM234hK-PVydV7YarGLWeuqX59AdEsmf5sxQD_eTqpmeCm0WfqdrdTpBkp_n_q90N07xyNPY0lV7P3MEdpUNcVdWwpjt69RaSVCDIde_J5BlPE8CDPxz2QpqwkR6nBBFq7Do3qKa3k403r-qph8z"
+                      alt="Elena Rostova"
+                    />
+                    <div class="flex flex-col gap-xs">
+                      <div class="flex items-center gap-sm flex-wrap">
+                        <span
+                          class="font-headline-md text-headline-md text-primary dark:text-parchment-white"
+                          >Elena Rostova</span
+                        >
+                        <span
+                          class="px-sm py-[2px] rounded-full bg-secondary-container dark:bg-emerald-950 text-on-secondary-container dark:text-emerald-300 font-label-sm text-label-sm uppercase tracking-wide"
+                          >Today • 2:00 PM</span
+                        >
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400"
+                          >Ref: #BK-7704</span
+                        >
+                      </div>
+                      <div
+                        class="flex items-center gap-sm text-on-surface-variant dark:text-neutral-400 font-body-sm text-body-sm"
+                      >
+                        <span
+                          class="font-semibold text-primary dark:text-parchment-white"
+                          >Architectural Brow Sculpting</span
+                        >
+                        <span>•</span>
+                        <span>60 Mins</span>
+                        <span>•</span>
+                        <span>Studio Station 03</span>
+                      </div>
+                      <div class="flex items-center gap-md mt-xs">
+                        <div class="flex items-baseline gap-xs">
+                          <span
+                            class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400"
+                            >25% Deposit Paid:</span
+                          >
+                          <span
+                            class="font-label-md text-label-md text-primary dark:text-parchment-white"
+                            >₦21,250</span
+                          >
+                        </div>
+                        <span class="text-on-surface-variant/40">|</span>
+                        <div class="flex items-baseline gap-xs">
+                          <span
+                            class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400"
+                            >Balance Due at Studio:</span
+                          >
+                          <span
+                            class="font-label-md text-label-md text-primary dark:text-parchment-white font-semibold"
+                            >₦63,750</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center gap-sm flex-wrap lg:justify-end"
+                  >
+                    <a
+                      href="chats.html?client=Elena+Rostova"
+                      class="px-sm py-xs rounded-lg text-on-surface-variant dark:text-neutral-300 hover:text-primary dark:hover:text-parchment-white hover:bg-surface-container dark:hover:bg-neutral-800 transition-colors flex items-center gap-xs font-label-md text-label-md"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >chat</span
+                      >
+                      Message Client
+                    </a>
+                    <button
+                      onclick="
+                        openRescheduleModal('Elena Rostova', 'Today • 2:00 PM')
+                      "
+                      class="px-sm py-xs rounded-lg text-on-surface-variant dark:text-neutral-300 hover:text-primary dark:hover:text-parchment-white hover:bg-surface-container dark:hover:bg-neutral-800 transition-colors flex items-center gap-xs font-label-md text-label-md"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >event_repeat</span
+                      >
+                      Reschedule
+                    </button>
+                    <button
+                      onclick="simulateComplete(this, 'BK-7704', 85000)"
+                      class="px-md py-sm rounded-lg bg-primary dark:bg-parchment-white text-on-primary dark:text-charcoal hover:bg-primary-container dark:hover:bg-neutral-200 transition-colors flex items-center gap-xs font-label-md text-label-md shadow-sm"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >check_circle</span
+                      >
+                      Mark as Completed
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Appointment Card 2: Dr. Aris Thorne -->
+              <div
+                class="appointment-card bg-surface-container-lowest dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 rounded-xl p-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden"
+                data-status="action"
+                data-search="dr aris thorne facial consultation cellular mapping"
+              >
+                <div
+                  class="absolute left-0 top-0 bottom-0 w-1.5 bg-muted-terracotta"
+                ></div>
+                <div
+                  class="flex flex-col lg:flex-row lg:items-center justify-between gap-md pl-xs"
+                >
+                  <div class="flex items-start gap-md">
+                    <img
+                      class="w-14 h-14 rounded-full object-cover shrink-0"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFJ8oPE9KHaWIBt3Hx58oV75BEsTzGOYWkwCAbvLdkbl7OP4MBlNxJAhtGYCUTaPvP6AwzTEZ8p7fdJApfV9glkLm4b13pTmEOhiR9WQeH1kkRrytP31DwPfKItxmvHofiZSsGaA-jPq0jozQUNrTS28wUCvb6Qo6fpas8Rd48LDPDzpbYKfSpvSMNpb19rcRfvNkT-eARdxrWmM9HaKcAAEHKE-b3jso1qIEznO52VBucxV_xh4aR"
+                      alt="Dr. Aris Thorne"
+                    />
+                    <div class="flex flex-col gap-xs">
+                      <div class="flex items-center gap-sm flex-wrap">
+                        <span
+                          class="font-headline-md text-headline-md text-primary dark:text-parchment-white"
+                          >Dr. Aris Thorne</span
+                        >
+                        <span
+                          class="px-sm py-[2px] rounded-full bg-surface-container-highest dark:bg-neutral-800 text-tertiary dark:text-neutral-300 font-label-sm text-label-sm uppercase tracking-wide"
+                          >Tomorrow • 10:30 AM</span
+                        >
+                        <span
+                          class="px-sm py-[2px] rounded-full bg-error-container dark:bg-red-950 text-on-error-container dark:text-red-300 font-label-sm text-label-sm flex items-center gap-xs"
+                        >
+                          <span class="material-symbols-outlined text-[14px]"
+                            >warning</span
+                          >
+                          Pending Deposit
+                        </span>
+                      </div>
+                      <div
+                        class="flex items-center gap-sm text-on-surface-variant dark:text-neutral-400 font-body-sm text-body-sm"
+                      >
+                        <span
+                          class="font-semibold text-primary dark:text-parchment-white"
+                          >Facial Consultation & Cellular Mapping</span
+                        >
+                        <span>•</span>
+                        <span>45 Mins</span>
+                        <span>•</span>
+                        <span>Online / Studio Intake</span>
+                      </div>
+                      <div class="flex items-center gap-md mt-xs">
+                        <div class="flex items-baseline gap-xs">
+                          <span
+                            class="font-label-sm text-label-sm text-muted-terracotta"
+                            >Deposit Outstanding:</span
+                          >
+                          <span
+                            class="font-label-md text-label-md text-muted-terracotta font-semibold"
+                            >₦35,000 (25%)</span
+                          >
+                        </div>
+                        <span class="text-on-surface-variant/40">|</span>
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400"
+                          >Slot holds until 6:00 PM today</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center gap-sm flex-wrap lg:justify-end"
+                  >
+                    <a
+                      href="chats.html?client=Dr.+Aris+Thorne"
+                      class="px-sm py-xs rounded-lg text-on-surface-variant dark:text-neutral-300 hover:text-primary dark:hover:text-parchment-white hover:bg-surface-container dark:hover:bg-neutral-800 transition-colors flex items-center gap-xs font-label-md text-label-md"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >chat</span
+                      >
+                      Message Client
+                    </a>
+                    <button
+                      onclick="openCancelModal(this, 'Dr. Aris Thorne')"
+                      class="px-sm py-xs rounded-lg text-error hover:bg-error-container/40 transition-colors flex items-center gap-xs font-label-md text-label-md"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >close</span
+                      >
+                      Cancel Slot
+                    </button>
+                    <button
+                      onclick="sendReminder('Dr. Aris Thorne')"
+                      class="px-md py-sm rounded-lg bg-surface-container-high dark:bg-neutral-800 text-primary dark:text-parchment-white hover:bg-surface-container-highest dark:hover:bg-neutral-700 transition-colors flex items-center gap-xs font-label-md text-label-md"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >forward_to_inbox</span
+                      >
+                      Send Reminder
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Appointment Card 3: Mila K. -->
+              <div
+                class="appointment-card bg-surface-container-lowest dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 rounded-xl p-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden opacity-90"
+                data-status="completed"
+                data-search="mila k laminar hydration protocol bk-7690"
+              >
+                <div
+                  class="absolute left-0 top-0 bottom-0 w-1.5 bg-outline-variant"
+                ></div>
+                <div
+                  class="flex flex-col lg:flex-row lg:items-center justify-between gap-md pl-xs"
+                >
+                  <div class="flex items-start gap-md">
+                    <img
+                      class="w-14 h-14 rounded-full object-cover shrink-0"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBe0caiyOowKIcE0YB8J1PM8lSnWOtDW9y8AN7qJdzZjpLkucaf8PdT7HOMXTREXxFsAQINUOD7M2t07dh4omAlpkjTkN1eaZSCukKHuDgJTFB13MNAxgFR3G5HUYPIx816FkpWJjU3NfkwcvMtiONiVw0p9KY72Qa2foOVNEqOw-01jVWgPHjXUVmGniuSUF7xXO_43Y5nlxTvik2WiOaXDArmHZ3xU6K68Trrznha2ZUYOIYtXI8m"
+                      alt="Mila K."
+                    />
+                    <div class="flex flex-col gap-xs">
+                      <div class="flex items-center gap-sm flex-wrap">
+                        <span
+                          class="font-headline-md text-headline-md text-primary dark:text-parchment-white"
+                          >Mila K.</span
+                        >
+                        <span
+                          class="px-sm py-[2px] rounded-full bg-surface-container dark:bg-neutral-800 text-on-surface-variant dark:text-neutral-400 font-label-sm text-label-sm uppercase tracking-wide"
+                          >Yesterday • 4:00 PM</span
+                        >
+                        <span
+                          class="px-sm py-[2px] rounded-full bg-secondary-container dark:bg-emerald-950 text-on-secondary-container dark:text-emerald-300 font-label-sm text-label-sm flex items-center gap-xs"
+                        >
+                          <span class="material-symbols-outlined text-[14px]"
+                            >done_all</span
+                          >
+                          Completed — Payout Released (₦150,000)
+                        </span>
+                      </div>
+                      <div
+                        class="flex items-center gap-sm text-on-surface-variant dark:text-neutral-400 font-body-sm text-body-sm"
+                      >
+                        <span
+                          class="font-semibold text-primary dark:text-parchment-white"
+                          >Laminar Hydration Protocol</span
+                        >
+                        <span>•</span>
+                        <span>90 Mins</span>
+                        <span>•</span>
+                        <span>Vault 02</span>
+                      </div>
+                      <div class="flex items-center gap-md mt-xs">
+                        <div class="flex items-baseline gap-xs">
+                          <span
+                            class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400"
+                            >Net Settled:</span
+                          >
+                          <span
+                            class="font-label-md text-label-md text-primary dark:text-parchment-white font-semibold"
+                            >₦150,000 to Wallet</span
+                          >
+                        </div>
+                        <span class="text-on-surface-variant/40">|</span>
+                        <span class="font-label-sm text-label-sm text-sage"
+                          >Auto-cleared via Glamora Escrow</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center gap-sm flex-wrap lg:justify-end"
+                  >
+                    <a
+                      href="chats.html?client=Mila+K."
+                      class="px-sm py-xs rounded-lg text-on-surface-variant dark:text-neutral-300 hover:text-primary dark:hover:text-parchment-white hover:bg-surface-container dark:hover:bg-neutral-800 transition-colors flex items-center gap-xs font-label-md text-label-md"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >chat</span
+                      >
+                      Message Client
+                    </a>
+                    <button
+                      onclick="
+                        openReceiptModal('Mila K.', 'BK-7690', '₦150,000')
+                      "
+                      class="px-sm py-xs rounded-lg text-on-surface-variant dark:text-neutral-300 hover:text-primary dark:hover:text-parchment-white hover:bg-surface-container dark:hover:bg-neutral-800 transition-colors flex items-center gap-xs font-label-md text-label-md"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >receipt_long</span
+                      >
+                      View Receipt
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PRODUCT ORDERS LIST VIEW -->
+            <div class="flex flex-col gap-md hidden" id="orders-view">
+              <!-- Order Card 1: GLM-8892 -->
+              <div
+                class="order-card bg-surface-container-lowest dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 rounded-xl p-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden"
+                data-status="action"
+                data-search="glm-8892 marcus c restorative night serum"
+              >
+                <div
+                  class="absolute left-0 top-0 bottom-0 w-1.5 bg-warning-amber"
+                ></div>
+                <div
+                  class="flex flex-col lg:flex-row lg:items-center justify-between gap-md pl-xs"
+                >
+                  <div class="flex items-start gap-md">
+                    <div
+                      class="w-14 h-14 rounded-xl bg-surface-container-low dark:bg-neutral-800 flex items-center justify-center shrink-0 text-primary dark:text-parchment-white border border-soft-border dark:border-neutral-700"
+                    >
+                      <span class="material-symbols-outlined text-[28px]"
+                        >science</span
+                      >
+                    </div>
+                    <div class="flex flex-col gap-xs">
+                      <div class="flex items-center gap-sm flex-wrap">
+                        <span
+                          class="font-headline-md text-headline-md text-primary dark:text-parchment-white"
+                          >Order #GLM-8892</span
+                        >
+                        <span
+                          class="px-sm py-[2px] rounded-full bg-secondary-container dark:bg-emerald-950 text-on-secondary-container dark:text-emerald-300 font-label-sm text-label-sm uppercase tracking-wide"
+                          >Ready to Dispatch</span
+                        >
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400"
+                          >Customer: Marcus C.</span
+                        >
+                      </div>
+                      <div
+                        class="flex items-center gap-sm text-on-surface-variant dark:text-neutral-400 font-body-sm text-body-sm"
+                      >
+                        <span
+                          class="font-semibold text-primary dark:text-parchment-white"
+                          >2x Restorative Night Serum (50ml)</span
+                        >
+                        <span>•</span>
+                        <span>Batch #SN-409</span>
+                        <span>•</span>
+                        <span>Express Courier</span>
+                      </div>
+                      <div class="flex items-center gap-md mt-xs">
+                        <div class="flex items-baseline gap-xs">
+                          <span
+                            class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400"
+                            >Order Total:</span
+                          >
+                          <span
+                            class="font-label-md text-label-md text-primary dark:text-parchment-white font-semibold"
+                            >₦130,000</span
+                          >
+                        </div>
+                        <span class="text-on-surface-variant/40">|</span>
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400"
+                          >Paid via Glamora Pay • Payout ready on scan</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center gap-sm flex-wrap lg:justify-end"
+                  >
+                    <a
+                      href="chats.html?client=Marcus+C."
+                      class="px-sm py-xs rounded-lg text-on-surface-variant dark:text-neutral-300 hover:text-primary dark:hover:text-parchment-white hover:bg-surface-container dark:hover:bg-neutral-800 transition-colors flex items-center gap-xs font-label-md text-label-md"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >chat</span
+                      >
+                      Message Client
+                    </a>
+                    <button
+                      onclick="printShippingLabel('GLM-8892')"
+                      class="px-sm py-xs rounded-lg bg-surface-container-high dark:bg-neutral-800 text-primary dark:text-parchment-white hover:bg-surface-container-highest dark:hover:bg-neutral-700 transition-colors flex items-center gap-xs font-label-md text-label-md"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >print</span
+                      >
+                      Print Shipping Label
+                    </button>
+                    <button
+                      onclick="simulateDispatch(this, 'GLM-8892')"
+                      class="px-md py-sm rounded-lg bg-primary dark:bg-parchment-white text-on-primary dark:text-charcoal hover:bg-primary-container dark:hover:bg-neutral-200 transition-colors flex items-center gap-xs font-label-md text-label-md shadow-sm"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >local_shipping</span
+                      >
+                      Mark Dispatched
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Order Card 2: GLM-8884 -->
+              <div
+                class="order-card bg-surface-container-lowest dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 rounded-xl p-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden"
+                data-status="completed"
+                data-search="glm-8884 chloe laurent botanical barrier balm"
+              >
+                <div
+                  class="absolute left-0 top-0 bottom-0 w-1.5 bg-outline-variant"
+                ></div>
+                <div
+                  class="flex flex-col lg:flex-row lg:items-center justify-between gap-md pl-xs"
+                >
+                  <div class="flex items-start gap-md">
+                    <div
+                      class="w-14 h-14 rounded-xl bg-surface-container-low dark:bg-neutral-800 flex items-center justify-center shrink-0 text-primary dark:text-parchment-white border border-soft-border dark:border-neutral-700"
+                    >
+                      <span class="material-symbols-outlined text-[28px]"
+                        >spa</span
+                      >
+                    </div>
+                    <div class="flex flex-col gap-xs">
+                      <div class="flex items-center gap-sm flex-wrap">
+                        <span
+                          class="font-headline-md text-headline-md text-primary dark:text-parchment-white"
+                          >Order #GLM-8884</span
+                        >
+                        <span
+                          class="px-sm py-[2px] rounded-full bg-surface-container dark:bg-neutral-800 text-on-surface-variant dark:text-neutral-400 font-label-sm text-label-sm uppercase tracking-wide"
+                          >Dispatched</span
+                        >
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400"
+                          >Customer: Chloe Laurent</span
+                        >
+                      </div>
+                      <div
+                        class="flex items-center gap-sm text-on-surface-variant dark:text-neutral-400 font-body-sm text-body-sm"
+                      >
+                        <span
+                          class="font-semibold text-primary dark:text-parchment-white"
+                          >1x Botanical Barrier Balm (100ml)</span
+                        >
+                        <span>•</span>
+                        <span class="font-mono text-label-sm"
+                          >Track: #FDX-9930219</span
+                        >
+                      </div>
+                      <div class="flex items-center gap-md mt-xs">
+                        <div class="flex items-baseline gap-xs">
+                          <span
+                            class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400"
+                            >Amount Settled:</span
+                          >
+                          <span
+                            class="font-label-md text-label-md text-primary dark:text-parchment-white font-semibold"
+                            >₦54,000</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center gap-sm flex-wrap lg:justify-end"
+                  >
+                    <a
+                      href="chats.html?client=Chloe+Laurent"
+                      class="px-sm py-xs rounded-lg text-on-surface-variant dark:text-neutral-300 hover:text-primary dark:hover:text-parchment-white hover:bg-surface-container dark:hover:bg-neutral-800 transition-colors flex items-center gap-xs font-label-md text-label-md"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >chat</span
+                      >
+                      Message Client
+                    </a>
+                    <button
+                      onclick="trackTransit('FDX-9930219')"
+                      class="px-sm py-xs rounded-lg text-on-surface-variant dark:text-neutral-300 hover:text-primary dark:hover:text-parchment-white hover:bg-surface-container dark:hover:bg-neutral-800 transition-colors flex items-center gap-xs font-label-md text-label-md"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >navigation</span
+                      >
+                      Track Transit
+                    </button>
+                    <button
+                      onclick="
+                        openReceiptModal('Chloe Laurent', 'GLM-8884', '₦54,000')
+                      "
+                      class="px-sm py-xs rounded-lg text-on-surface-variant dark:text-neutral-300 hover:text-primary dark:hover:text-parchment-white hover:bg-surface-container dark:hover:bg-neutral-800 transition-colors flex items-center gap-xs font-label-md text-label-md"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >receipt</span
+                      >
+                      Invoice
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SUMMARY FOOTER CARDS -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter pt-md">
+              <div
+                class="bg-surface-container-lowest dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 p-md rounded-xl shadow-sm flex flex-col justify-between"
+              >
+                <div class="flex flex-col gap-xs">
+                  <div class="flex items-center justify-between">
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400 uppercase tracking-wider"
+                      >Escrow Volume</span
+                    >
+                    <span
+                      class="material-symbols-outlined text-[18px] text-sage"
+                      >account_balance_wallet</span
+                    >
+                  </div>
+                  <span
+                    class="font-headline-md text-headline-md text-primary dark:text-parchment-white mt-sm"
+                    >₦2,410,000</span
+                  >
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant dark:text-neutral-400"
+                  >
+                    7 active pre-authorized sessions queued for this calendar
+                    cycle.
+                  </p>
+                </div>
+                <div
+                  class="mt-md pt-sm border-t border-soft-border dark:border-neutral-800 flex items-center justify-between"
+                >
+                  <span
+                    class="font-label-sm text-label-sm text-secondary dark:text-neutral-300"
+                    >Auto-transfer enabled</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[16px] text-secondary dark:text-neutral-300"
+                    >arrow_forward</span
+                  >
+                </div>
+              </div>
+
+              <div
+                class="bg-surface-container-lowest dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 p-md rounded-xl shadow-sm flex flex-col justify-between"
+              >
+                <div class="flex flex-col gap-xs">
+                  <div class="flex items-center justify-between">
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400 uppercase tracking-wider"
+                      >Fulfillment Speed</span
+                    >
+                    <span
+                      class="material-symbols-outlined text-[18px] text-secondary dark:text-neutral-300"
+                      >timer</span
+                    >
+                  </div>
+                  <span
+                    class="font-headline-md text-headline-md text-primary dark:text-parchment-white mt-sm"
+                    >2.4 Hours</span
+                  >
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant dark:text-neutral-400"
+                  >
+                    Average time from client checkout to tracking scan. Top 5%
+                    studio benchmark.
+                  </p>
+                </div>
+                <div
+                  class="mt-md pt-sm border-t border-soft-border dark:border-neutral-800 flex items-center justify-between"
+                >
+                  <span
+                    class="font-label-sm text-label-sm text-success-green dark:text-emerald-400 font-semibold"
+                    >Tier 1 Studio Rating</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[16px] text-success-green dark:text-emerald-400"
+                    >verified</span
+                  >
+                </div>
+              </div>
+
+              <div
+                class="bg-surface-container-lowest dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 p-md rounded-xl shadow-sm flex flex-col justify-between"
+              >
+                <div class="flex flex-col gap-xs">
+                  <div class="flex items-center justify-between">
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400 uppercase tracking-wider"
+                      >Direct Studio Support</span
+                    >
+                    <span
+                      class="material-symbols-outlined text-[18px] text-primary dark:text-parchment-white"
+                      >support_agent</span
+                    >
+                  </div>
+                  <span
+                    class="font-headline-md text-headline-md text-primary dark:text-parchment-white mt-sm"
+                    >Priority Liaison</span
+                  >
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant dark:text-neutral-400"
+                  >
+                    Dedicated dispute arbitration and booking rescheduling
+                    concierge.
+                  </p>
+                </div>
+                <div
+                  class="mt-md pt-sm border-t border-soft-border dark:border-neutral-800 flex items-center justify-between"
+                >
+                  <a
+                    class="font-label-sm text-label-sm text-primary dark:text-parchment-white underline"
+                    href="chats.html"
+                    >Open Instant Channel</a
+                  >
+                  <span
+                    class="material-symbols-outlined text-[16px] text-primary dark:text-parchment-white"
+                    >open_in_new</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- MODAL: Cancel Slot Confirmation -->
+      <div
+        id="cancelSlotModal"
+        class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-md"
+      >
+        <div
+          class="bg-surface-container-lowest dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 rounded-2xl max-w-md w-full p-lg shadow-xl"
+        >
+          <div
+            class="flex justify-between items-center border-b border-soft-border dark:border-neutral-800 pb-md mb-md"
+          >
+            <div class="flex items-center gap-xs text-error">
+              <span class="material-symbols-outlined text-[20px]">warning</span>
+              <h3
+                class="text-headline-md font-headline-md text-on-surface dark:text-parchment-white"
+              >
+                Cancel Appointment
+              </h3>
+            </div>
+            <button
+              onclick="closeModal('cancelSlotModal')"
+              class="text-on-surface-variant hover:text-on-surface dark:text-neutral-400 dark:hover:text-parchment-white transition-colors"
+            >
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
+          <p
+            class="text-body-sm text-on-surface-variant dark:text-neutral-400 mb-md"
+            id="cancelModalText"
+          >
+            Are you sure you want to cancel this appointment slot? This action
+            cannot be undone.
+          </p>
+          <div
+            class="flex justify-end gap-sm pt-sm border-t border-soft-border dark:border-neutral-800"
+          >
+            <button
+              type="button"
+              onclick="closeModal('cancelSlotModal')"
+              class="px-md py-sm rounded-lg text-label-md font-label-md text-on-surface-variant dark:text-neutral-400 hover:text-primary transition-colors"
+            >
+              Keep Slot
+            </button>
+            <button
+              type="button"
+              onclick="confirmCancelSlot()"
+              class="px-md py-sm rounded-lg bg-error text-on-error hover:opacity-90 font-label-md text-label-md shadow-sm transition-opacity"
+            >
+              Confirm Cancellation
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL: Add Manual Booking -->
+      <div
+        id="manualBookingModal"
+        class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-md"
+      >
+        <div
+          class="bg-surface-container-lowest dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 rounded-2xl max-w-lg w-full p-lg shadow-xl"
+        >
+          <div
+            class="flex justify-between items-center border-b border-soft-border dark:border-neutral-800 pb-md mb-md"
+          >
+            <h3
+              class="text-headline-md font-headline-md text-on-surface dark:text-parchment-white"
+            >
+              Add Manual Booking
+            </h3>
+            <button
+              onclick="closeModal('manualBookingModal')"
+              class="text-on-surface-variant hover:text-on-surface dark:text-neutral-400 dark:hover:text-parchment-white transition-colors"
+            >
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
+          <form
+            onsubmit="handleManualBookingSubmit(event)"
+            class="space-y-md"
+            id="manualBookingForm"
+          >
+            <div>
+              <label
+                class="block text-label-sm font-label-sm text-on-surface-variant dark:text-neutral-400 mb-xs"
+                >Client Name / Email</label
+              >
+              <input
+                type="text"
+                id="manualClientInput"
+                required
+                placeholder="Search or add new client..."
+                class="w-full bg-surface-container dark:bg-neutral-800 border border-soft-border dark:border-neutral-700 rounded-xl p-sm text-body-sm text-on-surface dark:text-parchment-white focus:outline-none focus:border-charcoal dark:focus:border-neutral-500 transition-colors"
+              />
+            </div>
+            <div>
+              <label
+                class="block text-label-sm font-label-sm text-on-surface-variant dark:text-neutral-400 mb-xs"
+                >Select Service</label
+              >
+              <select
+                id="manualServiceInput"
+                required
+                class="w-full bg-surface-container dark:bg-neutral-800 border border-soft-border dark:border-neutral-700 rounded-xl p-sm text-body-sm text-on-surface dark:text-parchment-white focus:outline-none focus:border-charcoal dark:focus:border-neutral-500 transition-colors"
+              >
+                <option value="" disabled selected>Choose a service</option>
+                <option value="Bridal Makeup Trial">
+                  Bridal Makeup Trial — ₦85,000
+                </option>
+                <option value="Editorial Hair Styling">
+                  Editorial Hair Styling — ₦65,000
+                </option>
+                <option value="Signature Balayage">
+                  Signature Balayage — ₦120,000
+                </option>
+                <option value="Architectural Brow Sculpt">
+                  Architectural Brow Sculpt — ₦85,000
+                </option>
+              </select>
+            </div>
+            <div class="grid grid-cols-2 gap-sm">
+              <div>
+                <label
+                  class="block text-label-sm font-label-sm text-on-surface-variant dark:text-neutral-400 mb-xs"
+                  >Date</label
+                >
+                <input
+                  type="date"
+                  id="manualDateInput"
+                  required
+                  class="w-full bg-surface-container dark:bg-neutral-800 border border-soft-border dark:border-neutral-700 rounded-xl p-sm text-body-sm text-on-surface dark:text-parchment-white focus:outline-none focus:border-charcoal dark:focus:border-neutral-500 transition-colors"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-label-sm font-label-sm text-on-surface-variant dark:text-neutral-400 mb-xs"
+                  >Time</label
+                >
+                <input
+                  type="time"
+                  id="manualTimeInput"
+                  required
+                  class="w-full bg-surface-container dark:bg-neutral-800 border border-soft-border dark:border-neutral-700 rounded-xl p-sm text-body-sm text-on-surface dark:text-parchment-white focus:outline-none focus:border-charcoal dark:focus:border-neutral-500 transition-colors"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+                >Internal Notes (Optional)</label
+              >
+              <textarea
+                rows="2"
+                class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-body-sm text-on-surface focus:outline-none focus:border-charcoal resize-none"
+                placeholder="Add any specific requirements..."
+              ></textarea>
+            </div>
+            <div class="flex items-center gap-xs">
+              <input
+                type="checkbox"
+                id="manualDepositPaid"
+                class="w-4 h-4 accent-primary rounded"
+              />
+              <label
+                for="manualDepositPaid"
+                class="text-body-sm text-on-surface-variant dark:text-neutral-400"
+                >Mark 25% Deposit as collected in studio</label
+              >
+            </div>
+            <div
+              class="flex justify-end gap-sm pt-sm border-t border-soft-border dark:border-neutral-800"
+            >
+              <button
+                type="button"
+                onclick="closeModal('manualBookingModal')"
+                class="px-md py-sm rounded-lg text-label-md font-label-md text-on-surface-variant dark:text-neutral-400 hover:text-primary transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="px-md py-sm rounded-lg bg-primary dark:bg-parchment-white text-on-primary dark:text-charcoal hover:opacity-90 font-label-md text-label-md shadow-sm transition-opacity"
+              >
+                Create Booking
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- MODAL: Reschedule Appointment -->
+      <div
+        id="rescheduleModal"
+        class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-md"
+      >
+        <div
+          class="bg-surface-container-lowest dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 rounded-2xl max-w-md w-full p-lg shadow-xl"
+        >
+          <div
+            class="flex justify-between items-center border-b border-soft-border dark:border-neutral-800 pb-md mb-md"
+          >
+            <h3
+              class="text-headline-md font-headline-md text-on-surface dark:text-parchment-white"
+            >
+              Reschedule Appointment
+            </h3>
+            <button
+              onclick="closeModal('rescheduleModal')"
+              class="text-on-surface-variant hover:text-on-surface dark:text-neutral-400 dark:hover:text-parchment-white transition-colors"
+            >
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
+          <form onsubmit="handleRescheduleSubmit(event)" class="space-y-md">
+            <p
+              class="text-body-sm text-on-surface-variant dark:text-neutral-400"
+              id="rescheduleClientText"
+            >
+              Adjusting schedule slot for client session.
+            </p>
+            <div>
+              <label
+                class="block text-label-sm font-label-sm text-on-surface-variant dark:text-neutral-400 mb-xs"
+                >New Date</label
+              >
+              <input
+                type="date"
+                required
+                id="rescheduleDateInput"
+                class="w-full bg-surface-container dark:bg-neutral-800 border border-soft-border dark:border-neutral-700 rounded-xl p-sm text-body-sm text-on-surface dark:text-parchment-white focus:outline-none focus:border-charcoal transition-colors"
+              />
+            </div>
+            <div>
+              <label
+                class="block text-label-sm font-label-sm text-on-surface-variant dark:text-neutral-400 mb-xs"
+                >New Time</label
+              >
+              <input
+                type="time"
+                required
+                id="rescheduleTimeInput"
+                class="w-full bg-surface-container dark:bg-neutral-800 border border-soft-border dark:border-neutral-700 rounded-xl p-sm text-body-sm text-on-surface dark:text-parchment-white focus:outline-none focus:border-charcoal transition-colors"
+              />
+            </div>
+            <div
+              class="flex justify-end gap-sm pt-sm border-t border-soft-border dark:border-neutral-800"
+            >
+              <button
+                type="button"
+                onclick="closeModal('rescheduleModal')"
+                class="px-md py-sm rounded-lg text-label-md font-label-md text-on-surface-variant dark:text-neutral-400 hover:text-primary transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="px-md py-sm rounded-lg bg-primary dark:bg-parchment-white text-on-primary dark:text-charcoal hover:opacity-90 font-label-md text-label-md shadow-sm transition-opacity"
+              >
+                Confirm Reschedule
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- MODAL: View Receipt -->
+      <div
+        id="receiptModal"
+        class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-md"
+      >
+        <div
+          class="bg-surface-container-lowest dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 rounded-2xl max-w-md w-full p-lg shadow-xl"
+        >
+          <div
+            class="flex justify-between items-center border-b border-soft-border dark:border-neutral-800 pb-md mb-md"
+          >
+            <div class="flex items-center gap-xs">
+              <span class="material-symbols-outlined text-success-green"
+                >verified</span
+              >
+              <h3
+                class="text-headline-md font-headline-md text-on-surface dark:text-parchment-white"
+              >
+                Studio Payment Receipt
+              </h3>
+            </div>
+            <button
+              onclick="closeModal('receiptModal')"
+              class="text-on-surface-variant hover:text-on-surface dark:text-neutral-400 dark:hover:text-parchment-white transition-colors"
+            >
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
+          <div class="space-y-sm text-body-sm">
+            <div
+              class="flex justify-between py-xs border-b border-soft-border dark:border-neutral-800"
+            >
+              <span class="text-on-surface-variant dark:text-neutral-400"
+                >Client:</span
+              >
+              <span
+                class="font-semibold text-primary dark:text-parchment-white"
+                id="receiptClient"
+                >--</span
+              >
+            </div>
+            <div
+              class="flex justify-between py-xs border-b border-soft-border dark:border-neutral-800"
+            >
+              <span class="text-on-surface-variant dark:text-neutral-400"
+                >Reference:</span
+              >
+              <span
+                class="font-mono text-primary dark:text-parchment-white"
+                id="receiptRef"
+                >--</span
+              >
+            </div>
+            <div
+              class="flex justify-between py-xs border-b border-soft-border dark:border-neutral-800"
+            >
+              <span class="text-on-surface-variant dark:text-neutral-400"
+                >Amount Released:</span
+              >
+              <span
+                class="font-bold text-success-green dark:text-emerald-400"
+                id="receiptAmount"
+                >--</span
+              >
+            </div>
+            <div
+              class="flex justify-between py-xs border-b border-soft-border dark:border-neutral-800"
+            >
+              <span class="text-on-surface-variant dark:text-neutral-400"
+                >Escrow Status:</span
+              >
+              <span class="text-sage font-medium">Cleared & Disbursed</span>
+            </div>
+          </div>
+          <div class="flex justify-end pt-md">
+            <button
+              onclick="closeModal('receiptModal')"
+              class="px-md py-sm rounded-lg bg-primary dark:bg-parchment-white text-on-primary dark:text-charcoal font-label-md text-label-md"
+            >
+              Done
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL: Escrow Terms Modal -->
+      <div
+        id="escrowTermsModal"
+        class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-md"
+      >
+        <div
+          class="bg-surface-container-lowest dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 rounded-2xl max-w-lg w-full p-lg shadow-xl"
+        >
+          <div
+            class="flex justify-between items-center border-b border-soft-border dark:border-neutral-800 pb-md mb-md"
+          >
+            <h3
+              class="text-headline-md font-headline-md text-on-surface dark:text-parchment-white"
+            >
+              Glamora Escrow Terms
+            </h3>
+            <button
+              onclick="closeModal('escrowTermsModal')"
+              class="text-on-surface-variant hover:text-on-surface dark:text-neutral-400 dark:hover:text-parchment-white transition-colors"
+            >
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
+          <div
+            class="space-y-sm text-body-sm text-on-surface-variant dark:text-neutral-400"
+          >
+            <p>
+              1.
+              <strong class="text-primary dark:text-parchment-white"
+                >25% Non-Refundable Hold:</strong
+              >
+              Every client reservation pre-authorizes a mandatory 25% deposit to
+              protect studio availability.
+            </p>
+            <p>
+              2.
+              <strong class="text-primary dark:text-parchment-white"
+                >Instant Completion Disbursement:</strong
+              >
+              When you mark an appointment as complete, remaining studio fees
+              are released directly into your wallet.
+            </p>
+            <p>
+              3.
+              <strong class="text-primary dark:text-parchment-white"
+                >Late Cancellations:</strong
+              >
+              Cancellations made within 30 minutes of appointment time yield
+              100% of the deposit to your vendor payout balance.
+            </p>
+          </div>
+          <div class="flex justify-end pt-md">
+            <button
+              onclick="closeModal('escrowTermsModal')"
+              class="px-md py-sm rounded-lg bg-primary dark:bg-parchment-white text-on-primary dark:text-charcoal font-label-md text-label-md"
+            >
+              I Understand
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOAST NOTIFICATION CONTAINER -->
+      <div
+        id="toastContainer"
+        class="fixed bottom-6 right-6 z-50 flex flex-col gap-xs pointer-events-none"
+      ></div>
+    </div>
+    <!-- JAVASCRIPT CONTROLLERS -->
+    <script src="js/vendor-appointment.js"></script>
+  </body>
+</html>

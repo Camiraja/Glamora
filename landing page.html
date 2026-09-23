@@ -1,0 +1,1045 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>GLAMORA - Precision Grooming & Aesthetic Services</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#949393",
+              "on-primary-fixed-variant": "#474747",
+              "surface-container-highest": "#e3e2df",
+              "inverse-on-surface": "#f2f1ee",
+              "surface-container": "#efeeeb",
+              "on-tertiary-fixed-variant": "#6b392c",
+              "surface-container-lowest": "#ffffff",
+              primary: "#171818",
+              "surface-bright": "#faf9f6",
+              surface: "#faf9f6",
+              "success-green": "#5A705F",
+              "on-primary-fixed": "#1b1c1c",
+              "on-surface": "#1b1c1a",
+              tertiary: "#310b03",
+              "on-secondary-fixed-variant": "#3c4a40",
+              "secondary-fixed-dim": "#bacbbd",
+              "surface-container-high": "#e9e8e5",
+              "primary-container": "#2c2c2c",
+              "on-error-container": "#93000a",
+              secondary: "#536257",
+              "tertiary-container": "#4b1f14",
+              "muted-terracotta": "#BC7C6C",
+              "surface-variant": "#e3e2df",
+              "on-tertiary": "#ffffff",
+              "surface-dim": "#dbdad7",
+              "on-secondary": "#ffffff",
+              "on-surface-variant": "#444748",
+              background: "#faf9f6",
+              "on-error": "#ffffff",
+              "error-container": "#ffdad6",
+              "secondary-container": "#d6e7d8",
+              "outline-variant": "#c4c7c7",
+              "on-secondary-fixed": "#111e16",
+              "parchment-white": "#F7F6F3",
+              outline: "#747878",
+              "on-primary": "#ffffff",
+              "surface-container-low": "#f4f3f0",
+              "soft-border": "#E2E2DE",
+              "primary-fixed": "#e4e2e1",
+              "on-background": "#1b1c1a",
+              "inverse-primary": "#c8c6c5",
+              error: "#ba1a1a",
+              "tertiary-fixed-dim": "#feb5a3",
+              "inverse-surface": "#2f312f",
+              sage: "#8A9A8D",
+              "on-tertiary-container": "#c48373",
+              "warning-amber": "#C49D6A",
+              "secondary-fixed": "#d6e7d8",
+              "on-tertiary-fixed": "#360f06",
+              charcoal: "#2C2C2C",
+              "error-red": "#A64D4D",
+              "tertiary-fixed": "#ffdad2",
+              "surface-tint": "#5f5e5e",
+              "on-secondary-container": "#59685c",
+              "primary-fixed-dim": "#c8c6c5",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              lg: "48px",
+              "margin-desktop": "64px",
+              "margin-mobile": "16px",
+              sm: "12px",
+              xs: "4px",
+              gutter: "24px",
+              xl: "80px",
+              md: "24px",
+              base: "8px",
+            },
+
+            fontFamily: {
+              "headline-xl-mobile": ["Hanken Grotesk", "sans-serif"],
+              "headline-lg-mobile": ["Hanken Grotesk", "sans-serif"],
+              "label-md": ["Hanken Grotesk", "sans-serif"],
+              "headline-md": ["Hanken Grotesk", "sans-serif"],
+              "headline-lg": ["Hanken Grotesk", "sans-serif"],
+              "label-sm": ["Hanken Grotesk", "sans-serif"],
+              "headline-xl": ["Hanken Grotesk", "sans-serif"],
+              "body-lg": ["Hanken Grotesk", "sans-serif"],
+              "body-sm": ["Hanken Grotesk", "sans-serif"],
+              "body-md": ["Hanken Grotesk", "sans-serif"],
+            },
+            /* ADD THIS BLOCK BELOW */
+            fontSize: {
+              "headline-xl-mobile": [
+                "36px",
+                { lineHeight: "1.1", fontWeight: "600" },
+              ],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "label-md": [
+                "14px",
+                { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "500" }],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-sm": [
+                "12px",
+                { lineHeight: "1", letterSpacing: "0.03em", fontWeight: "600" },
+              ],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Google Fonts & Icons -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/landing page.css" />
+  </head>
+  <body
+    class="bg-background font-body-md text-on-surface transition-colors duration-300"
+  >
+    <!-- 1. Splash Screen Overlay (5 Seconds Duration) -->
+    <div
+      id="splash-screen"
+      class="splash-container bg-parchment-white dark:bg-[#121314]"
+    >
+      <div class="flex flex-col items-center text-center px-4">
+        <div class="w-24 h-24 mb-6 animate-logo-in animate-pulse-glow">
+          <img
+            src="images/glamora_background-removebg-preview.png"
+            alt="Glamora Logo"
+            class="w-full h-full object-contain filter dark:brightness-125"
+          />
+        </div>
+        <h1
+          class="text-3xl md:text-4xl font-bold tracking-[0.2em] text-charcoal dark:text-text-dark uppercase animate-text-in"
+        >
+          GLAM<span class="font-light text-sage">ORA</span>
+        </h1>
+        <p
+          class="text-xs md:text-sm uppercase tracking-[0.25em] text-sage font-semibold mt-3 animate-subtext-in"
+        >
+          Connect. Get Booked. Get Styled
+        </p>
+      </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header
+      class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-soft-border transition-colors duration-300"
+    >
+      <div
+        class="h-16 max-w-[1440px] mx-auto px-margin-desktop flex items-center justify-between"
+      >
+        <a href="#home" class="flex items-center gap-2">
+          <img
+            alt="Glamora Logo"
+            class="h-8 w-auto object-contain"
+            src="images/glamora_background-removebg-preview.png"
+          />
+          <span
+            class="font-headline-md text-headline-md text-primary tracking-tight"
+            >GLAMORA</span
+          >
+        </a>
+
+        <nav class="hidden md:flex items-center gap-lg">
+          <a
+            class="nav-link font-label-md text-label-md text-primary font-semibold transition-colors"
+            data-path="home"
+            href="#home"
+            >Home</a
+          >
+          <a
+            class="nav-link font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+            data-path="services"
+            href="#disciplinesSection"
+            >Services</a
+          >
+          <a
+            class="nav-link font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+            data-path="marketplace"
+            href="#rosterSection"
+            >Marketplace</a
+          >
+          <a
+            class="nav-link font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+            data-path="chats"
+            href="#processSection"
+            >Chats</a
+          >
+        </nav>
+
+        <div class="flex items-center gap-md">
+          <!-- Functional Light/Dark Theme Toggle -->
+          <button
+            id="themeToggleBtn"
+            aria-label="Toggle dark mode"
+            class="w-10 h-10 rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant flex items-center justify-center border border-transparent hover:border-soft-border"
+          >
+            <span
+              id="themeToggleIcon"
+              class="material-symbols-outlined text-[20px]"
+              >light_mode</span
+            >
+          </button>
+
+          <!-- Profile Anchor -->
+          <div
+            id="profileBtn"
+            class="flex items-center gap-sm cursor-pointer group"
+            title="Account Settings"
+          >
+            <img
+              alt="Profile"
+              class="w-8 h-8 rounded-full object-cover border border-soft-border group-hover:border-primary transition-colors"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAksYm7Vpu3y6nFXAdnowe6h9yhNcma3tOmWqhGqQ-yieKVgv8IOaIQ21a9oK4barmnxBtCbmquE3v8ijlXgSV-zbE8NktlwkPDfGYPsqoh8T0NODzVrMTSMZLOGIWxZ5sK5uG09XBqCUJsvcsc8RrecRsLG5xdSZ2m8MUH3WXsWax75A3uBbiT_shFBUTYsOu9dyHNTK3QCaWYe77GnvN4ZQ-67ApBKuv20ipR9qLJlf0O_ZyvafdN"
+            />
+            <span class="material-symbols-outlined text-on-surface-variant"
+              >expand_more</span
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="w-full pt-16 bg-background">
+      <div class="flex flex-col w-full">
+        <!-- Hero Section -->
+        <section
+          id="home"
+          class="relative w-full min-h-[600px] flex items-center justify-center pt-xl pb-lg px-margin-desktop overflow-hidden bg-surface"
+        >
+          <div class="absolute inset-0 z-0">
+            <div
+              class="w-full h-full bg-cover bg-center opacity-40 mix-blend-multiply"
+              style="
+                background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuB2EkrKPEuIp9F8dFVGFjp0eaVWW48EZyWLkhfVzs_QNuIvpjNahKs1T7cCYs3hehtoCnrNeKPM1z4gVZq2DjnOxJIHT1hSWY1qmI5nC6okRG_-HfUiptPpUosLiCqZR--7IzXbx0VsB5sYVxysok6K0GS5-zo9JA-XABZO7YgU6xKLhNOp_HXUvjneMyfHZlNTiK1xeJdYoeCNuibFEzpc5kI0iHdkMbzMxUh26k3AW0ut-HDPiFFx&quot;);
+              "
+            ></div>
+            <div
+              class="hero-overlay absolute inset-0 bg-gradient-to-b from-surface/80 via-surface/60 to-surface"
+            ></div>
+          </div>
+
+          <div
+            class="relative z-10 w-full max-w-[800px] mx-auto text-center flex flex-col items-center gap-lg"
+          >
+            <div class="flex flex-col gap-sm">
+              <span
+                class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest"
+                >Elevate Your Standard</span
+              >
+              <h1 class="font-headline-xl text-headline-xl text-on-surface">
+                Precision Grooming &<br />Aesthetic Services.
+              </h1>
+              <p
+                class="font-body-lg text-body-lg text-on-surface-variant max-w-[600px] mx-auto"
+              >
+                Book elite independent professionals. Designed for efficiency,
+                architectural beauty, and uncompromising quality.
+              </p>
+            </div>
+
+            <!-- Search Bar & Filters Trigger -->
+            <div
+              class="w-full max-w-[720px] bg-white dark:bg-[#1a1b1e] rounded-full p-2 flex items-center gap-2 shadow-md border border-soft-border dark:border-border-dark focus-within:ring-2 focus-within:ring-sage transition-all"
+            >
+              <div class="flex-1 flex items-center gap-sm px-md">
+                <span class="material-symbols-outlined text-on-surface-variant"
+                  >search</span
+                >
+                <input
+                  id="searchInput"
+                  class="w-full bg-transparent border-none outline-none font-body-md text-on-surface placeholder:text-on-surface-variant/50"
+                  placeholder="Search services, professionals, or locations..."
+                  type="text"
+                />
+              </div>
+
+              <!-- Filter Toggle Button -->
+              <button
+                id="filterToggleBtn"
+                aria-label="Filters"
+                class="w-10 h-10 rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant flex items-center justify-center shrink-0"
+              >
+                <span class="material-symbols-outlined">tune</span>
+              </button>
+
+              <!-- Search Submit Button -->
+              <button
+                id="searchSubmitBtn"
+                class="bg-primary text-on-primary font-label-md text-label-md px-lg py-sm rounded-full hover:bg-primary/90 transition-colors flex items-center justify-center shrink-0"
+              >
+                Search
+              </button>
+            </div>
+
+            <!-- Filter Panel Modal / Dropdown -->
+            <div
+              id="filter-panel"
+              class="hidden w-full max-w-[700px] bg-surface-container-lowest rounded-2xl p-6 shadow-xl border border-soft-border text-left transition-all mt-2"
+            >
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                  <label
+                    class="block text-xs font-semibold uppercase text-sage mb-2"
+                    >Location</label
+                  >
+                  <select
+                    id="filter-location"
+                    class="w-full bg-surface-container border border-soft-border rounded-lg p-2 text-sm text-on-surface outline-none"
+                  >
+                    <option value="">All Locations</option>
+                    <option value="Lagos">Lagos</option>
+                    <option value="Abuja">Abuja</option>
+                    <option value="Port Harcourt">Port Harcourt</option>
+                    <option value="Ibadan">Ibadan</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    class="block text-xs font-semibold uppercase text-sage mb-2"
+                    >Specialty</label
+                  >
+                  <select
+                    id="filter-specialty"
+                    class="w-full bg-surface-container border border-soft-border rounded-lg p-2 text-sm text-on-surface outline-none"
+                  >
+                    <option value="">All Disciplines</option>
+                    <option value="Barbering">Precision Barbering</option>
+                    <option value="Nails">Architectural Nails</option>
+                    <option value="Skin">Clinical Aesthetics</option>
+                    <option value="Makeup">Makeup & Dermal</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    class="block text-xs font-semibold uppercase text-sage mb-2"
+                    >Max Price (₦)</label
+                  >
+                  <select
+                    id="filter-price"
+                    class="w-full bg-surface-container border border-soft-border rounded-lg p-2 text-sm text-on-surface outline-none"
+                  >
+                    <option value="">Any Price</option>
+                    <option value="15000">Under ₦15,000</option>
+                    <option value="30000">Under ₦30,000</option>
+                    <option value="50000">Under ₦50,000</option>
+                  </select>
+                </div>
+              </div>
+
+              <div
+                class="flex justify-end gap-3 mt-4 pt-4 border-t border-soft-border"
+              >
+                <button
+                  id="reset-filters"
+                  class="text-xs font-semibold text-muted-terracotta hover:underline"
+                >
+                  Reset Filters
+                </button>
+                <button
+                  id="apply-filters"
+                  class="bg-sage text-white text-xs font-semibold px-4 py-2 rounded-md hover:bg-sage/90"
+                >
+                  Apply Filters
+                </button>
+              </div>
+            </div>
+
+            <!-- Popular Tags -->
+            <div
+              class="flex items-center gap-md font-label-sm text-label-sm text-on-surface-variant flex-wrap justify-center"
+            >
+              <span>Popular:</span>
+              <button
+                class="popular-tag px-sm py-xs bg-surface-container rounded-full cursor-pointer hover:bg-surface-container-high transition-colors"
+                data-tag="Brows"
+              >
+                Brows
+              </button>
+              <button
+                class="popular-tag px-sm py-xs bg-surface-container rounded-full cursor-pointer hover:bg-surface-container-high transition-colors"
+                data-tag="Barbering"
+              >
+                Barbering
+              </button>
+              <button
+                class="popular-tag px-sm py-xs bg-surface-container rounded-full cursor-pointer hover:bg-surface-container-high transition-colors"
+                data-tag="Skin"
+              >
+                Skin
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Categories / Disciplines -->
+        <section
+          id="disciplinesSection"
+          class="w-full py-xl px-margin-desktop bg-surface-container-lowest"
+        >
+          <div class="max-w-[1440px] mx-auto flex flex-col gap-lg">
+            <div class="flex justify-between items-end">
+              <div class="flex flex-col gap-xs">
+                <h2 class="font-headline-lg text-headline-lg text-on-surface">
+                  Disciplines
+                </h2>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Select a service category to begin filtering.
+                </p>
+              </div>
+              <button
+                id="resetDisciplineFilterBtn"
+                class="font-label-md text-label-md text-primary flex items-center gap-xs group cursor-pointer"
+              >
+                View All
+                <span
+                  class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform"
+                  >arrow_forward</span
+                >
+              </button>
+            </div>
+            <div
+              class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-md"
+              id="disciplineGrid"
+            >
+              <a
+                class="discipline-card group flex flex-col items-center gap-sm p-lg bg-surface-container rounded-lg hover:bg-surface-container-high transition-colors text-center shadow-sm hover:shadow-md relative overflow-hidden"
+                data-category="Hair"
+                href="#rosterSection"
+              >
+                <div
+                  class="absolute top-0 left-0 w-full h-1 bg-primary transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+                ></div>
+                <span class="material-symbols-outlined text-[32px] text-primary"
+                  >content_cut</span
+                >
+                <span class="font-label-md text-label-md text-on-surface"
+                  >Hair</span
+                >
+              </a>
+              <a
+                class="discipline-card group flex flex-col items-center gap-sm p-lg bg-surface-container rounded-lg hover:bg-surface-container-high transition-colors text-center shadow-sm hover:shadow-md relative overflow-hidden"
+                data-category="Skin"
+                href="#rosterSection"
+              >
+                <div
+                  class="absolute top-0 left-0 w-full h-1 bg-primary transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+                ></div>
+                <span class="material-symbols-outlined text-[32px] text-primary"
+                  >spa</span
+                >
+                <span class="font-label-md text-label-md text-on-surface"
+                  >Skin</span
+                >
+              </a>
+              <a
+                class="discipline-card group flex flex-col items-center gap-sm p-lg bg-surface-container rounded-lg hover:bg-surface-container-high transition-colors text-center shadow-sm hover:shadow-md relative overflow-hidden"
+                data-category="Brows"
+                href="#rosterSection"
+              >
+                <div
+                  class="absolute top-0 left-0 w-full h-1 bg-primary transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+                ></div>
+                <span class="material-symbols-outlined text-[32px] text-primary"
+                  >face</span
+                >
+                <span class="font-label-md text-label-md text-on-surface"
+                  >Brows</span
+                >
+              </a>
+              <a
+                class="discipline-card group flex flex-col items-center gap-sm p-lg bg-surface-container rounded-lg hover:bg-surface-container-high transition-colors text-center shadow-sm hover:shadow-md relative overflow-hidden"
+                data-category="Nails"
+                href="#rosterSection"
+              >
+                <div
+                  class="absolute top-0 left-0 w-full h-1 bg-primary transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+                ></div>
+                <span class="material-symbols-outlined text-[32px] text-primary"
+                  >back_hand</span
+                >
+                <span class="font-label-md text-label-md text-on-surface"
+                  >Nails</span
+                >
+              </a>
+              <a
+                class="discipline-card group flex flex-col items-center gap-sm p-lg bg-surface-container rounded-lg hover:bg-surface-container-high transition-colors text-center shadow-sm hover:shadow-md relative overflow-hidden"
+                data-category="Makeup"
+                href="#rosterSection"
+              >
+                <div
+                  class="absolute top-0 left-0 w-full h-1 bg-primary transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+                ></div>
+                <span class="material-symbols-outlined text-[32px] text-primary"
+                  >brush</span
+                >
+                <span class="font-label-md text-label-md text-on-surface"
+                  >Makeup</span
+                >
+              </a>
+              <a
+                class="discipline-card group flex flex-col items-center gap-sm p-lg bg-surface-container rounded-lg hover:bg-surface-container-high transition-colors text-center shadow-sm hover:shadow-md relative overflow-hidden"
+                data-category="Other"
+                href="#rosterSection"
+              >
+                <div
+                  class="absolute top-0 left-0 w-full h-1 bg-primary transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+                ></div>
+                <span class="material-symbols-outlined text-[32px] text-primary"
+                  >more_horiz</span
+                >
+                <span class="font-label-md text-label-md text-on-surface"
+                  >Other</span
+                >
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Featured Professionals Carousel -->
+        <section
+          id="rosterSection"
+          class="w-full py-xl px-margin-desktop bg-surface"
+        >
+          <div class="max-w-[1440px] mx-auto flex flex-col gap-lg">
+            <div
+              class="flex flex-col gap-xs items-center text-center max-w-[600px] mx-auto"
+            >
+              <span
+                class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest"
+                >The Roster</span
+              >
+              <h2 class="font-headline-lg text-headline-lg text-on-surface">
+                Curated Professionals
+              </h2>
+              <p class="font-body-md text-body-md text-on-surface-variant">
+                A selection of elite practitioners recognized for their
+                precision and client satisfaction.
+              </p>
+            </div>
+
+            <!-- Infinite Carousel Container -->
+            <div class="relative w-full overflow-hidden" id="rosterCarousel">
+              <div class="carousel-track flex" id="carouselTrack">
+                <!-- Pro Card 1 -->
+                <div
+                  class="carousel-card flex-none w-full md:w-1/2 lg:w-1/3 px-3"
+                  data-name="Alex Thorne"
+                  data-title="Master Barber & Structural Styling"
+                  data-category="Hair"
+                  data-specialty="Barbering"
+                  data-location="Lagos"
+                  data-price="25000"
+                  data-rating="4.98"
+                >
+                  <div
+                    class="group relative h-[400px] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow bg-surface-container-lowest"
+                  >
+                    <div
+                      class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                      style="
+                        background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAgKVO7o2jaLmp1bK0cJE0eMYA1Vr868qSvRVwuTi_755QEXChb_MjSpvI-Q7zefL0XzulBTp3e8cjQW7s78PdrXdCpzppD8xTISZdmGTKDQ3if7yTOQIf0Ark-jvXRppwdwbqN2DLmxrcC70--eHl7FplUMD8fZoZL9kva3ewsY0cXkEPhjeRASjfgWfky30jRAWiglGOd_iN8en95AIznvmcf6Y0GezTTEwfO_iNXIMnIc1wfZiCd&quot;);
+                      "
+                    ></div>
+                    <div
+                      class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent"
+                    ></div>
+                    <div
+                      class="absolute bottom-0 left-0 p-lg w-full flex justify-between items-end"
+                    >
+                      <div class="flex flex-col gap-xs text-on-primary">
+                        <h3 class="font-headline-md text-headline-md">
+                          Alex Thorne
+                        </h3>
+                        <p class="font-body-sm text-body-sm opacity-90">
+                          Master Barber & Structural Styling
+                        </p>
+                        <p class="font-label-sm text-label-sm opacity-75">
+                          Lagos • ₦25,000
+                        </p>
+                        <div class="flex items-center gap-xs mt-sm">
+                          <span
+                            class="material-symbols-outlined text-[16px]"
+                            style="font-variation-settings: &quot;FILL&quot; 1"
+                            >star</span
+                          >
+                          <span class="font-label-sm text-label-sm"
+                            >4.98 (124 reviews)</span
+                          >
+                        </div>
+                      </div>
+                      <a
+                        href="auth/signup.html"
+                        class="btn-view-profile bg-surface-container-lowest text-primary font-label-md text-label-md px-md py-sm rounded-full hover:bg-surface-container transition-colors shadow-sm"
+                      >
+                        View Profile
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Pro Card 2 -->
+                <div
+                  class="carousel-card flex-none w-full md:w-1/2 lg:w-1/3 px-3"
+                  data-name="Jordan Lee"
+                  data-title="Architectural Nail Design"
+                  data-category="Nails"
+                  data-specialty="Nails"
+                  data-location="Abuja"
+                  data-price="12000"
+                  data-rating="5.0"
+                >
+                  <div
+                    class="group relative h-[400px] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow bg-surface-container-lowest"
+                  >
+                    <div
+                      class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                      style="
+                        background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDxZIf3tgqxpwxNhAfsVxldfNJomJ_WiZFh56KeUmfMBOMkicIhYY8mzcK8HcCw3Fp2c00T1rONac_25qJOcxnUp2mP2F1GQtw4B8wbI_YICZ3m4jMUvJM--kE81Vc4X1nuGEPk7qHXsENElpfIKDsSsDllnCpfl3jypg6BUQ3WOe0X2lFci8BlDezTnpepe5YuzpIpME_sWkXRxhid08OXmhAR4u_U0tCnrDwxE0nDfjpYVqsvfPlr&quot;);
+                      "
+                    ></div>
+                    <div
+                      class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent"
+                    ></div>
+                    <div
+                      class="absolute bottom-0 left-0 p-lg w-full flex justify-between items-end"
+                    >
+                      <div class="flex flex-col gap-xs text-on-primary">
+                        <h3 class="font-headline-md text-headline-md">
+                          Jordan Lee
+                        </h3>
+                        <p class="font-body-sm text-body-sm opacity-90">
+                          Architectural Nail Design
+                        </p>
+                        <p class="font-label-sm text-label-sm opacity-75">
+                          Abuja • ₦12,000
+                        </p>
+                        <div class="flex items-center gap-xs mt-xs">
+                          <span
+                            class="material-symbols-outlined text-[16px]"
+                            style="font-variation-settings: &quot;FILL&quot; 1"
+                            >star</span
+                          >
+                          <span class="font-label-sm text-label-sm"
+                            >5.0 (89 reviews)</span
+                          >
+                        </div>
+                      </div>
+                      <a
+                        href="auth/signup.html"
+                        class="btn-view-profile bg-surface-container-lowest text-primary font-label-md text-label-md px-md py-sm rounded-full hover:bg-surface-container transition-colors shadow-sm"
+                      >
+                        View Profile
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Pro Card 3 -->
+                <div
+                  class="carousel-card flex-none w-full md:w-1/2 lg:w-1/3 px-3"
+                  data-name="Dr. Samira Patel"
+                  data-title="Clinical Aesthetics"
+                  data-category="Skin"
+                  data-specialty="Skin"
+                  data-location="Port Harcourt"
+                  data-price="45000"
+                  data-rating="4.95"
+                >
+                  <div
+                    class="group relative h-[400px] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow bg-surface-container-lowest"
+                  >
+                    <div
+                      class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                      style="
+                        background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCUvaUxlTXlyPjbjOX2Tjsxl8X9lL8vANycxbcndrUYZoMRbV53qgSvsYueh5VqZi6g116RF21-RbU2ZwnkNiNT5WPsYZIzCf3k4Tgs9EzF1so3Vemq2twfvdKmLnLGfz2ZL1-W7uVYRjjQ45nt0V1GSvj5tNR26tixMLxnyK6BieeGUek4aVumJjapIFP7IGmbXWrhqB6BR9UZdUriwu4RixVYAZVAHGnZMbrhF6-uv9etqmQssjTb&quot;);
+                      "
+                    ></div>
+                    <div
+                      class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent"
+                    ></div>
+                    <div
+                      class="absolute bottom-0 left-0 p-lg w-full flex justify-between items-end"
+                    >
+                      <div class="flex flex-col gap-xs text-on-primary">
+                        <h3 class="font-headline-md text-headline-md">
+                          Dr. Samira Patel
+                        </h3>
+                        <p class="font-body-sm text-body-sm opacity-90">
+                          Clinical Aesthetics
+                        </p>
+                        <p class="font-label-sm text-label-sm opacity-75">
+                          Port Harcourt • ₦45,000
+                        </p>
+                        <div class="flex items-center gap-xs mt-xs">
+                          <span
+                            class="material-symbols-outlined text-[16px]"
+                            style="font-variation-settings: &quot;FILL&quot; 1"
+                            >star</span
+                          >
+                          <span class="font-label-sm text-label-sm"
+                            >4.95 (210 reviews)</span
+                          >
+                        </div>
+                      </div>
+                      <a
+                        href="auth/signup.html"
+                        class="btn-view-profile bg-surface-container-lowest text-primary font-label-md text-label-md px-md py-sm rounded-full hover:bg-surface-container transition-colors shadow-sm"
+                      >
+                        View Profile
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Pro Card 4 -->
+                <div
+                  class="carousel-card flex-none w-full md:w-1/2 lg:w-1/3 px-3"
+                  data-name="Morgan Vane"
+                  data-title="Advanced Dermal Therapy"
+                  data-category="Brows"
+                  data-specialty="Makeup"
+                  data-location="Ibadan"
+                  data-price="35000"
+                  data-rating="4.99"
+                >
+                  <div
+                    class="group relative h-[400px] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow bg-surface-container-lowest"
+                  >
+                    <div
+                      class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                      style="
+                        background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAaBXBceuhXZSTDMhbDxV0NvPWQtjowyGRq99IVvWdrUDaGz9TZ_sh-KwzEg4uBRRgsPzbfT98_OCqRc7QGJBtAJGLVxGjtwCdeLy2y6o3SmHAJ8E1LA2IbVybEMeeC9O_khSKbQVzsW90XgvDFQV8lzpOw1aRS5YLHaoIQ2pyWtFNy9ksmQLctfxXMSI4U5uTgFy6mYMT3ixlQFS5mekBheM9RtlB8RWE6DzsmgZivz6UT1hRi51u_&quot;);
+                      "
+                    ></div>
+                    <div
+                      class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent"
+                    ></div>
+                    <div
+                      class="absolute bottom-0 left-0 p-lg w-full flex justify-between items-end"
+                    >
+                      <div class="flex flex-col gap-xs text-on-primary">
+                        <h3 class="font-headline-md text-headline-md">
+                          Morgan Vane
+                        </h3>
+                        <p class="font-body-sm text-body-sm opacity-90">
+                          Advanced Dermal Therapy
+                        </p>
+                        <p class="font-label-sm text-label-sm opacity-75">
+                          Ibadan • ₦35,000
+                        </p>
+                        <div class="flex items-center gap-xs mt-sm">
+                          <span
+                            class="material-symbols-outlined text-[16px]"
+                            style="font-variation-settings: &quot;FILL&quot; 1"
+                            >star</span
+                          >
+                          <span class="font-label-sm text-label-sm"
+                            >4.99 (150 reviews)</span
+                          >
+                        </div>
+                      </div>
+                      <a
+                        href="auth/signup.html"
+                        class="btn-view-profile bg-surface-container-lowest text-primary font-label-md text-label-md px-md py-sm rounded-full hover:bg-surface-container transition-colors shadow-sm"
+                      >
+                        View Profile
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Carousel Controls -->
+              <div class="flex justify-between items-center mt-md px-sm">
+                <button
+                  aria-label="Previous"
+                  class="w-10 h-10 rounded-full bg-surface-container-lowest border border-soft-border flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors shadow-sm"
+                  id="prevBtn"
+                >
+                  <span class="material-symbols-outlined text-[20px]"
+                    >chevron_left</span
+                  >
+                </button>
+                <div class="flex gap-2" id="carouselDots"></div>
+                <button
+                  aria-label="Next"
+                  class="w-10 h-10 rounded-full bg-surface-container-lowest border border-soft-border flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors shadow-sm"
+                  id="nextBtn"
+                >
+                  <span class="material-symbols-outlined text-[20px]"
+                    >chevron_right</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Process Section -->
+        <section
+          id="processSection"
+          class="w-full py-xl px-margin-desktop bg-surface-container-low border-t border-soft-border"
+        >
+          <div
+            class="max-w-[1440px] mx-auto flex flex-col lg:flex-row gap-xl items-center"
+          >
+            <div class="flex-1 flex flex-col gap-lg">
+              <div class="flex flex-col gap-xs">
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest"
+                  >Process</span
+                >
+                <h2 class="font-headline-lg text-headline-lg text-on-surface">
+                  Engineered for Efficiency.
+                </h2>
+                <p
+                  class="font-body-lg text-body-lg text-on-surface-variant max-w-[500px]"
+                >
+                  A streamlined booking experience designed to respect your time
+                  and guarantee professional commitment.
+                </p>
+              </div>
+              <div class="flex flex-col gap-md relative">
+                <div
+                  class="absolute left-[15px] top-4 bottom-4 w-[1px] bg-soft-border hidden md:block"
+                ></div>
+
+                <div class="flex gap-md relative z-10 group">
+                  <div
+                    class="process-step-num w-8 h-8 rounded-full bg-surface-container border border-soft-border flex items-center justify-center shrink-0 text-on-surface transition-colors"
+                  >
+                    <span class="font-label-sm text-label-sm">01</span>
+                  </div>
+                  <div class="flex flex-col gap-xs pt-1">
+                    <h3
+                      class="font-headline-md text-headline-md text-on-surface"
+                    >
+                      Select & Schedule
+                    </h3>
+                    <p
+                      class="font-body-md text-body-md text-on-surface-variant"
+                    >
+                      Browse vetted professionals and find a time that fits your
+                      rigorous schedule.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex gap-md relative z-10 group">
+                  <div
+                    class="process-step-num w-8 h-8 rounded-full bg-surface-container border border-soft-border flex items-center justify-center shrink-0 text-on-surface transition-colors"
+                  >
+                    <span class="font-label-sm text-label-sm">02</span>
+                  </div>
+                  <div class="flex flex-col gap-xs pt-1">
+                    <h3
+                      class="font-headline-md text-headline-md text-on-surface"
+                    >
+                      Secure with Deposit
+                    </h3>
+                    <p
+                      class="font-body-md text-body-md text-on-surface-variant"
+                    >
+                      Commit to your appointment with a secure deposit. Our
+                      breakage fee policy protects both client and provider
+                      time.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex gap-md relative z-10 group">
+                  <div
+                    class="process-step-num w-8 h-8 rounded-full bg-surface-container border border-soft-border flex items-center justify-center shrink-0 text-on-surface transition-colors"
+                  >
+                    <span class="font-label-sm text-label-sm">03</span>
+                  </div>
+                  <div class="flex flex-col gap-xs pt-1">
+                    <h3
+                      class="font-headline-md text-headline-md text-on-surface"
+                    >
+                      Experience Excellence
+                    </h3>
+                    <p
+                      class="font-body-md text-body-md text-on-surface-variant"
+                    >
+                      Arrive at the studio and receive a premium service
+                      tailored to your precise specifications.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex-1 w-full relative">
+              <div
+                class="aspect-square w-full max-w-[600px] mx-auto rounded-xl overflow-hidden shadow-lg relative bg-surface-container-highest"
+              >
+                <div
+                  class="absolute inset-0 bg-cover bg-center"
+                  style="
+                    background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuA0R60ffOEQZk1E_5nyztyVzCN04Mqjrjov8JYIHmIbo0aBq_fW7svFvvucGP_2nQqy4qeO41xcWCPwya64GkFBUvJ1RfGA3ZnOT6x5PdNHQzy2wiPevHjC65sUkh3DBUWrAvxmbWnZ490R0qb8Y2QRbBxsxWc_cFiV6pBi2-snbBvzBJ3KfUt7Vpq1qj_8zGIB_bcefjcZQXQ58FHPcyRm3ImBcgJmTgMTIuWBS47TLFGE90SGfihd&quot;);
+                  "
+                ></div>
+
+                <div
+                  class="floating-ui-card absolute bottom-lg -left-md bg-surface-container-lowest p-md rounded-lg shadow-xl flex items-center gap-sm border border-soft-border animate-[pulse_4s_ease-in-out_infinite]"
+                >
+                  <div
+                    class="w-10 h-10 rounded-full bg-success-green/20 flex items-center justify-center text-success-green"
+                  >
+                    <span class="material-symbols-outlined">check_circle</span>
+                  </div>
+                  <div>
+                    <p
+                      class="font-label-sm text-label-sm text-on-surface-variant"
+                    >
+                      Appointment Confirmed
+                    </p>
+                    <p class="font-label-md text-label-md text-on-surface">
+                      Today, 2:00 PM
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Call to Action Banner -->
+        <section
+          class="cta-section w-full py-xl px-margin-desktop bg-primary text-on-primary"
+        >
+          <div
+            class="max-w-[800px] mx-auto text-center flex flex-col items-center gap-lg"
+          >
+            <h2 class="font-headline-xl text-headline-xl">
+              Ready to refine your routine?
+            </h2>
+            <p class="font-body-lg text-body-lg opacity-80">
+              Join Glamora today to discover and book the industry's most
+              dedicated professionals.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-sm">
+              <a
+                href="auth/signup.html"
+                class="btn-signup bg-surface-container-lowest text-primary font-label-md text-label-md px-xl py-md rounded-full hover:bg-surface-container transition-colors shadow-sm inline-block"
+              >
+                Book Now
+              </a>
+              <a
+                href="auth/signup.html"
+                class="btn-signup-vendor bg-transparent text-on-primary border border-on-primary/30 font-label-md text-label-md px-xl py-md rounded-full hover:bg-on-primary/10 transition-colors inline-block"
+              >
+                Join as a Professional
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="w-full bg-surface-container-lowest py-xl border-t border-soft-border transition-colors duration-300"
+    >
+      <div class="max-w-[1440px] mx-auto px-margin-desktop">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-lg mb-lg">
+          <div class="col-span-1 md:col-span-1">
+            <img
+              alt="Glamora"
+              class="h-8 mb-base"
+              src="images/glamora_background-removebg-preview.png"
+            />
+            <p class="text-body-sm font-body-sm text-on-surface-variant">
+              Elevating the professional beauty standard through architectural
+              precision and efficiency.
+            </p>
+          </div>
+        </div>
+        <div
+          class="flex justify-between items-center pt-md border-t border-soft-border text-label-sm font-label-sm text-on-surface-variant"
+        >
+          <span>© 2026 GLAMORA. All rights reserved.</span>
+          <div class="flex gap-md">
+            <a href="#home" class="hover:text-primary transition-colors"
+              >Privacy Policy</a
+            >
+            <a href="#home" class="hover:text-primary transition-colors"
+              >Terms of Service</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="js/landing page.js"></script>
+  </body>
+</html>

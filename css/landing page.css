@@ -1,0 +1,267 @@
+@layer base {
+    html, body {
+        margin: 0;
+        padding: 0;
+        scroll-behavior: smooth;
+    }
+    body {
+        overscroll-behavior: none;
+    }
+    main > :first-child {
+        margin-top: 0 !important;
+    }
+    main > :last-child {
+        margin-bottom: 0 !important;
+    }
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Splash Screen Animation & Progress Bar */
+@keyframes progressBar {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+.splash-progress-bar {
+    animation: progressBar 5s linear forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Base Carousel Track */
+.carousel-track {
+    will-change: transform;
+}
+
+/* ==========================================================================
+   Comprehensive Dark Mode Overrides
+   ========================================================================== */
+html.dark {
+    color-scheme: dark;
+}
+
+html.dark body {
+    background-color: #0f1011 !important;
+    color: #f4f3f0 !important;
+}
+
+/* Section Backgrounds */
+html.dark main,
+html.dark section,
+html.dark header,
+html.dark footer {
+    background-color: #121314 !important;
+    border-color: #26282a !important;
+}
+
+/* Surface Utility Classes in Dark Mode */
+html.dark .bg-surface,
+html.dark .bg-surface-container-low,
+html.dark .bg-surface-container-lowest,
+html.dark .bg-surface-container,
+html.dark .bg-surface-container-high,
+html.dark .bg-surface-container-highest {
+    background-color: #1a1b1e !important;
+    border-color: #2b2d31 !important;
+}
+
+/* Typography Overrides */
+html.dark .text-on-surface,
+html.dark .text-primary,
+html.dark h1, 
+html.dark h2, 
+html.dark h3,
+html.dark h4 {
+    color: #f4f3f0 !important;
+}
+
+html.dark .text-on-surface-variant {
+    color: #a0a4a8 !important;
+}
+
+html.dark .border-soft-border {
+    border-color: #2b2d31 !important;
+}
+
+/* Input Fields & Select Controls */
+html.dark input:not(.bg-transparent),
+html.dark select {
+    background-color: #121315 !important;
+    color: #f4f3f0 !important;
+    border-color: #2b2d31 !important;
+}
+
+html.dark input::placeholder {
+    color: #6c7075 !important;
+}
+
+/* Search Bar Container */
+html.dark .search-bar-container {
+    background-color: #1a1b1e !important;
+    border-color: #2b2d31 !important;
+}
+
+/* Hero Overlay Gradient */
+html.dark .hero-overlay {
+    background: linear-gradient(to bottom, rgba(18,19,20,0.85), rgba(18,19,20,0.65), #121314) !important;
+}
+
+/* Primary Button High-Contrast Overrides */
+html.dark .bg-primary:not(.cta-section) {
+    background-color: #f4f3f0 !important;
+    color: #121314 !important;
+}
+
+html.dark .bg-primary:not(.cta-section) .text-on-primary {
+    color: #121314 !important;
+}
+
+/* CTA Banner Special Dark Mode Rules */
+html.dark .cta-section {
+    background-color: #1a1b1e !important;
+    border-top: 1px solid #2b2d31;
+    border-bottom: 1px solid #2b2d31;
+}
+
+html.dark .cta-section h2,
+html.dark .cta-section p {
+    color: #f4f3f0 !important;
+}
+
+html.dark .cta-section .btn-signup {
+    background-color: #f4f3f0 !important;
+    color: #121314 !important;
+}
+
+html.dark .cta-section .btn-signup-vendor {
+    border-color: #f4f3f0 !important;
+    color: #f4f3f0 !important;
+}
+
+/* Process Section Floating Card & Step Numbers */
+html.dark .floating-ui-card {
+    background-color: #1a1b1e !important;
+    border-color: #2b2d31 !important;
+}
+
+html.dark .process-step-num {
+    background-color: #222428 !important;
+    border-color: #33363b !important;
+    color: #f4f3f0 !important;
+}
+
+/* Splash Screen Animations */
+      .splash-container {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition:
+          opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+          visibility 0.6s;
+      }
+
+      @keyframes logoFadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.85);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      @keyframes textReveal {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes pulseGlow {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.05);
+          opacity: 0.7;
+        }
+      }
+
+      .animate-logo-in {
+        animation: logoFadeIn 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+      .animate-text-in {
+        animation: textReveal 0.8s ease-out forwards 0.3s;
+        opacity: 0;
+      }
+      .animate-subtext-in {
+        animation: textReveal 0.8s ease-out forwards 0.6s;
+        opacity: 0;
+      }
+      .animate-pulse-glow {
+        animation: pulseGlow 2s infinite ease-in-out 1s;
+      }
+
+      /* Carousel */
+      .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+      .carousel-card {
+        flex: 0 0 100%;
+        min-width: 100%;
+        padding: 0 12px;
+      }
+      @media (min-width: 768px) {
+        .carousel-card {
+          flex: 0 0 50%;
+          min-width: 50%;
+        }
+      }
+      @media (min-width: 1024px) {
+        .carousel-card {
+          flex: 0 0 33.333333%;
+          min-width: 33.333333%;
+        }
+      }
+
+/* Carousel Control Buttons */
+html.dark #prevBtn,
+html.dark #nextBtn {
+    background-color: #1a1b1e !important;
+    border-color: #2b2d31 !important;
+    color: #f4f3f0 !important;
+}
+
+html.dark .bg-surface-dim {
+    background-color: #3d4046 !important;
+}

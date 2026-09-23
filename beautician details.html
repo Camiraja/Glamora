@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Glamora - Adesuwa Balogun</title>
+
+    <link rel="stylesheet" href="css/beautician-details.css" />
+
+    <!-- Tailwind Framework & Config -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#949393",
+              "on-primary-fixed-variant": "#474747",
+              "surface-container-highest": "#e3e2df",
+              "inverse-on-surface": "#f2f1ee",
+              "surface-container": "#efeeeb",
+              "on-tertiary-fixed-variant": "#6b392c",
+              "surface-container-lowest": "#ffffff",
+              primary: "#171818",
+              "surface-bright": "#faf9f6",
+              surface: "#faf9f6",
+              "success-green": "#5A705F",
+              "on-primary-fixed": "#1b1c1c",
+              "on-surface": "#1b1c1a",
+              tertiary: "#310b03",
+              "on-secondary-fixed-variant": "#3c4a40",
+              "secondary-fixed-dim": "#bacbbd",
+              "surface-container-high": "#e9e8e5",
+              "primary-container": "#2c2c2c",
+              "on-error-container": "#93000a",
+              secondary: "#536257",
+              "tertiary-container": "#4b1f14",
+              "muted-terracotta": "#BC7C6C",
+              "surface-variant": "#e3e2df",
+              "on-tertiary": "#ffffff",
+              "surface-dim": "#dbdad7",
+              "on-secondary": "#ffffff",
+              "on-surface-variant": "#444748",
+              background: "#faf9f6",
+              "on-error": "#ffffff",
+              "error-container": "#ffdad6",
+              "secondary-container": "#d6e7d8",
+              "outline-variant": "#c4c7c7",
+              "on-secondary-fixed": "#111e16",
+              "parchment-white": "#F7F6F3",
+              outline: "#747878",
+              "on-primary": "#ffffff",
+              "surface-container-low": "#f4f3f0",
+              "soft-border": "#E2E2DE",
+              "primary-fixed": "#e4e2e1",
+              "on-background": "#1b1c1a",
+              "inverse-primary": "#c8c6c5",
+              error: "#ba1a1a",
+              "tertiary-fixed-dim": "#feb5a3",
+              "inverse-surface": "#2f312f",
+              sage: "#8A9A8D",
+              "on-tertiary-container": "#c48373",
+              "warning-amber": "#C49D6A",
+              "secondary-fixed": "#d6e7d8",
+              "on-tertiary-fixed": "#360f06",
+              charcoal: "#2C2C2C",
+              "error-red": "#A64D4D",
+              "tertiary-fixed": "#ffdad2",
+              "surface-tint": "#5f5e5e",
+              "on-secondary-container": "#59685c",
+              "primary-fixed-dim": "#c8c6c5",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              lg: "48px",
+              "margin-desktop": "64px",
+              "margin-mobile": "16px",
+              sm: "12px",
+              xs: "4px",
+              gutter: "24px",
+              xl: "80px",
+              md: "24px",
+              base: "8px",
+            },
+            fontFamily: {
+              "headline-xl-mobile": ["Hanken Grotesk"],
+              "headline-lg-mobile": ["Hanken Grotesk"],
+              "label-md": ["Hanken Grotesk"],
+              "headline-md": ["Hanken Grotesk"],
+              "headline-lg": ["Hanken Grotesk"],
+              "label-sm": ["Hanken Grotesk"],
+              "headline-xl": ["Hanken Grotesk"],
+              "body-lg": ["Hanken Grotesk"],
+              "body-sm": ["Hanken Grotesk"],
+              "body-md": ["Hanken Grotesk"],
+            },
+            fontSize: {
+              "headline-xl-mobile": [
+                "36px",
+                { lineHeight: "1.1", fontWeight: "600" },
+              ],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "label-md": [
+                "14px",
+                { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "500" }],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-sm": [
+                "12px",
+                { lineHeight: "1", letterSpacing: "0.03em", fontWeight: "600" },
+              ],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="bg-background font-body-md text-on-surface dark:bg-charcoal dark:text-parchment-white transition-colors duration-300"
+  >
+    <header
+      class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-charcoal/90 backdrop-blur-xl border-b border-soft-border dark:border-primary-container"
+    >
+      <div
+        class="h-16 w-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex items-center justify-between"
+      >
+        <button
+          onclick="history.back()"
+          class="p-0 border-none bg-transparent text-on-surface hover:text-primary cursor-pointer leading-none"
+          title="Go Back"
+        >
+          <span class="material-symbols-outlined text-[24px]">arrow_back</span>
+        </button>
+        <div class="flex items-center gap-base shrink-0">
+          <img
+            alt="Glamora Logo"
+            class="h-8 w-auto object-contain shrink-0"
+            src="images/glamora_background-removebg-preview.png"
+          />
+          <span
+            class="font-headline-md text-headline-md text-primary dark:text-inverse-primary tracking-tight"
+            >GLAMORA</span
+          >
+        </div>
+        <nav class="hidden md:flex items-center gap-lg">
+          <a
+            aria-current="page"
+            class="transition-colors text-primary dark:text-inverse-primary font-semibold"
+            href="index.html"
+            >Home</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors"
+            href="services.html"
+            >Services</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors"
+            href="marketplace.html"
+            >Marketplace</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors"
+            href="chats.html"
+            >Chats</a
+          >
+        </nav>
+        <div class="flex items-center gap-xs sm:gap-sm md:gap-md">
+          <div class="flex items-center gap-xs sm:gap-sm">
+            <a
+              href="cart.html"
+              aria-current="page"
+              class="p-xs text-primary font-semibold transition-colors flex items-center border-b-2 border-primary"
+            >
+              <span class="material-symbols-outlined">shopping_bag</span>
+            </a>
+            <a
+              href="notifications.html"
+              class="p-xs text-on-surface-variant hover:text-primary transition-colors flex items-center"
+            >
+              <span class="material-symbols-outlined">notifications</span>
+            </a>
+          </div>
+
+          <div class="flex items-center gap-xs sm:gap-sm cursor-pointer group">
+            <img
+              alt="Profile"
+              class="w-8 h-8 rounded-full object-cover border border-soft-border group-hover:border-primary dark:group-hover:border-inverse-primary transition-colors shrink-0"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAksYm7Vpu3y6nFXAdnowe6h9yhNcma3tOmWqhGqQ-yieKVgv8IOaIQ21a9oK4barmnxBtCbmquE3v8ijlXgSV-zbE8NktlwkPDfGYPsqoh8T0NODzVrMTSMZLOGIWxZ5sK5uG09XBqCUJsvcsc8RrecRsLG5xdSZ2m8MUH3WXsWax75A3uBbiT_shFBUTYsOu9dyHNTK3QCaWYe77GnvN4ZQ-67ApBKuv20ipR9qLJlf0O_ZyvafdN"
+            />
+            <span
+              class="material-symbols-outlined text-on-surface-variant dark:text-outline hidden md:block"
+              >expand_more</span
+            >
+          </div>
+          <!-- Hamburger Menu Button -->
+          <button
+            id="mobile-menu-btn"
+            class="md:hidden flex items-center justify-center p-2 text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors shrink-0"
+          >
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Sidebar Backdrop -->
+    <div
+      id="mobile-sidebar-backdrop"
+      class="fixed inset-0 bg-black/60 z-[60] hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm"
+    ></div>
+
+    <!-- Mobile Sidebar -->
+    <aside
+      id="mobile-sidebar"
+      class="fixed top-0 left-0 w-[80%] max-w-[300px] h-screen bg-surface dark:bg-charcoal z-[70] transform -translate-x-full transition-transform duration-300 flex flex-col shadow-2xl border-r border-soft-border dark:border-primary-container"
+    >
+      <!-- Sidebar Header -->
+      <div
+        class="h-16 px-margin-mobile flex items-center justify-between border-b border-soft-border dark:border-primary-container shrink-0"
+      >
+        <div class="flex items-center gap-base">
+          <img
+            alt="Glamora Logo"
+            class="h-8 w-auto object-contain"
+            src="images/glamora_background-removebg-preview.png"
+          />
+          <span
+            class="font-headline-md text-headline-md text-primary dark:text-inverse-primary tracking-tight"
+            >GLAMORA</span
+          >
+        </div>
+        <button
+          id="close-sidebar-btn"
+          class="w-8 h-8 rounded-full bg-surface-container dark:bg-primary-container flex items-center justify-center text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors shrink-0"
+        >
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Sidebar Navigation Links -->
+      <nav
+        class="flex-1 px-margin-mobile py-md overflow-y-auto flex flex-col gap-xs"
+      >
+        <a
+          href="index.html"
+          class="flex items-center gap-md px-md py-sm rounded-xl bg-primary dark:bg-inverse-surface text-on-primary font-semibold transition-colors"
+        >
+          <span class="material-symbols-outlined text-[22px]">home</span>
+          Dashboard
+        </a>
+        <a
+          href="mybookings.html"
+          class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant dark:text-outline hover:bg-surface-container dark:hover:bg-primary-container hover:text-primary dark:hover:text-inverse-primary transition-colors font-medium"
+        >
+          <span class="material-symbols-outlined text-[22px]"
+            >calendar_today</span
+          >
+          Services & Bookings
+        </a>
+        <a
+          href="marketplace.html"
+          class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant dark:text-outline hover:bg-surface-container dark:hover:bg-primary-container hover:text-primary dark:hover:text-inverse-primary transition-colors font-medium"
+        >
+          <span class="material-symbols-outlined text-[22px]">storefront</span>
+          Marketplace
+        </a>
+        <a
+          href="favorites.html"
+          class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant dark:text-outline hover:bg-surface-container dark:hover:bg-primary-container hover:text-primary dark:hover:text-inverse-primary transition-colors font-medium"
+        >
+          <span class="material-symbols-outlined text-[22px]">favorite</span>
+          Favorites
+        </a>
+        <a
+          href="chats.html"
+          class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant dark:text-outline hover:bg-surface-container dark:hover:bg-primary-container hover:text-primary dark:hover:text-inverse-primary transition-colors font-medium"
+        >
+          <span class="material-symbols-outlined text-[22px]"
+            >chat_bubble_outline</span
+          >
+          Messages
+        </a>
+        <a
+          href="cart.html"
+          class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant dark:text-outline hover:bg-surface-container dark:hover:bg-primary-container hover:text-primary dark:hover:text-inverse-primary transition-colors font-medium"
+        >
+          <span class="material-symbols-outlined text-[22px]"
+            >shopping_bag</span
+          >
+          My Orders
+        </a>
+      </nav>
+
+      <!-- Sidebar Footer (Profile Card) -->
+      <div
+        class="p-margin-mobile border-t border-soft-border dark:border-primary-container shrink-0 mt-auto"
+      >
+        <div
+          class="flex items-center gap-md p-sm rounded-xl bg-surface-container dark:bg-primary-container"
+        >
+          <img
+            alt="Profile"
+            class="w-10 h-10 rounded-full object-cover border border-soft-border dark:border-outline-variant shrink-0"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAksYm7Vpu3y6nFXAdnowe6h9yhNcma3tOmWqhGqQ-yieKVgv8IOaIQ21a9oK4barmnxBtCbmquE3v8ijlXgSV-zbE8NktlwkPDfGYPsqoh8T0NODzVrMTSMZLOGIWxZ5sK5uG09XBqCUJsvcsc8RrecRsLG5xdSZ2m8MUH3WXsWax75A3uBbiT_shFBUTYsOu9dyHNTK3QCaWYe77GnvN4ZQ-67ApBKuv20ipR9qLJlf0O_ZyvafdN"
+          />
+          <div class="flex flex-col min-w-0">
+            <span
+              class="font-headline-md text-body-md font-semibold text-on-surface dark:text-inverse-on-surface truncate"
+              >Alex Vanguard</span
+            >
+            <span
+              class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline truncate"
+              >Customer Account</span
+            >
+          </div>
+        </div>
+      </div>
+    </aside>
+    <main
+      class="w-full pt-16 bg-background dark:bg-charcoal transition-colors duration-300"
+    >
+      <div class="flex flex-col w-full">
+        <!-- Header/Profile Hero -->
+        <div
+          class="relative w-full min-h-[420px] md:h-[400px] bg-surface-container dark:bg-primary-container flex items-end pb-lg px-margin-mobile md:px-margin-desktop mt-[-64px] pt-[120px] md:pt-[64px]"
+          style="
+            background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBrQ0RAloIkN7jTg5Kaje_cET4392iQsWPH62vXXOBVnPTuDpsf8M2lNaGKMc3BF6E8asXD2Tvn-t2Sch2_lo-HWKJEkHIu0m_Ap2V6q4PpBd-73mSD-jpg3zz313KWgOzNIlWYYWbtKOZznRYb0nMwLJ3sGXaQxhLqNl8JBF7inBbyIiaVE7Jj5olnbBXZoStwZrwVuosipk3KutFOhDeq_cfmQb2ErSUFjnEfKG1_EAfbg601l0nZ&quot;);
+            background-size: cover;
+            background-position: center;
+          "
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-background dark:from-charcoal via-background/40 dark:via-charcoal/60 to-transparent"
+          ></div>
+
+          <!-- Changed to items-start for mobile to align left naturally -->
+          <div
+            class="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-md w-full max-w-[1440px] mx-auto"
+          >
+            <div
+              class="w-32 h-32 md:w-40 md:h-40 rounded-full bg-surface dark:bg-surface-container-high p-1 shadow-lg shrink-0"
+            >
+              <img
+                class="w-full h-full object-cover rounded-full"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ9WFYRcPcn0eUTWc0CgdzWyGgxY61FmLc1lehAHLhxNSQq_n-YAbUy0Fs1QTLRwIRhy75SaCn2-Db8L_HP_HeBl5FpwJD-DmDoxVQ_WCFsNl-oIzsTZ4A4NZyL9QpsRocXo5R16r70VxpbeiKKMlAzykxuQNdbooKaZv0dJh9whlHiEtCoJNsv6rW9EIeH-QXtmzROxNsy6ORKos3AmTCatnfbufDLD_TgxPepnuxNXkJodfdcP_f"
+                alt="Adesuwa Balogun Portrait"
+              />
+            </div>
+            <div class="flex-1 flex flex-col gap-xs pb-sm">
+              <div class="flex items-center gap-sm">
+                <h1
+                  class="font-headline-xl text-headline-xl text-on-background dark:text-parchment-white"
+                >
+                  Adesuwa Balogun
+                </h1>
+                <span
+                  class="material-symbols-outlined text-sage"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >verified</span
+                >
+              </div>
+              <p
+                class="font-body-lg text-body-lg text-on-surface-variant dark:text-outline-variant"
+              >
+                Master Aesthetician & Architectural Brow Specialist
+              </p>
+              <div class="flex items-center gap-md mt-xs">
+                <div class="flex items-center gap-xs">
+                  <span
+                    class="material-symbols-outlined text-warning-amber"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >star</span
+                  >
+                  <span
+                    class="font-label-md text-label-md text-on-surface dark:text-parchment-white"
+                    >4.9</span
+                  >
+                  <span
+                    class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant"
+                    >(128 Reviews)</span
+                  >
+                </div>
+                <div
+                  class="w-1 h-1 rounded-full bg-on-surface-variant/30 dark:bg-outline-variant/30"
+                ></div>
+                <div
+                  class="flex items-center gap-xs text-on-surface-variant dark:text-outline-variant"
+                >
+                  <span class="material-symbols-outlined text-sm"
+                    >location_on</span
+                  >
+                  <span class="font-body-sm text-body-sm"
+                    >Lekki Phase 1, Studio 4B, Lagos</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="w-full md:w-auto mt-sm md:mt-0 pb-sm">
+              <button
+                onclick="scrollToServices()"
+                class="w-full md:w-auto px-lg py-sm bg-charcoal dark:bg-parchment-white text-white dark:text-charcoal font-label-md text-label-md rounded-full shadow-md hover:opacity-90 transition-opacity flex items-center justify-center gap-sm"
+              >
+                <span>View Services</span>
+                <span class="material-symbols-outlined">arrow_downward</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="max-w-[1440px] mx-auto w-full px-margin-mobile md:px-margin-desktop py-xl grid grid-cols-1 lg:grid-cols-12 gap-lg"
+        >
+          <!-- Left Column: Main Content -->
+          <div class="lg:col-span-8 flex flex-col gap-xl">
+            <!-- Bio Section -->
+            <section class="flex flex-col gap-md">
+              <div class="flex items-center gap-sm">
+                <h2
+                  class="font-headline-lg text-headline-lg text-on-surface dark:text-parchment-white"
+                >
+                  Philosophy & Approach
+                </h2>
+                <div
+                  class="flex-1 h-px bg-soft-border dark:bg-outline-variant ml-sm"
+                ></div>
+              </div>
+              <p
+                class="font-body-lg text-body-lg text-on-surface-variant dark:text-outline-variant leading-relaxed max-w-3xl"
+              >
+                With over a decade of experience in architectural facial
+                aesthetics in Nigeria and abroad, I believe in enhancing natural
+                structure rather than masking it. My approach is rooted in
+                precision, utilizing advanced techniques to craft tailored
+                solutions for every client. Beauty is not about decoration; it's
+                about structural harmony and meticulous care.
+              </p>
+              <div class="flex gap-sm flex-wrap mt-sm">
+                <span
+                  class="px-sm py-xs bg-surface-container dark:bg-surface-container-high text-on-surface dark:text-parchment-white font-label-sm text-label-sm rounded-full border border-soft-border dark:border-outline-variant"
+                  >Structural Brows</span
+                >
+                <span
+                  class="px-sm py-xs bg-surface-container dark:bg-surface-container-high text-on-surface dark:text-parchment-white font-label-sm text-label-sm rounded-full border border-soft-border dark:border-outline-variant"
+                  >Advanced Skin Mapping</span
+                >
+                <span
+                  class="px-sm py-xs bg-surface-container dark:bg-surface-container-high text-on-surface dark:text-parchment-white font-label-sm text-label-sm rounded-full border border-soft-border dark:border-outline-variant"
+                  >Minimalist Aesthetics</span
+                >
+              </div>
+            </section>
+
+            <!-- Service Menu -->
+            <section id="services-menu" class="flex flex-col gap-md">
+              <div class="flex items-center justify-between mb-sm">
+                <h2
+                  class="font-headline-lg text-headline-lg text-on-surface dark:text-parchment-white"
+                >
+                  Service Menu
+                </h2>
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant uppercase tracking-widest"
+                  >Select to Book</span
+                >
+              </div>
+              <div class="flex flex-col gap-sm">
+                <!-- Service Cards -->
+                <div
+                  onclick="
+                    bookService(
+                      'srv_001',
+                      'Architectural Brow Sculpting',
+                      25000,
+                      45,
+                    )
+                  "
+                  class="group relative flex flex-col md:flex-row items-start md:items-center justify-between p-md bg-surface-container-lowest dark:bg-surface-container-high border border-soft-border dark:border-outline-variant rounded-xl transition-all hover:shadow-md cursor-pointer hover:border-charcoal dark:hover:border-parchment-white"
+                >
+                  <div class="flex-1 pr-lg">
+                    <h3
+                      class="font-headline-md text-headline-md text-on-surface dark:text-parchment-white mb-xs"
+                    >
+                      Architectural Brow Sculpting
+                    </h3>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant line-clamp-2"
+                    >
+                      Precision mapping, tinting, and shaping designed to
+                      enhance your natural bone structure. Includes a
+                      consultation and personalized aftercare plan.
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-md mt-sm md:mt-0 shrink-0">
+                    <div class="flex flex-col items-end">
+                      <span
+                        class="font-headline-md text-headline-md text-primary dark:text-parchment-white"
+                        >₦25,000</span
+                      >
+                      <span
+                        class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant"
+                        >45 mins</span
+                      >
+                    </div>
+                    <div
+                      class="w-px h-10 bg-soft-border dark:bg-outline-variant mx-xs hidden md:block"
+                    ></div>
+                    <button
+                      class="w-10 h-10 rounded-full bg-surface-container dark:bg-surface-container-highest flex items-center justify-center group-hover:bg-charcoal dark:group-hover:bg-parchment-white group-hover:text-white dark:group-hover:text-charcoal transition-colors"
+                    >
+                      <span
+                        class="material-symbols-outlined text-charcoal dark:text-parchment-white group-hover:text-white dark:group-hover:text-charcoal"
+                        >add</span
+                      >
+                    </button>
+                  </div>
+                </div>
+
+                <div
+                  onclick="
+                    bookService(
+                      'srv_002',
+                      'Dermal Resurfacing Treatment',
+                      45000,
+                      60,
+                    )
+                  "
+                  class="group relative flex flex-col md:flex-row items-start md:items-center justify-between p-md bg-surface-container-lowest dark:bg-surface-container-high border border-soft-border dark:border-outline-variant rounded-xl transition-all hover:shadow-md cursor-pointer hover:border-charcoal dark:hover:border-parchment-white"
+                >
+                  <div class="flex-1 pr-lg">
+                    <h3
+                      class="font-headline-md text-headline-md text-on-surface dark:text-parchment-white mb-xs"
+                    >
+                      Dermal Resurfacing Treatment
+                    </h3>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant line-clamp-2"
+                    >
+                      A deeply exfoliating procedure utilizing diamond-tip
+                      microdermabrasion to smooth texture, diminish fine lines,
+                      and promote cellular turnover.
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-md mt-sm md:mt-0 shrink-0">
+                    <div class="flex flex-col items-end">
+                      <span
+                        class="font-headline-md text-headline-md text-primary dark:text-parchment-white"
+                        >₦45,000</span
+                      >
+                      <span
+                        class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant"
+                        >60 mins</span
+                      >
+                    </div>
+                    <div
+                      class="w-px h-10 bg-soft-border dark:bg-outline-variant mx-xs hidden md:block"
+                    ></div>
+                    <button
+                      class="w-10 h-10 rounded-full bg-surface-container dark:bg-surface-container-highest flex items-center justify-center group-hover:bg-charcoal dark:group-hover:bg-parchment-white group-hover:text-white dark:group-hover:text-charcoal transition-colors"
+                    >
+                      <span
+                        class="material-symbols-outlined text-charcoal dark:text-parchment-white group-hover:text-white dark:group-hover:text-charcoal"
+                        >add</span
+                      >
+                    </button>
+                  </div>
+                </div>
+
+                <div
+                  onclick="
+                    bookService(
+                      'srv_003',
+                      'The Signature Lift (Lash & Brow)',
+                      55000,
+                      90,
+                    )
+                  "
+                  class="group relative flex flex-col md:flex-row items-start md:items-center justify-between p-md bg-surface-container-lowest dark:bg-surface-container-high border border-soft-border dark:border-outline-variant rounded-xl transition-all hover:shadow-md cursor-pointer hover:border-charcoal dark:hover:border-parchment-white"
+                >
+                  <div class="flex-1 pr-lg">
+                    <h3
+                      class="font-headline-md text-headline-md text-on-surface dark:text-parchment-white mb-xs"
+                    >
+                      The Signature Lift (Lash & Brow)
+                    </h3>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant line-clamp-2"
+                    >
+                      Combined lash lifting and brow lamination for a striking,
+                      awakened look that lasts up to 6 weeks. No extensions,
+                      just structure.
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-md mt-sm md:mt-0 shrink-0">
+                    <div class="flex flex-col items-end">
+                      <span
+                        class="font-headline-md text-headline-md text-primary dark:text-parchment-white"
+                        >₦55,000</span
+                      >
+                      <span
+                        class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant"
+                        >90 mins</span
+                      >
+                    </div>
+                    <div
+                      class="w-px h-10 bg-soft-border dark:bg-outline-variant mx-xs hidden md:block"
+                    ></div>
+                    <button
+                      class="w-10 h-10 rounded-full bg-surface-container dark:bg-surface-container-highest flex items-center justify-center group-hover:bg-charcoal dark:group-hover:bg-parchment-white group-hover:text-white dark:group-hover:text-charcoal transition-colors"
+                    >
+                      <span
+                        class="material-symbols-outlined text-charcoal dark:text-parchment-white group-hover:text-white dark:group-hover:text-charcoal"
+                        >add</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Portfolio Gallery -->
+            <section class="flex flex-col gap-md -ml-4 md:ml-0">
+              <h2
+                class="font-headline-lg text-headline-lg text-on-surface dark:text-parchment-white pl-4 md:pl-0"
+              >
+                Selected Works
+              </h2>
+              <div
+                class="grid grid-cols-2 md:grid-cols-3 gap-xs md:gap-sm pl-4 md:pl-0"
+              >
+                <div
+                  class="aspect-square rounded-xl overflow-hidden shadow-sm relative group cursor-pointer"
+                >
+                  <img
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVc93murcJhHYz7JzZuAdvfSduEZF57tetAb71ldirTZUawxK6eiX0vEtbe6JjpZEqL4-GB-jAhILK6n3MiCuBlRUN_Wg7GiVFp3H_5jJeiAaMDhyBieoTs4ke9EoAuYX72e18gzGAmK0fBSyqJhix0m5p9lM2wcA95_xkpHlQfJO9Lf_7uW3IjBuLKRgvlYaw37hDQK3RTUohmraz4wq9_f4-LH77uxqEDnHgoUZvpjfi-UEbFua7"
+                    alt="Brows Work 1"
+                  />
+                  <div
+                    class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+                  >
+                    <span
+                      class="material-symbols-outlined text-white text-headline-lg"
+                      >open_in_full</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="aspect-square rounded-xl overflow-hidden shadow-sm relative group cursor-pointer"
+                >
+                  <img
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJpZQlQlhbWHWjIomZTvUtbAQC1l2wfjqWWTaJ0-1HT06N04HQI3DZeY6YRJZziJn_tDj60ujQ4JDzrXSDEXeYvAqAOcLrt6npDdmPz50ejL9MaIpolKSh_HaM3sivlCBA6nrOB8w2iVokmEBdkY4TmtOkVantdmvyTEcyW3yPd_q3KLfo5al77d8jqZL5iPC5vrVRsXroTdjf5PVKNQUvFfEXfFM-z8-4b0o-EEgiJz0qSORbAVqQ"
+                    alt="Facial Work 2"
+                  />
+                  <div
+                    class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+                  >
+                    <span
+                      class="material-symbols-outlined text-white text-headline-lg"
+                      >open_in_full</span
+                    >
+                  </div>
+                </div>
+                <!-- Removed 'md:col-span-1 col-span-2' so it shares the same size constraints -->
+                <div
+                  class="aspect-square rounded-xl overflow-hidden shadow-sm relative group cursor-pointer"
+                >
+                  <img
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhdqAH61oW31Z2KY8ljbs59gaEVche7vr71KDDh6Nkcf8AlXbKRMdG1MLYLfMcAmayMGjs6-HGm2-MaISK1Tjg1Kj4cMdBV4JPmzdqgbuWjHEgFNfp3HjiGQKFjXCe0eKuvpEmyVXf_2GXIdR6qbYAt88rl0Nfy-RliIf6WaSiitUPz0oAHIrMrf16HjXLSMSPq5iRfjHLGGIK5U4AZQcSmBJYSsdMpVqGUSR7LiqUFUDNQIZKpJBI"
+                    alt="Facial Work 3"
+                  />
+                  <div
+                    class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+                  >
+                    <span
+                      class="material-symbols-outlined text-white text-headline-lg"
+                      >open_in_full</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </section>
+            <!-- Shop Products Section (Managed by JS) -->
+            <section id="shop-products-section" class="flex flex-col gap-md">
+              <div class="flex items-center justify-between mb-sm">
+                <h2
+                  class="font-headline-lg text-headline-lg text-on-surface dark:text-parchment-white"
+                >
+                  Shop Products
+                </h2>
+                <button
+                  onclick="openProductsModal()"
+                  class="font-label-md text-label-md text-on-surface dark:text-parchment-white hover:text-muted-terracotta transition-colors flex items-center gap-xs"
+                >
+                  View All
+                  <span class="material-symbols-outlined text-sm"
+                    >arrow_forward</span
+                  >
+                </button>
+              </div>
+              <div
+                id="shop-products-container"
+                class="flex overflow-x-auto gap-md pb-sm snap-x snap-mandatory hide-scrollbar"
+              >
+                <!-- Dynamically populated via JS -->
+              </div>
+            </section>
+
+            <!-- Reviews -->
+            <section class="flex flex-col gap-md">
+              <div class="flex items-center justify-between mb-sm">
+                <h2
+                  class="font-headline-lg text-headline-lg text-on-surface dark:text-parchment-white"
+                >
+                  Client Feedback
+                </h2>
+                <button
+                  class="font-label-md text-label-md text-on-surface dark:text-parchment-white hover:text-muted-terracotta transition-colors flex items-center gap-xs"
+                >
+                  Read All
+                  <span class="material-symbols-outlined text-sm"
+                    >arrow_forward</span
+                  >
+                </button>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+                <div
+                  class="bg-surface-container-low dark:bg-surface-container-high p-md rounded-xl border border-soft-border dark:border-outline-variant flex flex-col gap-sm"
+                >
+                  <div class="flex justify-between items-start">
+                    <div class="flex items-center gap-sm">
+                      <div
+                        class="w-10 h-10 rounded-full bg-surface-container dark:bg-primary-container flex items-center justify-center font-headline-md text-on-surface dark:text-parchment-white"
+                      >
+                        N
+                      </div>
+                      <div>
+                        <h4
+                          class="font-label-md text-label-md text-on-surface dark:text-parchment-white"
+                        >
+                          Ngozi T.
+                        </h4>
+                        <p
+                          class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant"
+                        >
+                          2 days ago
+                        </p>
+                      </div>
+                    </div>
+                    <div class="flex text-warning-amber">
+                      <span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >star</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >star</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >star</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >star</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >star</span
+                      >
+                    </div>
+                  </div>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant line-clamp-3"
+                  >
+                    "Adesuwa's attention to detail is unmatched. She doesn't
+                    just do a service; she analyzes your face and creates a
+                    custom plan. The studio environment in Lekki is incredibly
+                    calming and professional."
+                  </p>
+                </div>
+
+                <div
+                  class="bg-surface-container-low dark:bg-surface-container-high p-md rounded-xl border border-soft-border dark:border-outline-variant flex flex-col gap-sm"
+                >
+                  <div class="flex justify-between items-start">
+                    <div class="flex items-center gap-sm">
+                      <div
+                        class="w-10 h-10 rounded-full bg-surface-container dark:bg-primary-container flex items-center justify-center font-headline-md text-on-surface dark:text-parchment-white"
+                      >
+                        S
+                      </div>
+                      <div>
+                        <h4
+                          class="font-label-md text-label-md text-on-surface dark:text-parchment-white"
+                        >
+                          Simi K.
+                        </h4>
+                        <p
+                          class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant"
+                        >
+                          1 week ago
+                        </p>
+                      </div>
+                    </div>
+                    <div class="flex text-warning-amber">
+                      <span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >star</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >star</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >star</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >star</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >star</span
+                      >
+                    </div>
+                  </div>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant line-clamp-3"
+                  >
+                    "The dermal resurfacing completely changed my skin texture.
+                    It's an investment, but the results speak for themselves.
+                    The space feels like a high-end architectural firm rather
+                    than a typical salon."
+                  </p>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- Right Column: Sidebar / Sticky Info -->
+          <div class="lg:col-span-4 relative">
+            <div
+              class="sticky top-24 flex flex-col gap-lg bg-surface-container-lowest dark:bg-surface-container-high p-lg rounded-2xl border border-soft-border dark:border-outline-variant shadow-sm"
+            >
+              <!-- Availability / Hours -->
+              <div>
+                <h3
+                  class="font-label-md text-label-md text-on-surface dark:text-parchment-white uppercase tracking-widest mb-md flex items-center gap-xs"
+                >
+                  <span class="material-symbols-outlined text-sm"
+                    >schedule</span
+                  >
+                  Studio Hours
+                </h3>
+                <ul
+                  class="flex flex-col gap-sm font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant"
+                >
+                  <li
+                    class="flex justify-between items-center py-xs border-b border-soft-border/50 dark:border-outline-variant/50"
+                  >
+                    <span>Tuesday</span>
+                    <span
+                      class="text-on-surface dark:text-parchment-white font-medium"
+                      >10:00 AM - 7:00 PM</span
+                    >
+                  </li>
+                  <li
+                    class="flex justify-between items-center py-xs border-b border-soft-border/50 dark:border-outline-variant/50"
+                  >
+                    <span>Wednesday</span>
+                    <span
+                      class="text-on-surface dark:text-parchment-white font-medium"
+                      >10:00 AM - 7:00 PM</span
+                    >
+                  </li>
+                  <li
+                    class="flex justify-between items-center py-xs border-b border-soft-border/50 dark:border-outline-variant/50"
+                  >
+                    <span>Thursday</span>
+                    <span
+                      class="text-on-surface dark:text-parchment-white font-medium"
+                      >11:00 AM - 8:00 PM</span
+                    >
+                  </li>
+                  <li
+                    class="flex justify-between items-center py-xs border-b border-soft-border/50 dark:border-outline-variant/50"
+                  >
+                    <span>Friday</span>
+                    <span
+                      class="text-on-surface dark:text-parchment-white font-medium"
+                      >9:00 AM - 5:00 PM</span
+                    >
+                  </li>
+                  <li
+                    class="flex justify-between items-center py-xs border-b border-soft-border/50 dark:border-outline-variant/50"
+                  >
+                    <span>Saturday</span>
+                    <span
+                      class="text-on-surface dark:text-parchment-white font-medium"
+                      >9:00 AM - 3:00 PM</span
+                    >
+                  </li>
+                  <li
+                    class="flex justify-between items-center py-xs text-muted-terracotta"
+                  >
+                    <span>Sun & Mon</span>
+                    <span>Closed (Studio Reset)</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Location Map -->
+              <div>
+                <h3
+                  class="font-label-md text-label-md text-on-surface dark:text-parchment-white uppercase tracking-widest mb-md flex items-center gap-xs"
+                >
+                  <span class="material-symbols-outlined text-sm"
+                    >pin_drop</span
+                  >
+                  Location
+                </h3>
+                <div
+                  class="w-full h-48 rounded-xl overflow-hidden border border-soft-border dark:border-outline-variant shadow-inner bg-cover bg-center"
+                  style="
+                    background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuASipcx4Tfgk0esEbIybrYKBmT-Xzgouvb5wuAUnomqS-QXBHTWe8Ybu-PLe6o2kvL6l2OpkLjvZTdMmghDc5Fa__db68UlVjYiG-z9SpriglTbmJZXwncc9fHfVXLvJX7rxU5lwoOtjlEpEUllJ8pte1JB85YhoWoA3n3oRhZRmyE3_jrI6AQlWVx2XdymBzFDP7wfW8V6JCgdIcYwyKdlCpb07DwClc6S0wCja3adjWiZ7CoYRrnf&quot;);
+                  "
+                ></div>
+                <p
+                  class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant mt-sm"
+                >
+                  Lekki Phase 1, Studio 4B, Lagos<br />
+                  Entry via West Atrium. Valet parking available.
+                </p>
+              </div>
+
+              <!-- Policies -->
+              <div
+                class="bg-surface-container-low dark:bg-primary-container p-sm rounded-lg border border-soft-border dark:border-outline-variant"
+              >
+                <h4
+                  class="font-label-sm text-label-sm text-on-surface dark:text-parchment-white mb-xs flex items-center gap-xs"
+                >
+                  <span class="material-symbols-outlined text-sm">policy</span>
+                  Cancellation Policy
+                </h4>
+                <p
+                  class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant text-xs"
+                >
+                  Appointments cancelled within 48 hours incur a fee of 50% of
+                  the scheduled service. No-shows are charged in full.
+                </p>
+              </div>
+
+              <button
+                onclick="scrollToServices()"
+                class="w-full py-md bg-charcoal dark:bg-parchment-white text-white dark:text-charcoal font-label-md text-label-md rounded-xl shadow-md hover:opacity-90 transition-all active:scale-[0.98]"
+              >
+                Reserve Availability
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Vendor Products Modal -->
+    <div
+      id="products-modal"
+      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden"
+    >
+      <div
+        class="bg-surface dark:bg-charcoal border border-soft-border dark:border-outline-variant rounded-2xl max-w-4xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden transform transition-all duration-300"
+      >
+        <!-- Modal Header -->
+        <div
+          class="flex items-center justify-between p-md border-b border-soft-border dark:border-outline-variant"
+        >
+          <div>
+            <h3
+              class="font-headline-md text-headline-md text-on-surface dark:text-parchment-white"
+            >
+              Adesuwa's Collection
+            </h3>
+            <p
+              class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant"
+            >
+              All skincare & beauty products by this vendor
+            </p>
+          </div>
+          <button
+            onclick="closeProductsModal()"
+            class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant dark:text-outline-variant hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <!-- Modal Body (Products Grid) -->
+        <div
+          id="modal-products-grid"
+          class="p-md md:p-lg overflow-y-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-md"
+        >
+          <!-- Rendered dynamically by JS -->
+        </div>
+      </div>
+    </div>
+
+    <footer
+      class="w-full bg-surface-container-lowest dark:bg-surface-container-high py-xl border-t border-soft-border dark:border-outline-variant transition-colors duration-300"
+    >
+      <div class="max-w-[1440px] mx-auto px-margin-desktop">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-lg mb-lg">
+          <div class="col-span-1 md:col-span-1">
+            <img
+              alt="Glamora"
+              class="h-8 mb-base"
+              src="images/screen-removebg-preview.png"
+            />
+            <p
+              class="text-body-sm font-body-sm text-on-surface-variant dark:text-outline-variant"
+            >
+              Connect. Get booked. Get styled.
+            </p>
+          </div>
+        </div>
+        <div
+          class="flex justify-between items-center pt-md border-t border-soft-border dark:border-outline-variant text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant"
+        >
+          <span>© 2026 GLAMORA. All rights reserved.</span>
+          <div class="flex gap-md">
+            <a
+              href="#"
+              class="hover:text-primary dark:hover:text-parchment-white transition-colors"
+              >Privacy</a
+            >
+            <a
+              href="#"
+              class="hover:text-primary dark:hover:text-parchment-white transition-colors"
+              >Terms</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/beautician-details.js"></script>
+  </body>
+</html>

@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Vendor Wallet | GLAMORA</title>
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#949393",
+              "on-primary-fixed-variant": "#474747",
+              "surface-container-highest": "#e3e2df",
+              "inverse-on-surface": "#f2f1ee",
+              "surface-container": "#efeeeb",
+              "on-tertiary-fixed-variant": "#6b392c",
+              "surface-container-lowest": "#ffffff",
+              primary: "#171818",
+              "surface-bright": "#faf9f6",
+              surface: "#faf9f6",
+              "success-green": "#5A705F",
+              "on-primary-fixed": "#1b1c1c",
+              "on-surface": "#1b1c1a",
+              tertiary: "#310b03",
+              "on-secondary-fixed-variant": "#3c4a40",
+              "secondary-fixed-dim": "#bacbbd",
+              "surface-container-high": "#e9e8e5",
+              "primary-container": "#2c2c2c",
+              "on-error-container": "#93000a",
+              secondary: "#536257",
+              "tertiary-container": "#4b1f14",
+              "muted-terracotta": "#BC7C6C",
+              "surface-variant": "#e3e2df",
+              "on-tertiary": "#ffffff",
+              "surface-dim": "#dbdad7",
+              "on-secondary": "#ffffff",
+              "on-surface-variant": "#444748",
+              background: "#faf9f6",
+              "on-error": "#ffffff",
+              "error-container": "#ffdad6",
+              "secondary-container": "#d6e7d8",
+              "outline-variant": "#c4c7c7",
+              "on-secondary-fixed": "#111e16",
+              "parchment-white": "#F7F6F3",
+              outline: "#747878",
+              "on-primary": "#ffffff",
+              "surface-container-low": "#f4f3f0",
+              "soft-border": "#E2E2DE",
+              "primary-fixed": "#e4e2e1",
+              "on-background": "#1b1c1a",
+              "inverse-primary": "#c8c6c5",
+              error: "#ba1a1a",
+              "tertiary-fixed-dim": "#feb5a3",
+              "inverse-surface": "#2f312f",
+              sage: "#8A9A8D",
+              "on-tertiary-container": "#c48373",
+              "warning-amber": "#C49D6A",
+              "secondary-fixed": "#d6e7d8",
+              "on-tertiary-fixed": "#360f06",
+              charcoal: "#2C2C2C",
+              "error-red": "#A64D4D",
+              "tertiary-fixed": "#ffdad2",
+              "surface-tint": "#5f5e5e",
+              "on-secondary-container": "#59685c",
+              "primary-fixed-dim": "#c8c6c5",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              lg: "48px",
+              "margin-desktop": "64px",
+              "margin-mobile": "16px",
+              sm: "12px",
+              xs: "4px",
+              gutter: "24px",
+              xl: "80px",
+              md: "24px",
+              base: "8px",
+            },
+            fontFamily: {
+              "headline-xl-mobile": ["Hanken Grotesk"],
+              "headline-lg-mobile": ["Hanken Grotesk"],
+              "label-md": ["Hanken Grotesk"],
+              "headline-md": ["Hanken Grotesk"],
+              "headline-lg": ["Hanken Grotesk"],
+              "label-sm": ["Hanken Grotesk"],
+              "headline-xl": ["Hanken Grotesk"],
+              "body-lg": ["Hanken Grotesk"],
+              "body-sm": ["Hanken Grotesk"],
+              "body-md": ["Hanken Grotesk"],
+            },
+            fontSize: {
+              "headline-xl-mobile": [
+                "36px",
+                { lineHeight: "1.1", fontWeight: "600" },
+              ],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "label-md": [
+                "14px",
+                { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "500" }],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-sm": [
+                "12px",
+                { lineHeight: "1", letterSpacing: "0.03em", fontWeight: "600" },
+              ],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="bg-background font-body-md text-on-surface flex">
+    <!-- Mobile Header -->
+    <div
+      class="lg:hidden fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl border-b border-soft-border px-margin-mobile py-sm flex items-center justify-between"
+    >
+      <div class="flex items-center gap-base">
+        <img
+          alt="Glamora Logo"
+          class="h-7 w-auto object-contain"
+          src="images/glamora_background-removebg-preview.png"
+        />
+        <span class="font-headline-md text-[18px] text-primary tracking-tight"
+          >GLAMORA</span
+        >
+      </div>
+      <div class="flex items-center gap-sm">
+        <div
+          class="bg-surface-container p-1 rounded-full flex text-label-sm border border-soft-border -ml-3 scale-105"
+        >
+          <button
+            type="button"
+            onclick="switchRole('vendor')"
+            class="px-2.5 py-1 rounded-full text-[11px] bg-primary text-on-primary font-semibold shadow-sm transition-all"
+          >
+            Vendor
+          </button>
+          <button
+            type="button"
+            onclick="switchRole('customer')"
+            class="px-2.5 py-1 rounded-full text-[11px] text-on-surface-variant font-medium hover:text-primary transition-all"
+          >
+            Client
+          </button>
+        </div>
+        <button
+          class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors"
+          onclick="toggleMobileSidebar()"
+        >
+          <span class="material-symbols-outlined text-[20px]">menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Sidebar Drawer -->
+    <div class="hidden fixed inset-0 z-50 lg:hidden" id="mobile-sidebar">
+      <div
+        class="fixed inset-0 bg-primary/40 backdrop-blur-sm"
+        onclick="toggleMobileSidebar()"
+      ></div>
+      <aside
+        class="relative w-72 max-w-[80vw] h-full bg-surface-container-lowest border-r border-soft-border p-md flex flex-col shadow-lg z-10 overflow-y-auto"
+      >
+        <div
+          class="flex items-center justify-between pb-sm border-b border-soft-border mb-md"
+        >
+          <div class="flex items-center gap-base">
+            <img
+              alt="Glamora Logo"
+              class="h-7 w-auto object-contain"
+              src="images/glamora_background-removebg-preview.png"
+            />
+            <span
+              class="font-headline-md text-[18px] text-primary tracking-tight"
+              >GLAMORA</span
+            >
+          </div>
+          <button
+            class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant"
+            onclick="toggleMobileSidebar()"
+          >
+            <span class="material-symbols-outlined text-[18px]">close</span>
+          </button>
+        </div>
+        <nav class="flex-1 space-y-xs font-label-md text-label-md">
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-dashboard.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >dashboard</span
+            >
+            Dashboard
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="service-management.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >list_alt</span
+            >
+            Services
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-schedule-and-availability.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >calendar_today</span
+            >
+            Schedule
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg transition-all group bg-surface-container-high text-primary font-bold"
+            href="vendor-wallet.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >payments</span
+            >
+            Earnings
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="chats.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >chat_bubble</span
+            >
+            Chats
+          </a>
+        </nav>
+        <nav class="pt-md border-t border-soft-border">
+          <a
+            class="px-sm py-base rounded-lg text-label-md text-on-surface-variant hover:bg-surface-container transition-colors flex items-center gap-base"
+            data-path="settings"
+            href="vendor-profile.html"
+          >
+            <span class="material-symbols-outlined text-[20px]">settings</span>
+            Settings
+          </a>
+        </nav>
+      </aside>
+    </div>
+
+    <!-- Desktop Sidebar -->
+    <aside
+      class="hidden lg:flex fixed left-0 top-0 h-full w-72 bg-surface-container-lowest border-r border-soft-border z-50 flex-col"
+    >
+      <div
+        class="p-md flex items-center gap-base border-b border-soft-border mb-base"
+      >
+        <img
+          alt="Glamora Logo"
+          class="h-8 w-auto"
+          src="images/glamora_background-removebg-preview.png"
+        />
+        <span class="font-headline-md text-headline-md tracking-tight"
+          >GLAMORA</span
+        >
+      </div>
+      <div class="px-md py-base mb-sm">
+        <div
+          class="bg-surface-container flex rounded-full p-xs border border-soft-border"
+        >
+          <button
+            onclick="switchRole('vendor')"
+            class="flex-1 text-label-sm font-label-sm py-xs rounded-full bg-white shadow-sm text-primary font-semibold"
+          >
+            Vendor Mode
+          </button>
+          <button
+            onclick="switchRole('customer')"
+            class="flex-1 text-label-sm font-label-sm py-xs text-on-surface-variant hover:text-on-surface transition-colors"
+          >
+            Client Mode
+          </button>
+        </div>
+      </div>
+      <nav class="flex-1 px-sm space-y-xs font-label-md text-label-md">
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-dashboard.html"
+        >
+          <span class="material-symbols-outlined mr-md">dashboard</span>
+          Dashboard
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="service-management.html"
+        >
+          <span class="material-symbols-outlined mr-md">list_alt</span> Services
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-schedule-and-availability.html"
+        >
+          <span class="material-symbols-outlined mr-md">calendar_today</span>
+          Schedule
+        </a>
+        <a
+          aria-current="page"
+          class="flex items-center px-md py-sm rounded-lg transition-all group bg-surface-container-high text-primary font-bold"
+          href="vendor-wallet.html"
+        >
+          <span class="material-symbols-outlined mr-md">payments</span> Earnings
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="chats.html"
+        >
+          <span class="material-symbols-outlined mr-md">chat_bubble</span> Chats
+        </a>
+      </nav>
+      <div class="px-sm pb-md w-full">
+        <nav class="pt-sm border-t border-soft-border">
+          <a
+            class="flex items-center px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            data-path="settings"
+            href="vendor-profile.html"
+          >
+            <span class="material-symbols-outlined mr-md">settings</span>
+            Settings
+          </a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <div class="w-full lg:pl-72 flex flex-col min-h-screen relative">
+      <!-- Desktop Header -->
+      <header
+        class="hidden lg:flex fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl border-b border-soft-border z-40 items-center justify-end px-margin-desktop gap-md"
+      >
+        <button
+          id="btn-request-payout"
+          class="flex items-center gap-xs px-md py-xs bg-primary text-on-primary rounded-full font-label-sm text-label-sm hover:bg-surface-tint transition-colors"
+        >
+          <span class="material-symbols-outlined text-[18px]"
+            >account_balance</span
+          >
+          Request Payout
+        </button>
+        <div class="flex items-center gap-sm pl-md border-l border-soft-border">
+          <img
+            alt="Profile"
+            class="w-8 h-8 rounded-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAksYm7Vpu3y6nFXAdnowe6h9yhNcma3tOmWqhGqQ-yieKVgv8IOaIQ21a9oK4barmnxBtCbmquE3v8ijlXgSV-zbE8NktlwkPDfGYPsqoh8T0NODzVrMTSMZLOGIWxZ5sK5uG09XBqCUJsvcsc8RrecRsLG5xdSZ2m8MUH3WXsWax75A3uBbiT_shFBUTYsOu9dyHNTK3QCaWYe77GnvN4ZQ-67ApBKuv20ipR9qLJlf0O_ZyvafdN"
+          />
+          <span class="font-label-md text-label-md text-primary"
+            >Alexander V.</span
+          >
+        </div>
+      </header>
+
+      <!-- Main Wallet Content -->
+      <main class="relative pt-16 lg:pt-16 bg-background flex-1 flex flex-col">
+        <div
+          class="flex flex-col w-full h-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop py-lg gap-lg"
+        >
+          <!-- Header Section -->
+          <section
+            class="flex flex-col gap-sm md:flex-row md:items-end md:justify-between w-full mt-lg"
+          >
+            <div class="flex flex-col gap-xs max-w-2xl">
+              <h1
+                class="font-headline-xl text-headline-xl text-on-background tracking-tight"
+              >
+                Wallet & Earnings
+              </h1>
+              <p
+                class="font-body-lg text-body-lg text-on-surface-variant max-w-xl"
+              >
+                Track your income, manage payouts, and review your financial
+                history.
+              </p>
+            </div>
+            <div class="flex items-center gap-sm shrink-0">
+              <button
+                class="flex items-center gap-xs px-md py-sm bg-surface-container rounded-full hover:bg-surface-container-high transition-colors text-on-surface font-label-md text-label-md shadow-sm"
+              >
+                <span class="material-symbols-outlined text-[20px]"
+                  >download</span
+                >
+                Export Report
+              </button>
+            </div>
+          </section>
+
+          <!-- Key Metrics Bento Grid (Layout Fixed) -->
+          <section class="grid grid-cols-1 lg:grid-cols-3 gap-md w-full">
+            <!-- Left Column: Available Balance, Pending & Total -->
+            <div class="flex flex-col gap-md lg:col-span-1 w-full">
+              <!-- Metric 1: Available Balance (Maintained Dark Style) -->
+              <div
+                class="flex flex-col justify-between p-lg rounded-xl bg-primary text-on-primary min-h-[200px] relative overflow-hidden group"
+              >
+                <div
+                  class="absolute -right-8 -top-8 w-32 h-32 bg-white/5 rounded-full blur-2xl"
+                ></div>
+                <div
+                  class="flex items-start justify-between relative z-10 w-full"
+                >
+                  <h3
+                    class="font-label-md text-label-md text-on-primary-fixed-variant uppercase tracking-widest opacity-80"
+                  >
+                    Available Balance
+                  </h3>
+                  <span class="material-symbols-outlined text-success-green"
+                    >account_balance_wallet</span
+                  >
+                </div>
+                <div class="flex flex-col gap-xs relative z-10 mt-sm">
+                  <div class="flex items-baseline gap-xs">
+                    <span class="font-headline-md text-headline-md opacity-80"
+                      >₦</span
+                    >
+                    <span
+                      class="font-headline-xl text-headline-xl text-on-primary"
+                      >425,000</span
+                    >
+                  </div>
+                  <div
+                    class="font-body-sm text-body-sm text-on-primary/80 mt-1 flex items-center gap-1"
+                  >
+                    <span class="material-symbols-outlined text-[14px]"
+                      >trending_up</span
+                    >
+                    +12.5% from last month
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pending & Total Earned (Side by Side) -->
+              <div class="grid grid-cols-2 gap-md flex-1 min-h-[140px]">
+                <div
+                  class="bg-surface-container rounded-xl p-md shadow-sm flex flex-col justify-center cursor-pointer hover:bg-surface-container-high transition-colors"
+                  onclick="alert('Viewing Pending Transactions...')"
+                >
+                  <span
+                    class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant mb-md"
+                    >Pending</span
+                  >
+                  <div>
+                    <div
+                      class="font-headline-lg text-headline-lg text-on-surface mb-xs"
+                    >
+                      ₦85,000
+                    </div>
+                    <div
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Clearing in 48h
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="bg-surface-container rounded-xl p-md shadow-sm flex flex-col justify-center relative overflow-hidden cursor-pointer hover:bg-surface-container-high transition-colors"
+                  onclick="alert('Viewing Yearly Reports...')"
+                >
+                  <div
+                    class="absolute -right-4 -bottom-4 w-24 h-24 bg-secondary/10 rounded-full blur-xl"
+                  ></div>
+                  <span
+                    class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant mb-md"
+                    >Total Earned</span
+                  >
+                  <div class="relative z-10">
+                    <div
+                      id="display-total"
+                      class="font-headline-lg text-headline-lg text-on-surface mb-xs"
+                    >
+                      ₦3.2M
+                    </div>
+                    <div
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Year to date
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Revenue Chart -->
+            <div
+              class="lg:col-span-2 bg-surface-container rounded-xl p-md shadow-sm relative overflow-hidden flex flex-col min-h-[350px]"
+            >
+              <div
+                class="flex items-center justify-between mb-lg relative z-10"
+              >
+                <h2 class="font-headline-md text-headline-md text-on-surface">
+                  Revenue Growth
+                </h2>
+                <div
+                  class="flex gap-xs bg-surface p-xs rounded-full shadow-sm"
+                  id="chart-filters"
+                >
+                  <button
+                    data-filter="6M"
+                    class="chart-filter-btn px-sm py-xs rounded-full font-label-sm text-label-sm bg-surface-container-high text-on-surface transition-colors"
+                  >
+                    6M
+                  </button>
+                  <button
+                    data-filter="1Y"
+                    class="chart-filter-btn px-sm py-xs rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors"
+                  >
+                    1Y
+                  </button>
+                  <button
+                    data-filter="ALL"
+                    class="chart-filter-btn px-sm py-xs rounded-full font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors"
+                  >
+                    ALL
+                  </button>
+                </div>
+              </div>
+              <!-- Chart Container generated dynamically by JS -->
+              <div
+                class="relative flex-1 w-full flex items-end justify-between gap-2 z-10 px-sm pb-lg min-h-[220px]"
+                id="chart-container"
+              >
+                <!-- Bars will be injected here -->
+              </div>
+            </div>
+          </section>
+
+          <!-- Recent Transactions -->
+          <div class="relative z-10 mt-xl">
+            <div class="flex items-center justify-between mb-lg">
+              <h2 class="font-headline-md text-headline-md text-on-surface">
+                Recent Transactions
+              </h2>
+              <button
+                id="btn-view-all"
+                class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-xs"
+              >
+                View All
+                <span class="material-symbols-outlined text-[16px]"
+                  >arrow_forward</span
+                >
+              </button>
+            </div>
+
+            <div
+              class="bg-surface-container rounded-xl shadow-sm overflow-x-auto"
+            >
+              <div class="min-w-[700px]">
+                <div
+                  class="grid grid-cols-12 gap-4 p-md border-b border-soft-border/50 bg-surface-container-high/50 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                >
+                  <div class="col-span-5">Description</div>
+                  <div class="col-span-3">Date</div>
+                  <div class="col-span-2">Status</div>
+                  <div class="col-span-2 text-right">Amount</div>
+                </div>
+
+                <div class="flex flex-col" id="transaction-list">
+                  <!-- Transaction Item 1 -->
+                  <div
+                    class="grid grid-cols-12 gap-4 p-md items-center hover:bg-surface-container-high/30 transition-colors border-b border-soft-border/50 last:border-0 group cursor-pointer"
+                    onclick="alert('Transaction: Bridal Makeup Package')"
+                  >
+                    <div class="col-span-5 flex items-center gap-sm">
+                      <div
+                        class="w-10 h-10 rounded-full bg-surface shadow-sm flex items-center justify-center shrink-0"
+                      >
+                        <span
+                          class="material-symbols-outlined text-primary"
+                          style="font-variation-settings: &quot;FILL&quot; 1"
+                          >spa</span
+                        >
+                      </div>
+                      <div class="min-w-0">
+                        <div
+                          class="font-label-md text-label-md text-on-surface truncate"
+                        >
+                          Bridal Makeup Package
+                        </div>
+                        <div
+                          class="font-body-sm text-body-sm text-on-surface-variant truncate"
+                        >
+                          Client: Sarah Jenkins
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="col-span-3 font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Sept 10, 2026
+                    </div>
+                    <div class="col-span-2">
+                      <span
+                        class="inline-block px-2 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm"
+                        >Cleared</span
+                      >
+                    </div>
+                    <div
+                      class="col-span-2 text-right font-label-md text-label-md text-on-surface"
+                    >
+                      +₦45,000
+                    </div>
+                  </div>
+
+                  <!-- Transaction Item 2 -->
+                  <div
+                    class="grid grid-cols-12 gap-4 p-md items-center hover:bg-surface-container-high/30 transition-colors border-b border-soft-border/50 last:border-0 group cursor-pointer"
+                    onclick="alert('Transaction: Balayage & Styling')"
+                  >
+                    <div class="col-span-5 flex items-center gap-sm">
+                      <div
+                        class="w-10 h-10 rounded-full bg-surface shadow-sm flex items-center justify-center shrink-0"
+                      >
+                        <span
+                          class="material-symbols-outlined text-primary"
+                          style="font-variation-settings: &quot;FILL&quot; 1"
+                          >content_cut</span
+                        >
+                      </div>
+                      <div class="min-w-0">
+                        <div
+                          class="font-label-md text-label-md text-on-surface truncate"
+                        >
+                          Knotless Braids
+                        </div>
+                        <div
+                          class="font-body-sm text-body-sm text-on-surface-variant truncate"
+                        >
+                          Client: Emma Thompson
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="col-span-3 font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Sept 09, 2026
+                    </div>
+                    <div class="col-span-2">
+                      <span
+                        class="inline-block px-2 py-1 rounded-full bg-surface-variant text-on-surface-variant font-label-sm text-label-sm"
+                        >Processing</span
+                      >
+                    </div>
+                    <div
+                      class="col-span-2 text-right font-label-md text-label-md text-on-surface"
+                    >
+                      +₦22,000
+                    </div>
+                  </div>
+
+                  <!-- Transaction Item 3 -->
+                  <div
+                    class="grid grid-cols-12 gap-4 p-md items-center hover:bg-surface-container-high/30 transition-colors border-b border-soft-border/50 last:border-0 group cursor-pointer"
+                    onclick="alert('Transaction: Bank Transfer')"
+                  >
+                    <div class="col-span-5 flex items-center gap-sm">
+                      <div
+                        class="w-10 h-10 rounded-full bg-surface shadow-sm flex items-center justify-center shrink-0"
+                      >
+                        <span
+                          class="material-symbols-outlined text-on-surface-variant"
+                          >account_balance</span
+                        >
+                      </div>
+                      <div class="min-w-0">
+                        <div
+                          class="font-label-md text-label-md text-on-surface truncate"
+                        >
+                          Bank Transfer
+                        </div>
+                        <div
+                          class="font-body-sm text-body-sm text-on-surface-variant truncate"
+                        >
+                          To GTBank ending in **4592
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="col-span-3 font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Sept 05, 2026
+                    </div>
+                    <div class="col-span-2">
+                      <span
+                        class="inline-block px-2 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm"
+                        >Completed</span
+                      >
+                    </div>
+                    <div
+                      class="col-span-2 text-right font-label-md text-label-md text-on-surface-variant"
+                    >
+                      -₦150,000
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Payout Modal -->
+    <div
+      id="payout-modal"
+      class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm items-center justify-center p-4"
+    >
+      <div
+        class="bg-surface rounded-2xl shadow-xl w-full max-w-md overflow-hidden modal-enter"
+        id="payout-modal-content"
+      >
+        <div
+          class="p-md border-b border-soft-border flex justify-between items-center"
+        >
+          <h3 class="font-headline-md text-headline-md text-on-surface">
+            Request Payout
+          </h3>
+          <button
+            id="close-payout-modal"
+            class="text-on-surface-variant hover:text-on-surface transition-colors"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="p-md space-y-4">
+          <div>
+            <label
+              class="block font-label-sm text-label-sm text-on-surface-variant mb-2"
+              >Available Balance</label
+            >
+            <div class="font-headline-lg text-headline-lg text-primary">
+              ₦425,000
+            </div>
+          </div>
+          <div>
+            <label
+              class="block font-label-sm text-label-sm text-on-surface-variant mb-2"
+              >Amount to Withdraw (₦)</label
+            >
+            <input
+              type="number"
+              value="425000"
+              class="w-full bg-surface-container border border-soft-border rounded-lg px-4 py-3 text-on-surface font-body-md focus:outline-none focus:border-primary transition-colors"
+              placeholder="0.00"
+            />
+          </div>
+          <div>
+            <label
+              class="block font-label-sm text-label-sm text-on-surface-variant mb-2"
+              >Destination Account</label
+            >
+            <select
+              class="w-full bg-surface-container border border-soft-border rounded-lg px-4 py-3 text-on-surface font-body-md focus:outline-none focus:border-primary transition-colors"
+            >
+              <option>GTBank ending in **4592</option>
+              <option>Access Bank ending in **1102</option>
+            </select>
+          </div>
+        </div>
+        <div
+          class="p-md bg-surface-container-low border-t border-soft-border flex gap-sm justify-end"
+        >
+          <button
+            id="cancel-payout-btn"
+            class="px-md py-sm rounded-full font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            onclick="
+              alert('Payout Initiated Successfully!');
+              document.getElementById('close-payout-modal').click();
+            "
+            class="px-md py-sm rounded-full font-label-md text-label-md bg-primary text-on-primary hover:bg-charcoal transition-colors"
+          >
+            Confirm Payout
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- View All Transactions Modal -->
+    <div
+      id="view-all-modal"
+      class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm items-center justify-center p-4"
+    >
+      <div
+        class="bg-surface rounded-2xl shadow-xl w-full max-w-2xl overflow-hidden modal-enter flex flex-col max-h-[80vh]"
+        id="view-all-content"
+      >
+        <div
+          class="p-md border-b border-soft-border flex justify-between items-center"
+        >
+          <h3 class="font-headline-md text-headline-md text-on-surface">
+            All Transactions
+          </h3>
+          <button
+            id="close-view-all-modal"
+            class="text-on-surface-variant hover:text-on-surface transition-colors"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="p-md overflow-y-auto flex-1 space-y-4">
+          <p class="font-body-md text-on-surface-variant">
+            Here you can implement pagination and filtering for the full
+            transaction history.
+          </p>
+          <div
+            class="p-4 border border-soft-border rounded-lg bg-surface-container-low text-center text-on-surface-variant"
+          >
+            <span
+              class="material-symbols-outlined block text-[32px] mb-2 opacity-50"
+              >history</span
+            >
+            End of available history.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/vendor-wallets.js"></script>
+  </body>
+</html>

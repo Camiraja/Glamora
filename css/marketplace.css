@@ -1,0 +1,33 @@
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    overscroll-behavior: none;
+  }
+  
+  main > :first-child {
+    margin-top: 0 !important;
+  }
+  
+  main > :last-child {
+    margin-bottom: 0 !important;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}

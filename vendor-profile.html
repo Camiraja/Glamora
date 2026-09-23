@@ -1,0 +1,1672 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>GLAMORA - Vendor Studio Profile &amp; Settings</title>
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              background: "#faf9f6",
+              outline: "#747878",
+              "inverse-primary": "#c8c6c5",
+              primary: "#171818",
+              error: "#ba1a1a",
+              "on-background": "#1b1c1a",
+              "error-red": "#A64D4D",
+              surface: "#faf9f6",
+              "on-primary-fixed-variant": "#474747",
+              "surface-container": "#efeeeb",
+              "tertiary-fixed-dim": "#feb5a3",
+              tertiary: "#310b03",
+              "surface-bright": "#faf9f6",
+              "muted-terracotta": "#BC7C6C",
+              "on-primary": "#ffffff",
+              sage: "#8A9A8D",
+              "surface-container-highest": "#e3e2df",
+              "error-container": "#ffdad6",
+              "outline-variant": "#c4c7c7",
+              "success-green": "#5A705F",
+              "inverse-surface": "#2f312f",
+              charcoal: "#2C2C2C",
+              "on-tertiary-container": "#c48373",
+              "primary-container": "#2c2c2c",
+              "warning-amber": "#C49D6A",
+              "on-primary-container": "#949393",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-high": "#e9e8e5",
+              "tertiary-fixed": "#ffdad2",
+              "on-secondary-container": "#59685c",
+              "surface-dim": "#dbdad7",
+              secondary: "#536257",
+              "on-error": "#ffffff",
+              "inverse-on-surface": "#f2f1ee",
+              "surface-variant": "#e3e2df",
+              "on-secondary-fixed-variant": "#3c4a40",
+              "on-tertiary": "#ffffff",
+              "secondary-fixed-dim": "#bacbbd",
+              "on-primary-fixed": "#1b1c1c",
+              "parchment-white": "#F7F6F3",
+              "primary-fixed-dim": "#c8c6c5",
+              "on-secondary": "#ffffff",
+              "on-tertiary-fixed": "#360f06",
+              "tertiary-container": "#4b1f14",
+              "surface-container-low": "#f4f3f0",
+              "soft-border": "#E2E2DE",
+              "secondary-fixed": "#d6e7d8",
+              "primary-fixed": "#e4e2e1",
+              "on-secondary-fixed": "#111e16",
+              "on-error-container": "#93000a",
+              "on-tertiary-fixed-variant": "#6b392c",
+              "secondary-container": "#d6e7d8",
+              "on-surface-variant": "#444748",
+              "on-surface": "#1b1c1a",
+              "surface-tint": "#5f5e5e",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              base: "8px",
+              md: "24px",
+              "margin-desktop": "64px",
+              sm: "12px",
+              gutter: "24px",
+              lg: "48px",
+              xs: "4px",
+              xl: "80px",
+              "margin-mobile": "16px",
+            },
+            fontFamily: {
+              "headline-xl": ["Hanken Grotesk"],
+              "headline-xl-mobile": ["Hanken Grotesk"],
+              "body-lg": ["Hanken Grotesk"],
+              "headline-md": ["Hanken Grotesk"],
+              "headline-lg-mobile": ["Hanken Grotesk"],
+              "headline-lg": ["Hanken Grotesk"],
+              "body-md": ["Hanken Grotesk"],
+              "label-md": ["Hanken Grotesk"],
+              "body-sm": ["Hanken Grotesk"],
+              "label-sm": ["Hanken Grotesk"],
+            },
+            fontSize: {
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-xl-mobile": [
+                "36px",
+                { lineHeight: "1.1", fontWeight: "600" },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "500" }],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+              "label-md": [
+                "14px",
+                { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" },
+              ],
+              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+              "label-sm": [
+                "12px",
+                { lineHeight: "1", letterSpacing: "0.03em", fontWeight: "600" },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-background font-body-md text-on-surface antialiased">
+    <!-- Mobile Header -->
+    <div
+      class="lg:hidden fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl border-b border-soft-border px-margin-mobile py-sm flex items-center justify-between"
+    >
+      <div class="flex items-center gap-base">
+        <img
+          alt="Glamora Logo"
+          class="h-7 w-auto object-contain"
+          src="images/glamora_background-removebg-preview.png"
+        />
+        <span class="font-headline-md text-[18px] text-primary tracking-tight"
+          >GLAMORA</span
+        >
+      </div>
+
+      <div class="flex items-center gap-sm">
+        <!-- Vendor/Client Toggle (Mobile) -->
+        <div class="flex items-center gap-sm">
+          <div
+            class="bg-surface-container p-1 rounded-full flex text-label-sm border border-soft-border -ml-3 scale-105"
+          >
+            <button
+              type="button"
+              onclick="switchRole('vendor')"
+              class="px-2.5 py-1 rounded-full text-[11px] bg-primary text-on-primary font-semibold shadow-sm transition-all"
+            >
+              Vendor
+            </button>
+            <button
+              type="button"
+              onclick="switchRole('customer')"
+              class="px-2.5 py-1 rounded-full text-[11px] text-on-surface-variant font-medium hover:text-primary transition-all"
+            >
+              Client
+            </button>
+          </div>
+          <!-- Hamburger Menu -->
+          <button
+            class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors"
+            onclick="toggleMobileSidebar()"
+          >
+            <span class="material-symbols-outlined text-[20px]">menu</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Sidebar Drawer -->
+    <div class="hidden fixed inset-0 z-50 lg:hidden" id="mobile-sidebar">
+      <div
+        class="fixed inset-0 bg-primary/40 backdrop-blur-sm"
+        onclick="toggleMobileSidebar()"
+      ></div>
+      <aside
+        class="relative w-72 max-w-[80vw] h-full bg-surface-container-lowest border-r border-soft-border p-md flex flex-col shadow-lg z-10 overflow-y-auto"
+      >
+        <div
+          class="flex items-center justify-between pb-sm border-b border-soft-border mb-md"
+        >
+          <div class="flex items-center gap-base">
+            <img
+              alt="Glamora Logo"
+              class="h-7 w-auto object-contain"
+              src="images/glamora_background-removebg-preview.png"
+            />
+            <span
+              class="font-headline-md text-[18px] text-primary tracking-tight"
+              >GLAMORA</span
+            >
+          </div>
+          <button
+            class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant"
+            onclick="toggleMobileSidebar()"
+          >
+            <span class="material-symbols-outlined text-[18px]">close</span>
+          </button>
+        </div>
+
+        <nav class="flex-1 space-y-xs font-label-md text-label-md">
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-dashboard.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >dashboard</span
+            >
+            Dashboard
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="service-management.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >list_alt</span
+            >
+            Services
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-schedule-and-availability.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >date_range</span
+            >
+            Schedule
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-wallet.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >payments</span
+            >
+            Earnings
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-appointment.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >event_available</span
+            >
+            Appointments
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="Products-management.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >inventory_2</span
+            >
+            Products
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-analytics.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >monitoring</span
+            >
+            Analytics
+          </a>
+        </nav>
+
+        <nav class="pt-md border-t border-soft-border">
+          <a
+            class="px-sm py-base rounded-lg text-label-md text-on-surface-variant hover:bg-surface-container transition-colors flex items-center gap-base"
+            data-path="settings"
+            href="vendor-profile.html"
+            ><span class="material-symbols-outlined text-[20px]">settings</span>
+            Settings</a
+          >
+        </nav>
+      </aside>
+    </div>
+
+    <!-- Desktop Sidebar -->
+    <aside
+      class="hidden lg:flex fixed left-0 top-0 h-full w-72 bg-surface-container-lowest border-r border-soft-border z-50 flex-col"
+    >
+      <div
+        class="p-md flex items-center gap-base border-b border-soft-border mb-base"
+      >
+        <img
+          alt="Glamora Logo"
+          class="h-8 w-auto"
+          src="images/glamora_background-removebg-preview.png"
+        />
+        <span class="font-headline-md text-headline-md tracking-tight"
+          >GLAMORA</span
+        >
+      </div>
+      <div class="px-md py-base mb-sm">
+        <div
+          class="bg-surface-container flex rounded-full p-xs border border-soft-border"
+        >
+          <button
+            onclick="switchRole('vendor')"
+            class="flex-1 text-label-sm font-label-sm py-xs rounded-full bg-white shadow-sm text-primary font-semibold"
+          >
+            Vendor Mode
+          </button>
+          <button
+            onclick="switchRole('customer')"
+            class="flex-1 text-label-sm font-label-sm py-xs text-on-surface-variant hover:text-on-surface transition-colors"
+          >
+            Client Mode
+          </button>
+        </div>
+      </div>
+      <nav class="flex-1 px-sm space-y-xs font-label-md text-label-md">
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-dashboard.html"
+        >
+          <span class="material-symbols-outlined mr-md">dashboard</span>
+          Dashboard
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="service-management.html"
+        >
+          <span class="material-symbols-outlined mr-md">list_alt</span> Services
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-schedule-and-availability.html"
+        >
+          <span class="material-symbols-outlined mr-md">date_range</span>
+          Schedule
+        </a>
+        <!-- Updated to vendor-wallet.html -->
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-wallet.html"
+        >
+          <span class="material-symbols-outlined mr-md">payments</span> Earnings
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-appointments.html"
+        >
+          <span class="material-symbols-outlined mr-md">event_available</span>
+          Appointments
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="products-management.html"
+        >
+          <span class="material-symbols-outlined mr-md">inventory_2</span>
+          Products
+        </a>
+        <a
+          aria-current="page"
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-analytics.html"
+        >
+          <span class="material-symbols-outlined mr-md">monitoring</span>
+          Analytics
+        </a>
+      </nav>
+      <!-- Replace the bottom <nav> in the Desktop Sidebar -->
+      <div class="px-sm pb-md w-full">
+        <nav class="pt-sm border-t border-soft-border">
+          <a
+            class="flex items-center px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            data-path="settings"
+            href="vendor-profile.html"
+          >
+            <span class="material-symbols-outlined mr-md">settings</span>
+            Settings
+          </a>
+        </nav>
+      </div>
+    </aside>
+
+    <div class="w-full lg:pl-72 flex flex-col min-h-screen relative">
+      <!-- Desktop Header -->
+      <header
+        class="hidden lg:flex fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl border-b border-soft-border z-40 items-center justify-end px-margin-desktop gap-md"
+      >
+        <a
+          href="service-management.html"
+          class="flex items-center gap-xs px-md py-xs bg-primary text-on-primary rounded-full font-label-sm text-label-sm hover:bg-surface-tint transition-colors"
+        >
+          <span class="material-symbols-outlined text-[18px]">add</span> New
+          Service
+        </a>
+        <div class="flex items-center gap-sm pl-md border-l border-soft-border">
+          <img
+            alt="Profile"
+            class="w-8 h-8 rounded-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAksYm7Vpu3y6nFXAdnowe6h9yhNcma3tOmWqhGqQ-yieKVgv8IOaIQ21a9oK4barmnxBtCbmquE3v8ijlXgSV-zbE8NktlwkPDfGYPsqoh8T0NODzVrMTSMZLOGIWxZ5sK5uG09XBqCUJsvcsc8RrecRsLG5xdSZ2m8MUH3WXsWax75A3uBbiT_shFBUTYsOu9dyHNTK3QCaWYe77GnvN4ZQ-67ApBKuv20ipR9qLJlf0O_ZyvafdN"
+          />
+          <span class="font-label-md text-label-md text-primary"
+            >Alexander V.</span
+          >
+        </div>
+      </header>
+      <!-- Main Content Wrapper -->
+      <main class="pt-16 min-h-screen bg-background">
+        <div class="flex flex-col w-full">
+          <!-- Dynamic Floating Toast Notification -->
+          <div
+            class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 bg-charcoal text-white px-5 py-3.5 rounded-lg shadow-xl"
+            id="actionToast"
+          >
+            <span
+              class="material-symbols-outlined text-sage text-[20px]"
+              id="toastIcon"
+              >check_circle</span
+            >
+            <span
+              class="font-label-sm text-label-sm tracking-wide"
+              id="toastMessage"
+              >Studio profile updated successfully.</span
+            >
+          </div>
+          <!-- Hidden File Inputs for Banner & Avatar Uploads -->
+          <input
+            accept="image/*"
+            class="hidden"
+            id="bannerFileInput"
+            type="file"
+          />
+          <input
+            accept="image/*"
+            class="hidden"
+            id="avatarFileInput"
+            type="file"
+          />
+          <!-- Header & Top Control Bar -->
+          <div
+            class="px-margin-desktop py-lg bg-surface flex flex-col gap-base border-b border-soft-border"
+          >
+            <!-- Breadcrumb strictly matching requested format -->
+            <div
+              class="flex items-center gap-xs font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+            >
+              <span>STUDIO OPERATIONS</span>
+              <span class="material-symbols-outlined text-[14px]"
+                >chevron_right</span
+              >
+              <span class="text-primary font-semibold"
+                >VENDOR STUDIO PROFILE &amp; SETTINGS</span
+              >
+            </div>
+            <div
+              class="flex flex-col md:flex-row md:items-end justify-between gap-md"
+            >
+              <div class="max-w-3xl space-y-xs">
+                <div class="flex items-center gap-sm">
+                  <h1
+                    class="font-headline-lg text-headline-lg text-primary tracking-tight"
+                  >
+                    Vendor Studio Profile &amp; Settings
+                  </h1>
+                  <span
+                    class="bg-secondary-container text-on-secondary-container px-2.5 py-0.5 rounded-full font-label-sm text-label-sm flex items-center gap-1 font-semibold"
+                    id="headerTierBadge"
+                  >
+                    <span class="material-symbols-outlined text-[14px]"
+                      >verified</span
+                    >
+                    TIER 1 ESCROW
+                  </span>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Manage your verified studio credentials, media assets, service
+                  delivery models, institutional escrow guardrails, and treasury
+                  settlement routing.
+                </p>
+              </div>
+              <!-- Dynamic Edit Profile / Save Changes Button -->
+              <div class="flex items-center gap-sm shrink-0">
+                <button
+                  class="px-5 py-2.5 rounded-lg bg-primary text-on-primary hover:bg-primary/90 transition-all font-label-md text-label-md flex items-center gap-2 shadow-sm active:scale-[0.98]"
+                  id="profileToggleBtn"
+                >
+                  <span
+                    class="material-symbols-outlined text-[18px]"
+                    id="profileToggleIcon"
+                    >edit</span
+                  >
+                  <span id="profileToggleText">Edit Profile</span>
+                </button>
+              </div>
+            </div>
+            <!-- Section Jump Navigation -->
+            <div
+              class="flex items-center gap-md pt-sm overflow-x-auto scrollbar-none"
+            >
+              <a
+                class="py-2 font-label-md text-label-md text-primary border-b-2 border-primary -mb-px flex items-center gap-1.5"
+                href="#identity"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >storefront</span
+                >
+                Studio Details &amp; Identity
+              </a>
+              <a
+                class="py-2 font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1.5"
+                href="#service-modes"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >room_service</span
+                >
+                Guardrails &amp; Delivery Modes
+              </a>
+              <a
+                class="py-2 font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1.5"
+                href="#treasury"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >account_balance</span
+                >
+                Treasury &amp; Settlements
+              </a>
+            </div>
+          </div>
+          <!-- Main Layout Grid -->
+          <div
+            class="px-margin-desktop py-lg grid grid-cols-1 lg:grid-cols-12 gap-gutter"
+          >
+            <!-- Primary Settings Column (Left 8 Cols) -->
+            <div class="lg:col-span-8 flex flex-col gap-lg">
+              <!-- SECTION 1: VENDOR STUDIO DETAILS & IDENTITY -->
+              <section
+                class="bg-surface-container-lowest p-md rounded-xl shadow-sm space-y-md border border-soft-border/60"
+                id="identity"
+              >
+                <div class="flex items-start justify-between">
+                  <div>
+                    <span
+                      class="font-label-sm text-label-sm text-sage uppercase tracking-widest font-semibold"
+                      >Section 01</span
+                    >
+                    <h2 class="font-headline-md text-headline-md text-primary">
+                      Vendor Studio Details &amp; Identity
+                    </h2>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Present your studio brand, creative specialties, and
+                      visual showcase to prospective clients.
+                    </p>
+                  </div>
+                  <span
+                    class="bg-surface-container text-on-surface-variant font-mono text-label-sm px-2.5 py-1 rounded-md"
+                    id="editStateIndicator"
+                    >Read-Only Mode</span
+                  >
+                </div>
+                <!-- Upload Areas: Business Banner & Avatar Preview -->
+                <div class="space-y-sm">
+                  <label
+                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block"
+                    >Studio Visual Identity (Banner &amp; Avatar)</label
+                  >
+                  <div
+                    class="relative rounded-xl overflow-hidden bg-surface-container border border-soft-border"
+                  >
+                    <!-- Banner Preview -->
+                    <div
+                      class="h-44 w-full bg-cover bg-center transition-all duration-300 relative group"
+                      id="bannerDisplay"
+                      style="
+                        background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBNA-YkXFbqiMOgvHr-o180z_52j31M-Ux1IcPIaW7mbVUfFSH4AgLWu7ETTAoCl0wMGZZLx3sEhbhjciopHHAUhRtRrbjp2JGz9eyQ2bEZ_f-wreFyV5KZB9p3DZg3tSFc9JvsG-_SXFmDQ-Mh_oPsLcY5xxD00XiYPK4UQQrsUfsCxeE_XdPVowkgMDSC54-zX2GkKbNAhdkYpKQHIAEzNcjV7YtQQi-8JZrZlq5OVQU9pRWskLXt&quot;);
+                      "
+                    >
+                      <div
+                        class="absolute inset-0 bg-charcoal/20 group-hover:bg-charcoal/40 transition-colors"
+                      ></div>
+                      <!-- Upload Banner Button -->
+                      <button
+                        class="absolute top-3 right-3 bg-white/95 hover:bg-white text-primary px-3 py-1.5 rounded-lg text-label-sm font-label-sm shadow-sm backdrop-blur-md transition-all flex items-center gap-1.5"
+                        id="uploadBannerTrigger"
+                        type="button"
+                      >
+                        <span class="material-symbols-outlined text-[16px]"
+                          >add_photo_alternate</span
+                        >
+                        <span>Upload Banner</span>
+                      </button>
+                    </div>
+                    <!-- Avatar Circle Preview & Action -->
+                    <div
+                      class="p-sm flex flex-col sm:flex-row sm:items-center justify-between gap-sm bg-surface-container-lowest"
+                    >
+                      <div class="flex items-center gap-md">
+                        <div class="relative -mt-12 group">
+                          <img
+                            alt="Studio Avatar"
+                            class="w-20 h-20 rounded-full object-cover border-4 border-surface-container-lowest shadow-md bg-surface-container"
+                            id="avatarDisplay"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmnOeFTI4xCOjiInFYyyIJ2Pu2Z43gtH1YtL2SZ3dTJ8F8AZE2hikLdplAIGzuEKFizuqUfkMOTofNbO2SXcWtGCwKd1oUuVKx87hBE22tGQYVoDCpQBl1QM2aY9-ODvJbNfjyPyB4AcWv19OyoS8tUY0SuOXfAzEMcnuKI8jcV1dI6Aw1edweDrO4327Acubhuw-ADx9SqWufOIZ7uMYU3LIbYh8ola_d1zge3G5AMLozQXCT63PC"
+                          />
+                          <button
+                            class="absolute bottom-0 right-0 bg-primary text-white p-1 rounded-full shadow hover:bg-charcoal transition-colors flex items-center justify-center"
+                            id="avatarMiniTrigger"
+                            title="Change Photo"
+                            type="button"
+                          >
+                            <span class="material-symbols-outlined text-[14px]"
+                              >photo_camera</span
+                            >
+                          </button>
+                        </div>
+                        <div>
+                          <h4
+                            class="font-label-md text-label-md text-primary font-semibold"
+                            id="displayStudioNameHeader"
+                          >
+                            Alexander Vanguard Studio &amp; Apothecary
+                          </h4>
+                          <p
+                            class="font-body-sm text-body-sm text-on-surface-variant"
+                          >
+                            Recommended: 1200×400px for banner, 400×400px square
+                            for profile.
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        class="px-3.5 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm transition-colors flex items-center gap-1.5 self-start sm:self-auto"
+                        id="changePhotoTrigger"
+                        type="button"
+                      >
+                        <span class="material-symbols-outlined text-[16px]"
+                          >edit</span
+                        >
+                        <span>Change Photo</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Business Details Form -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-md pt-xs">
+                  <!-- Business / Studio Name -->
+                  <div class="space-y-xs md:col-span-2">
+                    <label
+                      class="font-label-sm text-label-sm text-on-surface-variant font-medium"
+                      >Business / Studio Name</label
+                    >
+                    <div class="relative">
+                      <span
+                        class="material-symbols-outlined absolute left-3 top-3 text-on-surface-variant text-[18px]"
+                        >storefront</span
+                      >
+                      <input
+                        class="studio-input w-full bg-surface-container-low pl-10 pr-sm py-2.5 rounded-lg text-body-md font-body-md text-primary border border-transparent focus:border-primary focus:bg-surface-container-lowest focus:outline-none transition-all disabled:opacity-85 disabled:cursor-not-allowed"
+                        id="inputStudioName"
+                        type="text"
+                        value="Alexander Vanguard Studio &amp; Apothecary"
+                      />
+                    </div>
+                  </div>
+                  <!-- Official Business / Dispatch Email -->
+                  <div class="space-y-xs">
+                    <label
+                      class="font-label-sm text-label-sm text-on-surface-variant font-medium"
+                      >Official Business / Dispatch Email</label
+                    >
+                    <div class="relative">
+                      <span
+                        class="material-symbols-outlined absolute left-3 top-3 text-on-surface-variant text-[18px]"
+                        >alternate_email</span
+                      >
+                      <input
+                        class="studio-input w-full bg-surface-container-low pl-10 pr-sm py-2.5 rounded-lg text-body-md font-body-md text-primary border border-transparent focus:border-primary focus:bg-surface-container-lowest focus:outline-none transition-all disabled:opacity-85 disabled:cursor-not-allowed"
+                        id="inputStudioEmail"
+                        type="email"
+                        value="concierge@alexandervanguard.ng"
+                      />
+                    </div>
+                  </div>
+                  <!-- WhatsApp / Phone Number -->
+                  <div class="space-y-xs">
+                    <label
+                      class="font-label-sm text-label-sm text-on-surface-variant font-medium"
+                      >WhatsApp / Phone Number</label
+                    >
+                    <div class="relative">
+                      <span
+                        class="material-symbols-outlined absolute left-3 top-3 text-on-surface-variant text-[18px]"
+                        >chat</span
+                      >
+                      <input
+                        class="studio-input w-full bg-surface-container-low pl-10 pr-sm py-2.5 rounded-lg text-body-md font-body-md text-primary border border-transparent focus:border-primary focus:bg-surface-container-lowest focus:outline-none transition-all disabled:opacity-85 disabled:cursor-not-allowed"
+                        id="inputStudioPhone"
+                        type="text"
+                        value="+234 818 900 4421"
+                      />
+                    </div>
+                  </div>
+                  <!-- Primary Service Specialties / Category multi-select tags -->
+                  <div class="space-y-xs md:col-span-2">
+                    <div class="flex items-center justify-between">
+                      <label
+                        class="font-label-sm text-label-sm text-on-surface-variant font-medium"
+                        >Primary Service Specialties &amp; Categories</label
+                      >
+                      <span class="font-label-sm text-label-sm text-secondary"
+                        >Click tags to toggle</span
+                      >
+                    </div>
+                    <div
+                      class="flex flex-wrap gap-2 p-2.5 bg-surface-container-low rounded-lg border border-soft-border/50"
+                      id="specialtiesContainer"
+                    >
+                      <button
+                        class="specialty-tag px-3 py-1.5 rounded-lg text-label-sm font-label-sm transition-all bg-primary text-white shadow-sm flex items-center gap-1.5"
+                        data-tag="Hair Architecture"
+                        type="button"
+                      >
+                        <span>Hair Architecture</span>
+                        <span class="material-symbols-outlined text-[14px]"
+                          >check</span
+                        >
+                      </button>
+                      <button
+                        class="specialty-tag px-3 py-1.5 rounded-lg text-label-sm font-label-sm transition-all bg-primary text-white shadow-sm flex items-center gap-1.5"
+                        data-tag="Scalp Therapy"
+                        type="button"
+                      >
+                        <span>Scalp Therapy</span>
+                        <span class="material-symbols-outlined text-[14px]"
+                          >check</span
+                        >
+                      </button>
+                      <button
+                        class="specialty-tag px-3 py-1.5 rounded-lg text-label-sm font-label-sm transition-all bg-primary text-white shadow-sm flex items-center gap-1.5"
+                        data-tag="Texture Reform"
+                        type="button"
+                      >
+                        <span>Texture Reform</span>
+                        <span class="material-symbols-outlined text-[14px]"
+                          >check</span
+                        >
+                      </button>
+                      <button
+                        class="specialty-tag px-3 py-1.5 rounded-lg text-label-sm font-label-sm transition-all bg-surface-container-lowest text-on-surface-variant border border-soft-border hover:border-primary flex items-center gap-1.5"
+                        data-tag="Wig Revamping &amp; Installation"
+                        type="button"
+                      >
+                        <span>Wig Revamping &amp; Installation</span>
+                        <span
+                          class="material-symbols-outlined text-[14px] opacity-0"
+                          >check</span
+                        >
+                      </button>
+                      <button
+                        class="specialty-tag px-3 py-1.5 rounded-lg text-label-sm font-label-sm transition-all bg-surface-container-lowest text-on-surface-variant border border-soft-border hover:border-primary flex items-center gap-1.5"
+                        data-tag="Clinical Facial Therapy"
+                        type="button"
+                      >
+                        <span>Clinical Facial Therapy</span>
+                        <span
+                          class="material-symbols-outlined text-[14px] opacity-0"
+                          >check</span
+                        >
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Physical Studio Address / Location -->
+                  <div class="space-y-xs md:col-span-2">
+                    <label
+                      class="font-label-sm text-label-sm text-on-surface-variant font-medium"
+                      >Physical Studio Address / Location</label
+                    >
+                    <div class="relative">
+                      <span
+                        class="material-symbols-outlined absolute left-3 top-3 text-on-surface-variant text-[18px]"
+                        >pin_drop</span
+                      >
+                      <input
+                        class="studio-input w-full bg-surface-container-low pl-10 pr-sm py-2.5 rounded-lg text-body-md font-body-md text-primary border border-transparent focus:border-primary focus:bg-surface-container-lowest focus:outline-none transition-all disabled:opacity-85 disabled:cursor-not-allowed"
+                        id="inputStudioAddress"
+                        type="text"
+                        value="Suite 4B, The Monolith Gallery, Admiralty Way, Lekki Phase 1, Lagos"
+                      />
+                    </div>
+                  </div>
+                  <!-- Short Executive Bio / Tagline -->
+                  <div class="space-y-xs md:col-span-2">
+                    <label
+                      class="font-label-sm text-label-sm text-on-surface-variant font-medium"
+                      >Short Executive Bio / Public Tagline</label
+                    >
+                    <textarea
+                      class="studio-input w-full bg-surface-container-low px-sm py-2.5 rounded-lg text-body-md font-body-md text-primary border border-transparent focus:border-primary focus:bg-surface-container-lowest focus:outline-none transition-all resize-none disabled:opacity-85 disabled:cursor-not-allowed"
+                      id="inputStudioBio"
+                      rows="3"
+                    >
+High-precision hair installation, wig revamping, and clinical scalp therapy tailored to modern urban professionals.</textarea
+                    >
+                  </div>
+                </div>
+              </section>
+              <!-- SECTION 2: BOOKING GUARDRAILS & SERVICE DELIVERY MODES -->
+              <section
+                class="bg-surface-container-lowest p-md rounded-xl shadow-sm space-y-md border border-soft-border/60"
+                id="service-modes"
+              >
+                <div class="flex items-start justify-between">
+                  <div>
+                    <span
+                      class="font-label-sm text-label-sm text-sage uppercase tracking-widest font-semibold"
+                      >Section 02</span
+                    >
+                    <h2 class="font-headline-md text-headline-md text-primary">
+                      Booking Guardrails &amp; Service Modes
+                    </h2>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Specify your delivery formats, mandatory escrow locks, and
+                      turnaround spacing.
+                    </p>
+                  </div>
+                  <span
+                    class="bg-primary/5 text-primary px-3 py-1 rounded-full font-mono text-label-sm font-semibold"
+                    >STRICT ENFORCEMENT</span
+                  >
+                </div>
+                <!-- Service Delivery Modes: Physical Studio vs Home Service / Mobile House Calls -->
+                <div class="space-y-sm">
+                  <label
+                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block"
+                    >Service Delivery Modes Offered</label
+                  >
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+                    <!-- Mode 1: In-Studio / Physical Walk-in (Enabled by default) -->
+                    <div
+                      class="p-md rounded-xl border transition-all cursor-pointer bg-surface-container-low border-primary/40 hover:border-primary"
+                      id="modeCardStudio"
+                    >
+                      <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-3">
+                          <div
+                            class="w-10 h-10 rounded-lg bg-primary text-white flex items-center justify-center"
+                          >
+                            <span class="material-symbols-outlined text-[20px]"
+                              >store</span
+                            >
+                          </div>
+                          <div>
+                            <h4
+                              class="font-label-md text-label-md text-primary font-semibold"
+                            >
+                              In-Studio / Physical Walk-in
+                            </h4>
+                            <p
+                              class="font-body-sm text-body-sm text-on-surface-variant"
+                            >
+                              Client visits registered studio chair
+                            </p>
+                          </div>
+                        </div>
+                        <label
+                          class="relative inline-flex items-center cursor-pointer"
+                        >
+                          <input
+                            checked=""
+                            class="sr-only peer"
+                            id="modeToggleStudio"
+                            type="checkbox"
+                          />
+                          <div
+                            class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"
+                          ></div>
+                        </label>
+                      </div>
+                      <div
+                        class="mt-3 pt-3 border-t border-soft-border/70 flex items-center justify-between text-label-sm"
+                      >
+                        <span class="text-on-surface-variant">Status:</span>
+                        <span
+                          class="text-success-green font-semibold flex items-center gap-1"
+                          id="modeStudioStatus"
+                        >
+                          <span class="material-symbols-outlined text-[14px]"
+                            >check_circle</span
+                          >
+                          Active &amp; Bookable
+                        </span>
+                      </div>
+                    </div>
+                    <!-- Mode 2: Home Service / Mobile House Calls -->
+                    <div
+                      class="p-md rounded-xl border transition-all cursor-pointer bg-surface-container-lowest border-soft-border hover:border-primary"
+                      id="modeCardMobile"
+                    >
+                      <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-3">
+                          <div
+                            class="w-10 h-10 rounded-lg bg-surface-container-high text-primary flex items-center justify-center"
+                            id="mobileIconBox"
+                          >
+                            <span class="material-symbols-outlined text-[20px]"
+                              >commute</span
+                            >
+                          </div>
+                          <div>
+                            <h4
+                              class="font-label-md text-label-md text-primary font-semibold"
+                            >
+                              Home Service / Mobile Calls
+                            </h4>
+                            <p
+                              class="font-body-sm text-body-sm text-on-surface-variant"
+                            >
+                              Stylist travels directly to client venue
+                            </p>
+                          </div>
+                        </div>
+                        <label
+                          class="relative inline-flex items-center cursor-pointer"
+                        >
+                          <input
+                            checked=""
+                            class="sr-only peer"
+                            id="modeToggleMobile"
+                            type="checkbox"
+                          />
+                          <div
+                            class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"
+                          ></div>
+                        </label>
+                      </div>
+                      <div
+                        class="mt-3 pt-3 border-t border-soft-border/70 flex items-center justify-between text-label-sm"
+                      >
+                        <span class="text-on-surface-variant">Status:</span>
+                        <span
+                          class="text-success-green font-semibold flex items-center gap-1"
+                          id="modeMobileStatus"
+                        >
+                          <span class="material-symbols-outlined text-[14px]"
+                            >check_circle</span
+                          >
+                          Enabled (Physical &amp; Mobile)
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Customizable Travel Surcharge & Radius Note (conditionally visible when Mobile active) -->
+                  <div
+                    class="p-sm bg-surface-container-low rounded-xl border border-soft-border flex flex-col md:flex-row items-center justify-between gap-md"
+                    id="mobileDetailsRow"
+                  >
+                    <div class="space-y-0.5 w-full md:w-auto">
+                      <span
+                        class="font-label-sm text-label-sm text-primary font-semibold flex items-center gap-1"
+                      >
+                        <span class="material-symbols-outlined text-[16px]"
+                          >location_on</span
+                        >
+                        Travel Radius &amp; Concierge Dispatch Note
+                      </span>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        Mobile bookings apply automatically within Lagos Island,
+                        Ikoyi, Victoria Island &amp; Lekki (up to 15km).
+                      </p>
+                    </div>
+                    <div
+                      class="flex items-center gap-2 shrink-0 w-full md:w-auto justify-end"
+                    >
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >Base Travel Surcharge:</span
+                      >
+                      <input
+                        class="w-28 px-3 py-1.5 bg-surface-container-lowest border border-soft-border rounded-lg text-label-md font-semibold text-primary focus:outline-none focus:border-primary text-right"
+                        id="travelSurchargeInput"
+                        type="text"
+                        value="₦ 15,000"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <!-- Escrow Breakage Deposit Slider Component -->
+                <div
+                  class="bg-surface-container-low p-md rounded-xl space-y-sm"
+                >
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <span
+                        class="font-label-md text-label-md text-primary font-semibold"
+                        >Client Breakage Deposit Rate</span
+                      >
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        Bonded against client no-shows and late cancellations.
+                      </p>
+                    </div>
+                    <div
+                      class="flex items-baseline gap-1 bg-surface-container-lowest px-3 py-1.5 rounded-lg shadow-sm border border-soft-border"
+                    >
+                      <span
+                        class="font-headline-md text-headline-md text-primary font-semibold"
+                        id="depositDisplay"
+                        >25</span
+                      >
+                      <span
+                        class="font-label-md text-label-md text-on-surface-variant"
+                        >%</span
+                      >
+                    </div>
+                  </div>
+                  <div class="pt-xs">
+                    <input
+                      class="w-full accent-primary h-1.5 bg-surface-container-high rounded-lg cursor-pointer"
+                      id="depositSlider"
+                      max="30"
+                      min="20"
+                      step="1"
+                      type="range"
+                      value="25"
+                    />
+                    <div
+                      class="flex justify-between font-label-sm text-label-sm text-on-surface-variant pt-1 font-mono"
+                    >
+                      <span>Min Limit: 20%</span>
+                      <span class="text-primary font-semibold"
+                        >Institutional Range (20% - 30%)</span
+                      >
+                      <span>Max Cap: 30%</span>
+                    </div>
+                  </div>
+                  <div
+                    class="bg-surface-container p-sm rounded-lg flex items-start gap-sm"
+                  >
+                    <span
+                      class="material-symbols-outlined text-muted-terracotta text-[20px] shrink-0 mt-0.5"
+                      >shield</span
+                    >
+                    <p class="font-body-sm text-body-sm text-on-surface">
+                      <strong class="font-semibold">Smart Escrow Rule:</strong>
+                      The <span id="depositInlineText">25%</span> deposit is
+                      pre-authorized &amp; locked at checkout. If a client fails
+                      to appear or cancels within 30 minutes of appointment
+                      commencement, the deposit settles immediately into your
+                      primary bank balance.
+                    </p>
+                  </div>
+                </div>
+                <!-- Strict 30-Minute Cancellation Enforcement -->
+                <div
+                  class="flex items-center justify-between p-sm bg-surface-container-low rounded-xl"
+                >
+                  <div class="space-y-0.5 max-w-xl">
+                    <div class="flex items-center gap-2">
+                      <span
+                        class="font-label-md text-label-md text-primary font-semibold"
+                        >Strict 30-Minute Cancellation Limit</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-primary text-[16px]"
+                        >lock</span
+                      >
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      System-enforced lock: Clients cannot perform self-service
+                      cancellations inside 30 minutes prior to booking time.
+                      Chair reservation is non-refundable past this threshold.
+                    </p>
+                  </div>
+                  <div
+                    class="relative inline-flex items-center cursor-not-allowed opacity-90"
+                  >
+                    <input
+                      checked=""
+                      class="sr-only peer"
+                      disabled=""
+                      type="checkbox"
+                    />
+                    <div
+                      class="w-11 h-6 bg-primary peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"
+                    ></div>
+                  </div>
+                </div>
+                <!-- Chair Turnaround & Sanitation Buffers -->
+                <div class="space-y-sm">
+                  <label
+                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block"
+                    >Chair Turnaround &amp; Sanitation Buffer</label
+                  >
+                  <div class="grid grid-cols-3 gap-sm" id="bufferButtonGroup">
+                    <button
+                      class="buffer-btn py-3 px-4 rounded-xl text-center font-label-md text-label-md bg-surface-container-low text-on-surface hover:bg-surface-container transition-all"
+                      data-buffer="10"
+                      type="button"
+                    >
+                      <span class="block font-headline-md text-headline-md"
+                        >10m</span
+                      >
+                      <span
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                        >Quick Restock</span
+                      >
+                    </button>
+                    <button
+                      class="buffer-btn py-3 px-4 rounded-xl text-center font-label-md text-label-md bg-primary text-on-primary shadow-sm transition-all"
+                      data-buffer="15"
+                      type="button"
+                    >
+                      <span class="block font-headline-md text-headline-md"
+                        >15m</span
+                      >
+                      <span
+                        class="font-body-sm text-body-sm text-surface-container-low"
+                        >Sanitize &amp; Reset (Rec.)</span
+                      >
+                    </button>
+                    <button
+                      class="buffer-btn py-3 px-4 rounded-xl text-center font-label-md text-label-md bg-surface-container-low text-on-surface hover:bg-surface-container transition-all"
+                      data-buffer="30"
+                      type="button"
+                    >
+                      <span class="block font-headline-md text-headline-md"
+                        >30m</span
+                      >
+                      <span
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                        >Deep Sterilization</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </section>
+              <!-- SECTION 3: TREASURY, CURRENCY & ESCROW SETTLEMENT -->
+              <section
+                class="bg-surface-container-lowest p-md rounded-xl shadow-sm space-y-md border border-soft-border/60"
+                id="treasury"
+              >
+                <div class="flex items-start justify-between">
+                  <div>
+                    <span
+                      class="font-label-sm text-label-sm text-sage uppercase tracking-widest font-semibold"
+                      >Section 03</span
+                    >
+                    <h2 class="font-headline-md text-headline-md text-primary">
+                      Treasury, Currency &amp; Escrow Settlement
+                    </h2>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Manage your studio operating currency, verified corporate
+                      bank accounts, and liquidation schedule.
+                    </p>
+                  </div>
+                  <span
+                    class="material-symbols-outlined text-on-surface-variant text-[24px]"
+                    >account_balance</span
+                  >
+                </div>
+                <!-- Base Operating Currency (Moved here from section 1) -->
+                <div
+                  class="p-md rounded-xl bg-surface-container-low space-y-xs"
+                >
+                  <label
+                    class="font-label-sm text-label-sm text-on-surface-variant font-medium"
+                    >Base Operating Currency</label
+                  >
+                  <div class="relative">
+                    <select
+                      class="w-full appearance-none bg-surface-container-lowest px-sm py-2.5 rounded-lg text-body-md font-body-md text-primary border border-soft-border focus:border-primary focus:outline-none transition-all cursor-pointer"
+                      id="operatingCurrencySelect"
+                    >
+                      <option selected="" value="NGN">
+                        Nigerian Naira (₦ / NGN)
+                      </option>
+                      <option value="USD">US Dollar ($ / USD)</option>
+                      <option value="GBP">British Pound (£ / GBP)</option>
+                    </select>
+                    <span
+                      class="material-symbols-outlined absolute right-3 top-3 pointer-events-none text-on-surface-variant text-[18px]"
+                      >expand_more</span
+                    >
+                  </div>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    All studio service pricing, escrow disbursements, and
+                    breakage bonds settle in this primary denomination.
+                  </p>
+                </div>
+                <!-- Settlement Bank Details -->
+                <div
+                  class="p-md rounded-xl bg-surface-container-low flex flex-col md:flex-row items-start md:items-center justify-between gap-md border border-soft-border"
+                >
+                  <div class="flex items-center gap-md">
+                    <div
+                      class="w-12 h-12 rounded-xl bg-primary text-on-primary flex items-center justify-center font-headline-md text-headline-md font-semibold"
+                    >
+                      GT
+                    </div>
+                    <div>
+                      <div class="flex items-center gap-2">
+                        <span
+                          class="font-headline-md text-headline-md text-primary"
+                          >Guaranty Trust Bank (GTBank)</span
+                        >
+                        <span
+                          class="bg-success-green/10 text-success-green font-label-sm text-label-sm px-2 py-0.5 rounded-full font-semibold"
+                          >Active Destination</span
+                        >
+                      </div>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        Account: Alexander Vanguard Studio Corp • Ending in
+                        <span class="font-mono font-semibold text-primary"
+                          >8921</span
+                        >
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-1 font-semibold"
+                    id="changeBankBtn"
+                    type="button"
+                  >
+                    <span>Update Account</span>
+                    <span class="material-symbols-outlined text-[14px]"
+                      >chevron_right</span
+                    >
+                  </button>
+                </div>
+                <!-- Payout Cadence Selection Options -->
+                <div class="space-y-sm">
+                  <label
+                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block"
+                    >Automated Escrow Payout Cadence</label
+                  >
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+                    <!-- Option A: Immediate Daily Cron -->
+                    <label
+                      class="relative flex flex-col p-md rounded-xl bg-surface-container-low hover:bg-surface-container cursor-pointer transition-colors border border-soft-border"
+                    >
+                      <div class="flex items-center justify-between pb-sm">
+                        <span
+                          class="font-label-md text-label-md text-primary font-semibold flex items-center gap-1.5"
+                        >
+                          <span
+                            class="material-symbols-outlined text-success-green text-[20px]"
+                            >bolt</span
+                          >
+                          Instant Daily Cron
+                        </span>
+                        <input
+                          checked=""
+                          class="accent-primary w-4 h-4 cursor-pointer"
+                          name="payout_cadence"
+                          type="radio"
+                          value="daily"
+                        />
+                      </div>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        Releases accumulated escrow balance instantly when
+                        booking session is confirmed "Completed" by both parties
+                        or automated 2-hour post-session timeout.
+                      </p>
+                      <span
+                        class="font-label-sm text-label-sm text-secondary mt-3 font-medium"
+                        >Zero holding fee • Direct NIBSS wire</span
+                      >
+                    </label>
+                    <!-- Option B: Weekly Batch -->
+                    <label
+                      class="relative flex flex-col p-md rounded-xl bg-surface-container-low hover:bg-surface-container cursor-pointer transition-colors border border-soft-border"
+                    >
+                      <div class="flex items-center justify-between pb-sm">
+                        <span
+                          class="font-label-md text-label-md text-primary font-semibold flex items-center gap-1.5"
+                        >
+                          <span
+                            class="material-symbols-outlined text-on-surface-variant text-[20px]"
+                            >event_repeat</span
+                          >
+                          Weekly Batch
+                        </span>
+                        <input
+                          class="accent-primary w-4 h-4 cursor-pointer"
+                          name="payout_cadence"
+                          type="radio"
+                          value="weekly"
+                        />
+                      </div>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        Consolidates 7-day studio proceeds into a single bulk
+                        transfer every Monday at 07:00 West Africa Time (WAT)
+                        with automated tax ledgering.
+                      </p>
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant mt-3 font-medium"
+                        >Preferred for studio payroll accounting</span
+                      >
+                    </label>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <!-- Secondary Meta Column (Right 4 Cols) -->
+            <div class="lg:col-span-4 flex flex-col gap-lg">
+              <!-- Executive Studio Overview Preview Card -->
+              <div
+                class="bg-surface-container-lowest p-md rounded-xl shadow-sm space-y-md border border-soft-border/60"
+              >
+                <div class="relative">
+                  <div
+                    class="h-28 rounded-lg bg-surface-container-high overflow-hidden"
+                  >
+                    <div
+                      class="w-full h-full bg-cover bg-center"
+                      id="sidebarBannerPreview"
+                      style="
+                        background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBNA-YkXFbqiMOgvHr-o180z_52j31M-Ux1IcPIaW7mbVUfFSH4AgLWu7ETTAoCl0wMGZZLx3sEhbhjciopHHAUhRtRrbjp2JGz9eyQ2bEZ_f-wreFyV5KZB9p3DZg3tSFc9JvsG-_SXFmDQ-Mh_oPsLcY5xxD00XiYPK4UQQrsUfsCxeE_XdPVowkgMDSC54-zX2GkKbNAhdkYpKQHIAEzNcjV7YtQQi-8JZrZlq5OVQU9pRWskLXt&quot;);
+                      "
+                    ></div>
+                  </div>
+                  <div
+                    class="absolute -bottom-8 left-4 p-1 bg-surface-container-lowest rounded-full shadow-sm"
+                  >
+                    <img
+                      alt="Sidebar Avatar"
+                      class="w-16 h-16 rounded-full object-cover"
+                      id="sidebarAvatarPreview"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmnOeFTI4xCOjiInFYyyIJ2Pu2Z43gtH1YtL2SZ3dTJ8F8AZE2hikLdplAIGzuEKFizuqUfkMOTofNbO2SXcWtGCwKd1oUuVKx87hBE22tGQYVoDCpQBl1QM2aY9-ODvJbNfjyPyB4AcWv19OyoS8tUY0SuOXfAzEMcnuKI8jcV1dI6Aw1edweDrO4327Acubhuw-ADx9SqWufOIZ7uMYU3LIbYh8ola_d1zge3G5AMLozQXCT63PC"
+                    />
+                  </div>
+                </div>
+                <div class="pt-8 space-y-xs">
+                  <div class="flex items-center justify-between">
+                    <h3
+                      class="font-headline-md text-headline-md text-primary font-semibold"
+                      id="sidebarStudioName"
+                    >
+                      Alexander Vanguard
+                    </h3>
+                    <span
+                      class="material-symbols-outlined text-success-green text-[20px]"
+                      >verified</span
+                    >
+                  </div>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant"
+                    id="sidebarStudioTagline"
+                  >
+                    Master Hair Architect &amp; Studio Principal
+                  </p>
+                  <div class="flex items-center gap-xs text-warning-amber pt-1">
+                    <span
+                      class="material-symbols-outlined text-[18px]"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >star</span
+                    >
+                    <span class="font-label-md text-label-md text-primary"
+                      >4.98</span
+                    >
+                    <span
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                      >(312 Client Reviews)</span
+                    >
+                  </div>
+                </div>
+                <div class="space-y-sm pt-xs border-t border-soft-border">
+                  <div class="flex justify-between font-body-sm text-body-sm">
+                    <span class="text-on-surface-variant"
+                      >Escrow Fulfillment</span
+                    >
+                    <span
+                      class="font-label-md text-label-md text-success-green font-semibold"
+                      >99.4%</span
+                    >
+                  </div>
+                  <div class="flex justify-between font-body-sm text-body-sm">
+                    <span class="text-on-surface-variant"
+                      >Average Booking Value</span
+                    >
+                    <span
+                      class="font-label-md text-label-md text-primary font-semibold"
+                      id="sidebarAbv"
+                      >₦ 68,500</span
+                    >
+                  </div>
+                  <div class="flex justify-between font-body-sm text-body-sm">
+                    <span class="text-on-surface-variant">Dispute Ratio</span>
+                    <span class="font-label-md text-label-md text-primary"
+                      >&lt; 0.1%</span
+                    >
+                  </div>
+                </div>
+                <!-- Chair Occupancy Indicator -->
+                <div class="pt-xs space-y-1">
+                  <div class="flex justify-between font-label-sm text-label-sm">
+                    <span class="text-on-surface-variant"
+                      >Weekly Chair Utilization</span
+                    >
+                    <span class="text-primary font-semibold">87% Booked</span>
+                  </div>
+                  <div
+                    class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden"
+                  >
+                    <div
+                      class="bg-primary h-full rounded-full"
+                      style="width: 87%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <!-- Compliance & Insurance Status with Functional Download -->
+              <div
+                class="bg-surface-container-lowest p-md rounded-xl shadow-sm space-y-md border border-soft-border/60"
+              >
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-sage text-[22px]"
+                    >verified_user</span
+                  >
+                  <h3
+                    class="font-label-md text-label-md text-primary uppercase tracking-wider font-semibold"
+                  >
+                    Escrow Institutional Seal
+                  </h3>
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Alexander V. Studio is audited quarterly for booking
+                  compliance. Your bonded deposits are backstopped by Leadway
+                  Assurance Professional Indemnity #LPA-8841-GLM.
+                </p>
+                <div
+                  class="p-3 bg-surface-container-low rounded-lg flex items-center justify-between border border-soft-border"
+                >
+                  <div>
+                    <span
+                      class="font-label-sm text-label-sm text-primary font-semibold block"
+                      >Compliance Certificate</span
+                    >
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant"
+                      >PDF • 2.4 MB • Valid 2025</span
+                    >
+                  </div>
+                  <button
+                    class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-1 font-semibold p-1.5 rounded hover:bg-surface-container transition-colors"
+                    id="downloadPdfBtn"
+                    type="button"
+                  >
+                    <span>Download PDF</span>
+                    <span class="material-symbols-outlined text-[16px]"
+                      >download</span
+                    >
+                  </button>
+                </div>
+              </div>
+              <!-- Studio Suspension / Pause Chair Card (Interactive) -->
+              <div
+                class="p-md rounded-xl bg-error-container/40 space-y-sm border border-error-container"
+                id="suspensionCard"
+              >
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-label-sm text-label-sm text-error uppercase tracking-wider font-semibold"
+                    >Studio Visibility</span
+                  >
+                  <span
+                    class="bg-white/80 text-success-green font-label-sm text-label-sm px-2 py-0.5 rounded-full font-semibold"
+                    id="suspensionBadge"
+                    >Public / Active</span
+                  >
+                </div>
+                <p
+                  class="font-body-sm text-body-sm text-on-surface-variant"
+                  id="suspensionText"
+                >
+                  Temporarily pause your studio presence on Glamora marketplace.
+                  Existing bonded bookings will remain valid.
+                </p>
+                <button
+                  class="w-full px-4 py-2.5 rounded-lg bg-white text-error font-label-sm text-label-sm hover:bg-error hover:text-white transition-all shadow-sm border border-error/20 font-semibold flex items-center justify-center gap-1.5"
+                  id="suspensionActionBtn"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >pause_circle</span
+                  >
+                  <span id="suspensionBtnText">Pause Public Booking Chair</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Dedicated Clean Vendor Footer -->
+          <footer
+            class="mt-xl border-t border-soft-border bg-surface-container-lowest px-margin-desktop py-lg"
+          >
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-lg pb-md">
+              <div class="space-y-sm">
+                <div class="flex items-center gap-base">
+                  <span
+                    class="font-headline-md text-headline-md text-primary tracking-tight"
+                    >GLAMORA</span
+                  >
+                  <span
+                    class="font-mono text-label-sm bg-surface-container px-2 py-0.5 rounded text-on-surface-variant"
+                    >VENDOR OS</span
+                  >
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Institutional infrastructure for high-performance aesthetics,
+                  hair architecture, and wellness clinics across Africa.
+                </p>
+              </div>
+              <div class="space-y-xs">
+                <span
+                  class="font-label-sm text-label-sm text-primary uppercase tracking-widest block font-semibold"
+                  >Escrow Governance</span
+                >
+                <ul
+                  class="font-body-sm text-body-sm text-on-surface-variant space-y-1"
+                >
+                  <li>
+                    <a class="hover:text-primary transition-colors" href="#"
+                      >Deposit Bond Standards</a
+                    >
+                  </li>
+                  <li>
+                    <a class="hover:text-primary transition-colors" href="#"
+                      >30-Min Cancellation Terms</a
+                    >
+                  </li>
+                  <li>
+                    <a class="hover:text-primary transition-colors" href="#"
+                      >Vendor Dispute Arbitration</a
+                    >
+                  </li>
+                  <li>
+                    <a class="hover:text-primary transition-colors" href="#"
+                      >NIBSS Daily Settlement Cron</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="space-y-xs">
+                <span
+                  class="font-label-sm text-label-sm text-primary uppercase tracking-widest block font-semibold"
+                  >Studio Operations</span
+                >
+                <ul
+                  class="font-body-sm text-body-sm text-on-surface-variant space-y-1"
+                >
+                  <li>
+                    <a class="hover:text-primary transition-colors" href="#"
+                      >Multi-Chair Scheduling</a
+                    >
+                  </li>
+                  <li>
+                    <a class="hover:text-primary transition-colors" href="#"
+                      >Mobile Dispatch Rules</a
+                    >
+                  </li>
+                  <li>
+                    <a class="hover:text-primary transition-colors" href="#"
+                      >Tax Clearance Invoicing</a
+                    >
+                  </li>
+                  <li>
+                    <a class="hover:text-primary transition-colors" href="#"
+                      >Breakage Bond Rates</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="space-y-xs">
+                <span
+                  class="font-label-sm text-label-sm text-primary uppercase tracking-widest block font-semibold"
+                  >Regulatory Disclosures</span
+                >
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Licensed payment aggregation powered by regulated settlement
+                  banks. All escrow funds ring-fenced under Nigerian financial
+                  services standards.
+                </p>
+              </div>
+            </div>
+            <div
+              class="pt-md border-t border-soft-border flex flex-col md:flex-row items-center justify-between gap-sm font-body-sm text-body-sm text-on-surface-variant"
+            >
+              <p>
+                © 2025 Glamora Technologies Ltd. Studio Session ID:
+                GLM-9028-AV-LAGOS.
+              </p>
+              <div class="flex items-center gap-md">
+                <a class="hover:text-primary transition-colors" href="#"
+                  >System Status: Operational</a
+                >
+                <a class="hover:text-primary transition-colors" href="#"
+                  >API Documentation</a
+                >
+                <a class="hover:text-primary transition-colors" href="#"
+                  >Direct Concierge Support</a
+                >
+              </div>
+            </div>
+          </footer>
+        </div>
+      </main>
+    </div>
+    <!-- Complete Vanilla JavaScript Engine -->
+    <script src="js/vendor-profile.js"></script>
+  </body>
+</html>

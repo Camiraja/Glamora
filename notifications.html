@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Notifications - Glamora</title>
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed-variant": "#474747",
+              "on-primary-container": "#949393",
+              "surface-container-highest": "#e3e2df",
+              "parchment-white": "#F7F6F3",
+              "secondary-container": "#d6e7d8",
+              "surface-container-low": "#f4f3f0",
+              "on-secondary-fixed-variant": "#3c4a40",
+              "on-error-container": "#93000a",
+              "inverse-surface": "#2f312f",
+              "on-tertiary-container": "#c48373",
+              "on-secondary-container": "#59685c",
+              "surface-variant": "#e3e2df",
+              "inverse-primary": "#c8c6c5",
+              "on-tertiary": "#ffffff",
+              "on-secondary": "#ffffff",
+              error: "#ba1a1a",
+              outline: "#747878",
+              "secondary-fixed-dim": "#bacbbd",
+              "on-surface": "#1b1c1a",
+              "inverse-on-surface": "#f2f1ee",
+              "error-container": "#ffdad6",
+              charcoal: "#2C2C2C",
+              "on-tertiary-fixed": "#360f06",
+              "surface-tint": "#5f5e5e",
+              "error-red": "#A64D4D",
+              "on-background": "#1b1c1a",
+              "surface-container": "#efeeeb",
+              "surface-container-lowest": "#ffffff",
+              "soft-border": "#E2E2DE",
+              background: "#faf9f6",
+              "on-secondary-fixed": "#111e16",
+              "on-surface-variant": "#444748",
+              primary: "#171818",
+              "success-green": "#5A705F",
+              "primary-fixed-dim": "#c8c6c5",
+              "surface-container-high": "#e9e8e5",
+              "secondary-fixed": "#d6e7d8",
+              "surface-dim": "#dbdad7",
+              "tertiary-container": "#4b1f14",
+              "tertiary-fixed-dim": "#feb5a3",
+              sage: "#8A9A8D",
+              "surface-bright": "#faf9f6",
+              "tertiary-fixed": "#ffdad2",
+              surface: "#faf9f6",
+              "outline-variant": "#c4c7c7",
+              "muted-terracotta": "#BC7C6C",
+              "primary-fixed": "#e4e2e1",
+              tertiary: "#310b03",
+              "on-tertiary-fixed-variant": "#6b392c",
+              "warning-amber": "#C49D6A",
+              "on-error": "#ffffff",
+              secondary: "#536257",
+              "primary-container": "#2c2c2c",
+              "on-primary": "#ffffff",
+              "on-primary-fixed": "#1b1c1c",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              xl: "80px",
+              gutter: "24px",
+              "margin-mobile": "16px",
+              lg: "48px",
+              base: "8px",
+              xs: "4px",
+              "margin-desktop": "64px",
+              md: "24px",
+              sm: "12px",
+            },
+            fontFamily: {
+              "label-md": ["Hanken Grotesk"],
+              "body-md": ["Hanken Grotesk"],
+              "label-sm": ["Hanken Grotesk"],
+              "body-sm": ["Hanken Grotesk"],
+              "headline-lg-mobile": ["Hanken Grotesk"],
+              "headline-xl-mobile": ["Hanken Grotesk"],
+              "headline-lg": ["Hanken Grotesk"],
+              "body-lg": ["Hanken Grotesk"],
+              "headline-xl": ["Hanken Grotesk"],
+              "headline-md": ["Hanken Grotesk"],
+            },
+            fontSize: {
+              "label-md": [
+                "14px",
+                { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" },
+              ],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+              "label-sm": [
+                "12px",
+                { lineHeight: "1", letterSpacing: "0.03em", fontWeight: "600" },
+              ],
+              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "headline-xl-mobile": [
+                "36px",
+                { lineHeight: "1.1", fontWeight: "600" },
+              ],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "500" }],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="bg-background font-body-md text-on-surface dark:bg-charcoal dark:text-parchment-white transition-colors duration-300"
+  >
+    <!-- Header Navigation -->
+    <header
+      class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-charcoal/80 backdrop-blur-xl border-b border-soft-border dark:border-outline-variant/20 transition-colors"
+    >
+      <div
+        class="h-16 max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex items-center justify-between"
+      >
+        <!-- Left: Back Button & Logo -->
+        <div class="flex items-center gap-xs sm:gap-base">
+          <button
+            onclick="window.history.back()"
+            class="p-xs text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-parchment-white transition-colors flex items-center justify-center rounded-full hover:bg-surface-container dark:hover:bg-primary-container"
+            title="Go Back"
+          >
+            <span class="material-symbols-outlined text-xl">arrow_back</span>
+          </button>
+
+          <div class="flex items-center gap-base">
+            <img
+              alt="Glamora Logo"
+              class="h-8 w-auto object-contain"
+              src="images/glamora_background-removebg-preview.png"
+            />
+            <span
+              class="font-headline-md text-headline-md text-primary tracking-tight"
+              >GLAMORA</span
+            >
+          </div>
+        </div>
+
+        <!-- Center Nav Links -->
+        <nav class="hidden md:flex items-center gap-lg h-full">
+          <a
+            class="flex items-center h-full px-xs font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-parchment-white transition-colors"
+            href="#"
+            >Home</a
+          >
+          <a
+            class="flex items-center h-full px-xs font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-parchment-white transition-colors"
+            href="marketplace.html"
+            >Marketplace</a
+          >
+          <a
+            class="flex items-center h-full px-xs font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-parchment-white transition-colors"
+            href="favorites.html"
+            >Favorites</a
+          >
+          <a
+            class="flex items-center h-full px-xs font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-parchment-white transition-colors"
+            href="bookings.html"
+            >My Bookings</a
+          >
+        </nav>
+
+        <!-- Right Action Icons & Profile -->
+        <div class="flex items-center gap-md">
+          <div class="flex items-center gap-xs sm:gap-sm">
+            <a
+              href="cart.html"
+              class="p-xs text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-parchment-white transition-colors flex items-center"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >shopping_bag</span
+              >
+            </a>
+            <a
+              href="notifications.html"
+              class="p-xs text-primary dark:text-parchment-white transition-colors flex items-center relative"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >notifications</span
+              >
+              <span
+                id="nav-notification-dot"
+                class="absolute top-1 right-1 w-2 h-2 rounded-full bg-error"
+              ></span>
+            </a>
+          </div>
+
+          <!-- Restored Profile Picture -->
+          <a href="profile.html" class="flex items-center gap-sm group">
+            <img
+              alt="Profile"
+              class="w-8 h-8 rounded-full object-cover border border-soft-border dark:border-outline-variant/30 group-hover:border-primary dark:group-hover:border-parchment-white transition-colors"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAksYm7Vpu3y6nFXAdnowe6h9yhNcma3tOmWqhGqQ-yieKVgv8IOaIQ21a9oK4barmnxBtCbmquE3v8ijlXgSV-zbE8NktlwkPDfGYPsqoh8T0NODzVrMTSMZLOGIWxZ5sK5uG09XBqCUJsvcsc8RrecRsLG5xdSZ2m8MUH3WXsWax75A3uBbiT_shFBUTYsOu9dyHNTK3QCaWYe77GnvN4ZQ-67ApBKuv20ipR9qLJlf0O_ZyvafdN"
+            />
+            <span
+              class="material-symbols-outlined text-on-surface-variant dark:text-outline-variant group-hover:text-primary dark:group-hover:text-parchment-white hidden sm:inline-block"
+              >expand_more</span
+            >
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="w-full pt-16 bg-background dark:bg-charcoal transition-colors">
+      <div class="flex flex-col w-full">
+        <!-- Ambient Background Element -->
+        <div
+          class="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-primary/5 dark:from-parchment-white/5 via-transparent to-transparent pointer-events-none rounded-bl-full"
+        ></div>
+
+        <div
+          class="max-w-[1440px] w-full mx-auto px-margin-mobile md:px-margin-desktop py-lg md:py-xl relative z-10"
+        >
+          <!-- Header Section -->
+          <div
+            class="flex flex-col md:flex-row md:items-end justify-between mb-lg md:mb-xl"
+          >
+            <div>
+              <span
+                class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant uppercase tracking-widest mb-base flex items-center gap-2"
+              >
+                <span
+                  class="w-6 h-[2px] bg-charcoal dark:bg-parchment-white inline-block"
+                ></span>
+                Activity Feed
+              </span>
+              <h1
+                class="font-headline-xl text-headline-xl text-on-surface dark:text-parchment-white"
+              >
+                Inbox
+              </h1>
+            </div>
+
+            <!-- Restored Inbox Action Rate Gauge -->
+            <div
+              class="hidden md:flex items-center gap-md bg-surface-container-highest dark:bg-primary-container p-sm pr-lg rounded-xl shadow-md mt-lg md:mt-0 transition-colors"
+            >
+              <div
+                class="relative w-14 h-14 bg-surface dark:bg-charcoal rounded-full shadow-sm p-1 transition-colors"
+              >
+                <svg class="w-full h-full -rotate-90" viewBox="0 0 36 36">
+                  <path
+                    class="text-surface-dim dark:text-outline-variant/30 transition-colors"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-dasharray="100, 100"
+                    stroke-width="2"
+                  ></path>
+                  <path
+                    id="rate-circle"
+                    class="text-charcoal dark:text-parchment-white transition-all duration-1000 ease-out"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-dasharray="82, 100"
+                    stroke-width="2.5"
+                  ></path>
+                </svg>
+                <div
+                  id="rate-value"
+                  class="absolute inset-0 flex items-center justify-center font-label-sm text-label-sm text-charcoal dark:text-parchment-white transition-colors"
+                >
+                  82%
+                </div>
+              </div>
+              <div class="flex flex-col">
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant uppercase tracking-wider transition-colors"
+                  >Action Rate</span
+                >
+                <span
+                  class="font-body-md text-body-md text-on-surface dark:text-parchment-white transition-colors"
+                  >Highly Responsive</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Layout Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter relative">
+            <!-- Restored Left Sidebar (Responsive Shrinking Filters) -->
+            <div class="md:col-span-3">
+              <div
+                class="sticky top-20 md:top-24 flex flex-row md:flex-col gap-1 sm:gap-xs w-full max-w-full"
+              >
+                <button
+                  id="filter-all"
+                  onclick="setFilter('all')"
+                  class="filter-btn flex-1 md:flex-none flex items-center justify-center md:justify-between px-2 sm:px-md py-sm rounded-xl bg-surface-container-highest dark:bg-primary-container shadow-sm text-on-surface dark:text-parchment-white transition-all group min-w-0"
+                >
+                  <span
+                    class="font-label-md text-xs sm:text-label-md flex items-center gap-1 sm:gap-sm truncate"
+                  >
+                    <span
+                      class="material-symbols-outlined text-base sm:text-lg shrink-0"
+                      >inbox</span
+                    >
+                    <span class="truncate">All Updates</span>
+                  </span>
+                  <span
+                    id="badge-all"
+                    class="bg-charcoal dark:bg-parchment-white text-on-primary dark:text-charcoal px-1.5 sm:px-2 py-0.5 rounded-full font-label-sm text-[10px] sm:text-label-sm ml-1 sm:ml-md shadow-sm shrink-0 transition-colors"
+                    >0</span
+                  >
+                </button>
+
+                <button
+                  id="filter-unread"
+                  onclick="setFilter('unread')"
+                  class="filter-btn flex-1 md:flex-none flex items-center justify-center md:justify-between px-2 sm:px-md py-sm rounded-xl text-on-surface-variant dark:text-outline-variant hover:bg-surface-container dark:hover:bg-primary-container/60 transition-all group min-w-0"
+                >
+                  <span
+                    class="font-label-md text-xs sm:text-label-md flex items-center gap-1 sm:gap-sm truncate"
+                  >
+                    <span
+                      class="material-symbols-outlined text-base sm:text-lg shrink-0"
+                      >mark_email_unread</span
+                    >
+                    <span class="truncate">Unread</span>
+                  </span>
+                  <span
+                    id="badge-unread"
+                    class="bg-surface-dim dark:bg-primary-container text-on-surface dark:text-parchment-white px-1.5 sm:px-2 py-0.5 rounded-full font-label-sm text-[10px] sm:text-label-sm ml-1 sm:ml-md transition-colors shrink-0"
+                    >0</span
+                  >
+                </button>
+
+                <button
+                  id="filter-important"
+                  onclick="setFilter('important')"
+                  class="filter-btn flex-1 md:flex-none flex items-center justify-center md:justify-between px-2 sm:px-md py-sm rounded-xl text-on-surface-variant dark:text-outline-variant hover:bg-surface-container dark:hover:bg-primary-container/60 transition-all group min-w-0"
+                >
+                  <span
+                    class="font-label-md text-xs sm:text-label-md flex items-center gap-1 sm:gap-sm truncate"
+                  >
+                    <span
+                      class="material-symbols-outlined text-base sm:text-lg shrink-0"
+                      >priority_high</span
+                    >
+                    <span class="truncate">Important</span>
+                  </span>
+                  <span
+                    id="badge-important"
+                    class="bg-surface-dim dark:bg-primary-container text-on-surface dark:text-parchment-white px-1.5 sm:px-2 py-0.5 rounded-full font-label-sm text-[10px] sm:text-label-sm ml-1 sm:ml-md transition-colors shrink-0"
+                    >0</span
+                  >
+                </button>
+              </div>
+
+              <!-- Restored Decorative Branding (Desktop Only) -->
+              <div class="hidden md:block mt-xl pt-lg relative opacity-60">
+                <div
+                  class="font-headline-xl text-headline-xl text-surface-dim dark:text-outline-variant/30 [writing-mode:vertical-rl] transform rotate-180 tracking-tighter uppercase select-none transition-colors"
+                >
+                  GLMR—NTF
+                </div>
+              </div>
+            </div>
+
+            <!-- Main Feed -->
+            <div
+              class="md:col-span-9 flex flex-col gap-sm md:-mt-8 relative z-10"
+            >
+              <div id="notifications-container" class="flex flex-col gap-sm">
+                <!-- Dynamically populated via JS -->
+              </div>
+
+              <!-- Restored Load Earlier History Button -->
+              <div class="mt-lg md:mt-xl flex justify-center pb-xl">
+                <button
+                  id="load-earlier-btn"
+                  onclick="loadEarlierHistory()"
+                  class="group flex items-center gap-sm px-xl py-sm bg-surface-container-highest dark:bg-primary-container shadow-sm text-charcoal dark:text-parchment-white font-label-md text-label-md rounded-full transition-all hover:shadow-md hover:bg-surface-container-high dark:hover:bg-primary-container/80"
+                >
+                  <span
+                    class="material-symbols-outlined transition-transform duration-300 group-hover:translate-y-1"
+                    >arrow_downward</span
+                  >
+                  <span id="load-btn-text">Load Earlier History</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/notifications.js"></script>
+  </body>
+</html>

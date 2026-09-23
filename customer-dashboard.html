@@ -1,0 +1,1003 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#949393",
+              "on-primary-fixed-variant": "#474747",
+              "surface-container-highest": "#e3e2df",
+              "inverse-on-surface": "#f2f1ee",
+              "surface-container": "#efeeeb",
+              "on-tertiary-fixed-variant": "#6b392c",
+              "surface-container-lowest": "#ffffff",
+              primary: "#171818",
+              "surface-bright": "#faf9f6",
+              surface: "#faf9f6",
+              "success-green": "#5A705F",
+              "on-primary-fixed": "#1b1c1c",
+              "on-surface": "#1b1c1a",
+              tertiary: "#310b03",
+              "on-secondary-fixed-variant": "#3c4a40",
+              "secondary-fixed-dim": "#bacbbd",
+              "surface-container-high": "#e9e8e5",
+              "primary-container": "#2c2c2c",
+              "on-error-container": "#93000a",
+              secondary: "#536257",
+              "tertiary-container": "#4b1f14",
+              "muted-terracotta": "#BC7C6C",
+              "surface-variant": "#e3e2df",
+              "on-tertiary": "#ffffff",
+              "surface-dim": "#dbdad7",
+              "on-secondary": "#ffffff",
+              "on-surface-variant": "#444748",
+              background: "#faf9f6",
+              "on-error": "#ffffff",
+              "error-container": "#ffdad6",
+              "secondary-container": "#d6e7d8",
+              "outline-variant": "#c4c7c7",
+              "on-secondary-fixed": "#111e16",
+              "parchment-white": "#F7F6F3",
+              outline: "#747878",
+              "on-primary": "#ffffff",
+              "surface-container-low": "#f4f3f0",
+              "soft-border": "#E2E2DE",
+              "primary-fixed": "#e4e2e1",
+              "on-background": "#1b1c1a",
+              "inverse-primary": "#c8c6c5",
+              error: "#ba1a1a",
+              "tertiary-fixed-dim": "#feb5a3",
+              "inverse-surface": "#2f312f",
+              sage: "#8A9A8D",
+              "on-tertiary-container": "#c48373",
+              "warning-amber": "#C49D6A",
+              "secondary-fixed": "#d6e7d8",
+              "on-tertiary-fixed": "#360f06",
+              charcoal: "#2C2C2C",
+              "error-red": "#A64D4D",
+              "tertiary-fixed": "#ffdad2",
+              "surface-tint": "#5f5e5e",
+              "on-secondary-container": "#59685c",
+              "primary-fixed-dim": "#c8c6c5",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              lg: "48px",
+              "margin-desktop": "64px",
+              "margin-mobile": "16px",
+              sm: "12px",
+              xs: "4px",
+              gutter: "24px",
+              xl: "80px",
+              md: "24px",
+              base: "8px",
+            },
+            fontFamily: {
+              "headline-xl-mobile": ["Hanken Grotesk"],
+              "headline-lg-mobile": ["Hanken Grotesk"],
+              "label-md": ["Hanken Grotesk"],
+              "headline-md": ["Hanken Grotesk"],
+              "headline-lg": ["Hanken Grotesk"],
+              "label-sm": ["Hanken Grotesk"],
+              "headline-xl": ["Hanken Grotesk"],
+              "body-lg": ["Hanken Grotesk"],
+              "body-sm": ["Hanken Grotesk"],
+              "body-md": ["Hanken Grotesk"],
+            },
+            fontSize: {
+              "headline-xl-mobile": [
+                "36px",
+                { lineHeight: "1.1", fontWeight: "600" },
+              ],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "label-md": [
+                "14px",
+                { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "500" }],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-sm": [
+                "12px",
+                { lineHeight: "1", letterSpacing: "0.03em", fontWeight: "600" },
+              ],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="bg-background font-body-md text-on-surface dark:bg-charcoal dark:text-inverse-on-surface transition-colors duration-300"
+  >
+    <header
+      class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-charcoal/90 backdrop-blur-xl border-b border-soft-border dark:border-primary-container"
+    >
+      <div
+        class="h-16 w-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex items-center justify-between"
+      >
+        <div class="flex items-center gap-base shrink-0">
+          <img
+            alt="Glamora Logo"
+            class="h-8 w-auto object-contain shrink-0"
+            src="images/glamora_background-removebg-preview.png"
+          />
+          <span
+            class="font-headline-md text-headline-md text-primary dark:text-inverse-primary tracking-tight"
+            >GLAMORA</span
+          >
+        </div>
+        <nav class="hidden md:flex items-center gap-lg">
+          <a
+            aria-current="page"
+            class="transition-colors text-primary dark:text-inverse-primary font-semibold"
+            href="index.html"
+            >Home</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors"
+            href="services.html"
+            >Services</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors"
+            href="marketplace.html"
+            >Marketplace</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors"
+            href="chats.html"
+            >Chats</a
+          >
+        </nav>
+        <div class="flex items-center gap-xs sm:gap-sm md:gap-md">
+          <div class="flex items-center gap-xs sm:gap-sm">
+            <a
+              href="cart.html"
+              aria-current="page"
+              class="p-xs text-primary font-semibold transition-colors flex items-center border-b-2 border-primary"
+            >
+              <span class="material-symbols-outlined">shopping_bag</span>
+            </a>
+            <a
+              href="notifications.html"
+              class="p-xs text-on-surface-variant hover:text-primary transition-colors flex items-center"
+            >
+              <span class="material-symbols-outlined">notifications</span>
+            </a>
+          </div>
+
+          <div class="flex items-center gap-xs sm:gap-sm cursor-pointer group">
+            <img
+              alt="Profile"
+              class="w-8 h-8 rounded-full object-cover border border-soft-border group-hover:border-primary dark:group-hover:border-inverse-primary transition-colors shrink-0"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAksYm7Vpu3y6nFXAdnowe6h9yhNcma3tOmWqhGqQ-yieKVgv8IOaIQ21a9oK4barmnxBtCbmquE3v8ijlXgSV-zbE8NktlwkPDfGYPsqoh8T0NODzVrMTSMZLOGIWxZ5sK5uG09XBqCUJsvcsc8RrecRsLG5xdSZ2m8MUH3WXsWax75A3uBbiT_shFBUTYsOu9dyHNTK3QCaWYe77GnvN4ZQ-67ApBKuv20ipR9qLJlf0O_ZyvafdN"
+            />
+            <span
+              class="material-symbols-outlined text-on-surface-variant dark:text-outline hidden md:block"
+              >expand_more</span
+            >
+          </div>
+          <!-- Hamburger Menu Button -->
+          <button
+            id="mobile-menu-btn"
+            class="md:hidden flex items-center justify-center p-2 text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors shrink-0"
+          >
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Sidebar Backdrop -->
+    <div
+      id="mobile-sidebar-backdrop"
+      class="fixed inset-0 bg-black/60 z-[60] hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm"
+    ></div>
+
+    <!-- Mobile Sidebar -->
+    <aside
+      id="mobile-sidebar"
+      class="fixed top-0 left-0 w-[80%] max-w-[300px] h-screen bg-surface dark:bg-charcoal z-[70] transform -translate-x-full transition-transform duration-300 flex flex-col shadow-2xl border-r border-soft-border dark:border-primary-container"
+    >
+      <!-- Sidebar Header -->
+      <div
+        class="h-16 px-margin-mobile flex items-center justify-between border-b border-soft-border dark:border-primary-container shrink-0"
+      >
+        <div class="flex items-center gap-base">
+          <img
+            alt="Glamora Logo"
+            class="h-8 w-auto object-contain"
+            src="images/glamora_background-removebg-preview.png"
+          />
+          <span
+            class="font-headline-md text-headline-md text-primary dark:text-inverse-primary tracking-tight"
+            >GLAMORA</span
+          >
+        </div>
+        <button
+          id="close-sidebar-btn"
+          class="w-8 h-8 rounded-full bg-surface-container dark:bg-primary-container flex items-center justify-center text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors shrink-0"
+        >
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Sidebar Navigation Links -->
+      <nav
+        class="flex-1 px-margin-mobile py-md overflow-y-auto flex flex-col gap-xs"
+      >
+        <a
+          href="index.html"
+          class="flex items-center gap-md px-md py-sm rounded-xl bg-primary dark:bg-inverse-surface text-on-primary font-semibold transition-colors"
+        >
+          <span class="material-symbols-outlined text-[22px]">home</span>
+          Dashboard
+        </a>
+        <a
+          href="mybookings.html"
+          class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant dark:text-outline hover:bg-surface-container dark:hover:bg-primary-container hover:text-primary dark:hover:text-inverse-primary transition-colors font-medium"
+        >
+          <span class="material-symbols-outlined text-[22px]"
+            >calendar_today</span
+          >
+          Services & Bookings
+        </a>
+        <a
+          href="marketplace.html"
+          class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant dark:text-outline hover:bg-surface-container dark:hover:bg-primary-container hover:text-primary dark:hover:text-inverse-primary transition-colors font-medium"
+        >
+          <span class="material-symbols-outlined text-[22px]">storefront</span>
+          Marketplace
+        </a>
+        <a
+          href="favorites.html"
+          class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant dark:text-outline hover:bg-surface-container dark:hover:bg-primary-container hover:text-primary dark:hover:text-inverse-primary transition-colors font-medium"
+        >
+          <span class="material-symbols-outlined text-[22px]">favorite</span>
+          Favorites
+        </a>
+        <a
+          href="chats.html"
+          class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant dark:text-outline hover:bg-surface-container dark:hover:bg-primary-container hover:text-primary dark:hover:text-inverse-primary transition-colors font-medium"
+        >
+          <span class="material-symbols-outlined text-[22px]"
+            >chat_bubble_outline</span
+          >
+          Messages
+        </a>
+        <a
+          href="cart.html"
+          class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant dark:text-outline hover:bg-surface-container dark:hover:bg-primary-container hover:text-primary dark:hover:text-inverse-primary transition-colors font-medium"
+        >
+          <span class="material-symbols-outlined text-[22px]"
+            >shopping_bag</span
+          >
+          My Orders
+        </a>
+      </nav>
+
+      <!-- Sidebar Footer (Profile Card) -->
+      <div
+        class="p-margin-mobile border-t border-soft-border dark:border-primary-container shrink-0 mt-auto"
+      >
+        <div
+          class="flex items-center gap-md p-sm rounded-xl bg-surface-container dark:bg-primary-container"
+        >
+          <img
+            alt="Profile"
+            class="w-10 h-10 rounded-full object-cover border border-soft-border dark:border-outline-variant shrink-0"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAksYm7Vpu3y6nFXAdnowe6h9yhNcma3tOmWqhGqQ-yieKVgv8IOaIQ21a9oK4barmnxBtCbmquE3v8ijlXgSV-zbE8NktlwkPDfGYPsqoh8T0NODzVrMTSMZLOGIWxZ5sK5uG09XBqCUJsvcsc8RrecRsLG5xdSZ2m8MUH3WXsWax75A3uBbiT_shFBUTYsOu9dyHNTK3QCaWYe77GnvN4ZQ-67ApBKuv20ipR9qLJlf0O_ZyvafdN"
+          />
+          <div class="flex flex-col min-w-0">
+            <span
+              class="font-headline-md text-body-md font-semibold text-on-surface dark:text-inverse-on-surface truncate"
+              >Alex Vanguard</span
+            >
+            <span
+              class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline truncate"
+              >Customer Account</span
+            >
+          </div>
+        </div>
+      </div>
+    </aside>
+    <main class="w-full pt-16 bg-background dark:bg-primary-container">
+      <div class="flex flex-col w-full relative">
+        <div
+          class="fixed top-0 left-0 w-full h-full bg-surface-container-highest dark:bg-black opacity-30 pointer-events-none mix-blend-multiply"
+        ></div>
+        <div
+          class="fixed top-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-secondary opacity-10 blur-3xl pointer-events-none mix-blend-multiply"
+        ></div>
+        <div
+          class="fixed bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-warning-amber opacity-10 blur-3xl pointer-events-none mix-blend-multiply"
+        ></div>
+
+        <div
+          class="max-w-[1440px] mx-auto w-full px-margin-mobile md:px-margin-desktop py-lg xl:py-xl z-10"
+        >
+          <div
+            class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-md mb-xl"
+          >
+            <div class="max-w-2xl">
+              <p
+                class="font-label-md text-label-md text-on-surface-variant dark:text-outline uppercase tracking-widest mb-sm"
+              >
+                Dashboard Overview
+              </p>
+              <h1
+                class="font-headline-xl text-headline-xl text-on-surface dark:text-inverse-on-surface tracking-tighter"
+              >
+                Welcome back,
+                <span class="text-secondary dark:text-sage italic font-light"
+                  >Alex</span
+                >.
+              </h1>
+              <p
+                class="font-body-lg text-body-lg text-on-surface-variant dark:text-outline mt-sm max-w-xl leading-relaxed"
+              >
+                Your upcoming appointments, saved professionals, and recent
+                communications, organized for absolute efficiency.
+              </p>
+            </div>
+            <!-- Updated: Discover New Services links to search-results.html -->
+            <a
+              href="search-results.html"
+              class="bg-primary hover:bg-surface-tint dark:bg-inverse-primary dark:hover:bg-primary-fixed dark:text-primary transition-all duration-300 text-on-primary font-label-md text-label-md px-lg py-sm rounded-full flex items-center gap-base group shrink-0 shadow-md"
+            >
+              <span
+                class="material-symbols-outlined group-hover:-translate-y-0.5 transition-transform"
+                >search</span
+              >
+              Discover New Services
+            </a>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-lg lg:gap-gutter">
+            <div class="col-span-1 lg:col-span-8 flex flex-col gap-xl">
+              <section>
+                <div class="flex items-center justify-between mb-md">
+                  <div class="flex items-center gap-sm">
+                    <span
+                      class="material-symbols-outlined text-secondary dark:text-sage"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >calendar_today</span
+                    >
+                    <h2
+                      class="font-headline-md text-headline-md text-on-surface dark:text-inverse-on-surface"
+                    >
+                      Upcoming Appointments
+                    </h2>
+                  </div>
+                  <!-- Updated: View All links to mybookings.html -->
+                  <a
+                    class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors flex items-center gap-xs"
+                    href="mybookings.html"
+                    >View all
+                    <span class="material-symbols-outlined text-sm"
+                      >arrow_forward</span
+                    ></a
+                  >
+                </div>
+
+                <div
+                  class="grid grid-cols-1 gap-sm"
+                  id="appointments-container"
+                >
+                  <div
+                    class="searchable-card bg-surface-container-lowest dark:bg-charcoal rounded-xl p-md flex flex-col md:flex-row items-start md:items-center justify-between gap-md relative overflow-hidden group shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1 border dark:border-soft-border/10"
+                  >
+                    <div
+                      class="absolute left-0 top-0 bottom-0 w-1 bg-secondary rounded-l-xl"
+                    ></div>
+                    <div
+                      class="flex flex-col md:flex-row items-start md:items-center gap-md md:gap-lg w-full"
+                    >
+                      <div class="flex flex-col min-w-[120px]">
+                        <span
+                          class="font-label-sm text-label-sm text-secondary dark:text-sage uppercase tracking-wider mb-xs"
+                          >Today</span
+                        >
+                        <span
+                          class="font-headline-md text-headline-md text-on-surface dark:text-inverse-on-surface"
+                          >2:00 PM</span
+                        >
+                        <span
+                          class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline"
+                          >45 mins</span
+                        >
+                      </div>
+                      <div
+                        class="hidden md:block w-px h-16 bg-soft-border dark:bg-outline-variant/20"
+                      ></div>
+                      <div class="flex items-center gap-md flex-grow min-w-0">
+                        <div
+                          class="w-16 h-16 rounded-full overflow-hidden shrink-0 shadow-sm relative group"
+                        >
+                          <img
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            data-alt="A portrait of a minimalist architect wearing geometric glasses in a softly lit, concrete and glass studio space. Shot on 35mm film, desaturated tones, natural side light."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8yheYXi9_p0-JaT0F24jAqHKhV0GXQSpNFabdXZq0oL3k_jpIsiV_auZXSiturcA0a6RBI418OSCtW-lptlOS2c6N7T2QVT3MGqT61VE7LChNhsZB32d_vFOEeN_-B3Ndvr3DgGFNVQp-R5Sy3lNi539EOP36OFyFg7kCu5__-gRwASjypOJ4Q4iYE4Y2_G4Bd76oHOevh8FPaJZD8l0upGS0wfr1gpKwoOPhFWgg0GuoOGLEDyNQ"
+                          />
+                          <div
+                            class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"
+                          ></div>
+                        </div>
+                        <div class="min-w-0 searchable-content">
+                          <h3
+                            class="font-headline-md text-headline-md text-on-surface dark:text-inverse-on-surface truncate"
+                          >
+                            Architectural Brow Sculpting
+                          </h3>
+                          <p
+                            class="font-body-md text-body-md text-on-surface-variant dark:text-outline truncate flex items-center gap-xs mt-xs"
+                          >
+                            with Elena Rostova
+                            <span
+                              class="inline-flex items-center justify-center bg-sage/20 text-success-green px-2 py-0.5 rounded-full font-label-sm text-[10px] uppercase ml-sm tracking-wider"
+                              >Confirmed</span
+                            >
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="flex items-center gap-sm shrink-0 w-full md:w-auto justify-end md:justify-start mt-md md:mt-0"
+                    >
+                      <!-- Updated: Message links to chats.html -->
+                      <a
+                        href="chats.html"
+                        aria-label="Message Provider"
+                        class="w-10 h-10 rounded-full bg-surface-container dark:bg-primary-container flex items-center justify-center text-on-surface dark:text-inverse-on-surface hover:bg-primary hover:text-on-primary dark:hover:bg-inverse-primary dark:hover:text-primary transition-colors tooltip"
+                      >
+                        <span class="material-symbols-outlined text-[20px]"
+                          >chat_bubble_outline</span
+                        >
+                      </a>
+                      <!-- Updated: Reschedule changed to Rebook, links to bookings.html -->
+                      <a
+                        href="bookings.html"
+                        aria-label="Rebook"
+                        class="w-10 h-10 rounded-full bg-surface-container dark:bg-primary-container flex items-center justify-center text-on-surface dark:text-inverse-on-surface hover:bg-primary hover:text-on-primary dark:hover:bg-inverse-primary dark:hover:text-primary transition-colors tooltip"
+                      >
+                        <span class="material-symbols-outlined text-[20px]"
+                          >edit_calendar</span
+                        >
+                      </a>
+                      <button
+                        class="bg-primary dark:bg-inverse-primary text-on-primary dark:text-primary font-label-md text-label-md px-md py-sm rounded-full hover:bg-surface-tint dark:hover:bg-primary-fixed transition-colors shadow-sm whitespace-nowrap"
+                      >
+                        Check In
+                      </button>
+                    </div>
+                  </div>
+
+                  <div
+                    class="searchable-card bg-surface-container-lowest dark:bg-charcoal rounded-xl p-md flex flex-col md:flex-row items-start md:items-center justify-between gap-md relative overflow-hidden group shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1 border dark:border-soft-border/10"
+                  >
+                    <div
+                      class="absolute left-0 top-0 bottom-0 w-1 bg-muted-terracotta rounded-l-xl opacity-50"
+                    ></div>
+                    <div
+                      class="flex flex-col md:flex-row items-start md:items-center gap-md md:gap-lg w-full opacity-70 group-hover:opacity-100 transition-opacity"
+                    >
+                      <div class="flex flex-col min-w-[120px]">
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline uppercase tracking-wider mb-xs"
+                          >Oct 24</span
+                        >
+                        <span
+                          class="font-headline-md text-headline-md text-on-surface dark:text-inverse-on-surface"
+                          >10:30 AM</span
+                        >
+                        <span
+                          class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline"
+                          >90 mins</span
+                        >
+                      </div>
+                      <div
+                        class="hidden md:block w-px h-16 bg-soft-border dark:bg-outline-variant/20"
+                      ></div>
+                      <div class="flex items-center gap-md flex-grow min-w-0">
+                        <div
+                          class="w-16 h-16 rounded-full overflow-hidden shrink-0 shadow-sm relative group"
+                        >
+                          <img
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale"
+                            data-alt="A close up of hands mixing minimalist skincare ingredients on a slate slab, clinical lighting, sterile environment."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWkJVSiEIDpuDaWHgk8cSpQL845xbcaZB47ZEUxhdT2fTzZxbbWPtHHTPyk23RcMpDLeLQNTmftk_DUCC-Tpoe1LkkzxRj-h3u978IC89_RyoypAJZJvOwfnSLzqKjmr4jywwnOYQgvJE6dcuqOMT2vNfLX9sTEGfczIhagJ7yiz1jowKtLuOMMy-AJLK3eSOu489F8LXe6uAYW7Ddr1emxBqOCnmwc8nH7Bd3n3cwCQXagrn9TWPc"
+                          />
+                        </div>
+                        <div class="min-w-0 searchable-content">
+                          <h3
+                            class="font-headline-md text-headline-md text-on-surface dark:text-inverse-on-surface truncate"
+                          >
+                            Custom Formulation Facial
+                          </h3>
+                          <p
+                            class="font-body-md text-body-md text-on-surface-variant dark:text-outline truncate flex items-center gap-xs mt-xs"
+                          >
+                            with Dr. Aris Thorne
+                            <span
+                              class="inline-flex items-center justify-center bg-error-container text-on-error-container px-2 py-0.5 rounded-full font-label-sm text-[10px] uppercase ml-sm tracking-wider"
+                              >Pending Action</span
+                            >
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="flex items-center gap-sm shrink-0 w-full md:w-auto justify-end md:justify-start mt-md md:mt-0 opacity-70 group-hover:opacity-100 transition-opacity"
+                    >
+                      <button
+                        class="bg-error text-on-error font-label-md text-label-md px-md py-sm rounded-full hover:bg-error-red transition-colors shadow-sm whitespace-nowrap animate-pulse"
+                      >
+                        Pay Deposit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section>
+                <div class="flex items-center justify-between mb-md">
+                  <div class="flex items-center gap-sm">
+                    <span
+                      class="material-symbols-outlined text-secondary dark:text-sage"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >favorite</span
+                    >
+                    <h2
+                      class="font-headline-md text-headline-md text-on-surface dark:text-inverse-on-surface"
+                    >
+                      Curated Providers
+                    </h2>
+                  </div>
+                  <!-- Updated: Browse All links to favorites.html -->
+                  <a
+                    class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors flex items-center gap-xs"
+                    href="favorites.html"
+                    >Browse all
+                    <span class="material-symbols-outlined text-sm"
+                      >arrow_forward</span
+                    ></a
+                  >
+                </div>
+
+                <div
+                  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md"
+                  id="providers-container"
+                >
+                  <div
+                    class="searchable-card bg-surface-container-lowest dark:bg-charcoal border dark:border-soft-border/10 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group cursor-pointer relative"
+                  >
+                    <div
+                      class="absolute top-sm right-sm z-10 w-8 h-8 rounded-full bg-surface-container-lowest/80 dark:bg-charcoal/80 backdrop-blur-md flex items-center justify-center text-error"
+                    >
+                      <span
+                        class="material-symbols-outlined text-[18px]"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >favorite</span
+                      >
+                    </div>
+                    <div class="h-40 w-full relative overflow-hidden">
+                      <img
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        data-alt="A brutalist hair salon interior with poured concrete stations, steel mirrors, and sparse, structural lighting. High contrast black and white aesthetic."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVNNDdjxu5kLAvT-H_JFPrFxWPCgB4TZJhkybxQVOsz7f-i6eXBl9M5G6_HNZgSMmvYbSvohE20vymkJUdc6X1Ww_fhizoDG1IUWSmWcPBwW5MXmdac0Q4AOTnSX7i5PiZIWasCiaWr27IHUmeWb0r9ACFgxsPnmp72WKfRSmn1437g9anxRlSST0oeQ3yx1kSM3IHxR4yJU7mMLsrE1pxJ0wM025FoPiZ7BB9eQRHTEwu99xRfBBK"
+                      />
+                      <div
+                        class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"
+                      ></div>
+                      <div
+                        class="absolute bottom-md left-md right-md searchable-content"
+                      >
+                        <h3
+                          class="font-headline-md text-headline-md text-on-primary"
+                        >
+                          Maison Noir
+                        </h3>
+                        <p
+                          class="font-label-sm text-label-sm text-inverse-primary uppercase tracking-wider"
+                        >
+                          Structural Hair
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      class="p-md bg-surface-container-lowest dark:bg-charcoal flex justify-between items-center"
+                    >
+                      <div
+                        class="flex items-center gap-xs text-on-surface-variant dark:text-outline"
+                      >
+                        <span
+                          class="material-symbols-outlined text-[16px] text-warning-amber"
+                          style="font-variation-settings: &quot;FILL&quot; 1"
+                          >star</span
+                        >
+                        <span class="font-label-md text-label-md">4.9</span>
+                        <span class="font-body-sm text-body-sm ml-xs"
+                          >(128)</span
+                        >
+                      </div>
+                      <!-- Updated: Book button links to bookings.html -->
+                      <a
+                        href="bookings.html"
+                        class="font-label-sm text-label-sm text-secondary dark:text-sage hover:text-primary dark:hover:text-inverse-primary transition-colors uppercase tracking-wider flex items-center gap-xs"
+                      >
+                        Book
+                        <span class="material-symbols-outlined text-[14px]"
+                          >arrow_outward</span
+                        >
+                      </a>
+                    </div>
+                  </div>
+
+                  <div
+                    class="searchable-card bg-surface-container-lowest dark:bg-charcoal border dark:border-soft-border/10 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group cursor-pointer relative"
+                  >
+                    <div
+                      class="absolute top-sm right-sm z-10 w-8 h-8 rounded-full bg-surface-container-lowest/80 dark:bg-charcoal/80 backdrop-blur-md flex items-center justify-center text-error"
+                    >
+                      <span
+                        class="material-symbols-outlined text-[18px]"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >favorite</span
+                      >
+                    </div>
+                    <div class="h-40 w-full relative overflow-hidden">
+                      <img
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        data-alt="A minimalist dermatology clinic waiting area, stark white walls, a single sculptural black leather chair, indirect soft lighting. Clean, clinical luxury."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc8RGCE9YjTFWtGYSwQEwrEtvZgh5BGE2kWm7wcDurSiEYsYAjVvtYfOP50SRwpo3HRseo0mL3105ybbsf8cXsM_HufJawR8HbKzaGtVQz097t2LDrC8nrczZoYoti49MGijpIXtEuQTYoMtyH5y91FUFfCTeq2fT9Aoi8HLvZf5gED8-FwJjnLqtiw2KynDpcq6cg63-nf4PvlPf16NfTbK-nB1Pc4lHfZFtNRWwALK9huQ4_GOKv"
+                      />
+                      <div
+                        class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"
+                      ></div>
+                      <div
+                        class="absolute bottom-md left-md right-md searchable-content"
+                      >
+                        <h3
+                          class="font-headline-md text-headline-md text-on-primary"
+                        >
+                          Derm Aesthetics
+                        </h3>
+                        <p
+                          class="font-label-sm text-label-sm text-inverse-primary uppercase tracking-wider"
+                        >
+                          Clinical Skin
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      class="p-md bg-surface-container-lowest dark:bg-charcoal flex justify-between items-center"
+                    >
+                      <div
+                        class="flex items-center gap-xs text-on-surface-variant dark:text-outline"
+                      >
+                        <span
+                          class="material-symbols-outlined text-[16px] text-warning-amber"
+                          style="font-variation-settings: &quot;FILL&quot; 1"
+                          >star</span
+                        >
+                        <span class="font-label-md text-label-md">5.0</span>
+                        <span class="font-body-sm text-body-sm ml-xs"
+                          >(84)</span
+                        >
+                      </div>
+                      <!-- Updated: Book button links to bookings.html -->
+                      <a
+                        href="bookings.html"
+                        class="font-label-sm text-label-sm text-secondary dark:text-sage hover:text-primary dark:hover:text-inverse-primary transition-colors uppercase tracking-wider flex items-center gap-xs"
+                      >
+                        Book
+                        <span class="material-symbols-outlined text-[14px]"
+                          >arrow_outward</span
+                        >
+                      </a>
+                    </div>
+                  </div>
+                  <!-- Find More Box -->
+                  <a
+                    href="search-results.html"
+                    class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group cursor-pointer relative border border-dashed border-outline-variant flex items-center justify-center flex-col p-lg hover:border-primary min-h-[220px]"
+                  >
+                    <div
+                      class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-primary group-hover:text-on-primary transition-colors mb-md"
+                    >
+                      <span class="material-symbols-outlined text-[24px]"
+                        >add</span
+                      >
+                    </div>
+                    <h3
+                      class="font-headline-md text-headline-md text-on-surface text-center mb-xs"
+                    >
+                      Find More
+                    </h3>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant text-center max-w-[200px]"
+                    >
+                      Explore specialists matching your aesthetic profile.
+                    </p>
+                  </a>
+                </div>
+              </section>
+            </div>
+
+            <div class="col-span-1 lg:col-span-4 flex flex-col gap-lg">
+              <section
+                class="bg-surface-container-lowest dark:bg-charcoal rounded-2xl shadow-sm overflow-hidden flex flex-col border dark:border-soft-border/10"
+              >
+                <div
+                  class="p-md border-b border-soft-border dark:border-outline-variant/20 bg-surface-container-lowest/50 dark:bg-charcoal/50 relative overflow-hidden"
+                >
+                  <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <svg
+                      class="text-primary dark:text-inverse-primary"
+                      fill="none"
+                      height="60"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      width="60"
+                    >
+                      <path
+                        d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="flex items-center justify-between relative z-10">
+                    <h2
+                      class="font-headline-md text-headline-md text-on-surface dark:text-inverse-on-surface flex items-center gap-xs"
+                    >
+                      Recent Comms
+                      <span
+                        class="w-2 h-2 rounded-full bg-secondary dark:bg-sage animate-pulse"
+                      ></span>
+                    </h2>
+                    <button
+                      class="w-8 h-8 rounded-full bg-surface-container dark:bg-primary-container flex items-center justify-center text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >more_horiz</span
+                      >
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="flex flex-col flex-grow divide-y divide-soft-border/50 dark:divide-outline-variant/20"
+                >
+                  <!-- Updated: Comms list links to chats.html -->
+                  <a
+                    class="p-md hover:bg-surface-container-highest/30 dark:hover:bg-primary-container transition-colors flex items-start gap-md group"
+                    href="chats.html"
+                  >
+                    <div class="relative shrink-0">
+                      <img
+                        class="w-12 h-12 rounded-full object-cover shadow-sm"
+                        data-alt="A tight crop of a person's eye with architecturally precise eyeliner, monochromatic styling, soft studio light."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZllZcmdyQ_99crxX-Ufn-3ZYIqKah6uF_9AYDlzC7npRIa2dNUI6HIQKAfuBq4IsYczh7bV7FoizvcDdFVoUczz1QvqkBEno3ST1GFIBMrnSe0eijey8u-qn0h3QhcbqnaHTovWJB7lDS4SfpblDi0s59iNLqKV8d8NkrO3z5iadUXFA7ktYsbvmN75L1hzhmJ_gS1v1ZK7NHJP64wgm481MmLbEsDcKs1jcmg6xeHtOpvsNmcrKF"
+                      />
+                      <div
+                        class="absolute bottom-0 right-0 w-3 h-3 bg-success-green border-2 border-surface-container-lowest dark:border-charcoal rounded-full"
+                      ></div>
+                    </div>
+                    <div class="min-w-0 flex-grow">
+                      <div class="flex justify-between items-baseline mb-xs">
+                        <h4
+                          class="font-label-md text-label-md text-on-surface dark:text-inverse-on-surface truncate pr-2"
+                        >
+                          Elena Rostova
+                        </h4>
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline shrink-0"
+                          >2m ago</span
+                        >
+                      </div>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface dark:text-inverse-on-surface truncate font-semibold"
+                      >
+                        I've adjusted the formula for today's session...
+                      </p>
+                    </div>
+                  </a>
+                  <a
+                    class="p-md hover:bg-surface-container-highest/30 dark:hover:bg-primary-container transition-colors flex items-start gap-md group opacity-70 hover:opacity-100"
+                    href="chats.html"
+                  >
+                    <div class="relative shrink-0">
+                      <div
+                        class="w-12 h-12 rounded-full bg-surface-container dark:bg-primary-container flex items-center justify-center text-on-surface-variant dark:text-outline font-headline-md uppercase shadow-sm"
+                      >
+                        MA
+                      </div>
+                    </div>
+                    <div class="min-w-0 flex-grow">
+                      <div class="flex justify-between items-baseline mb-xs">
+                        <h4
+                          class="font-label-md text-label-md text-on-surface dark:text-inverse-on-surface truncate pr-2"
+                        >
+                          Maison Noir Reception
+                        </h4>
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline shrink-0"
+                          >Yesterday</span
+                        >
+                      </div>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline truncate"
+                      >
+                        Your invoice #4920 is available for review.
+                      </p>
+                    </div>
+                  </a>
+                </div>
+                <div
+                  class="p-sm border-t border-soft-border dark:border-outline-variant/20 bg-surface-container-lowest dark:bg-charcoal text-center"
+                >
+                  <!-- Updated: Open Inbox links to chats.html -->
+                  <a
+                    class="font-label-sm text-label-sm text-secondary dark:text-sage hover:text-primary dark:hover:text-inverse-primary transition-colors uppercase tracking-widest inline-flex items-center gap-xs p-2"
+                    href="chats.html"
+                  >
+                    Open Inbox
+                    <span class="material-symbols-outlined text-[14px]"
+                      >open_in_new</span
+                    >
+                  </a>
+                </div>
+              </section>
+
+              <section
+                class="bg-primary dark:bg-inverse-surface text-on-primary rounded-2xl shadow-lg p-lg relative overflow-hidden group"
+              >
+                <div
+                  class="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-700"
+                >
+                  <div
+                    class="w-full h-full bg-cover bg-center mix-blend-overlay"
+                    data-alt="A high-contrast macro photograph of sleek, dark metallic architectural materials, creating abstract diagonal lines and deep shadows."
+                    style="
+                      background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuB507i_AzvN9OIXBpwfEqWaBvpavezHmq0-NO5gVifqKRfbTxf5T68mS2wTuXoZBmPeGHANfZvuWOjDBbL_QflapcQUyPR2l7j-T3mjYiTVkgF429JpFEUMLY-9Q7_iZSLre9l8etS6hDFWaf89g-HF8Ta4WoO8h7tbsvScPrabqutMaa69B23aSlHDATmcS1VpK8hadr2CELcQ0PdId43JEgZ32k_rR_eawCIhyIN-Y-H41MOxrA6e&quot;);
+                    "
+                  ></div>
+                </div>
+                <div
+                  class="absolute inset-0 bg-gradient-to-br from-primary dark:from-inverse-surface via-primary/90 dark:via-inverse-surface/90 to-transparent"
+                ></div>
+                <div
+                  class="relative z-10 flex flex-col items-start h-full justify-between min-h-[200px]"
+                >
+                  <div>
+                    <span
+                      class="inline-flex items-center justify-center bg-on-primary text-primary px-3 py-1 rounded-full font-label-sm text-[10px] uppercase tracking-widest mb-md shadow-sm"
+                      >Pro Membership</span
+                    >
+                    <h3
+                      class="font-headline-md text-headline-md text-on-primary mb-sm"
+                    >
+                      Elevate Your Standard
+                    </h3>
+                    <p
+                      class="font-body-sm text-body-sm text-inverse-primary max-w-[80%]"
+                    >
+                      Priority booking, waived breakage fees, and exclusive
+                      access.
+                    </p>
+                  </div>
+                  <button
+                    class="mt-lg border border-on-primary/30 hover:border-on-primary bg-transparent hover:bg-on-primary hover:text-primary text-on-primary font-label-md text-label-md px-lg py-sm rounded-full transition-all duration-300 backdrop-blur-sm w-full md:w-auto text-center"
+                  >
+                    Upgrade Now
+                  </button>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer
+      class="w-full bg-surface-container-lowest dark:bg-charcoal py-xl border-t border-soft-border dark:border-outline-variant/20"
+    >
+      <div class="max-w-[1440px] mx-auto px-margin-desktop">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-lg mb-lg">
+          <div class="col-span-1 md:col-span-1">
+            <img
+              alt="Glamora"
+              class="h-8 mb-base"
+              src="images/screen-removebg-preview.png"
+            />
+            <p
+              class="text-body-sm font-body-sm text-on-surface-variant dark:text-outline"
+            >
+              Elevating the professional beauty standard through architectural
+              precision and efficiency.
+            </p>
+          </div>
+        </div>
+        <div
+          class="flex justify-between items-center pt-md border-t border-soft-border dark:border-outline-variant/20 text-label-sm font-label-sm text-on-surface-variant dark:text-outline"
+        >
+          <span>© 2026 GLAMORA. All rights reserved.</span>
+          <div class="flex gap-md">
+            <a
+              class="hover:text-primary dark:hover:text-inverse-primary transition-colors cursor-pointer"
+              >Privacy</a
+            >
+            <a
+              class="hover:text-primary dark:hover:text-inverse-primary transition-colors cursor-pointer"
+              >Terms</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/customer-dashboard.js"></script>
+  </body>
+</html>

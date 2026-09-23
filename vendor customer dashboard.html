@@ -1,0 +1,1466 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Vendor - Customer Dashboard | GLAMORA</title>
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#949393",
+              "on-primary-fixed-variant": "#474747",
+              "surface-container-highest": "#e3e2df",
+              "inverse-on-surface": "#f2f1ee",
+              "surface-container": "#efeeeb",
+              "on-tertiary-fixed-variant": "#6b392c",
+              "surface-container-lowest": "#ffffff",
+              primary: "#171818",
+              "surface-bright": "#faf9f6",
+              surface: "#faf9f6",
+              "success-green": "#5A705F",
+              "on-primary-fixed": "#1b1c1c",
+              "on-surface": "#1b1c1a",
+              tertiary: "#310b03",
+              "on-secondary-fixed-variant": "#3c4a40",
+              "secondary-fixed-dim": "#bacbbd",
+              "surface-container-high": "#e9e8e5",
+              "primary-container": "#2c2c2c",
+              "on-error-container": "#93000a",
+              secondary: "#536257",
+              "tertiary-container": "#4b1f14",
+              "muted-terracotta": "#BC7C6C",
+              "surface-variant": "#e3e2df",
+              "on-tertiary": "#ffffff",
+              "surface-dim": "#dbdad7",
+              "on-secondary": "#ffffff",
+              "on-surface-variant": "#444748",
+              background: "#faf9f6",
+              "on-error": "#ffffff",
+              "error-container": "#ffdad6",
+              "secondary-container": "#d6e7d8",
+              "outline-variant": "#c4c7c7",
+              "on-secondary-fixed": "#111e16",
+              "parchment-white": "#F7F6F3",
+              outline: "#747878",
+              "on-primary": "#ffffff",
+              "surface-container-low": "#f4f3f0",
+              "soft-border": "#E2E2DE",
+              "primary-fixed": "#e4e2e1",
+              "on-background": "#1b1c1a",
+              "inverse-primary": "#c8c6c5",
+              error: "#ba1a1a",
+              "tertiary-fixed-dim": "#feb5a3",
+              "inverse-surface": "#2f312f",
+              sage: "#8A9A8D",
+              "on-tertiary-container": "#c48373",
+              "warning-amber": "#C49D6A",
+              "secondary-fixed": "#d6e7d8",
+              "on-tertiary-fixed": "#360f06",
+              charcoal: "#2C2C2C",
+              "error-red": "#A64D4D",
+              "tertiary-fixed": "#ffdad2",
+              "surface-tint": "#5f5e5e",
+              "on-secondary-container": "#59685c",
+              "primary-fixed-dim": "#c8c6c5",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              lg: "48px",
+              "margin-desktop": "64px",
+              "margin-mobile": "16px",
+              sm: "12px",
+              xs: "4px",
+              gutter: "24px",
+              xl: "80px",
+              md: "24px",
+              base: "8px",
+            },
+            fontFamily: {
+              "headline-xl-mobile": ["Hanken Grotesk"],
+              "headline-lg-mobile": ["Hanken Grotesk"],
+              "label-md": ["Hanken Grotesk"],
+              "headline-md": ["Hanken Grotesk"],
+              "headline-lg": ["Hanken Grotesk"],
+              "label-sm": ["Hanken Grotesk"],
+              "headline-xl": ["Hanken Grotesk"],
+              "body-lg": ["Hanken Grotesk"],
+              "body-sm": ["Hanken Grotesk"],
+              "body-md": ["Hanken Grotesk"],
+            },
+            fontSize: {
+              "headline-xl-mobile": [
+                "36px",
+                { lineHeight: "1.1", fontWeight: "600" },
+              ],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "label-md": [
+                "14px",
+                { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "500" }],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-sm": [
+                "12px",
+                { lineHeight: "1", letterSpacing: "0.03em", fontWeight: "600" },
+              ],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-background font-body-md text-on-surface flex">
+    <!-- Mobile Header -->
+    <div
+      class="lg:hidden fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl border-b border-soft-border px-margin-mobile py-sm flex items-center justify-between"
+    >
+      <div class="flex items-center gap-base">
+        <img
+          alt="Glamora Logo"
+          class="h-7 w-auto object-contain"
+          src="images/glamora_background-removebg-preview.png"
+        />
+        <span class="font-headline-md text-[18px] text-primary tracking-tight"
+          >GLAMORA</span
+        >
+      </div>
+
+      <div class="flex items-center gap-sm">
+        <div
+          class="bg-surface-container p-1 rounded-full flex text-label-sm border border-soft-border -ml-3 scale-105"
+        >
+          <button
+            type="button"
+            onclick="switchRole('vendor')"
+            class="px-2.5 py-1 rounded-full text-[11px] text-on-surface-variant font-medium hover:text-primary transition-all"
+          >
+            Vendor
+          </button>
+          <button
+            type="button"
+            onclick="switchRole('customer')"
+            class="px-2.5 py-1 rounded-full text-[11px] bg-primary text-on-primary font-semibold shadow-sm transition-all"
+          >
+            Customer
+          </button>
+        </div>
+        <button
+          class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors"
+          onclick="toggleMobileSidebar()"
+        >
+          <span class="material-symbols-outlined text-[20px]">menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Sidebar Drawer -->
+    <div class="hidden fixed inset-0 z-50 lg:hidden" id="mobile-sidebar">
+      <div
+        class="fixed inset-0 bg-primary/40 backdrop-blur-sm"
+        onclick="toggleMobileSidebar()"
+      ></div>
+      <aside
+        class="relative w-72 max-w-[80vw] h-full bg-surface border-r border-soft-border p-md flex flex-col justify-between shadow-lg z-10"
+      >
+        <div class="flex flex-col gap-md">
+          <div
+            class="flex items-center justify-between pb-sm border-b border-soft-border"
+          >
+            <div class="flex items-center gap-base">
+              <img
+                alt="Glamora Logo"
+                class="h-7 w-auto object-contain"
+                src="images/glamora_background-removebg-preview.png"
+              />
+              <span
+                class="font-headline-md text-[18px] text-primary tracking-tight"
+                >GLAMORA</span
+              >
+            </div>
+            <button
+              class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant"
+              onclick="toggleMobileSidebar()"
+            >
+              <span class="material-symbols-outlined text-[18px]">close</span>
+            </button>
+          </div>
+
+          <nav class="flex flex-col gap-xs">
+            <a
+              class="flex items-center gap-sm px-sm py-2 rounded-xl bg-primary text-on-primary font-label-md"
+              href="vendor-customer-dashboard.html"
+            >
+              <span class="material-symbols-outlined text-[20px]">home</span>
+              <span>Dashboard</span>
+            </a>
+            <a
+              class="flex items-center gap-sm px-sm py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md"
+              href="mybookings.html"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >calendar_month</span
+              >
+              <span>Services &amp; Bookings</span>
+            </a>
+            <a
+              class="flex items-center gap-sm px-sm py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md"
+              href="marketplace.html"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >storefront</span
+              >
+              <span>Marketplace</span>
+            </a>
+            <a
+              class="flex items-center gap-sm px-sm py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md"
+              href="favorites.html"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >favorite</span
+              >
+              <span>Favorites</span>
+            </a>
+            <a
+              class="flex items-center gap-sm px-sm py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md"
+              href="chats.html"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >chat_bubble</span
+              >
+              <span>Messages</span>
+            </a>
+            <a
+              class="flex items-center gap-sm px-sm py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md"
+              href="cart.html"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >shopping_bag</span
+              >
+              <span>My Orders</span>
+            </a>
+          </nav>
+        </div>
+
+        <div class="flex flex-col gap-sm pt-sm border-t border-soft-border">
+          <div
+            class="flex items-center gap-sm p-sm rounded-xl bg-surface-container-low"
+          >
+            <img
+              alt="Alex Vanguard"
+              class="w-9 h-9 rounded-full object-cover border border-soft-border"
+              src="https://lh3.googleusercontent.com/aida/AEtjO1Us-PUIECGe3nMdhYmSQjarVuv72odJ3BtFqVaC7R-OY1zC7Fcsp0dfBHlu79STPk-8TrHk7B5Ye_Fr8eWE9c2M7jLeAT6rSwA3atgdUEnSGUPKaFQhrnQ4sMJirAxTMsWNwBcdQ-nfPr-DRBnB1Hq7xbpJpbEXzHkAnhA3INNFRGx2_4oc_jy_q_qAiLNsKLHd5UNYaMscP_nk9GWG5Njf0ircuGfjMS4xkHIKz-W4mXZT1F7z5y3e-A"
+            />
+            <div class="min-w-0 flex-1">
+              <div class="font-label-md text-on-surface text-sm truncate">
+                Alex Vanguard
+              </div>
+              <div
+                class="font-body-sm text-[11px] text-on-surface-variant truncate"
+              >
+                Customer Account
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Desktop Unified Left Sidebar Navigation -->
+    <aside
+      class="hidden lg:flex w-72 shrink-0 h-screen sticky top-0 bg-surface border-r border-soft-border flex-col justify-between p-md z-40"
+    >
+      <div class="flex flex-col gap-md">
+        <div class="flex items-center gap-base px-xs pt-xs">
+          <img
+            alt="Glamora Logo"
+            class="h-8 w-auto object-contain"
+            src="images/glamora_background-removebg-preview.png"
+          />
+          <span
+            class="font-headline-md text-headline-md text-primary tracking-tight"
+            >GLAMORA</span
+          >
+        </div>
+
+        <div
+          class="bg-surface-container p-1 rounded-full flex items-center border border-soft-border"
+        >
+          <button
+            type="button"
+            onclick="switchRole('vendor')"
+            class="flex-1 py-1 px-sm rounded-full font-label-sm text-[12px] text-on-surface-variant hover:text-primary transition-all text-center"
+          >
+            Vendor
+          </button>
+          <button
+            type="button"
+            onclick="switchRole('customer')"
+            class="flex-1 py-1 px-sm rounded-full font-label-sm text-[12px] bg-primary text-on-primary shadow-sm transition-all text-center font-semibold"
+          >
+            Customer
+          </button>
+        </div>
+
+        <nav class="flex flex-col gap-1">
+          <a
+            class="flex items-center gap-sm px-sm py-2.5 rounded-xl bg-primary text-on-primary font-label-md text-label-md transition-all shadow-sm"
+            href="vendor-customer-dashboard.html"
+          >
+            <span class="material-symbols-outlined text-[20px]">home</span>
+            <span>Dashboard</span>
+          </a>
+          <a
+            class="flex items-center gap-sm px-sm py-2.5 rounded-xl text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors font-label-md text-label-md"
+            href="mybookings.html"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >calendar_month</span
+            >
+            <span>Services &amp; Bookings</span>
+          </a>
+          <a
+            class="flex items-center gap-sm px-sm py-2.5 rounded-xl text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors font-label-md text-label-md"
+            href="marketplace.html"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >storefront</span
+            >
+            <span>Marketplace</span>
+          </a>
+          <a
+            class="flex items-center gap-sm px-sm py-2.5 rounded-xl text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors font-label-md text-label-md"
+            href="favorites.html"
+          >
+            <span class="material-symbols-outlined text-[20px]">favorite</span>
+            <span>Favorites</span>
+          </a>
+          <a
+            class="flex items-center justify-between px-sm py-2.5 rounded-xl text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors font-label-md text-label-md"
+            href="chats.html"
+          >
+            <div class="flex items-center gap-sm">
+              <span class="material-symbols-outlined text-[20px]"
+                >chat_bubble</span
+              >
+              <span>Messages</span>
+            </div>
+            <span
+              class="w-2 h-2 rounded-full bg-secondary animate-pulse"
+            ></span>
+          </a>
+          <a
+            class="flex items-center justify-between px-sm py-2.5 rounded-xl text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors font-label-md text-label-md"
+            href="myorders.html"
+          >
+            <div class="flex items-center gap-sm">
+              <span class="material-symbols-outlined text-[20px]"
+                >shopping_bag</span
+              >
+              <span>My Orders</span>
+            </div>
+            <span
+              class="bg-surface-container text-on-surface font-label-sm text-[10px] px-2 py-0.5 rounded-full"
+              >2</span
+            >
+          </a>
+        </nav>
+      </div>
+
+      <div class="flex flex-col gap-sm pt-md border-t border-soft-border">
+        <a
+          class="flex items-center gap-sm px-sm py-2 rounded-xl text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors font-label-md text-label-md"
+          href="settings.html"
+        >
+          <span class="material-symbols-outlined text-[20px]">settings</span>
+          <span>Settings</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main
+      class="w-full bg-background flex-1 flex flex-col min-h-screen min-w-0"
+    >
+      <div class="flex flex-col w-full relative flex-grow">
+        <div
+          class="fixed top-0 left-0 w-full h-full bg-surface-container-highest opacity-30 pointer-events-none mix-blend-multiply"
+        ></div>
+        <div
+          class="fixed top-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-secondary opacity-10 blur-3xl pointer-events-none mix-blend-multiply"
+        ></div>
+        <div
+          class="fixed bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-warning-amber opacity-10 blur-3xl pointer-events-none mix-blend-multiply"
+        ></div>
+
+        <div
+          class="max-w-[1440px] mx-auto w-full px-margin-mobile md:px-margin-desktop py-lg xl:py-xl z-10 pt-16 md:pt-md"
+        >
+          <!-- Header Banner -->
+          <div
+            class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-md mb-xl"
+          >
+            <div class="max-w-2xl">
+              <p
+                class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-sm"
+              >
+                Dashboard Overview
+              </p>
+              <h1
+                class="font-headline-xl text-headline-xl text-on-surface tracking-tighter"
+              >
+                Welcome back,
+                <span class="text-secondary italic font-light">Alex</span>.
+              </h1>
+              <p
+                class="font-body-lg text-body-lg text-on-surface-variant mt-sm max-w-xl leading-relaxed"
+              >
+                Your upcoming appointments, saved professionals, and recent
+                communications, organized for absolute efficiency.
+              </p>
+            </div>
+            <a
+              href="search-results.html"
+              class="bg-primary hover:bg-surface-tint transition-all duration-300 text-on-primary font-label-md text-label-md px-lg py-sm rounded-full flex items-center gap-base group shrink-0 shadow-md"
+            >
+              <span
+                class="material-symbols-outlined group-hover:-translate-y-0.5 transition-transform"
+                >search</span
+              >
+              Discover New Services
+            </a>
+          </div>
+
+          <div class="flex flex-col gap-xl w-full">
+            <!-- Upcoming Appointments Section -->
+            <section class="w-full relative z-20">
+              <div class="flex items-center justify-between mb-md">
+                <div class="flex items-center gap-sm">
+                  <span
+                    class="material-symbols-outlined text-secondary"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >calendar_today</span
+                  >
+                  <h2 class="font-headline-md text-headline-md text-on-surface">
+                    Upcoming Appointments
+                  </h2>
+                </div>
+                <a
+                  class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-xs"
+                  href="mybookings.html"
+                >
+                  View all
+                  <span class="material-symbols-outlined text-sm"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+                <!-- Appointment Card 1 -->
+                <div
+                  class="bg-surface-container-lowest rounded-xl p-md flex flex-col justify-between gap-md relative border border-soft-border shadow-sm transition-all duration-300 hover:shadow-md z-20"
+                >
+                  <div
+                    class="absolute left-0 top-0 bottom-0 w-1 bg-secondary rounded-l-xl"
+                  ></div>
+
+                  <div class="flex items-start justify-between gap-md">
+                    <div class="flex items-center gap-md min-w-0">
+                      <div
+                        class="w-16 h-16 rounded-full overflow-hidden shrink-0 shadow-sm relative group"
+                      >
+                        <img
+                          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8yheYXi9_p0-JaT0F24jAqHKhV0GXQSpNFabdXZq0oL3k_jpIsiV_auZXSiturcA0a6RBI418OSCtW-lptlOS2c6N7T2QVT3MGqT61VE7LChNhsZB32d_vFOEeN_-B3Ndvr3DgGFNVQp-R5Sy3lNi539EOP36OFyFg7kCu5__-gRwASjypOJ4Q4iYE4Y2_G4Bd76oHOevh8FPaJZD8l0upGS0wfr1gpKwoOPhFWgg0GuoOGLEDyNQ"
+                          alt="Elena Rodriguez"
+                        />
+                      </div>
+                      <div class="min-w-0">
+                        <span
+                          class="inline-flex items-center bg-sage/20 text-success-green px-2 py-0.5 rounded-full font-label-sm text-[10px] uppercase tracking-wider mb-xs"
+                          >Confirmed</span
+                        >
+                        <h3
+                          class="font-headline-md text-[18px] text-on-surface truncate"
+                        >
+                          Architectural Brow Sculpting
+                        </h3>
+                        <p
+                          class="font-body-sm text-body-sm text-on-surface-variant truncate mt-xs"
+                        >
+                          with Elena Rodriguez
+                        </p>
+                      </div>
+                    </div>
+                    <div class="flex flex-col items-end shrink-0">
+                      <span
+                        class="font-label-sm text-label-sm text-secondary uppercase tracking-wider mb-xs"
+                        >Today</span
+                      >
+                      <span
+                        class="font-headline-md text-headline-md text-on-surface"
+                        >2:00 PM</span
+                      >
+                      <span
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                        >45 mins</span
+                      >
+                    </div>
+                  </div>
+
+                  <div
+                    class="flex items-center justify-between pt-sm border-t border-soft-border/50 mt-sm"
+                  >
+                    <div class="flex items-center gap-xs">
+                      <a
+                        href="chats.html"
+                        aria-label="Message Provider"
+                        class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors tooltip"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >chat_bubble_outline</span
+                        >
+                      </a>
+                      <a
+                        href="bookings.html"
+                        aria-label="Rebook"
+                        class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors tooltip"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >edit_calendar</span
+                        >
+                      </a>
+                    </div>
+
+                    <!-- Manage Button Container -->
+                    <div class="relative z-30">
+                      <button
+                        onclick="toggleManageDropdown('dropdown-1')"
+                        class="bg-primary text-on-primary font-label-md text-label-md px-md py-sm rounded-full hover:bg-surface-tint transition-colors shadow-sm whitespace-nowrap flex items-center gap-xs"
+                      >
+                        <span>Manage</span>
+                      </button>
+
+                      <!-- Dropdown Menu -->
+                      <div
+                        id="dropdown-1"
+                        class="hidden absolute right-0 mt-2 w-52 bg-surface-container-lowest border border-soft-border rounded-xl shadow-2xl z-50 py-2 divide-y divide-soft-border/50"
+                      >
+                        <div class="py-1">
+                          <button
+                            onclick="openModal('bookingModal')"
+                            class="w-full text-left px-md py-2 text-body-sm text-on-surface hover:bg-surface-container-low flex items-center gap-sm"
+                          >
+                            <span class="material-symbols-outlined text-[18px]"
+                              >visibility</span
+                            >
+                            View Details
+                          </button>
+                          <button
+                            onclick="openModal('reportConfirmModal')"
+                            class="w-full text-left px-md py-2 text-body-sm text-on-surface hover:bg-surface-container-low flex items-center gap-sm"
+                          >
+                            <span class="material-symbols-outlined text-[18px]"
+                              >flag</span
+                            >
+                            Report
+                          </button>
+                          <button
+                            onclick="openModal('blockConfirmModal')"
+                            class="w-full text-left px-md py-2 text-body-sm text-on-surface hover:bg-surface-container-low flex items-center gap-sm"
+                          >
+                            <span class="material-symbols-outlined text-[18px]"
+                              >block</span
+                            >
+                            Block
+                          </button>
+                        </div>
+                        <div class="py-1">
+                          <div
+                            class="px-md py-2 opacity-50 cursor-not-allowed group relative"
+                            title="Cannot cancel within 30 mins of appointment"
+                          >
+                            <div
+                              class="flex items-center gap-sm text-error-red"
+                            >
+                              <span
+                                class="material-symbols-outlined text-[18px]"
+                                >cancel</span
+                              >
+                              <span class="font-medium">Cancel</span>
+                            </div>
+                            <p
+                              class="text-[10px] text-on-surface-variant mt-0.5 leading-tight"
+                            >
+                              Cannot cancel within 30 mins of appointment
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Appointment Card 2 -->
+                <div
+                  class="bg-surface-container-lowest rounded-xl p-md flex flex-col justify-between gap-md relative border border-soft-border shadow-sm transition-all duration-300 hover:shadow-md z-10"
+                >
+                  <div
+                    class="absolute left-0 top-0 bottom-0 w-1 bg-muted-terracotta rounded-l-xl"
+                  ></div>
+
+                  <div class="flex items-start justify-between gap-md">
+                    <div class="flex items-center gap-md min-w-0">
+                      <div
+                        class="w-16 h-16 rounded-full overflow-hidden shrink-0 shadow-sm relative group"
+                      >
+                        <img
+                          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWkJVSiEIDpuDaWHgk8cSpQL845xbcaZB47ZEUxhdT2fTzZxbbWPtHHTPyk23RcMpDLeLQNTmftk_DUCC-Tpoe1LkkzxRj-h3u978IC89_RyoypAJZJvOwfnSLzqKjmr4jywwnOYQgvJE6dcuqOMT2vNfLX9sTEGfczIhagJ7yiz1jowKtLuOMMy-AJLK3eSOu489F8LXe6uAYW7Ddr1emxBqOCnmwc8nH7Bd3n3cwCQXagrn9TWPc"
+                          alt="Dr. Aris Thorne"
+                        />
+                      </div>
+                      <div class="min-w-0">
+                        <span
+                          class="inline-flex items-center bg-error-container text-on-error-container px-2 py-0.5 rounded-full font-label-sm text-[10px] uppercase tracking-wider mb-xs"
+                          >Pending Action</span
+                        >
+                        <h3
+                          class="font-headline-md text-[18px] text-on-surface truncate"
+                        >
+                          Custom Formulation Facial
+                        </h3>
+                        <p
+                          class="font-body-sm text-body-sm text-on-surface-variant truncate mt-xs"
+                        >
+                          with Dr. Aris Thorne
+                        </p>
+                      </div>
+                    </div>
+                    <div class="flex flex-col items-end shrink-0">
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-xs"
+                        >Oct 24</span
+                      >
+                      <span
+                        class="font-headline-md text-headline-md text-on-surface"
+                        >10:30 AM</span
+                      >
+                      <span
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                        >90 mins</span
+                      >
+                    </div>
+                  </div>
+
+                  <div
+                    class="flex items-center justify-between pt-sm border-t border-soft-border/50 mt-sm"
+                  >
+                    <div class="flex items-center gap-xs">
+                      <a
+                        href="chats.html"
+                        aria-label="Message Provider"
+                        class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors tooltip"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >chat_bubble_outline</span
+                        >
+                      </a>
+                      <a
+                        href="bookings.html"
+                        aria-label="Rebook"
+                        class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors tooltip"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >edit_calendar</span
+                        >
+                      </a>
+                    </div>
+
+                    <!-- Manage and Pay Deposit Buttons Container -->
+                    <div class="flex items-center gap-xs relative z-30">
+                      <button
+                        onclick="openModal('depositModal')"
+                        class="bg-error text-on-error font-label-md text-label-md px-md py-sm rounded-full hover:bg-error-red transition-colors shadow-sm whitespace-nowrap animate-pulse"
+                      >
+                        <span>Pay Deposit</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Curated Providers Section -->
+            <section class="w-full relative z-10">
+              <div class="flex items-center justify-between mb-md">
+                <div class="flex items-center gap-sm">
+                  <span
+                    class="material-symbols-outlined text-secondary"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >favorite</span
+                  >
+                  <h2 class="font-headline-md text-headline-md text-on-surface">
+                    Curated Providers
+                  </h2>
+                </div>
+                <a
+                  class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-xs"
+                  href="favorites.html"
+                >
+                  Browse all
+                  <span class="material-symbols-outlined text-sm"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+                <!-- Provider Card 1 -> Links to beautician-details.html -->
+                <a
+                  href="beautician-details.html"
+                  class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group cursor-pointer relative border border-soft-border block"
+                >
+                  <div
+                    class="absolute top-sm right-sm z-10 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-error"
+                  >
+                    <span
+                      class="material-symbols-outlined text-[18px]"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >favorite</span
+                    >
+                  </div>
+                  <div class="h-44 w-full relative overflow-hidden">
+                    <img
+                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVNNDdjxu5kLAvT-H_JFPrFxWPCgB4TZJhkybxQVOsz7f-i6eXBl9M5G6_HNZgSMmvYbSvohE20vymkJUdc6X1Ww_fhizoDG1IUWSmWcPBwW5MXmdac0Q4AOTnSX7i5PiZIWasCiaWr27IHUmeWb0r9ACFgxsPnmp72WKfRSmn1437g9anxRlSST0oeQ3yx1kSM3IHxR4yJU7mMLsrE1pxJ0wM025FoPiZ7BB9eQRHTEwu99xRfBBK"
+                      alt="Maison Noir"
+                    />
+                    <div
+                      class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"
+                    ></div>
+                    <div class="absolute bottom-md left-md right-md">
+                      <h3
+                        class="font-headline-md text-headline-md text-on-primary"
+                      >
+                        Maison Noir
+                      </h3>
+                      <p
+                        class="font-label-sm text-label-sm text-inverse-primary uppercase tracking-wider"
+                      >
+                        Structural Hair
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="p-md bg-surface-container-lowest flex justify-between items-center"
+                  >
+                    <div
+                      class="flex items-center gap-xs text-on-surface-variant"
+                    >
+                      <span
+                        class="material-symbols-outlined text-[16px] text-warning-amber"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >star</span
+                      >
+                      <span class="font-label-md text-label-md">4.9</span>
+                      <span class="font-body-sm text-body-sm ml-xs">(128)</span>
+                    </div>
+                    <span
+                      class="font-label-sm text-label-sm text-secondary hover:text-primary transition-colors uppercase tracking-wider flex items-center gap-xs"
+                    >
+                      Book
+                      <span class="material-symbols-outlined text-[14px]"
+                        >arrow_outward</span
+                      >
+                    </span>
+                  </div>
+                </a>
+
+                <!-- Provider Card 2 -> Links to beautician-details.html -->
+                <a
+                  href="beautician-details.html"
+                  class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group cursor-pointer relative border border-soft-border block"
+                >
+                  <div
+                    class="absolute top-sm right-sm z-10 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-error"
+                  >
+                    <span
+                      class="material-symbols-outlined text-[18px]"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >favorite</span
+                    >
+                  </div>
+                  <div class="h-44 w-full relative overflow-hidden">
+                    <img
+                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc8RGCE9YjTFWtGYSwQEwrEtvZgh5BGE2kWm7wcDurSiEYsYAjVvtYfOP50SRwpo3HRseo0mL3105ybbsf8cXsM_HufJawR8HbKzaGtVQz097t2LDrC8nrczZoYoti49MGijpIXtEuQTYoMtyH5y91FUFfCTeq2fT9Aoi8HLvZf5gED8-FwJjnLqtiw2KynDpcq6cg63-nf4PvlPf16NfTbK-nB1Pc4lHfZFtNRWwALK9huQ4_GOKv"
+                      alt="Derm Aesthetics"
+                    />
+                    <div
+                      class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"
+                    ></div>
+                    <div class="absolute bottom-md left-md right-md">
+                      <h3
+                        class="font-headline-md text-headline-md text-on-primary"
+                      >
+                        Derm Aesthetics
+                      </h3>
+                      <p
+                        class="font-label-sm text-label-sm text-inverse-primary uppercase tracking-wider"
+                      >
+                        Clinical Skin
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="p-md bg-surface-container-lowest flex justify-between items-center"
+                  >
+                    <div
+                      class="flex items-center gap-xs text-on-surface-variant"
+                    >
+                      <span
+                        class="material-symbols-outlined text-[16px] text-warning-amber"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >star</span
+                      >
+                      <span class="font-label-md text-label-md">5.0</span>
+                      <span class="font-body-sm text-body-sm ml-xs">(84)</span>
+                    </div>
+                    <span
+                      class="font-label-sm text-label-sm text-secondary hover:text-primary transition-colors uppercase tracking-wider flex items-center gap-xs"
+                    >
+                      Book
+                      <span class="material-symbols-outlined text-[14px]"
+                        >arrow_outward</span
+                      >
+                    </span>
+                  </div>
+                </a>
+
+                <!-- Find More Box -->
+                <a
+                  href="search-results.html"
+                  class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group cursor-pointer relative border border-dashed border-outline-variant flex items-center justify-center flex-col p-lg hover:border-primary min-h-[220px]"
+                >
+                  <div
+                    class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-primary group-hover:text-on-primary transition-colors mb-md"
+                  >
+                    <span class="material-symbols-outlined text-[24px]"
+                      >add</span
+                    >
+                  </div>
+                  <h3
+                    class="font-headline-md text-headline-md text-on-surface text-center mb-xs"
+                  >
+                    Find More
+                  </h3>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant text-center max-w-[200px]"
+                  >
+                    Explore specialists matching your aesthetic profile.
+                  </p>
+                </a>
+              </div>
+            </section>
+
+            <!-- Bottom Combined Section -->
+            <div
+              class="grid grid-cols-1 lg:grid-cols-12 gap-md w-full relative z-10"
+            >
+              <!-- Recent Communications -->
+              <section
+                class="lg:col-span-7 bg-surface-container-lowest rounded-2xl shadow-sm border border-soft-border overflow-hidden flex flex-col"
+              >
+                <div
+                  class="p-md border-b border-soft-border bg-surface-container-lowest/50 relative overflow-hidden"
+                >
+                  <div class="flex items-center justify-between relative z-10">
+                    <h2
+                      class="font-headline-md text-headline-md text-on-surface flex items-center gap-xs"
+                    >
+                      Recent Comms
+                      <span
+                        class="w-2 h-2 rounded-full bg-secondary animate-pulse ml-xs"
+                      ></span>
+                    </h2>
+                    <a
+                      class="font-label-sm text-label-sm text-secondary hover:text-primary transition-colors uppercase tracking-widest inline-flex items-center gap-xs"
+                      href="chats.html"
+                    >
+                      Open Inbox
+                      <span class="material-symbols-outlined text-[14px]"
+                        >open_in_new</span
+                      >
+                    </a>
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col flex-grow divide-y divide-soft-border/50"
+                >
+                  <a
+                    class="p-md hover:bg-surface-container-highest/30 transition-colors flex items-start gap-md group"
+                    href="chats.html"
+                  >
+                    <div class="relative shrink-0">
+                      <img
+                        class="w-12 h-12 rounded-full object-cover shadow-sm"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZllZcmdyQ_99crxX-Ufn-3ZYIqKah6uF_9AYDlzC7npRIa2dNUI6HIQKAfuBq4IsYczh7bV7FoizvcDdFVoUczz1QvqkBEno3ST1GFIBMrnSe0eijey8u-qn0h3QhcbqnaHTovWJB7lDS4SfpblDi0s59iNLqKV8d8NkrO3z5iadUXFA7ktYsbvmN75L1hzhmJ_gS1v1ZK7NHJP64wgm481MmLbEsDcKs1jcmg6xeHtOpvsNmcrKF"
+                        alt="Elena Rodriguez"
+                      />
+                      <div
+                        class="absolute bottom-0 right-0 w-3 h-3 bg-success-green border-2 border-surface-container-lowest rounded-full"
+                      ></div>
+                    </div>
+                    <div class="min-w-0 flex-grow">
+                      <div class="flex justify-between items-baseline mb-xs">
+                        <h4
+                          class="font-label-md text-label-md text-on-surface truncate pr-2"
+                        >
+                          Elena Rodriguez
+                        </h4>
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant shrink-0"
+                          >2m ago</span
+                        >
+                      </div>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface truncate font-semibold"
+                      >
+                        I've adjusted the formula for today's session based
+                        on...
+                      </p>
+                    </div>
+                  </a>
+
+                  <a
+                    class="p-md hover:bg-surface-container-highest/30 transition-colors flex items-start gap-md group opacity-80 hover:opacity-100"
+                    href="chats.html"
+                  >
+                    <div class="relative shrink-0">
+                      <div
+                        class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant font-headline-md uppercase shadow-sm"
+                      >
+                        MA
+                      </div>
+                    </div>
+                    <div class="min-w-0 flex-grow">
+                      <div class="flex justify-between items-baseline mb-xs">
+                        <h4
+                          class="font-label-md text-label-md text-on-surface truncate pr-2"
+                        >
+                          Maison Noir Reception
+                        </h4>
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant shrink-0"
+                          >Yesterday</span
+                        >
+                      </div>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant truncate"
+                      >
+                        Your invoice #4920 is available for review.
+                      </p>
+                    </div>
+                  </a>
+
+                  <a
+                    class="p-md hover:bg-surface-container-highest/30 transition-colors flex items-start gap-md group opacity-80 hover:opacity-100"
+                    href="chats.html"
+                  >
+                    <div class="relative shrink-0">
+                      <img
+                        class="w-12 h-12 rounded-full object-cover shadow-sm"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzmn6tF-mQS5dWwfINLwUkR-eNUR3BMinWWlUjWw75cOaAr9XsTfFci9kAoVPJ74gIY5JwWs4UNGAJwJVmWDTUNfC2SM8shs5L28mytVvcXJWvk0yomAtLxRitZNsf4Sr8EPh-cYfWRuI5ongTvTAX_s1FCSJW9qe0eJlbE0F-rIgpB-UxLCvYhLsEF2ZcURcL31xoAnIKVtpuLxFfAZLQJeFs1F8vzMqU0No9QIPgNrRU2OGc8F3c"
+                        alt="Dr. Aris Thorne"
+                      />
+                    </div>
+                    <div class="min-w-0 flex-grow">
+                      <div class="flex justify-between items-baseline mb-xs">
+                        <h4
+                          class="font-label-md text-label-md text-on-surface truncate pr-2"
+                        >
+                          Dr. Aris Thorne
+                        </h4>
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant shrink-0"
+                          >Oct 12</span
+                        >
+                      </div>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant truncate flex items-center gap-xs"
+                      >
+                        <span class="material-symbols-outlined text-[14px]"
+                          >attachment</span
+                        >
+                        Post-care instructions.pdf
+                      </p>
+                    </div>
+                  </a>
+                </div>
+              </section>
+
+              <!-- Pro Membership Banner -->
+              <section
+                class="lg:col-span-5 bg-primary text-on-primary rounded-2xl shadow-lg p-lg relative overflow-hidden group flex flex-col justify-between min-h-[260px]"
+              >
+                <div
+                  class="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none"
+                >
+                  <div
+                    class="w-full h-full bg-cover bg-center mix-blend-overlay"
+                    style="
+                      background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuB507i_AzvN9OIXBpwfEqWaBvpavezHmq0-NO5gVifqKRfbTxf5T68mS2wTuXoZBmPeGHANfZvuWOjDBbL_QflapcQUyPR2l7j-T3mjYiTVkgF429JpFEUMLY-9Q7_iZSLre9l8etS6hDFWaf89g-HF8Ta4WoO8h7tbsvScPrabqutMaa69B23aSlHDATmcS1VpK8hadr2CELcQ0PdId43JEgZ32k_rR_eawCIhyIN-Y-H41MOxrA6e&quot;);
+                    "
+                  ></div>
+                </div>
+                <div
+                  class="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-transparent pointer-events-none"
+                ></div>
+                <div class="relative z-10 flex flex-col items-start">
+                  <span
+                    class="inline-flex items-center justify-center bg-on-primary text-primary px-3 py-1 rounded-full font-label-sm text-[10px] uppercase tracking-widest mb-md shadow-sm font-semibold"
+                    >Pro Membership</span
+                  >
+                  <h3
+                    class="font-headline-md text-headline-md text-on-primary mb-sm"
+                  >
+                    Elevate Your Standard
+                  </h3>
+                  <p
+                    class="font-body-sm text-body-sm text-inverse-primary max-w-sm"
+                  >
+                    Priority booking, waived breakage fees, and exclusive access
+                    to top-tier specialists.
+                  </p>
+                </div>
+                <div class="relative z-10 pt-md">
+                  <button
+                    class="border border-on-primary/30 hover:border-on-primary bg-transparent hover:bg-on-primary hover:text-primary text-on-primary font-label-md text-label-md px-lg py-sm rounded-full transition-all duration-300 backdrop-blur-sm w-full md:w-auto text-center"
+                  >
+                    Upgrade Now
+                  </button>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer
+        class="w-full bg-surface-container-lowest py-lg border-t border-soft-border mt-auto"
+      >
+        <div
+          class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop"
+        >
+          <div
+            class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md pb-md"
+          >
+            <div class="flex items-center gap-base">
+              <img
+                alt="Glamora"
+                class="h-7 w-auto object-contain"
+                src="images/screen-removebg-preview.png"
+              />
+              <span
+                class="font-headline-md text-[16px] text-primary tracking-tight"
+                >GLAMORA</span
+              >
+              <span
+                class="text-body-sm text-on-surface-variant hidden md:inline ml-sm"
+                >Elevating the professional beauty standard through
+                architectural precision.</span
+              >
+            </div>
+            <div
+              class="flex items-center gap-md font-label-sm text-label-sm text-on-surface-variant"
+            >
+              <a class="hover:text-primary transition-colors" href="#"
+                >Privacy</a
+              >
+              <a class="hover:text-primary transition-colors" href="#">Terms</a>
+              <a class="hover:text-primary transition-colors" href="#"
+                >Support</a
+              >
+            </div>
+          </div>
+          <div
+            class="flex justify-between items-center pt-md border-t border-soft-border text-label-sm text-on-surface-variant font-label-sm"
+          >
+            <span class="text-[12px]"
+              >© 2026 GLAMORA. All rights reserved.</span
+            >
+            <span class="text-[12px] hidden md:inline"
+              >Designed for seamless client &amp; professional workflows.</span
+            >
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <!-- MODALS CONTAINER -->
+
+    <!-- Pay Deposit Modal -->
+    <div
+      id="depositModal"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-md"
+    >
+      <div
+        class="bg-surface-container-lowest border border-soft-border rounded-2xl max-w-md w-full p-lg shadow-xl"
+      >
+        <div
+          class="flex justify-between items-center border-b border-soft-border pb-md mb-md"
+        >
+          <div>
+            <span
+              class="text-label-sm font-label-sm text-warning-amber bg-warning-amber/10 px-2 py-0.5 rounded-full"
+              >Deposit Required</span
+            >
+            <h3 class="text-headline-md font-headline-md text-on-surface mt-xs">
+              Custom Formulation Facial
+            </h3>
+          </div>
+          <button
+            onclick="closeModal('depositModal')"
+            class="text-on-surface-variant hover:text-on-surface"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="space-y-sm text-body-sm font-body-sm text-on-surface mb-lg">
+          <div
+            class="flex justify-between py-xs border-b border-soft-border/50"
+          >
+            <span class="text-on-surface-variant">Specialist:</span>
+            <span class="font-medium">Dr. Aris Thorne</span>
+          </div>
+          <div
+            class="flex justify-between py-xs border-b border-soft-border/50"
+          >
+            <span class="text-on-surface-variant">Date &amp; Time:</span>
+            <span class="font-medium">Oct 24, 2026 at 10:30 AM</span>
+          </div>
+          <div
+            class="flex justify-between py-xs border-b border-soft-border/50"
+          >
+            <span class="text-on-surface-variant">Total Service Fee:</span>
+            <span class="font-medium">₦75,000</span>
+          </div>
+          <div
+            class="flex justify-between py-xs border-b border-soft-border/50"
+          >
+            <span class="text-on-surface-variant">Required Deposit (30%):</span>
+            <span class="font-semibold text-headline-md text-primary"
+              >₦22,500</span
+            >
+          </div>
+        </div>
+        <button
+          onclick="confirmPayDeposit()"
+          class="w-full py-sm bg-warning-amber text-primary font-semibold text-label-md font-label-md rounded-xl hover:bg-amber-600 hover:text-white transition-colors shadow-sm flex items-center justify-center gap-xs"
+        >
+          <span class="material-symbols-outlined text-[20px]">lock</span>
+          <span>Confirm &amp; Pay Deposit</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Block Confirmation Modal -->
+    <div
+      id="blockConfirmModal"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-md"
+    >
+      <div
+        class="bg-surface-container-lowest border border-soft-border rounded-2xl max-w-sm w-full p-lg shadow-xl"
+      >
+        <div class="flex items-center gap-md mb-sm">
+          <div
+            class="w-12 h-12 rounded-full bg-error-container text-error-red flex items-center justify-center shrink-0"
+          >
+            <span class="material-symbols-outlined text-[24px]">block</span>
+          </div>
+          <h3 class="text-headline-md font-headline-md text-on-surface">
+            Block User?
+          </h3>
+        </div>
+        <p
+          class="text-body-sm font-body-sm text-on-surface-variant mb-lg text-left"
+        >
+          Are you sure you want to block this specialist? You won't be able to
+          chat or view their profile details anymore.
+        </p>
+        <div class="flex gap-sm">
+          <button
+            onclick="closeModal('blockConfirmModal')"
+            class="flex-1 py-sm border border-soft-border text-on-surface font-label-md text-label-md rounded-xl hover:bg-surface-container-low transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            onclick="confirmBlockUser()"
+            class="flex-1 py-sm bg-error-red text-white font-label-md text-label-md rounded-xl hover:bg-red-800 transition-colors"
+          >
+            Block
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Report Confirmation Modal -->
+    <div
+      id="reportConfirmModal"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-md"
+    >
+      <div
+        class="bg-surface-container-lowest border border-soft-border rounded-2xl max-w-sm w-full p-lg shadow-xl"
+      >
+        <div class="flex items-center gap-md mb-sm">
+          <div
+            class="w-12 h-12 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center shrink-0"
+          >
+            <span class="material-symbols-outlined text-[24px]">flag</span>
+          </div>
+          <h3 class="text-headline-md font-headline-md text-on-surface">
+            Report User?
+          </h3>
+        </div>
+        <p
+          class="text-body-sm font-body-sm text-on-surface-variant mb-lg text-left"
+        >
+          Are you sure you want to report something inappropriate or suspicious
+          regarding this appointment?
+        </p>
+        <div class="flex gap-sm">
+          <button
+            onclick="closeModal('reportConfirmModal')"
+            class="flex-1 py-sm border border-soft-border text-on-surface font-label-md text-label-md rounded-xl hover:bg-surface-container-low transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            onclick="proceedToReportDetails()"
+            class="flex-1 py-sm bg-charcoal text-white font-label-md text-label-md rounded-xl hover:bg-primary-container transition-colors"
+          >
+            Proceed
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detailed Report Modal -->
+    <div
+      id="reportDetailModal"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-md"
+    >
+      <div
+        class="bg-surface-container-lowest border border-soft-border rounded-2xl max-w-md w-full p-lg shadow-xl"
+      >
+        <div class="flex justify-between items-center mb-md">
+          <h3 class="text-headline-md font-headline-md text-on-surface">
+            Submit Report
+          </h3>
+          <button
+            onclick="closeModal('reportDetailModal')"
+            class="text-on-surface-variant hover:text-on-surface"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <form onsubmit="submitReport(event)" class="space-y-md">
+          <div>
+            <label
+              class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+              >Reason for Reporting</label
+            >
+            <select
+              class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-body-sm text-on-surface focus:outline-none focus:border-charcoal"
+            >
+              <option>Inappropriate Behavior / Harassment</option>
+              <option>Spam or Fraud Attempt</option>
+              <option>Unsafe Payment Request</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label
+              class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+              >Description</label
+            >
+            <textarea
+              required
+              rows="3"
+              class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-body-sm text-on-surface focus:outline-none focus:border-charcoal resize-none"
+              placeholder="Provide details about what happened..."
+            ></textarea>
+          </div>
+          <div>
+            <label
+              class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+              >Add Media / Screenshots</label
+            >
+            <input
+              type="file"
+              class="w-full text-body-sm text-on-surface-variant file:mr-sm file:py-xs file:px-sm file:rounded-full file:border-0 file:text-label-sm file:bg-surface-container-high file:text-on-surface hover:file:bg-surface-variant"
+            />
+          </div>
+          <div class="flex items-center gap-xs pt-xs">
+            <input
+              type="checkbox"
+              id="blockCheckbox"
+              class="rounded border-soft-border text-charcoal focus:ring-charcoal"
+            />
+            <label
+              for="blockCheckbox"
+              class="text-body-sm font-body-sm text-on-surface"
+              >Also block this user</label
+            >
+          </div>
+          <div class="flex gap-sm pt-sm">
+            <button
+              type="button"
+              onclick="closeModal('reportDetailModal')"
+              class="flex-1 py-sm border border-soft-border text-on-surface font-label-md text-label-md rounded-xl hover:bg-surface-container-low transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="flex-1 py-sm bg-error-red text-white font-label-md text-label-md rounded-xl hover:bg-red-800 transition-colors"
+            >
+              Submit Report
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Booking Details Modal -->
+    <div
+      id="bookingModal"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-md"
+    >
+      <div
+        class="bg-surface-container-lowest border border-soft-border rounded-2xl max-w-md w-full p-lg shadow-xl"
+      >
+        <div
+          class="flex justify-between items-center border-b border-soft-border pb-md mb-md"
+        >
+          <div>
+            <span
+              class="text-label-sm font-label-sm text-success-green bg-secondary-container px-2 py-0.5 rounded-full"
+              >Confirmed</span
+            >
+            <h3 class="text-headline-md font-headline-md text-on-surface mt-xs">
+              Architectural Brow Sculpting
+            </h3>
+          </div>
+          <button
+            onclick="closeModal('bookingModal')"
+            class="text-on-surface-variant hover:text-on-surface"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="space-y-sm text-body-sm font-body-sm text-on-surface mb-lg">
+          <div
+            class="flex justify-between py-xs border-b border-soft-border/50"
+          >
+            <span class="text-on-surface-variant">Specialist:</span>
+            <span class="font-medium">Elena Rodriguez</span>
+          </div>
+          <div
+            class="flex justify-between py-xs border-b border-soft-border/50"
+          >
+            <span class="text-on-surface-variant"
+              >Scheduled Time &amp; Date:</span
+            >
+            <span class="font-medium">Today at 2:00 PM (45 mins)</span>
+          </div>
+          <div
+            class="flex justify-between py-xs border-b border-soft-border/50"
+          >
+            <span class="text-on-surface-variant">Location:</span>
+            <span class="font-medium">Studio Salon A</span>
+          </div>
+          <div
+            class="flex justify-between py-xs border-b border-soft-border/50"
+          >
+            <span class="text-on-surface-variant">Total Payment:</span>
+            <span class="font-medium text-headline-md text-primary"
+              >₦45,000</span
+            >
+          </div>
+        </div>
+        <button
+          onclick="closeModal('bookingModal')"
+          class="w-full py-sm bg-charcoal text-white text-label-md font-label-md rounded-xl hover:bg-primary-container transition-colors"
+        >
+          Close Details
+        </button>
+      </div>
+    </div>
+
+    <!-- External Script Import -->
+    <script src="js/vendor-customer-dashboard.js"></script>
+  </body>
+</html>

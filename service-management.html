@@ -1,0 +1,796 @@
+<!doctype html>
+<html lang="en" class="">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Service Management | GLAMORA</title>
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed-variant": "#474747",
+              "on-primary-container": "#949393",
+              "surface-container-highest": "#e3e2df",
+              "parchment-white": "#F7F6F3",
+              "secondary-container": "#d6e7d8",
+              "surface-container-low": "#f4f3f0",
+              "on-secondary-fixed-variant": "#3c4a40",
+              "on-error-container": "#93000a",
+              "inverse-surface": "#2f312f",
+              "on-tertiary-container": "#c48373",
+              "on-secondary-container": "#59685c",
+              "surface-variant": "#e3e2df",
+              "inverse-primary": "#c8c6c5",
+              "on-tertiary": "#ffffff",
+              "on-secondary": "#ffffff",
+              error: "#ba1a1a",
+              outline: "#747878",
+              "secondary-fixed-dim": "#bacbbd",
+              "on-surface": "#1b1c1a",
+              "inverse-on-surface": "#f2f1ee",
+              "error-container": "#ffdad6",
+              charcoal: "#2C2C2C",
+              "on-tertiary-fixed": "#360f06",
+              "surface-tint": "#5f5e5e",
+              "error-red": "#A64D4D",
+              "on-background": "#1b1c1a",
+              "surface-container": "#efeeeb",
+              "surface-container-lowest": "#ffffff",
+              "soft-border": "#E2E2DE",
+              background: "#faf9f6",
+              "on-secondary-fixed": "#111e16",
+              "on-surface-variant": "#444748",
+              primary: "#171818",
+              "success-green": "#5A705F",
+              "primary-fixed-dim": "#c8c6c5",
+              "surface-container-high": "#e9e8e5",
+              "secondary-fixed": "#d6e7d8",
+              "surface-dim": "#dbdad7",
+              "tertiary-container": "#4b1f14",
+              "tertiary-fixed-dim": "#feb5a3",
+              sage: "#8A9A8D",
+              "surface-bright": "#faf9f6",
+              "tertiary-fixed": "#ffdad2",
+              surface: "#faf9f6",
+              "outline-variant": "#c4c7c7",
+              "muted-terracotta": "#BC7C6C",
+              "primary-fixed": "#e4e2e1",
+              tertiary: "#310b03",
+              "on-tertiary-fixed-variant": "#6b392c",
+              "warning-amber": "#C49D6A",
+              "on-error": "#ffffff",
+              secondary: "#536257",
+              "primary-container": "#2c2c2c",
+              "on-primary": "#ffffff",
+              "on-primary-fixed": "#1b1c1c",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              xl: "80px",
+              gutter: "24px",
+              "margin-mobile": "16px",
+              lg: "48px",
+              base: "8px",
+              xs: "4px",
+              "margin-desktop": "64px",
+              md: "24px",
+              sm: "12px",
+            },
+            fontFamily: {
+              "label-md": ["Hanken Grotesk"],
+              "body-md": ["Hanken Grotesk"],
+              "label-sm": ["Hanken Grotesk"],
+              "body-sm": ["Hanken Grotesk"],
+              "headline-lg-mobile": ["Hanken Grotesk"],
+              "headline-xl-mobile": ["Hanken Grotesk"],
+              "headline-lg": ["Hanken Grotesk"],
+              "body-lg": ["Hanken Grotesk"],
+              "headline-xl": ["Hanken Grotesk"],
+              "headline-md": ["Hanken Grotesk"],
+            },
+            fontSize: {
+              "label-md": [
+                "14px",
+                { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" },
+              ],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+              "label-sm": [
+                "12px",
+                { lineHeight: "1", letterSpacing: "0.03em", fontWeight: "600" },
+              ],
+              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "headline-xl-mobile": [
+                "36px",
+                { lineHeight: "1.1", fontWeight: "600" },
+              ],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "500" }],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-background font-body-md text-on-surface flex">
+    <!-- Mobile Header -->
+    <div
+      class="lg:hidden fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl border-b border-soft-border px-margin-mobile py-sm flex items-center justify-between"
+    >
+      <div class="flex items-center gap-base">
+        <img
+          alt="Glamora Logo"
+          class="h-7 w-auto object-contain"
+          src="images/glamora_background-removebg-preview.png"
+        />
+        <span class="font-headline-md text-[18px] text-primary tracking-tight"
+          >GLAMORA</span
+        >
+      </div>
+
+      <div class="flex items-center gap-sm">
+        <!-- Vendor/Client Toggle (Mobile) -->
+        <div
+          class="bg-surface-container p-1 rounded-full flex text-label-sm border border-soft-border -ml-3 scale-105"
+        >
+          <button
+            type="button"
+            onclick="switchRole('vendor')"
+            class="px-2.5 py-1 rounded-full text-[11px] bg-primary text-on-primary font-semibold shadow-sm transition-all"
+          >
+            Vendor
+          </button>
+          <button
+            type="button"
+            onclick="switchRole('customer')"
+            class="px-2.5 py-1 rounded-full text-[11px] text-on-surface-variant font-medium hover:text-primary transition-all"
+          >
+            Client
+          </button>
+        </div>
+        <!-- Hamburger Menu -->
+        <button
+          class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors"
+          onclick="toggleMobileSidebar()"
+        >
+          <span class="material-symbols-outlined text-[20px]">menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Sidebar Drawer -->
+    <div class="hidden fixed inset-0 z-50 lg:hidden" id="mobile-sidebar">
+      <div
+        class="fixed inset-0 bg-primary/40 backdrop-blur-sm"
+        onclick="toggleMobileSidebar()"
+      ></div>
+      <aside
+        class="relative w-72 max-w-[80vw] h-full bg-surface-container-lowest border-r border-soft-border p-md flex flex-col shadow-lg z-10 overflow-y-auto"
+      >
+        <div
+          class="flex items-center justify-between pb-sm border-b border-soft-border mb-md"
+        >
+          <div class="flex items-center gap-base">
+            <img
+              alt="Glamora Logo"
+              class="h-7 w-auto object-contain"
+              src="images/glamora_background-removebg-preview.png"
+            />
+            <span
+              class="font-headline-md text-[18px] text-primary tracking-tight"
+              >GLAMORA</span
+            >
+          </div>
+          <button
+            class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant"
+            onclick="toggleMobileSidebar()"
+          >
+            <span class="material-symbols-outlined text-[18px]">close</span>
+          </button>
+        </div>
+
+        <nav class="flex-1 space-y-xs font-label-md text-label-md">
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-dashboard.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >dashboard</span
+            >
+            Dashboard
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg transition-all group bg-surface-container-high text-primary font-bold"
+            href="service-management.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >list_alt</span
+            >
+            Services
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-schedule-and-availability.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >calendar_today</span
+            >
+            Schedule
+          </a>
+          <!-- Updated to vendor-wallet.html -->
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-wallet.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >payments</span
+            >
+            Earnings
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="chats.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >chat_bubble</span
+            >
+            Chats
+          </a>
+        </nav>
+      </aside>
+    </div>
+
+    <!-- Desktop Sidebar -->
+    <aside
+      class="hidden lg:flex fixed left-0 top-0 h-full w-72 bg-surface-container-lowest border-r border-soft-border z-50 flex-col"
+    >
+      <div
+        class="p-md flex items-center gap-base border-b border-soft-border mb-base"
+      >
+        <img
+          alt="Glamora Logo"
+          class="h-8 w-auto"
+          src="images/glamora_background-removebg-preview.png"
+        />
+        <span class="font-headline-md text-headline-md tracking-tight"
+          >GLAMORA</span
+        >
+      </div>
+      <div class="px-md py-base mb-sm">
+        <div
+          class="bg-surface-container flex rounded-full p-xs border border-soft-border"
+        >
+          <button
+            onclick="switchRole('vendor')"
+            class="flex-1 text-label-sm font-label-sm py-xs rounded-full bg-white shadow-sm text-primary font-semibold"
+          >
+            Vendor Mode
+          </button>
+          <button
+            onclick="switchRole('customer')"
+            class="flex-1 text-label-sm font-label-sm py-xs text-on-surface-variant hover:text-on-surface transition-colors"
+          >
+            Client Mode
+          </button>
+        </div>
+      </div>
+      <nav class="flex-1 px-sm space-y-xs font-label-md text-label-md">
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-dashboard.html"
+        >
+          <span class="material-symbols-outlined mr-md">dashboard</span>
+          Dashboard
+        </a>
+        <a
+          aria-current="page"
+          class="flex items-center px-md py-sm rounded-lg transition-all group bg-surface-container-high text-primary font-bold"
+          href="service-management.html"
+        >
+          <span class="material-symbols-outlined mr-md">list_alt</span> Services
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-schedule-and-availability.html"
+        >
+          <span class="material-symbols-outlined mr-md">calendar_today</span>
+          Schedule
+        </a>
+        <!-- Updated to vendor-wallet.html -->
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-wallet.html"
+        >
+          <span class="material-symbols-outlined mr-md">payments</span> Earnings
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="chats.html"
+        >
+          <span class="material-symbols-outlined mr-md">chat_bubble</span> Chats
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="w-full lg:pl-72 pt-16 min-h-screen bg-background relative">
+      <div class="max-w-[1440px] mx-auto px-margin-desktop py-lg">
+        <!-- Top Header & Add Button -->
+        <div
+          class="flex flex-col md:flex-row md:items-center justify-between gap-md mb-lg"
+        >
+          <div>
+            <span
+              class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-widest"
+              >— PORTFOLIO</span
+            >
+            <h1
+              class="text-headline-xl font-headline-xl text-on-surface mt-xs tracking-tight"
+            >
+              Service Directory
+            </h1>
+          </div>
+          <button
+            onclick="openModal('new')"
+            class="inline-flex items-center gap-base px-md py-sm bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:bg-surface-tint transition-all shadow-sm self-start md:self-auto"
+          >
+            <span class="material-symbols-outlined text-[20px]">add</span>
+            <span>New Service</span>
+          </button>
+        </div>
+
+        <!-- Filters & Search -->
+        <div
+          class="flex flex-col md:flex-row md:items-center justify-between gap-md mb-lg"
+        >
+          <div
+            class="inline-flex items-center p-xs bg-surface-container rounded-full border border-soft-border self-start overflow-x-auto max-w-full"
+          >
+            <button
+              class="filter-btn px-md py-xs rounded-full bg-white text-on-surface font-label-sm text-label-sm shadow-sm transition-all whitespace-nowrap"
+              data-filter="all"
+            >
+              All
+            </button>
+            <button
+              class="filter-btn px-md py-xs rounded-full text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all whitespace-nowrap"
+              data-filter="haircuts"
+            >
+              Haircuts
+            </button>
+            <button
+              class="filter-btn px-md py-xs rounded-full text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all whitespace-nowrap"
+              data-filter="coloring"
+            >
+              Coloring
+            </button>
+            <button
+              class="filter-btn px-md py-xs rounded-full text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all whitespace-nowrap"
+              data-filter="treatments"
+            >
+              Treatments
+            </button>
+          </div>
+          <div class="relative w-full md:w-[350px]">
+            <span
+              class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]"
+              >search</span
+            >
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search services..."
+              class="w-full pl-8 pr-md py-sm bg-transparent border-b border-soft-border text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:border-primary text-body-sm font-body-sm transition-colors"
+            />
+          </div>
+        </div>
+
+        <!-- Grid -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter"
+          id="servicesGrid"
+        >
+          <!-- Card 1 -->
+          <div
+            class="service-card bg-surface-container-lowest rounded-xl border border-soft-border p-md flex flex-col justify-between shadow-sm hover:border-primary/40 transition-all"
+            data-category="haircuts"
+          >
+            <div class="mb-lg">
+              <div
+                class="inline-block px-sm py-xs rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider mb-md"
+              >
+                HAIRCUTS
+              </div>
+              <h3
+                class="text-headline-md font-headline-md text-on-surface mb-sm leading-snug"
+              >
+                Signature Precision Cut
+              </h3>
+              <p
+                class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed"
+              >
+                A fully customized haircut utilizing advanced texturizing
+                techniques to suit your face shape and personal style.
+              </p>
+            </div>
+            <div
+              class="pt-md border-t border-soft-border flex items-center justify-between"
+            >
+              <div class="space-y-xs">
+                <span
+                  class="block text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider"
+                  >PRICE</span
+                >
+                <span class="text-headline-md font-headline-md text-on-surface"
+                  >₦15,000</span
+                >
+              </div>
+              <div class="h-8 w-[1px] bg-soft-border"></div>
+              <div class="space-y-xs text-right">
+                <span
+                  class="block text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider"
+                  >DURATION</span
+                >
+                <span class="text-headline-md font-headline-md text-on-surface"
+                  >60 min</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div
+            class="service-card bg-surface-container-lowest rounded-xl border border-soft-border p-md flex flex-col justify-between shadow-sm hover:border-primary/40 transition-all"
+            data-category="coloring"
+          >
+            <div class="mb-lg">
+              <div
+                class="inline-block px-sm py-xs rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider mb-md"
+              >
+                COLORING
+              </div>
+              <h3
+                class="text-headline-md font-headline-md text-on-surface mb-sm leading-snug"
+              >
+                Balayage &amp; Toner
+              </h3>
+              <p
+                class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed"
+              >
+                Hand-painted, sunkissed highlights tailored to enhance your
+                natural color flow. Includes gloss toner treatment.
+              </p>
+            </div>
+            <div
+              class="pt-md border-t border-soft-border flex items-center justify-between"
+            >
+              <div class="space-y-xs">
+                <span
+                  class="block text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider"
+                  >PRICE</span
+                >
+                <span class="text-headline-md font-headline-md text-on-surface"
+                  >₦45,000</span
+                >
+              </div>
+              <div class="h-8 w-[1px] bg-soft-border"></div>
+              <div class="space-y-xs text-right">
+                <span
+                  class="block text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider"
+                  >DURATION</span
+                >
+                <span class="text-headline-md font-headline-md text-on-surface"
+                  >150 min</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div
+            class="service-card bg-surface-container-lowest rounded-xl border border-soft-border p-md flex flex-col justify-between shadow-sm hover:border-primary/40 transition-all"
+            data-category="treatments"
+          >
+            <div class="mb-lg">
+              <div
+                class="inline-block px-sm py-xs rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider mb-md"
+              >
+                TREATMENTS
+              </div>
+              <h3
+                class="text-headline-md font-headline-md text-on-surface mb-sm leading-snug"
+              >
+                Keratin Smoothing
+              </h3>
+              <p
+                class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed"
+              >
+                Frizz-reducing intensive protein treatment that seals the
+                cuticle for a sleek, glossy finish lasting up to 4 months.
+              </p>
+            </div>
+            <div
+              class="pt-md border-t border-soft-border flex items-center justify-between"
+            >
+              <div class="space-y-xs">
+                <span
+                  class="block text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider"
+                  >PRICE</span
+                >
+                <span class="text-headline-md font-headline-md text-on-surface"
+                  >₦35,000</span
+                >
+              </div>
+              <div class="h-8 w-[1px] bg-soft-border"></div>
+              <div class="space-y-xs text-right">
+                <span
+                  class="block text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider"
+                  >DURATION</span
+                >
+                <span class="text-headline-md font-headline-md text-on-surface"
+                  >120 min</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Draft Card -->
+          <div
+            onclick="openModal('draft')"
+            class="service-card draft-card bg-surface-container-lowest/60 rounded-xl border border-dashed border-soft-border p-md flex flex-col justify-between cursor-pointer hover:bg-surface-container-lowest transition-colors group"
+            data-category="draft"
+          >
+            <div class="mb-lg">
+              <div
+                class="inline-block px-sm py-xs rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider mb-md"
+              >
+                DRAFT
+              </div>
+              <h3
+                class="text-headline-md font-headline-md text-on-surface/80 italic mb-sm leading-snug group-hover:text-primary group-hover:not-italic transition-all"
+              >
+                Men's Executive Grooming
+              </h3>
+              <p
+                class="text-body-sm font-body-sm text-on-surface-variant/70 italic"
+              >
+                Service description pending... Click to complete.
+              </p>
+            </div>
+            <div
+              class="pt-md border-t border-dashed border-soft-border flex items-center justify-between"
+            >
+              <div class="space-y-xs">
+                <span
+                  class="block text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider"
+                  >PRICE</span
+                >
+                <span
+                  class="text-headline-md font-headline-md text-on-surface/70"
+                  >--</span
+                >
+              </div>
+              <div class="h-8 w-[1px] bg-soft-border"></div>
+              <div class="space-y-xs text-right">
+                <span
+                  class="block text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider"
+                  >DURATION</span
+                >
+                <span
+                  class="text-headline-md font-headline-md text-on-surface/70"
+                  >45 min</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Add Service Trigger Card -->
+          <div
+            onclick="openModal('new')"
+            class="add-service-card rounded-xl border border-soft-border bg-surface-container-low p-md flex flex-col items-center justify-center text-center group cursor-pointer hover:bg-surface-container hover:border-primary/30 transition-all min-h-[280px]"
+          >
+            <div
+              class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface mb-base group-hover:bg-white transition-all shadow-sm"
+            >
+              <span class="material-symbols-outlined text-[24px]">add</span>
+            </div>
+            <h3 class="text-headline-md font-headline-md text-on-surface mb-xs">
+              Add Service
+            </h3>
+            <p
+              class="text-body-sm font-body-sm text-on-surface-variant max-w-[220px]"
+            >
+              Expand your portfolio and attract new clientele.
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Add/Edit Service Modal -->
+    <div
+      id="serviceModal"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-md"
+    >
+      <div
+        class="bg-surface-container-lowest border border-soft-border rounded-2xl max-w-xl w-full p-lg shadow-xl relative max-h-[90vh] overflow-y-auto"
+      >
+        <div
+          class="flex justify-between items-center border-b border-soft-border pb-md mb-md"
+        >
+          <h2
+            id="modalTitle"
+            class="text-headline-md font-headline-md text-on-surface tracking-tight"
+          >
+            Add New Service
+          </h2>
+          <button
+            onclick="closeModal()"
+            class="text-on-surface-variant hover:text-on-surface transition-colors"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+
+        <form
+          id="serviceForm"
+          onsubmit="handleServiceSubmit(event)"
+          class="space-y-md"
+        >
+          <div>
+            <label
+              class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+              >Service Name</label
+            >
+            <input
+              type="text"
+              id="serviceName"
+              required
+              placeholder="e.g. Signature Precision Cut"
+              class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-body-sm text-on-surface focus:outline-none focus:border-charcoal transition-colors"
+            />
+          </div>
+
+          <div class="grid grid-cols-2 gap-sm">
+            <div>
+              <label
+                class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+                >Category</label
+              >
+              <select
+                id="serviceCategory"
+                required
+                class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-body-sm text-on-surface focus:outline-none focus:border-charcoal transition-colors"
+              >
+                <option value="" disabled selected>Select category</option>
+                <option value="haircuts">Haircuts</option>
+                <option value="coloring">Coloring</option>
+                <option value="treatments">Treatments</option>
+              </select>
+            </div>
+            <div>
+              <label
+                class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+                >Duration (mins)</label
+              >
+              <input
+                type="number"
+                id="serviceDuration"
+                required
+                placeholder="e.g. 60"
+                min="15"
+                step="15"
+                class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-body-sm text-on-surface focus:outline-none focus:border-charcoal transition-colors"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label
+              class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+              >Price (₦)</label
+            >
+            <input
+              type="number"
+              id="servicePrice"
+              required
+              placeholder="e.g. 15000"
+              min="1000"
+              step="500"
+              class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-body-sm text-on-surface focus:outline-none focus:border-charcoal transition-colors"
+            />
+          </div>
+
+          <div>
+            <label
+              class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+              >Description</label
+            >
+            <textarea
+              id="serviceDesc"
+              rows="3"
+              required
+              placeholder="Detail what the service includes..."
+              class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-body-sm text-on-surface focus:outline-none focus:border-charcoal resize-none transition-colors"
+            ></textarea>
+          </div>
+
+          <div class="flex gap-sm pt-sm border-t border-soft-border mt-md">
+            <button
+              type="button"
+              onclick="closeModal()"
+              class="flex-1 py-sm border border-soft-border text-on-surface font-label-md text-label-md rounded-xl hover:bg-surface-container-low transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="flex-1 py-sm bg-primary text-on-primary font-label-md text-label-md rounded-xl hover:bg-surface-tint transition-colors shadow-sm"
+            >
+              Save Service
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Interactive Scripts -->
+    <script src="js/service management.js" defer></script>
+  </body>
+</html>

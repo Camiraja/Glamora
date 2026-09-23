@@ -1,0 +1,2321 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              surface: "#faf9f6",
+              "surface-tint": "#5f5e5e",
+              "on-surface": "#1b1c1a",
+              "tertiary-fixed": "#ffdad2",
+              "outline-variant": "#c4c7c7",
+              "on-tertiary": "#ffffff",
+              "primary-container": "#2c2c2c",
+              "surface-container-lowest": "#ffffff",
+              "error-red": "#A64D4D",
+              "surface-bright": "#faf9f6",
+              "surface-variant": "#e3e2df",
+              "surface-container": "#efeeeb",
+              "on-tertiary-fixed": "#360f06",
+              "parchment-white": "#F7F6F3",
+              "on-primary-fixed-variant": "#474747",
+              "surface-container-low": "#f4f3f0",
+              "on-secondary-fixed": "#111e16",
+              "on-secondary-fixed-variant": "#3c4a40",
+              "primary-fixed-dim": "#c8c6c5",
+              "inverse-surface": "#2f312f",
+              "on-primary-fixed": "#1b1c1c",
+              "secondary-container": "#d6e7d8",
+              "inverse-on-surface": "#f2f1ee",
+              "on-background": "#1b1c1a",
+              "error-container": "#ffdad6",
+              secondary: "#536257",
+              "tertiary-container": "#4b1f14",
+              "on-primary-container": "#949393",
+              outline: "#747878",
+              "on-error": "#ffffff",
+              tertiary: "#310b03",
+              "success-green": "#5A705F",
+              "inverse-primary": "#c8c6c5",
+              "on-primary": "#ffffff",
+              charcoal: "#2C2C2C",
+              "on-tertiary-fixed-variant": "#6b392c",
+              "tertiary-fixed-dim": "#feb5a3",
+              "muted-terracotta": "#BC7C6C",
+              sage: "#8A9A8D",
+              "on-secondary": "#ffffff",
+              "on-tertiary-container": "#c48373",
+              "soft-border": "#E2E2DE",
+              background: "#faf9f6",
+              "warning-amber": "#C49D6A",
+              "surface-dim": "#dbdad7",
+              "secondary-fixed-dim": "#bacbbd",
+              error: "#ba1a1a",
+              "surface-container-high": "#e9e8e5",
+              "on-surface-variant": "#444748",
+              "primary-fixed": "#e4e2e1",
+              "surface-container-highest": "#e3e2df",
+              "on-error-container": "#93000a",
+              "on-secondary-container": "#59685c",
+              primary: "#171818",
+              "secondary-fixed": "#d6e7d8",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "margin-desktop": "64px",
+              xs: "4px",
+              base: "8px",
+              "margin-mobile": "16px",
+              md: "24px",
+              lg: "48px",
+              xl: "80px",
+              gutter: "24px",
+              sm: "12px",
+            },
+            fontFamily: {
+              "body-md": ["Hanken Grotesk", "sans-serif"],
+              "label-sm": ["Hanken Grotesk", "sans-serif"],
+              "headline-md": ["Hanken Grotesk", "sans-serif"],
+              "headline-xl": ["Hanken Grotesk", "sans-serif"],
+              "headline-lg": ["Hanken Grotesk", "sans-serif"],
+              "body-sm": ["Hanken Grotesk", "sans-serif"],
+              "body-lg": ["Hanken Grotesk", "sans-serif"],
+              "headline-xl-mobile": ["Hanken Grotesk", "sans-serif"],
+              "headline-lg-mobile": ["Hanken Grotesk", "sans-serif"],
+              "label-md": ["Hanken Grotesk", "sans-serif"],
+            },
+            fontSize: {
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+              "label-sm": [
+                "12px",
+                { lineHeight: "1", letterSpacing: "0.03em", fontWeight: "600" },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "500" }],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "headline-xl-mobile": [
+                "36px",
+                { lineHeight: "1.1", fontWeight: "600" },
+              ],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "label-md": [
+                "14px",
+                { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background font-body-md text-body-md text-on-surface antialiased"
+  >
+    <!-- Toast Notification Element -->
+    <div
+      class="fixed bottom-6 right-6 z-[100] px-md py-sm bg-charcoal text-white rounded-xl shadow-xl flex items-center gap-sm transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none"
+      id="toastNotification"
+    >
+      <span
+        class="material-symbols-outlined text-sage text-[20px]"
+        id="toastIcon"
+        >check_circle</span
+      >
+      <span class="font-body-sm text-body-sm font-medium" id="toastMessage"
+        >Product added successfully</span
+      >
+    </div>
+
+    <!-- Mobile Header -->
+    <div
+      class="lg:hidden fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl border-b border-soft-border px-margin-mobile py-sm flex items-center justify-between"
+    >
+      <div class="flex items-center gap-base">
+        <img
+          alt="Glamora Logo"
+          class="h-7 w-auto object-contain"
+          src="images/glamora_background-removebg-preview.png"
+        />
+        <span class="font-headline-md text-[18px] text-primary tracking-tight"
+          >GLAMORA</span
+        >
+      </div>
+
+      <div class="flex items-center gap-sm">
+        <!-- Vendor/Client Toggle (Mobile) -->
+        <div class="flex items-center gap-sm">
+          <div
+            class="bg-surface-container p-1 rounded-full flex text-label-sm border border-soft-border -ml-3 scale-105"
+          >
+            <button
+              type="button"
+              onclick="switchRole('vendor')"
+              class="px-2.5 py-1 rounded-full text-[11px] bg-primary text-on-primary font-semibold shadow-sm transition-all"
+            >
+              Vendor
+            </button>
+            <button
+              type="button"
+              onclick="switchRole('customer')"
+              class="px-2.5 py-1 rounded-full text-[11px] text-on-surface-variant font-medium hover:text-primary transition-all"
+            >
+              Client
+            </button>
+          </div>
+          <!-- Hamburger Menu -->
+          <button
+            class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors"
+            onclick="toggleMobileSidebar()"
+          >
+            <span class="material-symbols-outlined text-[20px]">menu</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Sidebar Drawer -->
+    <div class="hidden fixed inset-0 z-50 lg:hidden" id="mobile-sidebar">
+      <div
+        class="fixed inset-0 bg-primary/40 backdrop-blur-sm"
+        onclick="toggleMobileSidebar()"
+      ></div>
+      <aside
+        class="relative w-72 max-w-[80vw] h-full bg-surface-container-lowest border-r border-soft-border p-md flex flex-col shadow-lg z-10 overflow-y-auto"
+      >
+        <div
+          class="flex items-center justify-between pb-sm border-b border-soft-border mb-md"
+        >
+          <div class="flex items-center gap-base">
+            <img
+              alt="Glamora Logo"
+              class="h-7 w-auto object-contain"
+              src="images/glamora_background-removebg-preview.png"
+            />
+            <span
+              class="font-headline-md text-[18px] text-primary tracking-tight"
+              >GLAMORA</span
+            >
+          </div>
+          <button
+            class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant"
+            onclick="toggleMobileSidebar()"
+          >
+            <span class="material-symbols-outlined text-[18px]">close</span>
+          </button>
+        </div>
+
+        <nav class="flex-1 space-y-xs font-label-md text-label-md">
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-dashboard.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >dashboard</span
+            >
+            Dashboard
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="service-management.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >list_alt</span
+            >
+            Services
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-schedule-and-availability.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >date_range</span
+            >
+            Schedule
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-wallet.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >payments</span
+            >
+            Earnings
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-appointment.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >event_available</span
+            >
+            Appointments
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg transition-all group bg-surface-container-high text-primary font-bold"
+            href="Products-management.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >inventory_2</span
+            >
+            Products
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-analytics.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >monitoring</span
+            >
+            Analytics
+          </a>
+        </nav>
+
+        <nav class="pt-md border-t border-soft-border">
+          <a
+            class="px-sm py-base rounded-lg text-label-md text-on-surface-variant hover:bg-surface-container transition-colors flex items-center gap-base"
+            data-path="settings"
+            href="vendor-profile.html"
+            ><span class="material-symbols-outlined text-[20px]">settings</span>
+            Settings</a
+          >
+        </nav>
+      </aside>
+    </div>
+
+    <!-- Desktop Sidebar -->
+    <aside
+      class="hidden lg:flex fixed left-0 top-0 h-full w-72 bg-surface-container-lowest border-r border-soft-border z-50 flex-col"
+    >
+      <div
+        class="p-md flex items-center gap-base border-b border-soft-border mb-base"
+      >
+        <img
+          alt="Glamora Logo"
+          class="h-8 w-auto"
+          src="images/glamora_background-removebg-preview.png"
+        />
+        <span class="font-headline-md text-headline-md tracking-tight"
+          >GLAMORA</span
+        >
+      </div>
+      <div class="px-md py-base mb-sm">
+        <div
+          class="bg-surface-container flex rounded-full p-xs border border-soft-border"
+        >
+          <button
+            onclick="switchRole('vendor')"
+            class="flex-1 text-label-sm font-label-sm py-xs rounded-full bg-white shadow-sm text-primary font-semibold"
+          >
+            Vendor Mode
+          </button>
+          <button
+            onclick="switchRole('customer')"
+            class="flex-1 text-label-sm font-label-sm py-xs text-on-surface-variant hover:text-on-surface transition-colors"
+          >
+            Client Mode
+          </button>
+        </div>
+      </div>
+      <nav class="flex-1 px-sm space-y-xs font-label-md text-label-md">
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-dashboard.html"
+        >
+          <span class="material-symbols-outlined mr-md">dashboard</span>
+          Dashboard
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="service-management.html"
+        >
+          <span class="material-symbols-outlined mr-md">list_alt</span> Services
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-schedule-and-availability.html"
+        >
+          <span class="material-symbols-outlined mr-md">date_range</span>
+          Schedule
+        </a>
+        <!-- Updated to vendor-wallet.html -->
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-wallet.html"
+        >
+          <span class="material-symbols-outlined mr-md">payments</span> Earnings
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-appointments.html"
+        >
+          <span class="material-symbols-outlined mr-md">event_available</span>
+          Appointments
+        </a>
+        <a
+          aria-current="page"
+          class="flex items-center px-md py-sm rounded-lg transition-all group bg-surface-container-high text-primary font-bold"
+          href="products-management.html"
+        >
+          <span class="material-symbols-outlined mr-md">inventory_2</span>
+          Products
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-analytics.html"
+        >
+          <span class="material-symbols-outlined mr-md">monitoring</span>
+          Analytics
+        </a>
+      </nav>
+      <!-- Replace the bottom <nav> in the Desktop Sidebar -->
+      <div class="px-sm pb-md w-full">
+        <nav class="pt-sm border-t border-soft-border">
+          <a
+            class="flex items-center px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            data-path="settings"
+            href="vendor-profile.html"
+          >
+            <span class="material-symbols-outlined mr-md">settings</span>
+            Settings
+          </a>
+        </nav>
+      </div>
+    </aside>
+
+    <div class="w-full lg:pl-72 flex flex-col min-h-screen relative">
+      <!-- Desktop Header -->
+      <header
+        class="hidden lg:flex fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl border-b border-soft-border z-40 items-center justify-end px-margin-desktop gap-md"
+      >
+        <a
+          href="service-management.html"
+          class="flex items-center gap-xs px-md py-xs bg-primary text-on-primary rounded-full font-label-sm text-label-sm hover:bg-surface-tint transition-colors"
+        >
+          <span class="material-symbols-outlined text-[18px]">add</span> New
+          Service
+        </a>
+        <div class="flex items-center gap-sm pl-md border-l border-soft-border">
+          <img
+            alt="Profile"
+            class="w-8 h-8 rounded-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAksYm7Vpu3y6nFXAdnowe6h9yhNcma3tOmWqhGqQ-yieKVgv8IOaIQ21a9oK4barmnxBtCbmquE3v8ijlXgSV-zbE8NktlwkPDfGYPsqoh8T0NODzVrMTSMZLOGIWxZ5sK5uG09XBqCUJsvcsc8RrecRsLG5xdSZ2m8MUH3WXsWax75A3uBbiT_shFBUTYsOu9dyHNTK3QCaWYe77GnvN4ZQ-67ApBKuv20ipR9qLJlf0O_ZyvafdN"
+          />
+          <span class="font-label-md text-label-md text-primary"
+            >Alexander V.</span
+          >
+        </div>
+      </header>
+      <!-- Page Content -->
+      <main class="w-full pt-16 px-gutter bg-background flex-1">
+        <div class="flex flex-col w-full pb-xl">
+          <!-- Top Breadcrumb & Status Pill Bar -->
+          <div
+            class="flex flex-col md:flex-row md:items-center justify-between gap-md py-base"
+          >
+            <div class="flex flex-col gap-xs">
+              <div
+                class="flex items-center gap-xs text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider"
+              >
+                <span>VENDOR ATELIER</span>
+                <span class="text-outline-variant">/</span>
+                <span class="text-charcoal font-semibold"
+                  >RETAIL APOTHECARY</span
+                >
+              </div>
+              <h1
+                class="font-headline-lg text-headline-lg text-charcoal tracking-tight"
+              >
+                Product Management &amp; Inventory
+              </h1>
+              <p
+                class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl"
+              >
+                Manage your retail apothecary products, stock availability,
+                category pricing, and active promotional campaigns in real-time.
+              </p>
+            </div>
+            <div class="flex items-center gap-sm flex-wrap">
+              <div
+                class="flex items-center gap-xs px-sm py-xs bg-surface-container rounded-xl shadow-sm border border-soft-border"
+              >
+                <span
+                  class="inline-block w-2 h-2 rounded-full bg-success-green animate-pulse"
+                ></span>
+                <span
+                  class="font-label-sm text-label-sm text-charcoal font-medium"
+                  >1 Active Campaign</span
+                >
+                <span
+                  class="px-xs py-0.5 bg-surface-container-lowest text-on-surface-variant rounded-md text-[10px] font-bold"
+                  >15% OFF</span
+                >
+              </div>
+              <button
+                class="flex items-center gap-xs px-md py-sm bg-charcoal text-on-primary rounded-xl font-label-md text-label-md shadow-md hover:bg-primary transition-all duration-200"
+                id="openAddModalBtn"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[18px]">add</span>
+                <span>+ Add New Product</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- KPI Summary Deck -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-md my-md">
+            <div
+              class="p-md bg-surface-container-lowest rounded-xl shadow-sm border border-soft-border flex flex-col justify-between"
+            >
+              <div
+                class="flex items-center justify-between text-on-surface-variant"
+              >
+                <span
+                  class="font-label-sm text-label-sm uppercase tracking-wider font-semibold"
+                  >Total Products Listed</span
+                >
+                <span class="material-symbols-outlined text-[20px] text-sage"
+                  >inventory_2</span
+                >
+              </div>
+              <div class="mt-base">
+                <div
+                  class="font-headline-md text-headline-md text-charcoal font-semibold"
+                  id="kpiTotalProducts"
+                >
+                  4
+                </div>
+                <div
+                  class="flex items-center gap-xs mt-xs text-secondary font-label-sm text-label-sm"
+                >
+                  <span class="material-symbols-outlined text-[14px]"
+                    >arrow_upward</span
+                  >
+                  <span>145 total inventory items</span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="p-md bg-surface-container-lowest rounded-xl shadow-sm border border-soft-border flex flex-col justify-between"
+            >
+              <div
+                class="flex items-center justify-between text-on-surface-variant"
+              >
+                <span
+                  class="font-label-sm text-label-sm uppercase tracking-wider font-semibold"
+                  >Inventory Value</span
+                >
+                <span class="material-symbols-outlined text-[20px] text-sage"
+                  >account_balance</span
+                >
+              </div>
+              <div class="mt-base">
+                <div
+                  class="font-headline-md text-headline-md text-charcoal font-semibold"
+                >
+                  ₦2,180,450
+                </div>
+                <div
+                  class="flex items-center gap-xs mt-xs text-secondary font-label-sm text-label-sm"
+                >
+                  <span class="material-symbols-outlined text-[14px]"
+                    >trending_up</span
+                  >
+                  <span>88% active in catalog</span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="p-md bg-surface-container-lowest rounded-xl shadow-sm border border-soft-border flex flex-col justify-between"
+            >
+              <div
+                class="flex items-center justify-between text-on-surface-variant"
+              >
+                <span
+                  class="font-label-sm text-label-sm uppercase tracking-wider font-semibold"
+                  >Stock Alerts</span
+                >
+                <span
+                  class="material-symbols-outlined text-[20px] text-muted-terracotta"
+                  >warning</span
+                >
+              </div>
+              <div class="mt-base">
+                <div
+                  class="font-headline-md text-headline-md text-muted-terracotta font-semibold"
+                  id="kpiAlertCount"
+                >
+                  2 Items
+                </div>
+                <div
+                  class="flex items-center gap-xs mt-xs text-muted-terracotta font-label-sm text-label-sm"
+                >
+                  <span>1 low stock • 1 depleted</span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="p-md bg-surface-container-lowest rounded-xl shadow-sm border border-soft-border flex flex-col justify-between"
+            >
+              <div
+                class="flex items-center justify-between text-on-surface-variant"
+              >
+                <span
+                  class="font-label-sm text-label-sm uppercase tracking-wider font-semibold"
+                  >Promo Uplift</span
+                >
+                <span class="material-symbols-outlined text-[20px] text-sage"
+                  >local_mall</span
+                >
+              </div>
+              <div class="mt-base">
+                <div
+                  class="font-headline-md text-headline-md text-charcoal font-semibold"
+                >
+                  +32.4%
+                </div>
+                <div
+                  class="flex items-center gap-xs mt-xs text-success-green font-label-sm text-label-sm"
+                >
+                  <span class="material-symbols-outlined text-[14px]"
+                    >verified</span
+                  >
+                  <span>Code: GLAMORASUMMER</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Campaigns & Promos Section Header & Container -->
+          <div
+            class="mt-lg mb-sm flex flex-col sm:flex-row items-center justify-between gap-sm"
+          >
+            <h2
+              class="font-headline-md text-headline-md text-charcoal font-semibold"
+            >
+              Marketing Campaigns &amp; Promos
+            </h2>
+            <div class="flex items-center gap-sm">
+              <button
+                class="px-sm py-xs bg-surface-container rounded-xl font-label-sm text-label-sm text-charcoal hover:bg-surface-container-high transition-colors font-semibold border border-soft-border shadow-sm flex items-center gap-xs"
+                id="addNewCampaignBtn"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[16px]">add</span>
+                Add Campaign
+              </button>
+              <button
+                class="px-sm py-xs bg-surface-container rounded-xl font-label-sm text-label-sm text-charcoal hover:bg-surface-container-high transition-colors font-semibold border border-soft-border shadow-sm flex items-center gap-xs"
+                id="addNewPromoBtn"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[16px]">add</span>
+                Add Promo
+              </button>
+            </div>
+          </div>
+
+          <!-- Side-by-Side 2-Column Responsive Grid Layout: Active Campaign & Quick Promo Creator -->
+          <div
+            class="grid grid-cols-1 lg:grid-cols-2 gap-md my-base items-stretch"
+            id="marketingContainer"
+          >
+            <!-- Card 1: Active Campaign Card (Template) -->
+            <div
+              class="campaign-card bg-surface-container-lowest rounded-xl p-md shadow-sm border border-soft-border relative overflow-hidden flex flex-col justify-between"
+              id="activeCampaignBanner"
+            >
+              <div
+                class="absolute -right-10 -bottom-10 w-48 h-48 rounded-full bg-secondary-container/30 blur-2xl pointer-events-none"
+              ></div>
+              <div>
+                <div
+                  class="flex items-start justify-between gap-sm relative z-10"
+                >
+                  <div class="flex items-center gap-sm">
+                    <div
+                      class="w-10 h-10 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center flex-shrink-0"
+                    >
+                      <span class="material-symbols-outlined text-[22px]"
+                        >campaign</span
+                      >
+                    </div>
+                    <div>
+                      <div class="flex items-center gap-xs">
+                        <span
+                          class="font-label-sm text-label-sm uppercase tracking-wider text-muted-terracotta font-semibold"
+                          >Active Campaign</span
+                        >
+                        <span class="text-outline-variant">•</span>
+                        <span class="font-label-sm text-label-sm text-secondary"
+                          >Seasonal Event</span
+                        >
+                      </div>
+                      <h2
+                        class="font-headline-md text-headline-md text-charcoal font-semibold"
+                      >
+                        Mid-Season Beauty Promo: 15% OFF
+                      </h2>
+                    </div>
+                  </div>
+                  <!-- Master Switch -->
+                  <label
+                    class="relative inline-flex items-center cursor-pointer flex-shrink-0"
+                    title="Toggle Campaign Status"
+                  >
+                    <input
+                      checked=""
+                      class="campaign-toggle sr-only peer"
+                      type="checkbox"
+                    />
+                    <div
+                      class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-charcoal"
+                    ></div>
+                  </label>
+                </div>
+                <!-- Campaign Visual Metrics / Spark Bar -->
+                <div
+                  class="my-md py-sm px-md bg-surface-container-low rounded-xl relative z-10 grid grid-cols-3 gap-md border border-soft-border"
+                >
+                  <div>
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant block"
+                      >Discount Scope</span
+                    >
+                    <span
+                      class="font-headline-md text-headline-md text-charcoal font-semibold"
+                      >15% Tier</span
+                    >
+                  </div>
+                  <div>
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant block"
+                      >Ends In</span
+                    >
+                    <span
+                      class="font-headline-md text-headline-md text-charcoal font-semibold"
+                      >14 Days</span
+                    >
+                  </div>
+                  <div>
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant block"
+                      >Redemptions</span
+                    >
+                    <span
+                      class="font-headline-md text-headline-md text-charcoal font-semibold"
+                      >184 orders</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div
+                class="flex flex-wrap items-center justify-between gap-sm pt-xs relative z-10"
+              >
+                <div
+                  class="flex items-center gap-xs text-on-surface-variant font-label-sm text-label-sm"
+                >
+                  <span class="material-symbols-outlined text-[16px] text-sage"
+                    >event_available</span
+                  >
+                  <span>Target: Scalp Therapy &amp; Hair Care Categories</span>
+                </div>
+                <div class="flex items-center gap-xs">
+                  <button
+                    class="adjust-discount-btn px-sm py-xs bg-surface-container rounded-xl font-label-sm text-label-sm text-charcoal hover:bg-surface-container-high transition-colors font-medium"
+                    type="button"
+                  >
+                    Adjust Discount
+                  </button>
+                  <button
+                    class="extend-duration-btn px-sm py-xs bg-surface-container rounded-xl font-label-sm text-label-sm text-charcoal hover:bg-surface-container-high transition-colors font-medium"
+                    type="button"
+                  >
+                    Extend Duration
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2: Quick Promo Creator Card (Template) -->
+            <div
+              class="promo-card bg-surface-container-lowest rounded-xl p-md shadow-sm border border-soft-border flex flex-col justify-between"
+              id="promoCardTemplate"
+            >
+              <div>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-xs">
+                    <span
+                      class="material-symbols-outlined text-[20px] text-charcoal"
+                      >loyalty</span
+                    >
+                    <h3
+                      class="font-label-md text-label-md uppercase tracking-wider text-charcoal font-semibold"
+                    >
+                      Quick Promo Creator
+                    </h3>
+                  </div>
+                  <span
+                    class="px-xs py-0.5 rounded-lg bg-surface-container text-on-surface-variant font-label-sm text-label-sm"
+                    >Catalog Campaign</span
+                  >
+                </div>
+                <div class="flex flex-col gap-sm my-sm">
+                  <div>
+                    <label
+                      class="block font-label-sm text-label-sm text-on-surface-variant mb-xs font-medium"
+                      >Promo Voucher Code</label
+                    >
+                    <div class="relative">
+                      <input
+                        class="promo-code-input w-full bg-surface-container-low font-label-md text-label-md tracking-wider text-charcoal uppercase px-sm py-xs rounded-xl focus:outline-none focus:bg-surface-container-lowest transition-colors border border-soft-border"
+                        type="text"
+                        value="GLAMORASUMMER"
+                      />
+                      <button
+                        class="copy-promo-btn absolute right-xs top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-charcoal p-1 transition-colors"
+                        title="Copy Code"
+                        type="button"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >content_copy</span
+                        >
+                      </button>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-2 gap-sm">
+                    <div>
+                      <label
+                        class="block font-label-sm text-label-sm text-on-surface-variant mb-xs font-medium"
+                        >Discount %</label
+                      >
+                      <div
+                        class="discount-rate-buttons flex items-center gap-xs"
+                      >
+                        <button
+                          class="flex-1 py-xs rounded-lg font-label-sm text-label-sm bg-surface-container text-charcoal hover:bg-surface-container-high font-semibold border border-soft-border transition-colors"
+                          data-discount="10%"
+                          type="button"
+                        >
+                          10%
+                        </button>
+                        <button
+                          class="flex-1 py-xs rounded-lg font-label-sm text-label-sm bg-charcoal text-on-primary font-semibold transition-colors"
+                          data-discount="15%"
+                          type="button"
+                        >
+                          15%
+                        </button>
+                        <button
+                          class="flex-1 py-xs rounded-lg font-label-sm text-label-sm bg-surface-container text-charcoal hover:bg-surface-container-high font-semibold border border-soft-border transition-colors"
+                          data-discount="25%"
+                          type="button"
+                        >
+                          25%
+                        </button>
+                      </div>
+                    </div>
+                    <div>
+                      <label
+                        class="block font-label-sm text-label-sm text-on-surface-variant mb-xs font-medium"
+                        >Target Scope</label
+                      >
+                      <select
+                        class="w-full bg-surface-container-low font-body-sm text-body-sm text-charcoal px-sm py-xs rounded-xl focus:outline-none border border-soft-border"
+                      >
+                        <option value="Scalp Therapy">
+                          Scalp &amp; Hair Care
+                        </option>
+                        <option value="Accessories">Accessories Only</option>
+                        <option value="All">All Inventory</option>
+                        <option value="Treatment">Treatments Only</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="deploy-campaign-btn w-full py-xs mt-xs bg-charcoal text-on-primary rounded-xl font-label-sm text-label-sm flex items-center justify-center gap-xs hover:bg-primary transition-colors font-medium shadow-sm"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[16px]">bolt</span>
+                <span>Deploy Campaign Immediately</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Dedicated In-Content Search Bar & Filter Controls Header -->
+          <div
+            class="bg-surface-container-lowest p-md rounded-xl shadow-sm border border-soft-border my-md flex flex-col gap-sm"
+          >
+            <div
+              class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-sm"
+            >
+              <div class="relative flex-1">
+                <span
+                  class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline text-[20px]"
+                  >search</span
+                >
+                <input
+                  class="w-full bg-surface-container-low text-charcoal font-body-sm text-body-sm pl-10 pr-sm py-2 rounded-xl focus:outline-none focus:bg-surface-container-lowest transition-colors border border-soft-border"
+                  id="catalogSearchInput"
+                  placeholder="Search by product name, botanical ingredients, or description..."
+                  type="text"
+                />
+                <button
+                  class="absolute right-sm top-1/2 -translate-y-1/2 text-outline hover:text-charcoal hidden"
+                  id="clearSearchBtn"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >cancel</span
+                  >
+                </button>
+              </div>
+              <div class="flex items-center gap-xs flex-wrap relative">
+                <div
+                  class="flex items-center bg-surface-container-low px-sm py-1.5 rounded-xl border border-soft-border"
+                >
+                  <span
+                    class="material-symbols-outlined text-[18px] text-secondary mr-xs"
+                    >category</span
+                  >
+                  <select
+                    class="bg-transparent text-charcoal font-body-sm text-body-sm focus:outline-none cursor-pointer pr-xs"
+                    id="categoryFilterSelect"
+                  >
+                    <option value="all">All Categories</option>
+                    <option value="Hair Care">Hair Care</option>
+                    <option value="Accessories">Accessories</option>
+                    <option value="Treatment">Treatment</option>
+                    <option value="Scalp Therapy">Scalp Therapy</option>
+                  </select>
+                </div>
+                <div class="relative">
+                  <button
+                    class="flex items-center gap-xs px-sm py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-charcoal font-label-sm text-label-sm border border-soft-border transition-colors font-medium"
+                    id="filterDropdownToggle"
+                    type="button"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >tune</span
+                    >
+                    <span>Filters &amp; Sort</span>
+                    <span class="material-symbols-outlined text-[16px]"
+                      >keyboard_arrow_down</span
+                    >
+                  </button>
+                  <div
+                    class="absolute right-0 top-full mt-2 w-72 bg-surface-container-lowest rounded-xl shadow-xl border border-soft-border p-md z-30 hidden flex flex-col gap-sm"
+                    id="filterDropdownMenu"
+                  >
+                    <div>
+                      <span
+                        class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold block mb-xs"
+                        >Sort Products</span
+                      >
+                      <div
+                        class="flex flex-col gap-1 text-body-sm text-charcoal"
+                      >
+                        <label
+                          class="flex items-center gap-xs hover:bg-surface-container-low p-1 rounded-lg cursor-pointer"
+                        >
+                          <input
+                            checked=""
+                            class="text-charcoal focus:ring-0"
+                            name="sortOption"
+                            type="radio"
+                            value="default"
+                          />
+                          <span>Default (Latest added)</span>
+                        </label>
+                        <label
+                          class="flex items-center gap-xs hover:bg-surface-container-low p-1 rounded-lg cursor-pointer"
+                        >
+                          <input
+                            class="text-charcoal focus:ring-0"
+                            name="sortOption"
+                            type="radio"
+                            value="price-asc"
+                          />
+                          <span>Price: Low to High</span>
+                        </label>
+                        <label
+                          class="flex items-center gap-xs hover:bg-surface-container-low p-1 rounded-lg cursor-pointer"
+                        >
+                          <input
+                            class="text-charcoal focus:ring-0"
+                            name="sortOption"
+                            type="radio"
+                            value="price-desc"
+                          />
+                          <span>Price: High to Low</span>
+                        </label>
+                        <label
+                          class="flex items-center gap-xs hover:bg-surface-container-low p-1 rounded-lg cursor-pointer"
+                        >
+                          <input
+                            class="text-charcoal focus:ring-0"
+                            name="sortOption"
+                            type="radio"
+                            value="stock-desc"
+                          />
+                          <span>Stock: High to Low</span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="pt-xs border-t border-soft-border">
+                      <span
+                        class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold block mb-xs"
+                        >Discount Status</span
+                      >
+                      <div
+                        class="flex flex-col gap-1 text-body-sm text-charcoal"
+                      >
+                        <label
+                          class="flex items-center gap-xs hover:bg-surface-container-low p-1 rounded-lg cursor-pointer"
+                        >
+                          <input
+                            class="rounded text-charcoal focus:ring-0"
+                            id="filterPromoOnly"
+                            type="checkbox"
+                          />
+                          <span>Has Active Promo (-15%)</span>
+                        </label>
+                      </div>
+                    </div>
+                    <div
+                      class="pt-xs border-t border-soft-border flex items-center justify-between"
+                    >
+                      <button
+                        class="font-label-sm text-label-sm text-secondary hover:text-charcoal font-semibold"
+                        id="resetFiltersBtn"
+                        type="button"
+                      >
+                        Reset
+                      </button>
+                      <button
+                        class="px-sm py-1 bg-charcoal text-white rounded-lg font-label-sm text-label-sm font-semibold hover:bg-primary transition-colors"
+                        id="applyFiltersBtn"
+                        type="button"
+                      >
+                        Apply
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- View switch (Table vs Grid) -->
+                <div
+                  class="flex items-center bg-surface-container p-0.5 rounded-xl border border-soft-border"
+                >
+                  <button
+                    class="p-xs rounded-lg bg-surface-container-lowest text-charcoal shadow-sm transition-all"
+                    id="tableViewBtn"
+                    title="Table View"
+                    type="button"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >table_rows</span
+                    >
+                  </button>
+                  <button
+                    class="p-xs rounded-lg text-on-surface-variant hover:text-charcoal transition-all"
+                    id="gridViewBtn"
+                    title="Grid View"
+                    type="button"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >grid_view</span
+                    >
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Status Filter Tabs -->
+            <div
+              class="flex items-center gap-xs flex-wrap pt-xs border-t border-soft-border"
+              id="statusTabsContainer"
+            >
+              <button
+                class="status-tab px-md py-xs rounded-xl bg-charcoal text-on-primary font-label-sm text-label-sm shadow-sm transition-all font-semibold"
+                data-status="all"
+                type="button"
+              >
+                All Products (<span class="tab-count">4</span>)
+              </button>
+              <button
+                class="status-tab px-md py-xs rounded-xl bg-surface-container text-charcoal hover:bg-surface-container-high font-label-sm text-label-sm transition-all border border-soft-border"
+                data-status="in-stock"
+                type="button"
+              >
+                In Stock (2)
+              </button>
+              <button
+                class="status-tab px-md py-xs rounded-xl bg-surface-container text-charcoal hover:bg-surface-container-high font-label-sm text-label-sm transition-all border border-soft-border"
+                data-status="low-stock"
+                type="button"
+              >
+                Low Stock (1)
+              </button>
+              <button
+                class="status-tab px-md py-xs rounded-xl bg-surface-container text-charcoal hover:bg-surface-container-high font-label-sm text-label-sm transition-all border border-soft-border"
+                data-status="out-of-stock"
+                type="button"
+              >
+                Out of Stock (1)
+              </button>
+              <button
+                class="status-tab px-md py-xs rounded-xl bg-surface-container text-charcoal hover:bg-surface-container-high font-label-sm text-label-sm transition-all border border-soft-border"
+                data-status="draft"
+                type="button"
+              >
+                Drafts (1)
+              </button>
+            </div>
+          </div>
+
+          <!-- Product Catalog Inventory View (Table by default, toggles to Grid) -->
+          <div
+            class="w-full bg-surface-container-lowest rounded-xl shadow-sm border border-soft-border overflow-hidden"
+            id="productCatalogContainer"
+          >
+            <div class="overflow-x-auto w-full">
+              <table class="w-full text-left" id="productsTable">
+                <thead
+                  class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider border-b border-soft-border"
+                >
+                  <tr>
+                    <th class="py-sm px-md font-semibold">
+                      Item &amp; Details
+                    </th>
+                    <th class="py-sm px-md font-semibold">Category</th>
+                    <th class="py-sm px-md font-semibold">Pricing Structure</th>
+                    <th class="py-sm px-md font-semibold">Inventory Volume</th>
+                    <th class="py-sm px-md font-semibold">Status</th>
+                    <th class="py-sm px-md font-semibold text-right">
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="divide-y divide-soft-border transition-all duration-300"
+                  id="productTableBody"
+                >
+                  <!-- Row 1 -->
+                  <tr
+                    class="product-row hover:bg-surface-container/50 transition-colors"
+                    data-category="Hair Care"
+                    data-has-promo="true"
+                    data-id="1"
+                    data-price="15725"
+                    data-status="in-stock"
+                    data-stock="42"
+                  >
+                    <td class="py-md px-md transition-all">
+                      <div class="flex flex-col gap-xs w-full">
+                        <div class="flex items-center gap-sm">
+                          <img
+                            alt="Restorative Scalp &amp; Hair Elixir"
+                            class="w-20 h-20 rounded-xl object-cover shadow-sm flex-shrink-0 border border-soft-border"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7BSfkQh2CgmBAUoEKsRVfzfV9kitJQyax6BSC7RCXkKTlyjQHwYTdoJ7tUGNc830jM61wt3CE-f0iWheOB1fw2UcAG37_zt5eGOrm7SluJEU7A8TCGAGLOKAZZElFpt1MnIRj1zGWCpUXf1aEf-7wURynlvu5GcEK7xa7lsAJDSCJFSd8UsrbCbE1WC5YtgPu2tr2z2qNEEKvq7cw3D_YRoJBrjg0gO_U5JIV9i9NR-VZhMeoMHHv"
+                          />
+                          <span
+                            class="product-title font-body-md text-body-md text-charcoal font-semibold hover:text-secondary cursor-pointer transition-colors"
+                            >Restorative Scalp &amp; Hair Elixir (100ml)</span
+                          >
+                        </div>
+                        <span
+                          class="product-desc font-body-sm text-body-sm text-on-surface-variant line-clamp-2 overflow-hidden text-ellipsis"
+                          >Cold-pressed botanical extracts, organic rosemary
+                          &amp; jojoba for deep follicle nourishment and
+                          moisture rentention.</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-md px-md transition-all">
+                      <span
+                        class="px-sm py-xs bg-surface-container-high rounded-lg text-charcoal font-label-sm text-label-sm font-medium"
+                        >Hair Care</span
+                      >
+                    </td>
+                    <td class="py-md px-md transition-all">
+                      <div class="flex flex-col">
+                        <div class="flex items-center gap-xs">
+                          <span
+                            class="font-label-md text-label-md text-charcoal font-semibold"
+                            >₦15,725</span
+                          >
+                          <span
+                            class="text-[11px] font-bold px-1.5 py-0.5 rounded bg-secondary-container text-on-secondary-container"
+                            >-15%</span
+                          >
+                        </div>
+                        <span
+                          class="font-body-sm text-body-sm text-on-surface-variant line-through"
+                          >₦18,500</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-md px-md transition-all">
+                      <div class="flex items-center gap-xs">
+                        <div
+                          class="w-2 h-2 rounded-full bg-success-green"
+                        ></div>
+                        <span
+                          class="font-body-sm text-body-sm text-charcoal font-medium"
+                          >42 units</span
+                        >
+                      </div>
+                      <span
+                        class="font-label-sm text-label-sm text-secondary block mt-0.5"
+                        >In Stock</span
+                      >
+                    </td>
+                    <td class="py-md px-md transition-all">
+                      <span
+                        class="px-sm py-xs bg-secondary-container text-on-secondary-container rounded-lg font-label-sm text-label-sm font-semibold"
+                        >Active</span
+                      >
+                    </td>
+                    <td class="py-md px-md text-right transition-all">
+                      <div
+                        class="flex items-center justify-end gap-xs actions-div"
+                      >
+                        <button
+                          class="edit-row-btn p-xs rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-charcoal transition-colors"
+                          title="Edit Product Details"
+                        >
+                          <span class="material-symbols-outlined text-[18px]"
+                            >edit</span
+                          >
+                        </button>
+                        <button
+                          class="p-xs rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-charcoal transition-colors"
+                          title="Update Stock Levels"
+                        >
+                          <span class="material-symbols-outlined text-[18px]"
+                            >swap_vert</span
+                          >
+                        </button>
+                        <button
+                          class="p-xs rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-charcoal transition-colors"
+                          title="Manage Promo"
+                        >
+                          <span class="material-symbols-outlined text-[18px]"
+                            >percent</span
+                          >
+                        </button>
+                        <button
+                          class="delete-row-btn p-xs rounded-lg hover:bg-surface-container text-muted-terracotta transition-colors"
+                          title="Archive/Delete"
+                        >
+                          <span class="material-symbols-outlined text-[18px]"
+                            >delete</span
+                          >
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Row 2 -->
+                  <tr
+                    class="product-row hover:bg-surface-container/50 transition-colors bg-surface-container-low/30"
+                    data-category="Accessories"
+                    data-has-promo="false"
+                    data-id="2"
+                    data-price="6500"
+                    data-status="low-stock"
+                    data-stock="15"
+                  >
+                    <td class="py-md px-md transition-all">
+                      <div class="flex flex-col gap-xs w-full">
+                        <div class="flex items-center gap-sm">
+                          <img
+                            alt="Organic Bamboo Detangling Comb Set"
+                            class="w-20 h-20 rounded-xl object-cover shadow-sm flex-shrink-0 border border-soft-border"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9_eQp5HFtSVFXHrtTY88JVtUEXkbRd8rwoB4aaC68VNX29gc1ZabcbFqGOpvUcN0vQbMnepwJ31IWdBQ4zSh0VmmUvo-WJWU7dLCAZ4yHNtqqxCUq892PcddDX1VojjOfXz2cIut9RA7UC9ooXZkKAOD28T6H9JYWyBNKsYcIGhXQeytSlnOoUvCix88Lw3Id1c9PydSJaDMKFXng68hyPaAFwgXRoYAvYh9vhiyXY9bIqVcjTqc_"
+                          />
+                          <span
+                            class="product-title font-body-md text-body-md text-charcoal font-semibold hover:text-secondary cursor-pointer transition-colors"
+                            >Organic Bamboo Detangling Comb Set</span
+                          >
+                        </div>
+                        <span
+                          class="product-desc font-body-sm text-body-sm text-on-surface-variant line-clamp-2 overflow-hidden text-ellipsis"
+                          >Dual tooth anti-static design with linen travel
+                          pouch. Gentle on sensitive scalps and reduces
+                          breakage.</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-md px-md transition-all">
+                      <span
+                        class="px-sm py-xs bg-surface-container-high rounded-lg text-charcoal font-label-sm text-label-sm font-medium"
+                        >Accessories</span
+                      >
+                    </td>
+                    <td class="py-md px-md transition-all">
+                      <span
+                        class="font-label-md text-label-md text-charcoal font-semibold"
+                        >₦6,500</span
+                      >
+                      <span
+                        class="block font-label-sm text-label-sm text-on-surface-variant"
+                        >Standard MSRP</span
+                      >
+                    </td>
+                    <td class="py-md px-md transition-all">
+                      <div class="flex items-center gap-xs">
+                        <div
+                          class="w-2 h-2 rounded-full bg-warning-amber"
+                        ></div>
+                        <span
+                          class="font-body-sm text-body-sm text-muted-terracotta font-medium"
+                          >15 units</span
+                        >
+                      </div>
+                      <span
+                        class="font-label-sm text-label-sm text-muted-terracotta block mt-0.5 font-semibold"
+                        >Low Stock Alert</span
+                      >
+                    </td>
+                    <td class="py-md px-md transition-all">
+                      <span
+                        class="px-sm py-xs bg-secondary-container text-on-secondary-container rounded-lg font-label-sm text-label-sm font-semibold"
+                        >Active</span
+                      >
+                    </td>
+                    <td class="py-md px-md text-right transition-all">
+                      <div
+                        class="flex items-center justify-end gap-xs actions-div"
+                      >
+                        <button
+                          class="edit-row-btn p-xs rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-charcoal transition-colors"
+                          title="Edit Product Details"
+                        >
+                          <span class="material-symbols-outlined text-[18px]"
+                            >edit</span
+                          >
+                        </button>
+                        <button
+                          class="p-xs rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-charcoal transition-colors"
+                          title="Update Stock Levels"
+                        >
+                          <span class="material-symbols-outlined text-[18px]"
+                            >swap_vert</span
+                          >
+                        </button>
+                        <button
+                          class="p-xs rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-charcoal transition-colors"
+                          title="Apply Promo"
+                        >
+                          <span class="material-symbols-outlined text-[18px]"
+                            >percent</span
+                          >
+                        </button>
+                        <button
+                          class="delete-row-btn p-xs rounded-lg hover:bg-surface-container text-muted-terracotta transition-colors"
+                          title="Archive/Delete"
+                        >
+                          <span class="material-symbols-outlined text-[18px]"
+                            >delete</span
+                          >
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Row 3 -->
+                  <tr
+                    class="product-row hover:bg-surface-container/50 transition-colors"
+                    data-category="Treatment"
+                    data-has-promo="false"
+                    data-id="3"
+                    data-price="14000"
+                    data-status="in-stock"
+                    data-stock="88"
+                  >
+                    <td class="py-md px-md transition-all">
+                      <div class="flex flex-col gap-xs w-full">
+                        <div class="flex items-center gap-sm">
+                          <img
+                            alt="Hydrating Shea Butter Deep Mask"
+                            class="w-20 h-20 rounded-xl object-cover shadow-sm flex-shrink-0 border border-soft-border"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHMsfRqSFdpRq9ft9fYIkh-OW1qVhdUZo-bMDoHS3kcipuzfZ6Rl2PO5Vo8OpcJlDeoIpTb1usEl_OtWUa4Zwd3MQ4vqYlxsezMEHMar7VHEJJbIRDYhRYVF9yC_juzdyLhesXas--vQhlsNyj7w56CImo5gKFZrOxq-wVIAcklCvK3ZlDxuSrS99vW56mFHszP-qj7oLDJl9eqoQLlie2ZvBDjchE639hbuwJ5yf9MdzCnxtjm3D1"
+                          />
+                          <span
+                            class="product-title font-body-md text-body-md text-charcoal font-semibold hover:text-secondary cursor-pointer transition-colors"
+                            >Hydrating Shea Butter Deep Mask (250g)</span
+                          >
+                        </div>
+                        <span
+                          class="product-desc font-body-sm text-body-sm text-on-surface-variant line-clamp-2 overflow-hidden text-ellipsis"
+                          >Intense moisture infusion with pure raw West African
+                          shea butter, restoring elasticity to brittle hair
+                          strands.</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-md px-md transition-all">
+                      <span
+                        class="px-sm py-xs bg-surface-container-high rounded-lg text-charcoal font-label-sm text-label-sm font-medium"
+                        >Treatment</span
+                      >
+                    </td>
+                    <td class="py-md px-md transition-all">
+                      <span
+                        class="font-label-md text-label-md text-charcoal font-semibold"
+                        >₦14,000</span
+                      >
+                      <span
+                        class="block font-label-sm text-label-sm text-on-surface-variant"
+                        >Standard MSRP</span
+                      >
+                    </td>
+                    <td class="py-md px-md transition-all">
+                      <div class="flex items-center gap-xs">
+                        <div
+                          class="w-2 h-2 rounded-full bg-success-green"
+                        ></div>
+                        <span
+                          class="font-body-sm text-body-sm text-charcoal font-medium"
+                          >88 units</span
+                        >
+                      </div>
+                      <span
+                        class="font-label-sm text-label-sm text-secondary block mt-0.5"
+                        >In Stock</span
+                      >
+                    </td>
+                    <td class="py-md px-md transition-all">
+                      <span
+                        class="px-sm py-xs bg-secondary-container text-on-secondary-container rounded-lg font-label-sm text-label-sm font-semibold"
+                        >Active</span
+                      >
+                    </td>
+                    <td class="py-md px-md text-right transition-all">
+                      <div
+                        class="flex items-center justify-end gap-xs actions-div"
+                      >
+                        <button
+                          class="edit-row-btn p-xs rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-charcoal transition-colors"
+                          title="Edit Product Details"
+                        >
+                          <span class="material-symbols-outlined text-[18px]"
+                            >edit</span
+                          >
+                        </button>
+                        <button
+                          class="p-xs rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-charcoal transition-colors"
+                          title="Update Stock Levels"
+                        >
+                          <span class="material-symbols-outlined text-[18px]"
+                            >swap_vert</span
+                          >
+                        </button>
+                        <button
+                          class="p-xs rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-charcoal transition-colors"
+                          title="Apply Promo"
+                        >
+                          <span class="material-symbols-outlined text-[18px]"
+                            >percent</span
+                          >
+                        </button>
+                        <button
+                          class="delete-row-btn p-xs rounded-lg hover:bg-surface-container text-muted-terracotta transition-colors"
+                          title="Archive/Delete"
+                        >
+                          <span class="material-symbols-outlined text-[18px]"
+                            >delete</span
+                          >
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Row 4 -->
+                  <tr
+                    class="product-row hover:bg-surface-container/50 transition-colors bg-surface-container-low/20 opacity-80 hover:opacity-100"
+                    data-category="Scalp Therapy"
+                    data-has-promo="true"
+                    data-id="4"
+                    data-price="20400"
+                    data-status="out-of-stock"
+                    data-stock="0"
+                  >
+                    <td class="py-md px-md transition-all">
+                      <div class="flex flex-col gap-xs w-full">
+                        <div class="flex items-center gap-sm">
+                          <div class="relative">
+                            <img
+                              alt="Clinical Clarifying Follicle Serum"
+                              class="w-20 h-20 rounded-xl object-cover shadow-sm flex-shrink-0 grayscale border border-soft-border"
+                              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR5RicTWgMlUfzS4zxOJWrn-Yuj46MIIN1kVnVVasb_WxAuEbjEEG_lFbAkLLPXqxtO2csYJ_rkW6CdkEmQICWQ17VjfKkEMX2sQaLTTCqJn03-fweEAAViHfO-YpWQCwkAhDt7jV5MaFwyfRaMK-IRIaG-Ec6vXaZii3PDoDCdhpQkxbHZOyPkS1Y7Y-82Ux4pg5t5MreJiqmPkXOIvXc3xYtxkthaW_d5rFEa_Ydt8zGl0aqzvHk"
+                            />
+                            <span
+                              class="absolute inset-0 bg-charcoal/20 rounded-xl flex items-center justify-center"
+                            >
+                              <span
+                                class="material-symbols-outlined text-white text-[16px]"
+                                >visibility_off</span
+                              >
+                            </span>
+                          </div>
+                          <span
+                            class="product-title font-body-md text-body-md text-charcoal font-semibold hover:text-secondary cursor-pointer transition-colors"
+                            >Clinical Clarifying Follicle Serum</span
+                          >
+                        </div>
+                        <span
+                          class="product-desc font-body-sm text-body-sm text-on-surface-variant line-clamp-2 overflow-hidden text-ellipsis"
+                          >Salicylic acid 2%, tea tree oil, peptide scalp
+                          complex. Designed for clinical clarifying
+                          therapy.</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-md px-md transition-all">
+                      <span
+                        class="px-sm py-xs bg-surface-container-high rounded-lg text-charcoal font-label-sm text-label-sm font-medium"
+                        >Scalp Therapy</span
+                      >
+                    </td>
+                    <td class="py-md px-md transition-all">
+                      <div class="flex flex-col">
+                        <div class="flex items-center gap-xs">
+                          <span
+                            class="font-label-md text-label-md text-charcoal font-semibold"
+                            >₦20,400</span
+                          >
+                          <span
+                            class="text-[11px] font-bold px-1.5 py-0.5 rounded bg-secondary-container text-on-secondary-container"
+                            >-15%</span
+                          >
+                        </div>
+                        <span
+                          class="font-body-sm text-body-sm text-on-surface-variant line-through"
+                          >₦24,000</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-md px-md transition-all">
+                      <div class="flex items-center gap-xs">
+                        <div class="w-2 h-2 rounded-full bg-error-red"></div>
+                        <span
+                          class="font-body-sm text-body-sm text-error-red font-medium"
+                          >0 units</span
+                        >
+                      </div>
+                      <span
+                        class="font-label-sm text-label-sm text-error-red block mt-0.5 font-semibold"
+                        >Out of Stock</span
+                      >
+                    </td>
+                    <td class="py-md px-md transition-all">
+                      <span
+                        class="px-sm py-xs bg-surface-container-high text-on-surface-variant rounded-lg font-label-sm text-label-sm font-semibold"
+                        >Draft</span
+                      >
+                    </td>
+                    <td class="py-md px-md text-right transition-all">
+                      <div
+                        class="flex items-center justify-end gap-xs actions-div"
+                      >
+                        <button
+                          class="edit-row-btn p-xs rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-charcoal transition-colors"
+                          title="Edit Product Details"
+                        >
+                          <span class="material-symbols-outlined text-[18px]"
+                            >edit</span
+                          >
+                        </button>
+                        <button
+                          class="restock-row-btn px-xs py-1 rounded-lg bg-charcoal text-on-primary font-label-sm text-label-sm hover:bg-primary transition-colors font-medium"
+                          title="Restock Units"
+                        >
+                          Restock
+                        </button>
+                        <button
+                          class="p-xs rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-charcoal transition-colors"
+                          title="Apply Promo"
+                        >
+                          <span class="material-symbols-outlined text-[18px]"
+                            >percent</span
+                          >
+                        </button>
+                        <button
+                          class="delete-row-btn p-xs rounded-lg hover:bg-surface-container text-muted-terracotta transition-colors"
+                          title="Archive/Delete"
+                        >
+                          <span class="material-symbols-outlined text-[18px]"
+                            >delete</span
+                          >
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Empty State -->
+              <div
+                class="hidden p-xl text-center flex-col items-center justify-center"
+                id="noProductsFound"
+              >
+                <span
+                  class="material-symbols-outlined text-[48px] text-outline mb-sm"
+                  >search_off</span
+                >
+                <h4
+                  class="font-headline-md text-headline-md text-charcoal font-semibold mb-xs"
+                >
+                  No matching apothecary products found
+                </h4>
+                <p
+                  class="font-body-sm text-body-sm text-on-surface-variant max-w-sm"
+                >
+                  Try tweaking your search term, clearing category filters, or
+                  add a new formulation.
+                </p>
+                <button
+                  class="mt-md px-md py-xs bg-surface-container text-charcoal rounded-xl font-label-sm text-label-sm font-semibold hover:bg-surface-container-high transition-colors"
+                  id="resetSearchFromEmpty"
+                >
+                  Clear All Filters
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="p-md bg-surface-container-low/50 flex flex-col sm:flex-row items-center justify-between gap-sm border-t border-soft-border"
+            >
+              <div class="flex items-center gap-sm">
+                <span
+                  class="font-body-sm text-body-sm text-on-surface-variant"
+                  id="tableShowingCount"
+                  >Showing 4 of 4 apothecary products</span
+                >
+                <button
+                  class="font-label-sm text-label-sm text-charcoal font-semibold hover:underline"
+                  id="bulkExportBtn"
+                  type="button"
+                >
+                  Bulk Stock Sync CSV
+                </button>
+              </div>
+              <div class="flex items-center gap-xs">
+                <button
+                  class="p-xs rounded-lg bg-surface-container-lowest text-on-surface-variant opacity-40 cursor-not-allowed border border-soft-border"
+                  disabled=""
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >chevron_left</span
+                  >
+                </button>
+                <span
+                  class="px-sm py-xs font-label-sm text-label-sm text-charcoal bg-surface-container-lowest rounded-lg shadow-sm font-semibold border border-soft-border"
+                  >1</span
+                >
+                <button
+                  class="p-xs rounded-lg bg-surface-container-lowest text-on-surface-variant opacity-40 cursor-not-allowed border border-soft-border"
+                  disabled=""
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >chevron_right</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Real-Time Stock Reorder Recommendations Bento Feature -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-md mt-lg">
+            <div
+              class="p-md bg-surface-container rounded-xl shadow-sm border border-soft-border flex flex-col justify-between"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-xs">
+                  <span
+                    class="font-label-sm text-label-sm uppercase tracking-wider text-muted-terracotta font-semibold"
+                    >Depleted Trigger</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[20px] text-muted-terracotta"
+                    >notification_important</span
+                  >
+                </div>
+                <h4
+                  class="font-headline-md text-headline-md text-charcoal font-semibold mb-xs"
+                >
+                  Follicle Serum Restock
+                </h4>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  3 clients placed notifications for the Clinical Clarifying
+                  Follicle Serum. Supplier lead time is 4 business days.
+                </p>
+              </div>
+              <button
+                class="mt-md px-md py-xs bg-charcoal text-on-primary rounded-xl font-label-sm text-label-sm flex items-center justify-center gap-xs hover:bg-primary transition-colors font-medium shadow-sm order-distributor-btn"
+                type="button"
+              >
+                <span>Order 50 Units via Distributor</span>
+              </button>
+            </div>
+            <div
+              class="p-md bg-surface-container-lowest rounded-xl shadow-sm border border-soft-border flex flex-col justify-between"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-xs">
+                  <span
+                    class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold"
+                    >High Velocity Product</span
+                  >
+                  <span class="material-symbols-outlined text-[20px] text-sage"
+                    >auto_graph</span
+                  >
+                </div>
+                <h4
+                  class="font-headline-md text-headline-md text-charcoal font-semibold mb-xs"
+                >
+                  Restorative Scalp Elixir
+                </h4>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Sales volume increased 44% following the 15% discount
+                  campaign. Current 42 units will last ~9 days.
+                </p>
+              </div>
+              <div class="mt-md flex items-center justify-between pt-xs">
+                <span
+                  class="font-label-sm text-label-sm text-charcoal font-medium"
+                  >Auto-reorder at 15 units</span
+                >
+                <button
+                  class="font-label-sm text-label-sm text-secondary font-bold hover:underline"
+                  type="button"
+                >
+                  Config Alert
+                </button>
+              </div>
+            </div>
+            <div
+              class="p-md bg-surface-container-lowest rounded-xl shadow-sm border border-soft-border flex flex-col justify-between"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-xs">
+                  <span
+                    class="font-label-sm text-label-sm uppercase tracking-wider text-charcoal font-semibold"
+                    >Storefront Sync</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[20px] text-charcoal"
+                    >storefront</span
+                  >
+                </div>
+                <h4
+                  class="font-headline-md text-headline-md text-charcoal font-semibold mb-xs"
+                >
+                  In-Salon Shelf Placement
+                </h4>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Synchronize retail shelf tags with active digital discounted
+                  pricing to avoid POS discrepancy.
+                </p>
+              </div>
+              <button
+                class="mt-md px-md py-xs bg-surface-container text-charcoal hover:bg-surface-container-high rounded-xl font-label-sm text-label-sm flex items-center justify-center gap-xs transition-colors font-medium border border-soft-border"
+                onclick="window.print()"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[16px]">print</span>
+                <span>Print Barcode Price Tags</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Add New Product Modal with Image Upload & Live Preview -->
+          <div
+            class="fixed inset-0 bg-charcoal/50 backdrop-blur-sm z-50 flex items-center justify-center p-md opacity-0 pointer-events-none transition-opacity duration-300"
+            id="addProductModal"
+          >
+            <div
+              class="bg-surface-container-lowest rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl p-lg flex flex-col gap-md border border-soft-border transform scale-95 transition-transform duration-300"
+              id="addProductModalContent"
+            >
+              <div
+                class="flex items-center justify-between pb-sm border-b border-soft-border"
+              >
+                <div>
+                  <span
+                    class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-semibold"
+                    >Retail Apothecary</span
+                  >
+                  <h3
+                    class="font-headline-lg text-headline-lg text-charcoal font-semibold"
+                    id="modalTitle"
+                  >
+                    Add New Formulation
+                  </h3>
+                </div>
+                <button
+                  class="p-xs rounded-full hover:bg-surface-container-high text-charcoal transition-colors"
+                  id="closeAddModalBtn"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[24px]"
+                    >close</span
+                  >
+                </button>
+              </div>
+              <form
+                class="flex flex-col gap-md"
+                id="newProductForm"
+                onsubmit="return false;"
+              >
+                <div>
+                  <label
+                    class="block font-label-sm text-label-sm text-charcoal mb-xs font-semibold"
+                    >Product Photograph</label
+                  >
+                  <div
+                    class="border-2 border-dashed border-soft-border hover:border-charcoal/40 rounded-xl p-md bg-surface-container-low transition-colors text-center relative group cursor-pointer"
+                    id="dropzoneArea"
+                  >
+                    <input
+                      accept="image/*"
+                      class="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10"
+                      id="productImageInput"
+                      type="file"
+                    />
+                    <div
+                      class="flex flex-col items-center justify-center gap-xs py-2"
+                      id="uploadPrompt"
+                    >
+                      <div
+                        class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-charcoal group-hover:scale-105 transition-transform"
+                      >
+                        <span class="material-symbols-outlined text-[24px]"
+                          >add_photo_alternate</span
+                        >
+                      </div>
+                      <span
+                        class="font-body-sm text-body-sm font-medium text-charcoal"
+                        >Click or drag &amp; drop product photo</span
+                      >
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >PNG, JPG, or WebP (square or 4:3 recommended)</span
+                      >
+                    </div>
+                    <div
+                      class="hidden flex items-center justify-center gap-md"
+                      id="imagePreviewContainer"
+                    >
+                      <img
+                        alt="Preview"
+                        class="w-20 h-20 object-cover rounded-xl border border-soft-border shadow-sm"
+                        id="imagePreview"
+                        src=""
+                      />
+                      <div class="text-left">
+                        <span
+                          class="font-body-sm text-body-sm font-semibold text-charcoal block"
+                          id="previewFileName"
+                          >photo.jpg</span
+                        >
+                        <button
+                          class="mt-1 text-muted-terracotta text-label-sm hover:underline flex items-center gap-0.5 relative z-20"
+                          id="removeImageBtn"
+                          type="button"
+                        >
+                          <span class="material-symbols-outlined text-[14px]"
+                            >delete</span
+                          >
+                          <span>Remove &amp; choose another</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+                  <div class="md:col-span-2">
+                    <label
+                      class="block font-label-sm text-label-sm text-charcoal mb-xs font-semibold"
+                      >Product Name <span class="text-error-red">*</span></label
+                    >
+                    <input
+                      class="w-full bg-surface-container-low px-sm py-xs rounded-xl font-body-sm text-body-sm text-charcoal focus:outline-none focus:bg-surface-container-lowest transition-colors border border-soft-border"
+                      id="newProductName"
+                      placeholder="e.g., Pure Marula Botanical Hair &amp; Scalp Nectar (100ml)"
+                      required=""
+                      type="text"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block font-label-sm text-label-sm text-charcoal mb-xs font-semibold"
+                      >Category <span class="text-error-red">*</span></label
+                    >
+                    <select
+                      class="w-full bg-surface-container-low px-sm py-xs rounded-xl font-body-sm text-body-sm text-charcoal focus:outline-none border border-soft-border"
+                      id="newProductCategory"
+                    >
+                      <option value="Hair Care">Hair Care</option>
+                      <option value="Scalp Therapy">Scalp Therapy</option>
+                      <option value="Treatment">Treatment</option>
+                      <option value="Accessories">Accessories</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label
+                      class="block font-label-sm text-label-sm text-charcoal mb-xs font-semibold"
+                      >Status</label
+                    >
+                    <select
+                      class="w-full bg-surface-container-low px-sm py-xs rounded-xl font-body-sm text-body-sm text-charcoal focus:outline-none border border-soft-border"
+                      id="newProductStatus"
+                    >
+                      <option value="Active">
+                        Active (Publish in Catalog)
+                      </option>
+                      <option value="Draft">Draft (Save Unlisted)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label
+                      class="block font-label-sm text-label-sm text-charcoal mb-xs font-semibold"
+                      >Retail Price (₦)
+                      <span class="text-error-red">*</span></label
+                    >
+                    <input
+                      class="w-full bg-surface-container-low px-sm py-xs rounded-xl font-body-sm text-body-sm text-charcoal focus:outline-none border border-soft-border"
+                      id="newProductPrice"
+                      min="100"
+                      placeholder="e.g. 14500"
+                      required=""
+                      type="number"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block font-label-sm text-label-sm text-charcoal mb-xs font-semibold"
+                      >Discount % (Optional)</label
+                    >
+                    <input
+                      class="w-full bg-surface-container-low px-sm py-xs rounded-xl font-body-sm text-body-sm text-charcoal focus:outline-none border border-soft-border"
+                      id="newProductDiscount"
+                      max="90"
+                      min="0"
+                      placeholder="e.g. 15"
+                      type="number"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block font-label-sm text-label-sm text-charcoal mb-xs font-semibold"
+                      >Initial Stock Units
+                      <span class="text-error-red">*</span></label
+                    >
+                    <input
+                      class="w-full bg-surface-container-low px-sm py-xs rounded-xl font-body-sm text-body-sm text-charcoal focus:outline-none border border-soft-border"
+                      id="newProductStock"
+                      min="0"
+                      placeholder="e.g. 35"
+                      required=""
+                      type="number"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block font-label-sm text-label-sm text-charcoal mb-xs font-semibold"
+                      >Volume / Size Specification</label
+                    >
+                    <input
+                      class="w-full bg-surface-container-low px-sm py-xs rounded-xl font-body-sm text-body-sm text-charcoal focus:outline-none border border-soft-border"
+                      id="newProductSize"
+                      placeholder="e.g., 100ml / 250g / Standard"
+                      type="text"
+                    />
+                  </div>
+                  <div class="md:col-span-2">
+                    <label
+                      class="block font-label-sm text-label-sm text-charcoal mb-xs font-semibold"
+                      >Botanical Description &amp; Active Ingredients</label
+                    >
+                    <textarea
+                      class="w-full bg-surface-container-low px-sm py-xs rounded-xl font-body-sm text-body-sm text-charcoal focus:outline-none border border-soft-border"
+                      id="newProductDesc"
+                      placeholder="Cold-pressed organic ingredients, application tips, client benefits..."
+                      rows="2"
+                    ></textarea>
+                  </div>
+                </div>
+                <div
+                  class="flex items-center justify-end gap-sm pt-sm border-t border-soft-border"
+                >
+                  <button
+                    class="px-md py-xs rounded-xl bg-surface-container font-label-md text-label-md text-charcoal hover:bg-surface-container-high transition-colors font-medium border border-soft-border"
+                    id="cancelAddModalBtn"
+                    type="button"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    class="px-lg py-xs rounded-xl bg-charcoal text-on-primary font-label-md text-label-md shadow-sm hover:bg-primary transition-colors font-semibold"
+                    id="saveProductBtn"
+                    type="button"
+                  >
+                    Save &amp; Publish Product
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Additional Custom Action Modals -->
+          <div id="additionalModalsContainer">
+            <!-- Delete Confirmation Modal -->
+            <div
+              id="deleteConfirmModal"
+              class="fixed inset-0 bg-charcoal/50 backdrop-blur-sm z-[60] flex items-center justify-center p-md opacity-0 pointer-events-none transition-opacity duration-300"
+            >
+              <div
+                class="bg-surface-container-lowest rounded-xl w-full max-w-sm shadow-xl p-md flex flex-col gap-md border border-soft-border modal-content transform scale-95 transition-transform duration-300"
+              >
+                <h3
+                  class="font-headline-md text-headline-md text-charcoal font-semibold"
+                >
+                  Delete Product
+                </h3>
+                <p
+                  class="font-body-sm text-on-surface-variant"
+                  id="deleteConfirmMessage"
+                >
+                  Are you sure you want to remove this product from the catalog?
+                </p>
+                <div class="flex justify-end gap-sm pt-xs">
+                  <button
+                    type="button"
+                    class="close-custom-modal-btn px-md py-xs bg-surface-container rounded-xl font-label-sm text-charcoal font-medium border border-soft-border"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    id="confirmDeleteBtn"
+                    class="px-md py-xs bg-muted-terracotta text-white rounded-xl font-label-sm font-semibold shadow-sm hover:bg-error-red transition-colors"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Update Stock Modal -->
+            <div
+              id="updateStockModal"
+              class="fixed inset-0 bg-charcoal/50 backdrop-blur-sm z-[60] flex items-center justify-center p-md opacity-0 pointer-events-none transition-opacity duration-300"
+            >
+              <div
+                class="bg-surface-container-lowest rounded-xl w-full max-w-sm shadow-xl p-md flex flex-col gap-md border border-soft-border modal-content transform scale-95 transition-transform duration-300"
+              >
+                <h3
+                  class="font-headline-md text-headline-md text-charcoal font-semibold"
+                >
+                  Update Inventory
+                </h3>
+                <div>
+                  <label
+                    class="block font-label-sm text-charcoal mb-xs font-semibold"
+                    >New Stock Quantity</label
+                  >
+                  <input
+                    type="number"
+                    id="modalStockInput"
+                    class="w-full bg-surface-container-low px-sm py-xs rounded-xl font-body-sm border border-soft-border focus:outline-none"
+                    min="0"
+                  />
+                </div>
+                <div class="flex justify-end gap-sm pt-xs">
+                  <button
+                    type="button"
+                    class="close-custom-modal-btn px-md py-xs bg-surface-container rounded-xl font-label-sm text-charcoal font-medium border border-soft-border"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    id="confirmUpdateStock"
+                    class="px-md py-xs bg-charcoal text-on-primary rounded-xl font-label-sm font-semibold shadow-sm hover:bg-primary transition-colors"
+                  >
+                    Save Stock
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Apply Promo Modal -->
+            <div
+              id="applyPromoModal"
+              class="fixed inset-0 bg-charcoal/50 backdrop-blur-sm z-[60] flex items-center justify-center p-md opacity-0 pointer-events-none transition-opacity duration-300"
+            >
+              <div
+                class="bg-surface-container-lowest rounded-xl w-full max-w-sm shadow-xl p-md flex flex-col gap-md border border-soft-border modal-content transform scale-95 transition-transform duration-300"
+              >
+                <h3
+                  class="font-headline-md text-headline-md text-charcoal font-semibold"
+                >
+                  Apply Discount
+                </h3>
+                <div>
+                  <label
+                    class="block font-label-sm text-charcoal mb-xs font-semibold"
+                    >Discount Percentage (%)</label
+                  >
+                  <input
+                    type="number"
+                    id="modalProductPromoInput"
+                    placeholder="e.g. 15"
+                    class="w-full bg-surface-container-low px-sm py-xs rounded-xl font-body-sm border border-soft-border focus:outline-none"
+                    min="0"
+                    max="100"
+                  />
+                </div>
+                <div class="flex justify-end gap-sm pt-xs">
+                  <button
+                    type="button"
+                    class="close-custom-modal-btn px-md py-xs bg-surface-container rounded-xl font-label-sm text-charcoal font-medium border border-soft-border"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    id="confirmApplyPromo"
+                    class="px-md py-xs bg-charcoal text-on-primary rounded-xl font-label-sm font-semibold shadow-sm hover:bg-primary transition-colors"
+                  >
+                    Apply Promo
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Add Campaign Modal -->
+            <div
+              id="campaignModal"
+              class="fixed inset-0 bg-charcoal/50 backdrop-blur-sm z-[60] flex items-center justify-center p-md opacity-0 pointer-events-none transition-opacity duration-300"
+            >
+              <div
+                class="bg-surface-container-lowest rounded-xl w-full max-w-md shadow-xl p-md flex flex-col gap-md border border-soft-border modal-content transform scale-95 transition-transform duration-300"
+              >
+                <h3
+                  class="font-headline-md text-headline-md text-charcoal font-semibold"
+                >
+                  Launch Campaign
+                </h3>
+                <div class="grid grid-cols-1 gap-sm">
+                  <div>
+                    <label
+                      class="block font-label-sm text-charcoal mb-xs font-semibold"
+                      >Campaign Title</label
+                    >
+                    <input
+                      type="text"
+                      id="modalCampaignName"
+                      placeholder="e.g. Mid-Season Beauty Promo"
+                      class="w-full bg-surface-container-low px-sm py-xs rounded-xl font-body-sm border border-soft-border focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block font-label-sm text-charcoal mb-xs font-semibold"
+                      >Discount % Tier</label
+                    >
+                    <input
+                      type="number"
+                      id="modalCampaignDiscount"
+                      placeholder="e.g. 15"
+                      class="w-full bg-surface-container-low px-sm py-xs rounded-xl font-body-sm border border-soft-border focus:outline-none"
+                      min="0"
+                      max="100"
+                    />
+                  </div>
+                </div>
+                <div class="flex justify-end gap-sm pt-xs">
+                  <button
+                    type="button"
+                    class="close-custom-modal-btn px-md py-xs bg-surface-container rounded-xl font-label-sm text-charcoal font-medium border border-soft-border"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    id="confirmAddCampaign"
+                    class="px-md py-xs bg-charcoal text-on-primary rounded-xl font-label-sm font-semibold shadow-sm hover:bg-primary transition-colors"
+                  >
+                    Create Campaign
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Adjust Discount Modal -->
+            <div
+              id="adjustDiscountModal"
+              class="fixed inset-0 bg-charcoal/50 backdrop-blur-sm z-[60] flex items-center justify-center p-md opacity-0 pointer-events-none transition-opacity duration-300"
+            >
+              <div
+                class="bg-surface-container-lowest rounded-xl w-full max-w-sm shadow-xl p-md flex flex-col gap-md border border-soft-border modal-content transform scale-95 transition-transform duration-300"
+              >
+                <h3
+                  class="font-headline-md text-headline-md text-charcoal font-semibold"
+                >
+                  Adjust Target Discount
+                </h3>
+                <div>
+                  <label
+                    class="block font-label-sm text-charcoal mb-xs font-semibold"
+                    >New Discount Percentage</label
+                  >
+                  <input
+                    type="number"
+                    id="modalAdjustDiscountInput"
+                    placeholder="e.g. 20"
+                    class="w-full bg-surface-container-low px-sm py-xs rounded-xl font-body-sm border border-soft-border focus:outline-none"
+                    min="0"
+                    max="100"
+                  />
+                </div>
+                <div class="flex justify-end gap-sm pt-xs">
+                  <button
+                    type="button"
+                    class="close-custom-modal-btn px-md py-xs bg-surface-container rounded-xl font-label-sm text-charcoal font-medium border border-soft-border"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    id="confirmAdjustDiscount"
+                    class="px-md py-xs bg-charcoal text-on-primary rounded-xl font-label-sm font-semibold shadow-sm hover:bg-primary transition-colors"
+                  >
+                    Save Target
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Extend Duration Modal -->
+            <div
+              id="extendDurationModal"
+              class="fixed inset-0 bg-charcoal/50 backdrop-blur-sm z-[60] flex items-center justify-center p-md opacity-0 pointer-events-none transition-opacity duration-300"
+            >
+              <div
+                class="bg-surface-container-lowest rounded-xl w-full max-w-sm shadow-xl p-md flex flex-col gap-md border border-soft-border modal-content transform scale-95 transition-transform duration-300"
+              >
+                <h3
+                  class="font-headline-md text-headline-md text-charcoal font-semibold"
+                >
+                  Extend Promotion
+                </h3>
+                <div>
+                  <label
+                    class="block font-label-sm text-charcoal mb-xs font-semibold"
+                    >Additional Days</label
+                  >
+                  <input
+                    type="number"
+                    id="modalExtendDaysInput"
+                    placeholder="e.g. 14"
+                    class="w-full bg-surface-container-low px-sm py-xs rounded-xl font-body-sm border border-soft-border focus:outline-none"
+                    min="1"
+                  />
+                </div>
+                <div class="flex justify-end gap-sm pt-xs">
+                  <button
+                    type="button"
+                    class="close-custom-modal-btn px-md py-xs bg-surface-container rounded-xl font-label-sm text-charcoal font-medium border border-soft-border"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    id="confirmExtendDuration"
+                    class="px-md py-xs bg-charcoal text-on-primary rounded-xl font-label-sm font-semibold shadow-sm hover:bg-primary transition-colors"
+                  >
+                    Extend Timeline
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="js/products-management.js"></script>
+  </body>
+</html>

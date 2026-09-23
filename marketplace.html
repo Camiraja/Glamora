@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Marketplace | Glamora</title>
+
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="css/marketplace.css" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#949393",
+              "on-primary-fixed-variant": "#474747",
+              "surface-container-highest": "#e3e2df",
+              "inverse-on-surface": "#f2f1ee",
+              "surface-container": "#efeeeb",
+              "on-tertiary-fixed-variant": "#6b392c",
+              "surface-container-lowest": "#ffffff",
+              primary: "#171818",
+              "surface-bright": "#faf9f6",
+              surface: "#faf9f6",
+              "success-green": "#5A705F",
+              "on-primary-fixed": "#1b1c1c",
+              "on-surface": "#1b1c1a",
+              tertiary: "#310b03",
+              "on-secondary-fixed-variant": "#3c4a40",
+              "secondary-fixed-dim": "#bacbbd",
+              "surface-container-high": "#e9e8e5",
+              "primary-container": "#2c2c2c",
+              "on-error-container": "#93000a",
+              secondary: "#536257",
+              "tertiary-container": "#4b1f14",
+              "muted-terracotta": "#BC7C6C",
+              "surface-variant": "#e3e2df",
+              "on-tertiary": "#ffffff",
+              "surface-dim": "#dbdad7",
+              "on-secondary": "#ffffff",
+              "on-surface-variant": "#444748",
+              background: "#faf9f6",
+              "on-error": "#ffffff",
+              "error-container": "#ffdad6",
+              "secondary-container": "#d6e7d8",
+              "outline-variant": "#c4c7c7",
+              "on-secondary-fixed": "#111e16",
+              "parchment-white": "#F7F6F3",
+              outline: "#747878",
+              "on-primary": "#ffffff",
+              "surface-container-low": "#f4f3f0",
+              "soft-border": "#E2E2DE",
+              "primary-fixed": "#e4e2e1",
+              "on-background": "#1b1c1a",
+              "inverse-primary": "#c8c6c5",
+              error: "#ba1a1a",
+              "tertiary-fixed-dim": "#feb5a3",
+              "inverse-surface": "#2f312f",
+              sage: "#8A9A8D",
+              "on-tertiary-container": "#c48373",
+              "warning-amber": "#C49D6A",
+              "secondary-fixed": "#d6e7d8",
+              "on-tertiary-fixed": "#360f06",
+              charcoal: "#2C2C2C",
+              "error-red": "#A64D4D",
+              "tertiary-fixed": "#ffdad2",
+              "surface-tint": "#5f5e5e",
+              "on-secondary-container": "#59685c",
+              "primary-fixed-dim": "#c8c6c5",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              lg: "48px",
+              "margin-desktop": "64px",
+              "margin-mobile": "16px",
+              sm: "12px",
+              xs: "4px",
+              gutter: "24px",
+              xl: "80px",
+              md: "24px",
+              base: "8px",
+            },
+            fontFamily: {
+              "headline-xl-mobile": ["Hanken Grotesk"],
+              "headline-lg-mobile": ["Hanken Grotesk"],
+              "label-md": ["Hanken Grotesk"],
+              "headline-md": ["Hanken Grotesk"],
+              "headline-lg": ["Hanken Grotesk"],
+              "label-sm": ["Hanken Grotesk"],
+              "headline-xl": ["Hanken Grotesk"],
+              "body-lg": ["Hanken Grotesk"],
+              "body-sm": ["Hanken Grotesk"],
+              "body-md": ["Hanken Grotesk"],
+            },
+            fontSize: {
+              "headline-xl-mobile": [
+                "36px",
+                { lineHeight: "1.1", fontWeight: "600" },
+              ],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "label-md": [
+                "14px",
+                { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "500" }],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-sm": [
+                "12px",
+                { lineHeight: "1", letterSpacing: "0.03em", fontWeight: "600" },
+              ],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="bg-background font-body-md text-on-surface dark:bg-charcoal dark:text-parchment-white transition-colors duration-300"
+  >
+    <!-- Navigation Bar from Notifications -->
+    <header
+      class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-charcoal/80 backdrop-blur-xl border-b border-soft-border dark:border-outline-variant/20 transition-colors"
+    >
+      <div
+        class="h-16 max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex items-center justify-between"
+      >
+        <!-- Left: Back Button & Logo -->
+        <div class="flex items-center gap-xs sm:gap-base">
+          <button
+            onclick="window.history.back()"
+            class="p-xs text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-parchment-white transition-colors flex items-center justify-center rounded-full hover:bg-surface-container dark:hover:bg-primary-container"
+            title="Go Back"
+          >
+            <span class="material-symbols-outlined text-xl">arrow_back</span>
+          </button>
+          <a href="index.html" class="flex items-center gap-base">
+            <img
+              alt="Glamora Logo"
+              class="h-8 w-auto object-contain"
+              src="images/glamora_background-removebg-preview.png"
+            />
+            <span
+              class="font-headline-md text-headline-md text-primary dark:text-parchment-white tracking-tight hidden sm:inline-block"
+              >GLAMORA</span
+            >
+          </a>
+        </div>
+
+        <!-- Center Nav Links -->
+        <nav class="hidden md:flex items-center gap-lg h-full">
+          <a
+            class="flex items-center h-full px-xs font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-parchment-white transition-colors"
+            href="index.html"
+            >Home</a
+          >
+          <a
+            class="flex items-center h-full px-xs font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-parchment-white transition-colors"
+            href="marketplace.html"
+            >Marketplace</a
+          >
+          <a
+            class="flex items-center h-full px-xs font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-parchment-white transition-colors"
+            href="favorites.html"
+            >Favorites</a
+          >
+          <a
+            class="flex items-center h-full px-xs font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-parchment-white transition-colors"
+            href="bookings.html"
+            >My Bookings</a
+          >
+        </nav>
+
+        <!-- Right Action Icons, Theme & Profile -->
+        <div class="flex items-center gap-md">
+          <div class="flex items-center gap-xs sm:gap-sm">
+            <!-- Cart Moved to the Header -->
+            <a
+              href="cart.html"
+              class="p-xs text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-parchment-white transition-colors flex items-center"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >shopping_bag</span
+              >
+            </a>
+            <a
+              href="notifications.html"
+              class="p-xs text-primary dark:text-parchment-white transition-colors flex items-center relative"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >notifications</span
+              >
+              <span
+                id="nav-notification-dot"
+                class="absolute top-1 right-1 w-2 h-2 rounded-full bg-error"
+              ></span>
+            </a>
+          </div>
+
+          <!-- Profile Picture -->
+          <a href="profile.html" class="flex items-center gap-sm group">
+            <img
+              alt="Profile"
+              class="w-8 h-8 rounded-full object-cover border border-soft-border dark:border-outline-variant/30 group-hover:border-primary dark:group-hover:border-parchment-white transition-colors"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAksYm7Vpu3y6nFXAdnowe6h9yhNcma3tOmWqhGqQ-yieKVgv8IOaIQ21a9oK4barmnxBtCbmquE3v8ijlXgSV-zbE8NktlwkPDfGYPsqoh8T0NODzVrMTSMZLOGIWxZ5sK5uG09XBqCUJsvcsc8RrecRsLG5xdSZ2m8MUH3WXsWax75A3uBbiT_shFBUTYsOu9dyHNTK3QCaWYe77GnvN4ZQ-67ApBKuv20ipR9qLJlf0O_ZyvafdN"
+            />
+            <span
+              class="material-symbols-outlined text-on-surface-variant dark:text-outline-variant group-hover:text-primary dark:group-hover:text-parchment-white hidden sm:inline-block"
+              >expand_more</span
+            >
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content layout adjusted for header (pt-24 to fix the empty space issue) -->
+    <main
+      class="relative flex min-h-screen flex-col items-center justify-center p-margin-mobile pt-24 transition-colors duration-300"
+    >
+      <div class="flex flex-col w-full">
+        <div
+          class="flex flex-col lg:flex-row w-full max-w-[1440px] mx-auto pt-md"
+        >
+          <!-- Sidebar Filters -->
+          <aside
+            class="w-full lg:w-[280px] flex-shrink-0 lg:pr-lg mb-lg lg:mb-0"
+          >
+            <div class="sticky top-24 flex flex-col gap-lg">
+              <!-- Search -->
+              <div class="flex flex-col gap-base">
+                <label
+                  class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant uppercase tracking-widest"
+                  >Search</label
+                >
+                <div class="relative">
+                  <span
+                    class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant dark:text-outline-variant"
+                    >search</span
+                  >
+                  <input
+                    id="search-input"
+                    class="w-full bg-surface-container dark:bg-charcoal rounded-lg border border-soft-border dark:border-outline-variant py-sm pl-[40px] pr-sm font-body-sm text-body-sm text-on-surface dark:text-parchment-white focus:outline-none focus:border-charcoal dark:focus:border-parchment-white transition-colors"
+                    placeholder="Find products..."
+                    type="text"
+                  />
+                </div>
+              </div>
+              <!-- Categories -->
+              <div class="flex flex-col gap-md">
+                <h3
+                  class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant uppercase tracking-widest"
+                >
+                  Categories
+                </h3>
+                <div class="flex flex-col gap-sm">
+                  <button
+                    class="flex items-center justify-between text-left group"
+                  >
+                    <span
+                      class="font-body-md text-body-md text-on-surface dark:text-parchment-white font-medium transition-colors"
+                      >All Products</span
+                    >
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant bg-surface-container dark:bg-surface-container-high px-xs rounded"
+                      >124</span
+                    >
+                  </button>
+                  <button
+                    class="flex items-center justify-between text-left group"
+                  >
+                    <span
+                      class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant group-hover:text-charcoal dark:group-hover:text-parchment-white transition-colors"
+                      >Hair Care</span
+                    >
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant bg-surface-container dark:bg-surface-container-high px-xs rounded"
+                      >45</span
+                    >
+                  </button>
+                  <button
+                    class="flex items-center justify-between text-left group"
+                  >
+                    <span
+                      class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant group-hover:text-charcoal dark:group-hover:text-parchment-white transition-colors"
+                      >Skincare</span
+                    >
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant bg-surface-container dark:bg-surface-container-high px-xs rounded"
+                      >32</span
+                    >
+                  </button>
+                  <button
+                    class="flex items-center justify-between text-left group"
+                  >
+                    <span
+                      class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant group-hover:text-charcoal dark:group-hover:text-parchment-white transition-colors"
+                      >Nails</span
+                    >
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant bg-surface-container dark:bg-surface-container-high px-xs rounded"
+                      >18</span
+                    >
+                  </button>
+                </div>
+              </div>
+
+              <!-- Price Range -->
+              <div class="flex flex-col gap-md">
+                <h3
+                  class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant uppercase tracking-widest"
+                >
+                  Price Range
+                </h3>
+                <div class="flex items-center gap-sm">
+                  <input
+                    id="min-price"
+                    step="1000"
+                    class="w-full bg-surface-container dark:bg-charcoal rounded-lg border border-soft-border dark:border-outline-variant p-sm font-body-sm text-body-sm text-on-surface dark:text-parchment-white focus:outline-none focus:border-charcoal dark:focus:border-parchment-white transition-colors text-center"
+                    placeholder="Min (₦1000)"
+                    type="number"
+                  />
+                  <span
+                    class="text-on-surface-variant dark:text-outline-variant"
+                    >-</span
+                  >
+                  <input
+                    id="max-price"
+                    step="1000"
+                    class="w-full bg-surface-container dark:bg-charcoal rounded-lg border border-soft-border dark:border-outline-variant p-sm font-body-sm text-body-sm text-on-surface dark:text-parchment-white focus:outline-none focus:border-charcoal dark:focus:border-parchment-white transition-colors text-center"
+                    placeholder="Max (₦1000)"
+                    type="number"
+                  />
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Product Grid Area -->
+          <div class="flex-1">
+            <!-- Top Actions / Sort (Added ID to select for JavaScript) -->
+            <div
+              class="flex items-center justify-between mb-lg pb-md border-b border-soft-border dark:border-outline-variant"
+            >
+              <h1
+                class="font-headline-lg text-headline-lg text-on-surface dark:text-parchment-white"
+              >
+                Marketplace
+              </h1>
+              <div class="flex items-center gap-sm">
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant uppercase tracking-widest"
+                  >Sort by:</span
+                >
+                <select
+                  id="sort-select"
+                  class="bg-transparent font-body-md text-body-md text-on-surface dark:text-parchment-white cursor-pointer focus:outline-none"
+                >
+                  <option value="recommended" class="dark:bg-charcoal">
+                    Recommended
+                  </option>
+                  <option value="price-asc" class="dark:bg-charcoal">
+                    Price: Low to High
+                  </option>
+                  <option value="price-desc" class="dark:bg-charcoal">
+                    Price: High to Low
+                  </option>
+                  <option value="newest" class="dark:bg-charcoal">
+                    Newest Arrivals
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Grid (Updated to grid-cols-2 for 2 products per row on mobile) -->
+            <!-- Added id="product-grid" to inject/sort products from JS -->
+            <div
+              id="product-grid"
+              class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-lg"
+            >
+              <!-- Product Card 1 (Added data-price attribute for sorting) -->
+              <div
+                data-price="48000"
+                class="group flex flex-col bg-surface-container-lowest dark:bg-primary-container rounded-xl overflow-hidden border border-soft-border dark:border-outline-variant hover:shadow-lg transition-all duration-300"
+              >
+                <div
+                  class="relative w-full aspect-[4/5] bg-surface-container dark:bg-charcoal overflow-hidden"
+                >
+                  <img
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBljMqH1LbV_q_ulqWpK_tN5tcPF2V8dMv1U00HYNsSvaDF6GN8C5BFyE61SZkIMMKlrWh8SEoDLNeLTMTqKvkBVJBuG-xz32xE5nbx4H2QOJ-3q3cAJTVN271j2zZEfvZwbhggtlCKocbfrtNwApPqUoD_sGONMO3oRNP4gAoXwtqRVO8-m3oFHFekhJDrwPpITW0kZikuSxugSb1BVrNkaIR8hu6JR8D1GkanpvPGmG7BKC_qDe3U"
+                  />
+                  <div class="absolute top-sm right-sm">
+                    <button
+                      class="w-8 h-8 rounded-full bg-surface-container-lowest/80 dark:bg-primary-container/80 backdrop-blur flex items-center justify-center text-on-surface dark:text-parchment-white hover:bg-surface-container-lowest dark:hover:bg-surface-container-highest transition-colors"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >favorite</span
+                      >
+                    </button>
+                  </div>
+                </div>
+                <div class="p-md flex flex-col gap-sm flex-1">
+                  <div
+                    class="flex flex-col xl:flex-row xl:items-start justify-between gap-2"
+                  >
+                    <div class="flex flex-col gap-xs min-w-0">
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant truncate"
+                        >By L'Aurier</span
+                      >
+                      <h3
+                        class="font-headline-md text-base sm:text-headline-md text-on-surface dark:text-parchment-white line-clamp-2"
+                      >
+                        Restorative Argan Serum
+                      </h3>
+                    </div>
+                    <span
+                      class="font-body-lg text-sm sm:text-body-lg text-on-surface dark:text-parchment-white font-semibold"
+                      >₦48,000</span
+                    >
+                  </div>
+                  <div class="mt-auto pt-md flex items-center justify-between">
+                    <button
+                      class="add-to-cart-btn w-full bg-charcoal dark:bg-parchment-white text-on-primary dark:text-charcoal font-label-md text-label-md px-md py-sm rounded-lg hover:bg-primary dark:hover:bg-surface-container-highest transition-colors flex justify-center items-center gap-xs"
+                    >
+                      Add
+                      <span class="material-symbols-outlined text-[16px]"
+                        >add_shopping_cart</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Product Card 2 -->
+              <div
+                data-price="185000"
+                class="group flex flex-col bg-surface-container-lowest dark:bg-primary-container rounded-xl overflow-hidden border border-soft-border dark:border-outline-variant hover:shadow-lg transition-all duration-300"
+              >
+                <div
+                  class="relative w-full aspect-[4/5] bg-surface-container dark:bg-charcoal overflow-hidden"
+                >
+                  <img
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIEcts62UL1AEiErjPRVjjn7flE9naPPmhlygHwtGG-TDbhkbB7UKBw3-sA3S7nmqu9Hy3Qtmp7xXWyzdfeQ_y6QtEGt_aKnPimG-WKOG0HD5Z8gWwo4QWJSgk81ylmdT_4ywPZsxKIB2LOPXM6unOSRlX9RoTPPQur_N5Xw48Wi9EMjbKzD4IYGdVjT880X6wn0ZM_fZCNgz7az8C1GtFlZ5gF9Ut8j_B3QXMK5hA6tUZX4qLr2pW"
+                  />
+                </div>
+                <div class="p-md flex flex-col gap-sm flex-1">
+                  <div
+                    class="flex flex-col xl:flex-row xl:items-start justify-between gap-2"
+                  >
+                    <div class="flex flex-col gap-xs min-w-0">
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant truncate"
+                        >Aura Pro Tools</span
+                      >
+                      <h3
+                        class="font-headline-md text-base sm:text-headline-md text-on-surface dark:text-parchment-white line-clamp-2"
+                      >
+                        Titanium Styler Pro
+                      </h3>
+                    </div>
+                    <span
+                      class="font-body-lg text-sm sm:text-body-lg text-on-surface dark:text-parchment-white font-semibold"
+                      >₦185,000</span
+                    >
+                  </div>
+                  <div class="mt-auto pt-md flex items-center justify-between">
+                    <button
+                      class="add-to-cart-btn w-full bg-charcoal dark:bg-parchment-white text-on-primary dark:text-charcoal font-label-md text-label-md px-md py-sm rounded-lg hover:bg-primary dark:hover:bg-surface-container-highest transition-colors flex justify-center items-center gap-xs"
+                    >
+                      Add
+                      <span class="material-symbols-outlined text-[16px]"
+                        >add_shopping_cart</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Product Card 3 -->
+              <div
+                data-price="32000"
+                class="group flex flex-col bg-surface-container-lowest dark:bg-primary-container rounded-xl overflow-hidden border border-soft-border dark:border-outline-variant hover:shadow-lg transition-all duration-300"
+              >
+                <div
+                  class="relative w-full aspect-[4/5] bg-surface-container dark:bg-charcoal overflow-hidden"
+                >
+                  <img
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDitj1lLir0sj05CVvDnX5DU8hoigsOvEl3TZyKTxXST9dGBDQaH1Niw5kEM5ygbdWZZ3jtxOBFN0CsWt-xcredAj4UmEh9fDxFit4BRXQB0f_QP0QmEv5I0yDRmR4ROLxOnZ9Ji3-nJ_H2FsHJw-fKvnOyZak-dzJAhT0j3ySs73IId6YCzjLmgFQxpp-7ymE2rqkoloQsch8xUVZaBWDnDc4EVoE5Gx7Brrhh50GeD67aFnAoLrc5"
+                  />
+                </div>
+                <div class="p-md flex flex-col gap-sm flex-1">
+                  <div
+                    class="flex flex-col xl:flex-row xl:items-start justify-between gap-2"
+                  >
+                    <div class="flex flex-col gap-xs min-w-0">
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant truncate"
+                        >Minimalist Lacquer</span
+                      >
+                      <h3
+                        class="font-headline-md text-base sm:text-headline-md text-on-surface dark:text-parchment-white line-clamp-2"
+                      >
+                        Earthy Tones Set
+                      </h3>
+                    </div>
+                    <span
+                      class="font-body-lg text-sm sm:text-body-lg text-on-surface dark:text-parchment-white font-semibold"
+                      >₦32,000</span
+                    >
+                  </div>
+                  <div class="mt-auto pt-md flex items-center justify-between">
+                    <button
+                      class="add-to-cart-btn w-full bg-charcoal dark:bg-parchment-white text-on-primary dark:text-charcoal font-label-md text-label-md px-md py-sm rounded-lg hover:bg-primary dark:hover:bg-surface-container-highest transition-colors flex justify-center items-center gap-xs"
+                    >
+                      Add
+                      <span class="material-symbols-outlined text-[16px]"
+                        >add_shopping_cart</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Product Card 4 -->
+              <div
+                data-price="65000"
+                class="group flex flex-col bg-surface-container-lowest dark:bg-primary-container rounded-xl overflow-hidden border border-soft-border dark:border-outline-variant hover:shadow-lg transition-all duration-300"
+              >
+                <div
+                  class="relative w-full aspect-[4/5] bg-surface-container dark:bg-charcoal overflow-hidden"
+                >
+                  <img
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-E88jjnU-ggyix_ySGCWLww2q5la49m2kiJD-FM0U3hJzcG9yLxhuEcm55WssvUG61ZJUgsm0l7IkdwGok4RfB6EqV_PvYNByIGcld4D9O5-G32f3G9s8fhdv7tnPuDBLjk4spmps0mxuD36DBdNFA0V7-DmAw3b0KJ8TgXzHs_v1NUNAZNREUsdeNbW-j35evv7zMXBUvMt7uha8-lcyuIjNPgD1WtpIGiWe84fDqX5PFvP4db8U"
+                  />
+                </div>
+                <div class="p-md flex flex-col gap-sm flex-1">
+                  <div
+                    class="flex flex-col xl:flex-row xl:items-start justify-between gap-2"
+                  >
+                    <div class="flex flex-col gap-xs min-w-0">
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant truncate"
+                        >DermaStruct</span
+                      >
+                      <h3
+                        class="font-headline-md text-base sm:text-headline-md text-on-surface dark:text-parchment-white line-clamp-2"
+                      >
+                        Barrier Repair Cream
+                      </h3>
+                    </div>
+                    <span
+                      class="font-body-lg text-sm sm:text-body-lg text-on-surface dark:text-parchment-white font-semibold"
+                      >₦65,000</span
+                    >
+                  </div>
+                  <div class="mt-auto pt-md flex items-center justify-between">
+                    <button
+                      class="add-to-cart-btn w-full bg-charcoal dark:bg-parchment-white text-on-primary dark:text-charcoal font-label-md text-label-md px-md py-sm rounded-lg hover:bg-primary dark:hover:bg-surface-container-highest transition-colors flex justify-center items-center gap-xs"
+                    >
+                      Add
+                      <span class="material-symbols-outlined text-[16px]"
+                        >add_shopping_cart</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Load More Button (Added ID to handle the JS) -->
+            <div class="mt-xl flex justify-center pb-xl">
+              <button
+                id="load-more-btn"
+                class="border border-charcoal dark:border-parchment-white text-charcoal dark:text-parchment-white font-label-md text-label-md px-xl py-sm rounded-lg hover:bg-surface-container dark:hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-2"
+              >
+                Load More Products
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer
+        class="w-full bg-surface-container-lowest dark:bg-primary-container py-xl border-t border-soft-border dark:border-outline-variant mt-xl transition-colors duration-300"
+      >
+        <div class="max-w-[1440px] mx-auto px-margin-desktop">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-lg mb-lg">
+            <div class="col-span-1 md:col-span-1">
+              <p
+                class="text-body-sm font-body-sm text-primary dark:text-parchment-white font-semibold mb-xs"
+              >
+                connect. get booked. get styled.
+              </p>
+              <p
+                class="text-body-sm font-body-sm text-on-surface-variant dark:text-outline-variant"
+              >
+                Elevating the professional beauty standard in Nigeria through
+                architectural precision and efficiency.
+              </p>
+            </div>
+          </div>
+          <div
+            class="flex justify-between items-center pt-md border-t border-soft-border dark:border-outline-variant text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant"
+          >
+            <span>© 2026 GLAMORA. All rights reserved.</span>
+            <div class="flex gap-md">
+              <a
+                href="#"
+                class="hover:text-primary dark:hover:text-parchment-white transition-colors"
+                >Privacy</a
+              >
+              <a
+                href="#"
+                class="hover:text-primary dark:hover:text-parchment-white transition-colors"
+                >Terms</a
+              >
+            </div>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <!-- JS linked properly -->
+    <script src="js/marketplace.js" defer></script>
+  </body>
+</html>

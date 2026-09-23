@@ -1,0 +1,1190 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glamora - Connect. Get Booked. Get Styled</title>
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              charcoal: "#2C2C2C",
+              sage: "#8A9A8D",
+              "muted-terracotta": "#BC7C6C",
+              "parchment-white": "#F7F6F3",
+              "soft-border": "#E2E2DE",
+              "success-green": "#5A705F",
+              "warning-amber": "#C49D6A",
+              "error-red": "#A64D4D",
+              primary: "#171818",
+              surface: "#faf9f6",
+              "surface-dark": "#121212",
+              "surface-card-dark": "#1e1e1e",
+              "border-dark": "#2c2c2c",
+              "text-dark": "#f2f1ee",
+              "muted-dark": "#949393",
+            },
+            fontFamily: {
+              sans: ["Hanken Grotesk", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Splash Screen Animations */
+      .splash-container {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition:
+          opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+          visibility 0.6s;
+      }
+
+      @keyframes logoFadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.85);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      @keyframes textReveal {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes pulseGlow {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.05);
+          opacity: 0.7;
+        }
+      }
+
+      .animate-logo-in {
+        animation: logoFadeIn 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+      .animate-text-in {
+        animation: textReveal 0.8s ease-out forwards 0.3s;
+        opacity: 0;
+      }
+      .animate-subtext-in {
+        animation: textReveal 0.8s ease-out forwards 0.6s;
+        opacity: 0;
+      }
+      .animate-pulse-glow {
+        animation: pulseGlow 2s infinite ease-in-out 1s;
+      }
+
+      /* Carousel */
+      .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+      .carousel-card {
+        flex: 0 0 100%;
+        min-width: 100%;
+        padding: 0 12px;
+      }
+      @media (min-width: 768px) {
+        .carousel-card {
+          flex: 0 0 50%;
+          min-width: 50%;
+        }
+      }
+      @media (min-width: 1024px) {
+        .carousel-card {
+          flex: 0 0 33.333333%;
+          min-width: 33.333333%;
+        }
+      }
+    </style>
+  </head>
+
+  <body
+    class="bg-surface dark:bg-surface-dark text-charcoal dark:text-text-dark transition-colors duration-300 font-sans antialiased overflow-x-hidden"
+  >
+    <!-- 1. Splash Screen Overlay (5 Seconds Duration) -->
+    <div
+      id="splash-screen"
+      class="splash-container bg-parchment-white dark:bg-surface-dark"
+    >
+      <div class="flex flex-col items-center text-center px-4">
+        <div class="w-24 h-24 mb-6 animate-logo-in animate-pulse-glow">
+          <img
+            src="glamora background.png"
+            alt="Glamora Logo"
+            class="w-full h-full object-contain filter dark:brightness-125"
+          />
+        </div>
+        <h1
+          class="text-3xl md:text-4xl font-bold tracking-[0.2em] text-charcoal dark:text-text-dark uppercase animate-text-in"
+        >
+          GLAM<span class="font-light text-sage">ORA</span>
+        </h1>
+        <p
+          class="text-xs md:text-sm uppercase tracking-[0.25em] text-sage font-semibold mt-3 animate-subtext-in"
+        >
+          Connect. Get Booked. Get Styled
+        </p>
+      </div>
+    </div>
+
+    <!-- Main Website Shell -->
+    <div id="main-content" class="opacity-0 transition-opacity duration-700">
+      <!-- Header Navigation -->
+      <header
+        class="fixed top-0 w-full z-50 bg-surface/90 dark:bg-surface-dark/90 backdrop-blur-md border-b border-soft-border dark:border-border-dark transition-colors duration-300"
+      >
+        <div
+          class="h-16 max-w-[1440px] mx-auto px-4 md:px-12 flex items-center justify-between"
+        >
+          <!-- Logo & Brand -->
+          <a href="#home" class="flex items-center gap-3 group">
+            <img
+              src="glamora background.png"
+              alt="Glamora Logo"
+              class="h-9 w-auto object-contain transition-transform group-hover:scale-105"
+            />
+            <span
+              class="text-xl font-bold tracking-tight text-primary dark:text-text-dark"
+              >GLAMORA</span
+            >
+          </a>
+
+          <!-- Desktop Navigation -->
+          <nav class="hidden md:flex items-center gap-8">
+            <a
+              href="#home"
+              class="text-sm font-semibold text-primary dark:text-text-dark hover:text-sage transition-colors"
+              >Home</a
+            >
+            <a
+              href="#services"
+              class="text-sm font-semibold text-charcoal/70 dark:text-text-dark/70 hover:text-primary dark:hover:text-text-dark transition-colors"
+              >Services</a
+            >
+            <a
+              href="#marketplace"
+              class="text-sm font-semibold text-charcoal/70 dark:text-text-dark/70 hover:text-primary dark:hover:text-text-dark transition-colors"
+              >Marketplace</a
+            >
+            <a
+              href="#process"
+              class="text-sm font-semibold text-charcoal/70 dark:text-text-dark/70 hover:text-primary dark:hover:text-text-dark transition-colors"
+              >How It Works</a
+            >
+          </nav>
+
+          <!-- Right Controls -->
+          <div class="flex items-center gap-4">
+            <!-- Theme Toggle (Light / Dark / System) -->
+            <button
+              id="theme-toggle"
+              aria-label="Toggle Theme"
+              class="w-10 h-10 rounded-full hover:bg-soft-border/50 dark:hover:bg-border-dark flex items-center justify-center transition-colors text-charcoal dark:text-text-dark"
+            >
+              <span
+                id="theme-icon"
+                class="material-symbols-outlined text-[20px]"
+                >settings_brightness</span
+              >
+            </button>
+
+            <!-- Authentication / Profile Quick Links -->
+            <a
+              href="#booking"
+              class="hidden sm:inline-flex bg-primary dark:bg-text-dark text-white dark:text-primary text-xs uppercase tracking-wider font-semibold px-5 py-2.5 rounded-full hover:bg-charcoal dark:hover:bg-gray-200 transition-colors shadow-sm"
+            >
+              Book Appointment
+            </a>
+
+            <a
+              href="#profile"
+              class="flex items-center gap-2 cursor-pointer group"
+              aria-label="User Profile"
+            >
+              <div
+                class="w-8 h-8 rounded-full bg-sage/30 flex items-center justify-center border border-soft-border dark:border-border-dark group-hover:border-primary transition-colors"
+              >
+                <span
+                  class="material-symbols-outlined text-sm text-charcoal dark:text-text-dark"
+                  >person</span
+                >
+              </div>
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content Body -->
+      <main class="pt-16">
+        <!-- Hero Section -->
+        <section
+          id="home"
+          class="relative min-h-[580px] flex items-center justify-center py-16 px-4 md:px-16 bg-surface dark:bg-surface-dark overflow-hidden"
+        >
+          <div
+            class="relative z-10 w-full max-w-[850px] mx-auto text-center flex flex-col items-center gap-6"
+          >
+            <div class="flex flex-col gap-3">
+              <span
+                class="text-xs uppercase tracking-[0.3em] font-semibold text-sage"
+                >Connect. Get Booked. Get Styled</span
+              >
+              <h1
+                class="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight text-primary dark:text-text-dark"
+              >
+                Precision Beauty & Grooming <br class="hidden sm:inline" />
+                Across Nigeria.
+              </h1>
+              <p
+                class="text-base md:text-lg text-charcoal/80 dark:text-text-dark/80 max-w-[620px] mx-auto"
+              >
+                Book top-rated Nigerian hairstylists, barbers, skincare
+                therapists, and makeup artists. Secure, seamless, and punctual.
+              </p>
+            </div>
+
+            <!-- Interactive Search Bar -->
+            <div
+              class="w-full max-w-[720px] bg-white dark:bg-surface-card-dark rounded-full p-2 flex items-center gap-2 shadow-md border border-soft-border dark:border-border-dark focus-within:ring-2 focus-within:ring-sage transition-all"
+            >
+              <div class="flex-1 flex items-center gap-3 px-4">
+                <span class="material-symbols-outlined text-sage">search</span>
+                <input
+                  id="search-input"
+                  type="text"
+                  placeholder="Search professionals (e.g. Amina, Lagos, Braids, Fades)..."
+                  class="w-full bg-transparent border-none outline-none text-sm md:text-base text-charcoal dark:text-text-dark placeholder:text-gray-400"
+                />
+              </div>
+
+              <button
+                id="filter-toggle-btn"
+                aria-label="Filters"
+                class="w-10 h-10 rounded-full hover:bg-parchment-white dark:hover:bg-border-dark text-charcoal dark:text-text-dark flex items-center justify-center shrink-0 transition-colors"
+              >
+                <span class="material-symbols-outlined">tune</span>
+              </button>
+
+              <button
+                id="search-btn"
+                class="bg-primary dark:bg-text-dark text-white dark:text-primary text-xs md:text-sm font-semibold px-6 py-3 rounded-full hover:bg-charcoal dark:hover:bg-gray-200 transition-colors shrink-0"
+              >
+                Search
+              </button>
+            </div>
+
+            <!-- Filter Options Panel (Collapsible) -->
+            <div
+              id="filter-panel"
+              class="hidden w-full max-w-[720px] bg-white dark:bg-surface-card-dark rounded-2xl p-6 shadow-xl border border-soft-border dark:border-border-dark text-left transition-all"
+            >
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                  <label
+                    class="block text-xs font-semibold uppercase text-sage mb-2"
+                    >Location</label
+                  >
+                  <select
+                    id="filter-location"
+                    class="w-full bg-parchment-white dark:bg-border-dark border border-soft-border dark:border-border-dark rounded-lg p-2 text-sm text-charcoal dark:text-text-dark outline-none"
+                  >
+                    <option value="">All Locations</option>
+                    <option value="Lagos">Lagos</option>
+                    <option value="Abuja">Abuja</option>
+                    <option value="Port Harcourt">Port Harcourt</option>
+                    <option value="Ibadan">Ibadan</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    class="block text-xs font-semibold uppercase text-sage mb-2"
+                    >Specialty</label
+                  >
+                  <select
+                    id="filter-specialty"
+                    class="w-full bg-parchment-white dark:bg-border-dark border border-soft-border dark:border-border-dark rounded-lg p-2 text-sm text-charcoal dark:text-text-dark outline-none"
+                  >
+                    <option value="">All Disciplines</option>
+                    <option value="Hair">Hair & Braiding</option>
+                    <option value="Barbering">Precision Barbering</option>
+                    <option value="Makeup">Bridal & Glam Makeup</option>
+                    <option value="Skin">Clinical Skincare</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    class="block text-xs font-semibold uppercase text-sage mb-2"
+                    >Max Price (₦)</label
+                  >
+                  <select
+                    id="filter-price"
+                    class="w-full bg-parchment-white dark:bg-border-dark border border-soft-border dark:border-border-dark rounded-lg p-2 text-sm text-charcoal dark:text-text-dark outline-none"
+                  >
+                    <option value="">Any Price</option>
+                    <option value="15000">Under ₦15,000</option>
+                    <option value="30000">Under ₦30,000</option>
+                    <option value="50000">Under ₦50,000</option>
+                  </select>
+                </div>
+              </div>
+
+              <div
+                class="flex justify-end gap-3 mt-4 pt-4 border-t border-soft-border dark:border-border-dark"
+              >
+                <button
+                  id="reset-filters"
+                  class="text-xs font-semibold text-muted-terracotta hover:underline"
+                >
+                  Reset Filters
+                </button>
+                <button
+                  id="apply-filters"
+                  class="bg-sage text-white text-xs font-semibold px-4 py-2 rounded-md hover:bg-sage/90"
+                >
+                  Apply Filters
+                </button>
+              </div>
+            </div>
+
+            <!-- Popular Search Quick Chips -->
+            <div
+              class="flex flex-wrap items-center justify-center gap-2 text-xs text-charcoal/70 dark:text-text-dark/70"
+            >
+              <span class="font-semibold">Popular:</span>
+              <button
+                class="popular-chip px-3 py-1 bg-white dark:bg-surface-card-dark rounded-full border border-soft-border dark:border-border-dark hover:border-sage transition-colors"
+              >
+                Knotless Braids
+              </button>
+              <button
+                class="popular-chip px-3 py-1 bg-white dark:bg-surface-card-dark rounded-full border border-soft-border dark:border-border-dark hover:border-sage transition-colors"
+              >
+                Precision Fades
+              </button>
+              <button
+                class="popular-chip px-3 py-1 bg-white dark:bg-surface-card-dark rounded-full border border-soft-border dark:border-border-dark hover:border-sage transition-colors"
+              >
+                Gele Styling
+              </button>
+              <button
+                class="popular-chip px-3 py-1 bg-white dark:bg-surface-card-dark rounded-full border border-soft-border dark:border-border-dark hover:border-sage transition-colors"
+              >
+                HydraFacial
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Disciplines / Service Categories -->
+        <section
+          id="services"
+          class="py-16 px-4 md:px-16 bg-white dark:bg-surface-card-dark border-y border-soft-border dark:border-border-dark transition-colors"
+        >
+          <div class="max-w-[1440px] mx-auto flex flex-col gap-8">
+            <div class="flex justify-between items-end">
+              <div>
+                <h2
+                  class="text-2xl md:text-3xl font-semibold text-primary dark:text-text-dark"
+                >
+                  Disciplines
+                </h2>
+                <p class="text-sm text-charcoal/70 dark:text-text-dark/70 mt-1">
+                  Select a discipline to explore top practitioners.
+                </p>
+              </div>
+              <a
+                href="#marketplace"
+                class="text-xs font-semibold uppercase tracking-wider text-sage hover:text-primary dark:hover:text-text-dark flex items-center gap-1 transition-colors"
+              >
+                View Marketplace
+                <span class="material-symbols-outlined text-sm"
+                  >arrow_forward</span
+                >
+              </a>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+              <a
+                href="#booking"
+                class="group flex flex-col items-center gap-3 p-6 bg-parchment-white dark:bg-border-dark rounded-xl hover:bg-sage/10 transition-all text-center border border-soft-border dark:border-border-dark relative overflow-hidden"
+              >
+                <span
+                  class="material-symbols-outlined text-3xl text-primary dark:text-text-dark group-hover:scale-110 transition-transform"
+                  >content_cut</span
+                >
+                <span
+                  class="text-sm font-semibold text-primary dark:text-text-dark"
+                  >Hair</span
+                >
+              </a>
+              <a
+                href="#booking"
+                class="group flex flex-col items-center gap-3 p-6 bg-parchment-white dark:bg-border-dark rounded-xl hover:bg-sage/10 transition-all text-center border border-soft-border dark:border-border-dark relative overflow-hidden"
+              >
+                <span
+                  class="material-symbols-outlined text-3xl text-primary dark:text-text-dark group-hover:scale-110 transition-transform"
+                  >spa</span
+                >
+                <span
+                  class="text-sm font-semibold text-primary dark:text-text-dark"
+                  >Skin</span
+                >
+              </a>
+              <a
+                href="#booking"
+                class="group flex flex-col items-center gap-3 p-6 bg-parchment-white dark:bg-border-dark rounded-xl hover:bg-sage/10 transition-all text-center border border-soft-border dark:border-border-dark relative overflow-hidden"
+              >
+                <span
+                  class="material-symbols-outlined text-3xl text-primary dark:text-text-dark group-hover:scale-110 transition-transform"
+                  >face</span
+                >
+                <span
+                  class="text-sm font-semibold text-primary dark:text-text-dark"
+                  >Brows</span
+                >
+              </a>
+              <a
+                href="#booking"
+                class="group flex flex-col items-center gap-3 p-6 bg-parchment-white dark:bg-border-dark rounded-xl hover:bg-sage/10 transition-all text-center border border-soft-border dark:border-border-dark relative overflow-hidden"
+              >
+                <span
+                  class="material-symbols-outlined text-3xl text-primary dark:text-text-dark group-hover:scale-110 transition-transform"
+                  >back_hand</span
+                >
+                <span
+                  class="text-sm font-semibold text-primary dark:text-text-dark"
+                  >Nails</span
+                >
+              </a>
+              <a
+                href="#booking"
+                class="group flex flex-col items-center gap-3 p-6 bg-parchment-white dark:bg-border-dark rounded-xl hover:bg-sage/10 transition-all text-center border border-soft-border dark:border-border-dark relative overflow-hidden"
+              >
+                <span
+                  class="material-symbols-outlined text-3xl text-primary dark:text-text-dark group-hover:scale-110 transition-transform"
+                  >brush</span
+                >
+                <span
+                  class="text-sm font-semibold text-primary dark:text-text-dark"
+                  >Makeup</span
+                >
+              </a>
+              <a
+                href="#booking"
+                class="group flex flex-col items-center gap-3 p-6 bg-parchment-white dark:bg-border-dark rounded-xl hover:bg-sage/10 transition-all text-center border border-soft-border dark:border-border-dark relative overflow-hidden"
+              >
+                <span
+                  class="material-symbols-outlined text-3xl text-primary dark:text-text-dark group-hover:scale-110 transition-transform"
+                  >checkroom</span
+                >
+                <span
+                  class="text-sm font-semibold text-primary dark:text-text-dark"
+                  >Gele & Traditional</span
+                >
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Featured Roster Carousel (Manual & Automatic) -->
+        <section
+          id="roster"
+          class="py-16 px-4 md:px-16 bg-surface dark:bg-surface-dark transition-colors"
+        >
+          <div class="max-w-[1440px] mx-auto flex flex-col gap-8">
+            <div class="text-center max-w-[600px] mx-auto">
+              <span
+                class="text-xs uppercase tracking-[0.25em] font-semibold text-sage"
+                >Curated Roster</span
+              >
+              <h2
+                class="text-2xl md:text-3xl font-semibold text-primary dark:text-text-dark mt-1"
+              >
+                Featured Nigerian Professionals
+              </h2>
+              <p class="text-sm text-charcoal/70 dark:text-text-dark/70 mt-2">
+                Verified practitioners across Lagos, Abuja, and Port Harcourt.
+              </p>
+            </div>
+
+            <!-- Carousel Container -->
+            <div class="relative w-full overflow-hidden" id="rosterCarousel">
+              <div class="carousel-track" id="carouselTrack">
+                <!-- Card 1 -->
+                <div
+                  class="carousel-card"
+                  data-name="Amina Bello"
+                  data-specialty="Hair"
+                  data-location="Lagos"
+                  data-price="25000"
+                >
+                  <div
+                    class="group relative h-[420px] rounded-xl overflow-hidden bg-white dark:bg-surface-card-dark border border-soft-border dark:border-border-dark shadow-sm"
+                  >
+                    <div
+                      class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                      style="
+                        background-image: url(&quot;https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80&quot;);
+                      "
+                    ></div>
+                    <div
+                      class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"
+                    ></div>
+                    <div
+                      class="absolute bottom-0 left-0 p-6 w-full flex justify-between items-end text-white"
+                    >
+                      <div class="flex flex-col gap-1">
+                        <span
+                          class="text-xs uppercase tracking-wider text-sage font-semibold"
+                          >Lagos • Hair & Braids</span
+                        >
+                        <h3 class="text-xl font-bold">Amina Bello</h3>
+                        <p class="text-xs opacity-90">
+                          Knotless Braids & Locs Specialist
+                        </p>
+                        <div class="flex items-center gap-2 mt-2">
+                          <span class="text-xs font-semibold text-amber-400"
+                            >★ 4.98 (142 reviews)</span
+                          >
+                          <span class="text-xs opacity-80">• From ₦25,000</span>
+                        </div>
+                      </div>
+                      <a
+                        href="#booking"
+                        class="bg-white text-primary text-xs font-semibold px-4 py-2 rounded-full hover:bg-sage hover:text-white transition-colors shrink-0"
+                      >
+                        Book Now
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                  class="carousel-card"
+                  data-name="Chidi Okafor"
+                  data-specialty="Barbering"
+                  data-location="Abuja"
+                  data-price="10000"
+                >
+                  <div
+                    class="group relative h-[420px] rounded-xl overflow-hidden bg-white dark:bg-surface-card-dark border border-soft-border dark:border-border-dark shadow-sm"
+                  >
+                    <div
+                      class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                      style="
+                        background-image: url(&quot;https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80&quot;);
+                      "
+                    ></div>
+                    <div
+                      class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"
+                    ></div>
+                    <div
+                      class="absolute bottom-0 left-0 p-6 w-full flex justify-between items-end text-white"
+                    >
+                      <div class="flex flex-col gap-1">
+                        <span
+                          class="text-xs uppercase tracking-wider text-sage font-semibold"
+                          >Abuja • Barbering</span
+                        >
+                        <h3 class="text-xl font-bold">Chidi Okafor</h3>
+                        <p class="text-xs opacity-90">
+                          Precision Fades & Beard Sculpting
+                        </p>
+                        <div class="flex items-center gap-2 mt-2">
+                          <span class="text-xs font-semibold text-amber-400"
+                            >★ 5.0 (98 reviews)</span
+                          >
+                          <span class="text-xs opacity-80">• From ₦10,000</span>
+                        </div>
+                      </div>
+                      <a
+                        href="#booking"
+                        class="bg-white text-primary text-xs font-semibold px-4 py-2 rounded-full hover:bg-sage hover:text-white transition-colors shrink-0"
+                      >
+                        Book Now
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div
+                  class="carousel-card"
+                  data-name="Zainab Abubakar"
+                  data-specialty="Makeup"
+                  data-location="Lagos"
+                  data-price="45000"
+                >
+                  <div
+                    class="group relative h-[420px] rounded-xl overflow-hidden bg-white dark:bg-surface-card-dark border border-soft-border dark:border-border-dark shadow-sm"
+                  >
+                    <div
+                      class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                      style="
+                        background-image: url(&quot;https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=800&q=80&quot;);
+                      "
+                    ></div>
+                    <div
+                      class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"
+                    ></div>
+                    <div
+                      class="absolute bottom-0 left-0 p-6 w-full flex justify-between items-end text-white"
+                    >
+                      <div class="flex flex-col gap-1">
+                        <span
+                          class="text-xs uppercase tracking-wider text-sage font-semibold"
+                          >Lagos • Makeup & Gele</span
+                        >
+                        <h3 class="text-xl font-bold">Zainab Abubakar</h3>
+                        <p class="text-xs opacity-90">
+                          Bridal Glam & Gele Styling
+                        </p>
+                        <div class="flex items-center gap-2 mt-2">
+                          <span class="text-xs font-semibold text-amber-400"
+                            >★ 4.96 (210 reviews)</span
+                          >
+                          <span class="text-xs opacity-80">• From ₦45,000</span>
+                        </div>
+                      </div>
+                      <a
+                        href="#booking"
+                        class="bg-white text-primary text-xs font-semibold px-4 py-2 rounded-full hover:bg-sage hover:text-white transition-colors shrink-0"
+                      >
+                        Book Now
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div
+                  class="carousel-card"
+                  data-name="Tunde Bakare"
+                  data-specialty="Skin"
+                  data-location="Port Harcourt"
+                  data-price="35000"
+                >
+                  <div
+                    class="group relative h-[420px] rounded-xl overflow-hidden bg-white dark:bg-surface-card-dark border border-soft-border dark:border-border-dark shadow-sm"
+                  >
+                    <div
+                      class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                      style="
+                        background-image: url(&quot;https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80&quot;);
+                      "
+                    ></div>
+                    <div
+                      class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"
+                    ></div>
+                    <div
+                      class="absolute bottom-0 left-0 p-6 w-full flex justify-between items-end text-white"
+                    >
+                      <div class="flex flex-col gap-1">
+                        <span
+                          class="text-xs uppercase tracking-wider text-sage font-semibold"
+                          >Port Harcourt • Skincare</span
+                        >
+                        <h3 class="text-xl font-bold">Tunde Bakare</h3>
+                        <p class="text-xs opacity-90">
+                          Clinical Facials & Dermal Therapy
+                        </p>
+                        <div class="flex items-center gap-2 mt-2">
+                          <span class="text-xs font-semibold text-amber-400"
+                            >★ 4.99 (115 reviews)</span
+                          >
+                          <span class="text-xs opacity-80">• From ₦35,000</span>
+                        </div>
+                      </div>
+                      <a
+                        href="#booking"
+                        class="bg-white text-primary text-xs font-semibold px-4 py-2 rounded-full hover:bg-sage hover:text-white transition-colors shrink-0"
+                      >
+                        Book Now
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Carousel Controls -->
+              <div class="flex justify-between items-center mt-6 px-2">
+                <button
+                  id="prevBtn"
+                  aria-label="Previous Slide"
+                  class="w-10 h-10 rounded-full bg-white dark:bg-surface-card-dark border border-soft-border dark:border-border-dark flex items-center justify-center text-charcoal dark:text-text-dark hover:bg-sage hover:text-white transition-colors shadow-sm"
+                >
+                  <span class="material-symbols-outlined text-[20px]"
+                    >chevron_left</span
+                  >
+                </button>
+
+                <div id="carouselDots" class="flex gap-2"></div>
+
+                <button
+                  id="nextBtn"
+                  aria-label="Next Slide"
+                  class="w-10 h-10 rounded-full bg-white dark:bg-surface-card-dark border border-soft-border dark:border-border-dark flex items-center justify-center text-charcoal dark:text-text-dark hover:bg-sage hover:text-white transition-colors shadow-sm"
+                >
+                  <span class="material-symbols-outlined text-[20px]"
+                    >chevron_right</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- How It Works (Process & Breakage Fee Policy) -->
+        <section
+          id="process"
+          class="py-16 px-4 md:px-16 bg-parchment-white dark:bg-surface-card-dark border-t border-soft-border dark:border-border-dark transition-colors"
+        >
+          <div
+            class="max-w-[1440px] mx-auto flex flex-col lg:flex-row gap-12 items-center"
+          >
+            <div class="flex-1 flex flex-col gap-6">
+              <div>
+                <span
+                  class="text-xs uppercase tracking-[0.25em] font-semibold text-sage"
+                  >Process</span
+                >
+                <h2
+                  class="text-2xl md:text-3xl font-semibold text-primary dark:text-text-dark mt-1"
+                >
+                  Engineered For Punctuality
+                </h2>
+                <p class="text-sm text-charcoal/70 dark:text-text-dark/70 mt-2">
+                  A booking workflow that protects client time and guarantees
+                  vendor commitment.
+                </p>
+              </div>
+
+              <div class="flex flex-col gap-6">
+                <div class="flex gap-4">
+                  <div
+                    class="w-8 h-8 rounded-full bg-sage/20 text-sage font-bold text-xs flex items-center justify-center shrink-0"
+                  >
+                    01
+                  </div>
+                  <div>
+                    <h3
+                      class="text-base font-semibold text-primary dark:text-text-dark"
+                    >
+                      Select Service & Time Slot
+                    </h3>
+                    <p
+                      class="text-xs md:text-sm text-charcoal/70 dark:text-text-dark/70 mt-1"
+                    >
+                      Choose your preferred practitioner and reserve available
+                      time slots seamlessly.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4">
+                  <div
+                    class="w-8 h-8 rounded-full bg-sage/20 text-sage font-bold text-xs flex items-center justify-center shrink-0"
+                  >
+                    02
+                  </div>
+                  <div>
+                    <h3
+                      class="text-base font-semibold text-primary dark:text-text-dark"
+                    >
+                      Secure Slot with Deposit (20-30%)
+                    </h3>
+                    <p
+                      class="text-xs md:text-sm text-charcoal/70 dark:text-text-dark/70 mt-1"
+                    >
+                      Pay a small breakage deposit via Paystack to lock in your
+                      appointment. No full upfront payments required.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4">
+                  <div
+                    class="w-8 h-8 rounded-full bg-sage/20 text-sage font-bold text-xs flex items-center justify-center shrink-0"
+                  >
+                    03
+                  </div>
+                  <div>
+                    <h3
+                      class="text-base font-semibold text-primary dark:text-text-dark"
+                    >
+                      Get Styled & Complete Payment
+                    </h3>
+                    <p
+                      class="text-xs md:text-sm text-charcoal/70 dark:text-text-dark/70 mt-1"
+                    >
+                      Experience professional styling and clear the balance upon
+                      service completion.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="flex-1 w-full max-w-[500px] bg-white dark:bg-border-dark p-6 rounded-2xl border border-soft-border dark:border-border-dark shadow-md"
+            >
+              <div class="flex items-center gap-3 mb-4 text-success-green">
+                <span class="material-symbols-outlined">verified_user</span>
+                <span class="text-sm font-semibold uppercase tracking-wider"
+                  >Glamora Protection Guarantee</span
+                >
+              </div>
+              <p
+                class="text-xs md:text-sm text-charcoal/80 dark:text-text-dark/80 leading-relaxed"
+              >
+                Cancellations made outside 30 minutes of the scheduled
+                appointment receive standard refund processing. Breakage fees
+                safeguard independent Nigerian beauty professionals against
+                last-minute no-shows.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Call To Action -->
+        <section class="py-16 px-4 md:px-16 bg-primary text-white text-center">
+          <div class="max-w-[700px] mx-auto flex flex-col items-center gap-6">
+            <h2 class="text-3xl md:text-4xl font-semibold">
+              Ready to refine your beauty routine?
+            </h2>
+            <p class="text-sm md:text-base opacity-80">
+              Join Glamora today to discover and book Nigeria's elite
+              independent beauty professionals.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <a
+                href="#booking"
+                class="bg-white text-primary text-xs uppercase font-semibold px-8 py-3.5 rounded-full hover:bg-sage hover:text-white transition-colors"
+                >Book Appointment</a
+              >
+              <a
+                href="#chats"
+                class="border border-white/40 text-white text-xs uppercase font-semibold px-8 py-3.5 rounded-full hover:bg-white/10 transition-colors"
+                >Join as Professional</a
+              >
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer
+        id="marketplace"
+        class="bg-white dark:bg-surface-card-dark py-12 border-t border-soft-border dark:border-border-dark transition-colors"
+      >
+        <div
+          class="max-w-[1440px] mx-auto px-4 md:px-16 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-charcoal/70 dark:text-text-dark/70"
+        >
+          <div class="flex items-center gap-3">
+            <img
+              src="glamora background.png"
+              alt="Glamora Logo"
+              class="h-6 w-auto object-contain"
+            />
+            <span class="font-bold text-primary dark:text-text-dark"
+              >GLAMORA NIGERIA</span
+            >
+          </div>
+          <p>
+            © 2026 GLAMORA. All rights reserved. Connect. Get Booked. Get
+            Styled.
+          </p>
+          <div class="flex gap-6">
+            <a href="#privacy" class="hover:underline">Privacy Policy</a>
+            <a href="#terms" class="hover:underline">Terms of Service</a>
+            <a href="#chats" class="hover:underline">Support Chat</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+      // --- 1. Splash Screen Logic (5 Seconds) ---
+      const splashScreen = document.getElementById("splash-screen");
+      const mainContent = document.getElementById("main-content");
+
+      window.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+          splashScreen.style.opacity = "0";
+          splashScreen.style.visibility = "hidden";
+          mainContent.classList.remove("opacity-0");
+          document.body.classList.remove("overflow-hidden");
+        }, 5000); // 5000ms splash screen duration
+      });
+
+      // --- 2. System / Theme Mode Switcher ---
+      const themeToggleBtn = document.getElementById("theme-toggle");
+      const themeIcon = document.getElementById("theme-icon");
+
+      // Theme state: 'light' | 'dark' | 'system'
+      let currentThemeMode = localStorage.getItem("glamora-theme") || "system";
+
+      function applyTheme(mode) {
+        const systemPrefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+
+        if (mode === "dark" || (mode === "system" && systemPrefersDark)) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+
+        if (mode === "dark") themeIcon.textContent = "dark_mode";
+        else if (mode === "light") themeIcon.textContent = "light_mode";
+        else themeIcon.textContent = "settings_brightness";
+      }
+
+      themeToggleBtn.addEventListener("click", () => {
+        if (currentThemeMode === "system") currentThemeMode = "light";
+        else if (currentThemeMode === "light") currentThemeMode = "dark";
+        else currentThemeMode = "system";
+
+        localStorage.setItem("glamora-theme", currentThemeMode);
+        applyTheme(currentThemeMode);
+      });
+
+      // Listen for OS system theme changes
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", () => {
+          if (currentThemeMode === "system") applyTheme("system");
+        });
+
+      applyTheme(currentThemeMode);
+
+      // --- 3. Filter Options Toggle & Search Logic ---
+      const filterToggleBtn = document.getElementById("filter-toggle-btn");
+      const filterPanel = document.getElementById("filter-panel");
+      const searchInput = document.getElementById("search-input");
+      const searchBtn = document.getElementById("search-btn");
+      const popularChips = document.querySelectorAll(".popular-chip");
+
+      filterToggleBtn.addEventListener("click", () => {
+        filterPanel.classList.toggle("hidden");
+      });
+
+      function filterCards() {
+        const query = searchInput.value.toLowerCase().trim();
+        const selectedLocation = document
+          .getElementById("filter-location")
+          .value.toLowerCase();
+        const selectedSpecialty = document
+          .getElementById("filter-specialty")
+          .value.toLowerCase();
+        const maxPrice =
+          parseFloat(document.getElementById("filter-price").value) || Infinity;
+
+        const cards = document.querySelectorAll(".carousel-card");
+
+        cards.forEach((card) => {
+          const name = card.dataset.name.toLowerCase();
+          const specialty = card.dataset.specialty.toLowerCase();
+          const location = card.dataset.location.toLowerCase();
+          const price = parseFloat(card.dataset.price);
+
+          const matchesQuery =
+            !query ||
+            name.includes(query) ||
+            specialty.includes(query) ||
+            location.includes(query);
+          const matchesLocation =
+            !selectedLocation || location.includes(selectedLocation);
+          const matchesSpecialty =
+            !selectedSpecialty || specialty.includes(selectedSpecialty);
+          const matchesPrice = price <= maxPrice;
+
+          if (
+            matchesQuery &&
+            matchesLocation &&
+            matchesSpecialty &&
+            matchesPrice
+          ) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      }
+
+      searchBtn.addEventListener("click", filterCards);
+      searchInput.addEventListener("keyup", (e) => {
+        if (e.key === "Enter") filterCards();
+      });
+
+      document.getElementById("apply-filters").addEventListener("click", () => {
+        filterCards();
+        filterPanel.classList.add("hidden");
+      });
+
+      document.getElementById("reset-filters").addEventListener("click", () => {
+        document.getElementById("filter-location").value = "";
+        document.getElementById("filter-specialty").value = "";
+        document.getElementById("filter-price").value = "";
+        searchInput.value = "";
+        filterCards();
+      });
+
+      popularChips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          searchInput.value = chip.textContent.trim();
+          filterCards();
+        });
+      });
+
+      // --- 4. Carousel (Manual & Automatic) ---
+      const track = document.getElementById("carouselTrack");
+      const cards = Array.from(track.children);
+      const nextBtn = document.getElementById("nextBtn");
+      const prevBtn = document.getElementById("prevBtn");
+      const dotsContainer = document.getElementById("carouselDots");
+      const carouselContainer = document.getElementById("rosterCarousel");
+
+      let currentIndex = 0;
+      let autoPlayInterval;
+
+      function getCardsPerView() {
+        if (window.innerWidth >= 1024) return 3;
+        if (window.innerWidth >= 768) return 2;
+        return 1;
+      }
+
+      function createDots() {
+        dotsContainer.innerHTML = "";
+        const cardsPerView = getCardsPerView();
+        const numDots = Math.ceil(cards.length / cardsPerView);
+
+        for (let i = 0; i < numDots; i++) {
+          const dot = document.createElement("button");
+          dot.className = `w-2.5 h-2.5 rounded-full transition-all ${i === 0 ? "bg-primary dark:bg-text-dark w-5" : "bg-soft-border dark:bg-border-dark"}`;
+          dot.setAttribute("aria-label", `Go to slide ${i + 1}`);
+          dot.addEventListener("click", () => {
+            currentIndex = i * cardsPerView;
+            updateCarousel();
+          });
+          dotsContainer.appendChild(dot);
+        }
+      }
+
+      function updateDots() {
+        const cardsPerView = getCardsPerView();
+        const dots = Array.from(dotsContainer.children);
+        const activeIndex = Math.floor(currentIndex / cardsPerView);
+
+        dots.forEach((dot, index) => {
+          if (index === activeIndex) {
+            dot.className =
+              "w-5 h-2.5 rounded-full bg-primary dark:bg-text-dark transition-all";
+          } else {
+            dot.className =
+              "w-2.5 h-2.5 rounded-full bg-soft-border dark:bg-border-dark transition-all";
+          }
+        });
+      }
+
+      function updateCarousel() {
+        const cardsPerView = getCardsPerView();
+        if (currentIndex >= cards.length) currentIndex = 0;
+        if (currentIndex < 0)
+          currentIndex = Math.max(0, cards.length - cardsPerView);
+
+        const offset = -(currentIndex * (100 / cardsPerView));
+        track.style.transform = `translateX(${offset}%)`;
+        updateDots();
+      }
+
+      function nextSlide() {
+        const cardsPerView = getCardsPerView();
+        currentIndex += cardsPerView;
+        if (currentIndex >= cards.length) currentIndex = 0;
+        updateCarousel();
+      }
+
+      function prevSlide() {
+        const cardsPerView = getCardsPerView();
+        currentIndex -= cardsPerView;
+        if (currentIndex < 0) currentIndex = cards.length - cardsPerView;
+        updateCarousel();
+      }
+
+      function startAutoPlay() {
+        stopAutoPlay();
+        autoPlayInterval = setInterval(nextSlide, 3500);
+      }
+
+      function stopAutoPlay() {
+        if (autoPlayInterval) clearInterval(autoPlayInterval);
+      }
+
+      nextBtn.addEventListener("click", () => {
+        nextSlide();
+        startAutoPlay();
+      });
+
+      prevBtn.addEventListener("click", () => {
+        prevSlide();
+        startAutoPlay();
+      });
+
+      carouselContainer.addEventListener("mouseenter", stopAutoPlay);
+      carouselContainer.addEventListener("mouseleave", startAutoPlay);
+
+      window.addEventListener("resize", () => {
+        createDots();
+        updateCarousel();
+      });
+
+      // Initialize Carousel
+      createDots();
+      updateCarousel();
+      startAutoPlay();
+    </script>
+  </body>
+</html>

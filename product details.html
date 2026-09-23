@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Product Details | Botanical Renewal Serum</title>
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      * {
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#949393",
+              "on-primary-fixed-variant": "#474747",
+              "surface-container-highest": "#e3e2df",
+              "inverse-on-surface": "#f2f1ee",
+              "surface-container": "#efeeeb",
+              "on-tertiary-fixed-variant": "#6b392c",
+              "surface-container-lowest": "#ffffff",
+              primary: "#171818",
+              "surface-bright": "#faf9f6",
+              surface: "#faf9f6",
+              "success-green": "#5A705F",
+              "on-primary-fixed": "#1b1c1c",
+              "on-surface": "#1b1c1a",
+              tertiary: "#310b03",
+              "on-secondary-fixed-variant": "#3c4a40",
+              "secondary-fixed-dim": "#bacbbd",
+              "surface-container-high": "#e9e8e5",
+              "primary-container": "#2c2c2c",
+              "on-error-container": "#93000a",
+              secondary: "#536257",
+              "tertiary-container": "#4b1f14",
+              "muted-terracotta": "#BC7C6C",
+              "surface-variant": "#e3e2df",
+              "on-tertiary": "#ffffff",
+              "surface-dim": "#dbdad7",
+              "on-secondary": "#ffffff",
+              "on-surface-variant": "#444748",
+              background: "#faf9f6",
+              "on-error": "#ffffff",
+              "error-container": "#ffdad6",
+              "secondary-container": "#d6e7d8",
+              "outline-variant": "#c4c7c7",
+              "on-secondary-fixed": "#111e16",
+              "parchment-white": "#F7F6F3",
+              outline: "#747878",
+              "on-primary": "#ffffff",
+              "surface-container-low": "#f4f3f0",
+              "soft-border": "#E2E2DE",
+              "primary-fixed": "#e4e2e1",
+              "on-background": "#1b1c1a",
+              "inverse-primary": "#c8c6c5",
+              error: "#ba1a1a",
+              "tertiary-fixed-dim": "#feb5a3",
+              "inverse-surface": "#2f312f",
+              sage: "#8A9A8D",
+              "on-tertiary-container": "#c48373",
+              "warning-amber": "#C49D6A",
+              "secondary-fixed": "#d6e7d8",
+              "on-tertiary-fixed": "#360f06",
+              charcoal: "#2C2C2C",
+              "error-red": "#A64D4D",
+              "tertiary-fixed": "#ffdad2",
+              "surface-tint": "#5f5e5e",
+              "on-secondary-container": "#59685c",
+              "primary-fixed-dim": "#c8c6c5",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              lg: "48px",
+              "margin-desktop": "64px",
+              "margin-mobile": "16px",
+              sm: "12px",
+              xs: "4px",
+              gutter: "24px",
+              xl: "80px",
+              md: "24px",
+              base: "8px",
+            },
+            fontFamily: {
+              "headline-xl-mobile": ["Hanken Grotesk"],
+              "headline-lg-mobile": ["Hanken Grotesk"],
+              "label-md": ["Hanken Grotesk"],
+              "headline-md": ["Hanken Grotesk"],
+              "headline-lg": ["Hanken Grotesk"],
+              "label-sm": ["Hanken Grotesk"],
+              "headline-xl": ["Hanken Grotesk"],
+              "body-lg": ["Hanken Grotesk"],
+              "body-sm": ["Hanken Grotesk"],
+              "body-md": ["Hanken Grotesk"],
+            },
+            fontSize: {
+              "headline-xl-mobile": [
+                "36px",
+                { lineHeight: "1.1", fontWeight: "600" },
+              ],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "label-md": [
+                "14px",
+                { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "500" }],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-sm": [
+                "12px",
+                { lineHeight: "1", letterSpacing: "0.03em", fontWeight: "600" },
+              ],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="bg-background dark:bg-charcoal font-body-md text-on-surface dark:text-inverse-on-surface"
+  >
+    <main
+      class="relative flex min-h-screen flex-col items-center justify-center p-margin-mobile"
+    >
+      <div
+        class="flex flex-col w-full bg-parchment-white dark:bg-inverse-surface min-h-screen"
+      >
+        <div
+          class="w-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop py-xl"
+        >
+          <!-- Top Nav / Breadcrumbs -->
+          <div class="flex items-center gap-sm mb-lg">
+            <div class="flex items-center gap-base">
+              <button
+                onclick="history.back()"
+                class="p-0 border-none bg-transparent text-on-surface hover:text-primary cursor-pointer flex items-center justify-center leading-none"
+                title="Go Back"
+              >
+                <span class="material-symbols-outlined text-[24px]"
+                  >arrow_back</span
+                >
+              </button>
+            </div>
+            <a
+              class="text-label-sm font-label-sm text-surface-tint dark:text-outline-variant hover:text-charcoal dark:hover:text-white transition-colors"
+              href="#"
+              >SHOP</a
+            >
+            <span
+              class="material-symbols-outlined text-[16px] text-surface-tint dark:text-outline-variant"
+              >chevron_right</span
+            >
+            <a
+              class="text-label-sm font-label-sm text-surface-tint dark:text-outline-variant hover:text-charcoal dark:hover:text-white transition-colors"
+              href="#"
+              >SKINCARE</a
+            >
+            <span
+              class="material-symbols-outlined text-[16px] text-surface-tint dark:text-outline-variant"
+              >chevron_right</span
+            >
+            <span
+              class="text-label-sm font-label-sm text-charcoal dark:text-white"
+              >RENEWAL SERUM</span
+            >
+          </div>
+
+          <!-- Main Product Section -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-xl relative">
+            <!-- Product Imagery (Left) -->
+            <div class="lg:col-span-7 flex flex-col gap-sm relative">
+              <div
+                class="w-full aspect-[4/5] bg-surface-container dark:bg-charcoal rounded-lg overflow-hidden relative group"
+              >
+                <img
+                  class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQ3uhbvT26Jmgq8T_dlb4c69Ys9CCOeKHgI7EHV7MXXUq0Rx-go_wzubhG37CqpiavGxhBFdjhJH6JXDbgxflN0AOKbJ2IQP0cBZitRCmnJJcDuKeP_vNmAXtAddaez4XhicXUE7eYd-r5N9DFYsnpDjJjrDVadHF4g1CaBwwhVnm1qAu9QpmjVxF_-49TZYb1I-DP7KGuhJ_hUartNUN5ss28IUD1zAIhhYc-VnHF274zNgiqUNjQ"
+                  alt="Main Serum"
+                />
+                <div
+                  class="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/5 dark:group-hover:bg-white/5 transition-colors duration-500 pointer-events-none"
+                ></div>
+              </div>
+
+              <div class="grid grid-cols-4 gap-sm mt-sm">
+                <div
+                  class="aspect-square bg-surface-container dark:bg-charcoal rounded-md overflow-hidden cursor-pointer shadow-sm relative ring-1 ring-charcoal dark:ring-white ring-offset-2 ring-offset-parchment-white dark:ring-offset-inverse-surface"
+                >
+                  <img
+                    class="w-full h-full object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7Mm_6i3u2RWbnfhi5Tx0w4Nd5rUHa2Numn2Rt4-iBTWxzmU6BftvSJoL3fgztjzffGoUA8u5d0TnMn16oNX_qVYZZNiZL-ZksKnRRc2tx49N8HTrIIbTmKF6T0ozj7yzPtHzVI3DEEr8S9c83Ic7-eSao77ny8UzN7yvI8RX1XWAqVUmQ9xrCXzf2oKPH-t_NrJ1XowOhNK-5O9Lmyx-ns9EAj9EONLbeyDdVTNZWN1c_-piDXMqv"
+                    alt="Thumbnail 1"
+                  />
+                </div>
+                <div
+                  class="aspect-square bg-surface-container dark:bg-charcoal rounded-md overflow-hidden cursor-pointer hover:shadow-md transition-shadow relative"
+                >
+                  <img
+                    class="w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6yTbf2iykAVx-No471a_KDI5yl8THCfbCXPsWU3RBV3gDTEmhVwu4Mh2frwHiGiPohzvtOdFMzONUKrXbs0ZRzSaNaXRRV57L2vCZcZykctf-b4GO7Q-vFqSv7h4eSR16Yvwey1pQ0tG8ystFZl1CSxw0f36q_eHJ6iJHe-5WqVB5k4650eBEqGhXsWrkbfazXRZKaFRxdsGH5EqrUiFThUswq13S8pW3cnv7cCxGzTGClvmCAHtN"
+                    alt="Thumbnail 2"
+                  />
+                </div>
+                <div
+                  class="aspect-square bg-surface-container dark:bg-charcoal rounded-md overflow-hidden cursor-pointer hover:shadow-md transition-shadow relative"
+                >
+                  <img
+                    class="w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEgMsFabfq4zgW3hG5VUmXFZU403wTi7jzkIBj-TJ2XoUKCgqfpqgwI40lIqd2iszSjpln_45UNN7bGV5P5vSC_KMPHgMTO1zHZlHUKIs0qEAJTd6ffMriU7CoS0l6f2E5Vr8fWlK__Pa-Qd2WQNC6mXb5oG1WHtkD1Z3LB51A4sg2zC9Bxcu5t_rYmP-2AhthoeVpuKa4DPi7yLrVW2rVVuiS-xpWTaE6lobXa6xFqzIfix1mL8hN"
+                    alt="Thumbnail 3"
+                  />
+                </div>
+                <div
+                  class="aspect-square bg-surface-container dark:bg-charcoal rounded-md overflow-hidden cursor-pointer hover:shadow-md transition-shadow relative"
+                >
+                  <img
+                    class="w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUcu1adGlheE6aoNXt8br-BYoXuN-BR5mgAJAPZtJdPVp2uUTycnx6XRl68iTDaEmu4iH3NGW1sDkxd7sVyeQe53jVU9vxNlxhm7IonsZKaGyN7tjG7omk7g9zKMeOow8wqjX6a_cmSxv3nBufQ5brmLHSxvMHPSvKZmTESHa-Qpv18XQ0vsEiJmZZuJLHYP9ZQEph3IWr4wQAyI5_3j4OIAeEvSOhqF6iSfSUUSqkBe-BZ0SgsLGR"
+                    alt="Thumbnail 4"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Product Details (Right) -->
+            <div
+              class="lg:col-span-5 flex flex-col pt-md lg:sticky lg:top-margin-desktop lg:h-max"
+            >
+              <div class="mb-sm flex justify-between items-start">
+                <h1
+                  id="product-title"
+                  class="text-headline-xl font-headline-xl text-charcoal dark:text-white leading-tight uppercase tracking-tighter"
+                >
+                  Botanical<br />Renewal Serum
+                </h1>
+                <button
+                  class="w-12 h-12 rounded-full flex items-center justify-center hover:bg-surface-container dark:hover:bg-charcoal transition-colors shrink-0"
+                >
+                  <span
+                    class="material-symbols-outlined text-[24px] text-charcoal dark:text-white"
+                    >favorite</span
+                  >
+                </button>
+              </div>
+
+              <div class="flex items-center gap-md mb-lg">
+                <span
+                  class="text-headline-md font-headline-md text-charcoal dark:text-white"
+                  >₦125,000</span
+                >
+                <div
+                  class="w-[1px] h-[20px] bg-soft-border dark:bg-surface-tint"
+                ></div>
+                <div class="flex items-center gap-xs">
+                  <div class="flex text-warning-amber">
+                    <span
+                      class="material-symbols-outlined text-[16px]"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >star</span
+                    >
+                    <span
+                      class="material-symbols-outlined text-[16px]"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >star</span
+                    >
+                    <span
+                      class="material-symbols-outlined text-[16px]"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >star</span
+                    >
+                    <span
+                      class="material-symbols-outlined text-[16px]"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >star</span
+                    >
+                    <span class="material-symbols-outlined text-[16px]"
+                      >star_half</span
+                    >
+                  </div>
+                  <span
+                    class="text-label-sm font-label-sm text-surface-tint dark:text-outline-variant ml-xs"
+                    >(4.8 / 124 Reviews)</span
+                  >
+                </div>
+              </div>
+
+              <div class="mb-lg space-y-md">
+                <p
+                  class="text-body-lg font-body-lg text-on-surface-variant dark:text-outline-variant leading-relaxed"
+                >
+                  A highly concentrated nightly treatment designed to accelerate
+                  cellular turnover and reveal deeply luminous, architectural
+                  skin. Formulated with rare botanical adaptogens.
+                </p>
+                <ul
+                  class="text-body-sm font-body-sm text-surface-tint dark:text-outline-variant space-y-sm"
+                >
+                  <li class="flex items-start gap-sm">
+                    <span class="material-symbols-outlined text-[16px] mt-[2px]"
+                      >check</span
+                    >
+                    Vegan & Cruelty-Free
+                  </li>
+                  <li class="flex items-start gap-sm">
+                    <span class="material-symbols-outlined text-[16px] mt-[2px]"
+                      >check</span
+                    >
+                    Sustainable Packaging
+                  </li>
+                  <li class="flex items-start gap-sm">
+                    <span class="material-symbols-outlined text-[16px] mt-[2px]"
+                      >check</span
+                    >
+                    Ideal for mature or fatigued skin
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Variants / Quantity -->
+              <div class="space-y-lg mb-xl">
+                <div>
+                  <label
+                    class="block text-label-sm font-label-sm text-charcoal dark:text-white mb-sm uppercase"
+                    >Size</label
+                  >
+                  <div class="flex gap-sm">
+                    <!-- Size buttons -->
+                    <button
+                      onclick="selectSize(this, '30 ML')"
+                      class="size-btn active bg-charcoal text-on-primary dark:bg-white dark:text-charcoal px-md py-sm rounded-md text-label-sm font-label-sm transition-all shadow-sm"
+                    >
+                      30 ML
+                    </button>
+                    <button
+                      onclick="selectSize(this, '50 ML')"
+                      class="size-btn bg-surface-container text-charcoal dark:bg-charcoal dark:text-white px-md py-sm rounded-md text-label-sm font-label-sm hover:bg-surface-container-high transition-all"
+                    >
+                      50 ML
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <label
+                    class="block text-label-sm font-label-sm text-charcoal dark:text-white mb-sm uppercase"
+                    >Quantity</label
+                  >
+                  <div
+                    class="flex items-center w-max bg-surface-container dark:bg-charcoal rounded-md overflow-hidden"
+                  >
+                    <button
+                      onclick="updateQty(-1)"
+                      class="w-10 h-10 flex items-center justify-center text-charcoal dark:text-white hover:bg-surface-container-high dark:hover:bg-surface-tint transition-colors"
+                    >
+                      -
+                    </button>
+                    <input
+                      id="qty"
+                      class="w-12 h-10 text-center bg-transparent text-body-md font-body-md text-charcoal dark:text-white focus:outline-none appearance-none"
+                      type="number"
+                      value="1"
+                      min="1"
+                      readonly
+                    />
+                    <button
+                      onclick="updateQty(1)"
+                      class="w-10 h-10 flex items-center justify-center text-charcoal dark:text-white hover:bg-surface-container-high dark:hover:bg-surface-tint transition-colors"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Actions -->
+              <div class="flex flex-col gap-sm mb-xl">
+                <button
+                  onclick="addToCart()"
+                  class="w-full bg-charcoal text-on-primary dark:bg-white dark:text-charcoal py-md rounded-md text-label-md font-label-md uppercase tracking-wider hover:bg-primary-container dark:hover:bg-surface-container-low transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-sm"
+                >
+                  Add to Cart
+                  <span class="material-symbols-outlined text-[18px]"
+                    >shopping_bag</span
+                  >
+                </button>
+                <button
+                  onclick="window.location.href = 'checkout.html'"
+                  class="w-full bg-transparent border border-charcoal dark:border-white text-charcoal dark:text-white py-md rounded-md text-label-md font-label-md uppercase tracking-wider hover:bg-surface-container dark:hover:bg-charcoal transition-all"
+                >
+                  Buy Now
+                </button>
+              </div>
+
+              <!-- Vendor Profile Snippet -->
+              <div
+                class="bg-surface-container-lowest dark:bg-charcoal p-md rounded-lg shadow-sm"
+              >
+                <div
+                  class="text-label-sm font-label-sm text-surface-tint dark:text-outline-variant uppercase mb-md tracking-wider"
+                >
+                  Curated By
+                </div>
+                <div class="flex items-center gap-md">
+                  <div
+                    class="w-12 h-12 rounded-full overflow-hidden shrink-0 bg-surface-container shadow-inner"
+                  >
+                    <img
+                      class="w-full h-full object-cover"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAW91JgQQUfa9A38QYLamdt9gYWz5gC_-7NqOQHjueuucvkh5JkoRTNLZg3KjQEOFU8gXns0s6wQLI1QiRZ_w1T38X04NSfbBxKSAnrI4RByB-YK9ifLW7_TpWM8einmFKkOweUCwZb949HuXgJB-Q1ebv54YutYUHwDcUROPh3F6g-E6J23qMhH1kdUzZPU4OfomudJDXkdCZq_2T1sxskL48Tj50miJuPevMOzhpXD_St-wiDMgMw"
+                      alt="Vendor"
+                    />
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div
+                      class="text-body-md font-body-md text-charcoal dark:text-white font-medium truncate"
+                    >
+                      Aura Labs
+                    </div>
+                    <div
+                      class="text-label-sm font-label-sm text-surface-tint dark:text-outline-variant truncate"
+                    >
+                      Premium Skincare Artisan
+                    </div>
+                  </div>
+                  <a
+                    href="beautician-details.html"
+                    class="shrink-0 text-label-sm font-label-sm text-charcoal dark:text-white underline underline-offset-4 hover:text-surface-tint dark:hover:text-outline-variant transition-colors"
+                    >Visit Store</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Visual Divider -->
+          <div
+            class="w-full h-[1px] bg-soft-border dark:bg-surface-tint my-xl"
+          ></div>
+
+          <!-- Related Products -->
+          <div class="mb-xl">
+            <div class="flex items-end justify-between mb-lg">
+              <h2
+                class="text-headline-lg font-headline-lg text-charcoal dark:text-white tracking-tight"
+              >
+                Complementary Rituals
+              </h2>
+              <a
+                href="marketplace.html"
+                class="text-label-sm font-label-sm text-charcoal dark:text-white underline underline-offset-4 hidden md:block hover:text-surface-tint dark:hover:text-outline-variant transition-colors"
+                >VIEW ALL</a
+              >
+            </div>
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter"
+            >
+              <!-- Product Card 1 -->
+              <a
+                href="product-details.html"
+                class="group block relative h-full"
+              >
+                <div
+                  class="w-full aspect-[3/4] bg-surface-container dark:bg-charcoal rounded-md overflow-hidden mb-sm relative"
+                >
+                  <img
+                    class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp91f05B_D3amzUNNLILvP_W3-04NU_nne1MSmeBR4mlvP7Qtu06W3ht1xSlw_bIryDCD6DcOWtbu3ZUcmT-rLsnFkOLAbbsiS94GAxz1Rd7I5osel-k-UvroDWTA3dmAOI7BCvezYjDgIOYPup92kyaariow-9-d_oW2uyOdQLMtqbGyN_QtfvLzoMfrGVpApWJUE9NPF_NCBSHfGXesDL03b-xHL4BLLSbY1YC8Y-RKorD-E-Ryv"
+                    alt="Balm"
+                  />
+                  <div
+                    class="absolute top-sm right-sm bg-surface-container-lowest/90 dark:bg-charcoal/90 backdrop-blur px-sm py-xs rounded text-label-sm font-label-sm text-charcoal dark:text-white shadow-sm"
+                  >
+                    NEW
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <h3
+                    class="text-body-md font-body-md text-charcoal dark:text-white font-medium group-hover:text-surface-tint transition-colors line-clamp-1"
+                  >
+                    Midnight Recovery Balm
+                  </h3>
+                  <p
+                    class="text-label-sm font-label-sm text-surface-tint dark:text-outline-variant mt-xs mb-sm"
+                  >
+                    AURA LABS
+                  </p>
+                  <div
+                    class="text-body-md font-body-md text-charcoal dark:text-white"
+                  >
+                    ₦85,000
+                  </div>
+                </div>
+              </a>
+
+              <!-- Product Card 2 -->
+              <a
+                href="product-details.html"
+                class="group block relative h-full"
+              >
+                <div
+                  class="w-full aspect-[3/4] bg-surface-container dark:bg-charcoal rounded-md overflow-hidden mb-sm relative"
+                >
+                  <img
+                    class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdhMhO3713HLhk3hy1a5icYHAZfBWXXkvRPkxl9Qk7I_T9020r1hKLZ80D4sVSYtWAlNH06EZozPEmc0ieMC0qBsIBdYC9ahwkv77NFtZt0q1F5a35sX6qiUQhaIHWnEafGJ2JS3NGa7CrlJRGLq1c7Llc6L3KBvSiMaFsnnbZfpyBPzcGSXuN2hixh5z44uvn2sj20A5lEiEKhC02b7jqNWyz-kGjkVTR7bgIJuIbXDIpFHICGFhT"
+                    alt="Eye Complex"
+                  />
+                </div>
+                <div class="flex flex-col">
+                  <h3
+                    class="text-body-md font-body-md text-charcoal dark:text-white font-medium group-hover:text-surface-tint transition-colors line-clamp-1"
+                  >
+                    Awaken Eye Complex
+                  </h3>
+                  <p
+                    class="text-label-sm font-label-sm text-surface-tint dark:text-outline-variant mt-xs mb-sm"
+                  >
+                    AURA LABS
+                  </p>
+                  <div
+                    class="text-body-md font-body-md text-charcoal dark:text-white"
+                  >
+                    ₦60,000
+                  </div>
+                </div>
+              </a>
+
+              <!-- Product Card 3 -->
+              <a
+                href="product-details.html"
+                class="group block relative h-full hidden sm:block"
+              >
+                <div
+                  class="w-full aspect-[3/4] bg-surface-container dark:bg-charcoal rounded-md overflow-hidden mb-sm relative"
+                >
+                  <img
+                    class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6hCL1duostYE8pE-DmAS8B_Ymvr4Ujml50zx0RFeqbGi5B4XFNPKeFdpvtADrpomPHIE1YuPmjPCjrcvPOt9n4qd3OX_ZPLftdGv0dCtItQw28T-RGCKx7wm3a4c3y6i8Gg-NebyI1aD5Y3LH07mOQGsmGfbyju0Xgw2txAdl_jXtphJ8tyePWlR3mGqS4G1lze15DzliMknVVbz-cPU7nXu3hvV1w8jEw0UvGSmlCGTf1fNt1MlY"
+                    alt="Essence"
+                  />
+                </div>
+                <div class="flex flex-col">
+                  <h3
+                    class="text-body-md font-body-md text-charcoal dark:text-white font-medium group-hover:text-surface-tint transition-colors line-clamp-1"
+                  >
+                    Balancing Essence
+                  </h3>
+                  <p
+                    class="text-label-sm font-label-sm text-surface-tint dark:text-outline-variant mt-xs mb-sm"
+                  >
+                    AURA LABS
+                  </p>
+                  <div
+                    class="text-body-md font-body-md text-charcoal dark:text-white"
+                  >
+                    ₦45,000
+                  </div>
+                </div>
+              </a>
+
+              <!-- Product Card 4 -->
+              <a
+                href="product-details.html"
+                class="group block relative h-full hidden lg:block"
+              >
+                <div
+                  class="w-full aspect-[3/4] bg-surface-container dark:bg-charcoal rounded-md overflow-hidden mb-sm relative"
+                >
+                  <img
+                    class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkc4WKw13X1c1KBfnFDsEUxxa6uNMFHfY93KSRnv-0oOWD-xKTGH5aziCBsbdcV5MOy1KaiI-ThG7nJeJWlIaeHHcLJDAK8G9hjBIURSDbKTmEbiIyjQs4WvSFDZ9FahBgE-FKwPZVdp7amCDQ46Aeumk4MuXlWVPc3ckpzgwr5ZF4lKViLqftno9DBF-kSr7IyoTO4Kc6rr5fXhfzohp1IxUJ7W1zdyIzfH5PMFbE1esx5JprJnJA"
+                    alt="Cotton Rounds"
+                  />
+                </div>
+                <div class="flex flex-col">
+                  <h3
+                    class="text-body-md font-body-md text-charcoal dark:text-white font-medium group-hover:text-surface-tint transition-colors line-clamp-1"
+                  >
+                    Organic Cotton Rounds
+                  </h3>
+                  <p
+                    class="text-label-sm font-label-sm text-surface-tint dark:text-outline-variant mt-xs mb-sm"
+                  >
+                    AURA LABS
+                  </p>
+                  <div
+                    class="text-body-md font-body-md text-charcoal dark:text-white"
+                  >
+                    ₦18,000
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/product details.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Glamora - Login</title>
+
+    <link rel="stylesheet" href="css/auth.css" />
+
+    <!-- Tailwind Framework & Config -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#949393",
+              "on-primary-fixed-variant": "#474747",
+              "surface-container-highest": "#e3e2df",
+              "inverse-on-surface": "#f2f1ee",
+              "surface-container": "#efeeeb",
+              "on-tertiary-fixed-variant": "#6b392c",
+              "surface-container-lowest": "#ffffff",
+              primary: "#171818",
+              "surface-bright": "#faf9f6",
+              surface: "#faf9f6",
+              "success-green": "#5A705F",
+              "on-primary-fixed": "#1b1c1c",
+              "on-surface": "#1b1c1a",
+              tertiary: "#310b03",
+              "on-secondary-fixed-variant": "#3c4a40",
+              "secondary-fixed-dim": "#bacbbd",
+              "surface-container-high": "#e9e8e5",
+              "primary-container": "#2c2c2c",
+              "on-error-container": "#93000a",
+              secondary: "#536257",
+              "tertiary-container": "#4b1f14",
+              "muted-terracotta": "#BC7C6C",
+              "surface-variant": "#e3e2df",
+              "on-tertiary": "#ffffff",
+              "surface-dim": "#dbdad7",
+              "on-secondary": "#ffffff",
+              "on-surface-variant": "#444748",
+              background: "#faf9f6",
+              "on-error": "#ffffff",
+              "error-container": "#ffdad6",
+              "secondary-container": "#d6e7d8",
+              "outline-variant": "#c4c7c7",
+              "on-secondary-fixed": "#111e16",
+              "parchment-white": "#F7F6F3",
+              outline: "#747878",
+              "on-primary": "#ffffff",
+              "surface-container-low": "#f4f3f0",
+              "soft-border": "#E2E2DE",
+              "primary-fixed": "#e4e2e1",
+              "on-background": "#1b1c1a",
+              "inverse-primary": "#c8c6c5",
+              error: "#ba1a1a",
+              "tertiary-fixed-dim": "#feb5a3",
+              "inverse-surface": "#2f312f",
+              sage: "#8A9A8D",
+              "on-tertiary-container": "#c48373",
+              "warning-amber": "#C49D6A",
+              "secondary-fixed": "#d6e7d8",
+              "on-tertiary-fixed": "#360f06",
+              charcoal: "#2C2C2C",
+              "error-red": "#A64D4D",
+              "tertiary-fixed": "#ffdad2",
+              "surface-tint": "#5f5e5e",
+              "on-secondary-container": "#59685c",
+              "primary-fixed-dim": "#c8c6c5",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              lg: "48px",
+              "margin-desktop": "64px",
+              "margin-mobile": "16px",
+              sm: "12px",
+              xs: "4px",
+              gutter: "24px",
+              xl: "80px",
+              md: "24px",
+              base: "8px",
+            },
+            fontFamily: {
+              "headline-xl-mobile": ["Hanken Grotesk"],
+              "headline-lg-mobile": ["Hanken Grotesk"],
+              "label-md": ["Hanken Grotesk"],
+              "headline-md": ["Hanken Grotesk"],
+              "headline-lg": ["Hanken Grotesk"],
+              "label-sm": ["Hanken Grotesk"],
+              "headline-xl": ["Hanken Grotesk"],
+              "body-lg": ["Hanken Grotesk"],
+              "body-sm": ["Hanken Grotesk"],
+              "body-md": ["Hanken Grotesk"],
+            },
+            fontSize: {
+              "headline-xl-mobile": [
+                "36px",
+                { lineHeight: "1.1", fontWeight: "600" },
+              ],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "label-md": [
+                "14px",
+                { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "500" }],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-sm": [
+                "12px",
+                { lineHeight: "1", letterSpacing: "0.03em", fontWeight: "600" },
+              ],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="bg-background font-body-md text-on-surface dark:bg-charcoal dark:text-parchment-white transition-colors duration-300"
+  >
+    <main
+      class="relative flex min-h-screen flex-col items-center justify-center p-margin-mobile"
+    >
+      <div
+        class="flex flex-col w-full h-full min-h-[calc(100vh-var(--spacing-margin-mobile))] md:min-h-[calc(100vh-var(--spacing-margin-desktop))] lg:flex-row bg-background dark:bg-charcoal"
+      >
+        <!-- Left Column: Form -->
+        <div
+          class="w-full lg:w-1/2 p-margin-mobile md:p-margin-desktop flex flex-col justify-center relative z-10 bg-surface-container-low dark:bg-primary-container rounded-xl lg:rounded-none lg:rounded-r-[48px] shadow-2xl shadow-charcoal/5"
+        >
+          <div class="max-w-md mx-auto w-full space-y-12">
+            <div class="space-y-4">
+              <div
+                class="w-12 h-12 mb-6 shadow-lg shadow-charcoal/20 overflow-hidden rounded-full"
+              >
+                <img
+                  src="images/screen-removebg-preview.png"
+                  alt="Glamora Logo"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <h1
+                class="font-headline-xl-mobile text-headline-xl-mobile lg:font-headline-xl lg:text-headline-xl text-on-surface dark:text-parchment-white tracking-tight"
+              >
+                Welcome back
+              </h1>
+              <p
+                class="font-body-lg text-body-lg text-on-surface-variant dark:text-outline-variant"
+              >
+                Log in to manage your appointments, view your schedule, and
+                access client records.
+              </p>
+            </div>
+
+            <div class="space-y-6">
+              <button
+                onclick="handleSSO('Google')"
+                type="button"
+                class="w-full h-[56px] flex items-center justify-center gap-3 bg-surface dark:bg-surface-container-high border-none rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 group"
+              >
+                <svg
+                  class="w-5 h-5 text-on-surface group-hover:scale-110 transition-transform"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                    fill="#4285F4"
+                  ></path>
+                  <path
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                    fill="#34A853"
+                  ></path>
+                  <path
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                    fill="#FBBC05"
+                  ></path>
+                  <path
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                    fill="#EA4335"
+                  ></path>
+                </svg>
+                <span
+                  class="font-label-md text-label-md text-on-surface dark:text-charcoal"
+                  >Continue with Google</span
+                >
+              </button>
+
+              <button
+                onclick="handleSSO('Apple')"
+                type="button"
+                class="w-full h-[56px] flex items-center justify-center gap-3 bg-charcoal dark:bg-parchment-white border-none rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 group"
+              >
+                <svg
+                  class="w-5 h-5 text-on-primary dark:text-charcoal group-hover:scale-110 transition-transform"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.19 2.31-.88 3.5-.8 1.54.11 2.62.7 3.34 1.76-2.76 1.7-2.26 5.48.56 6.64-.67 1.84-1.74 3.48-2.48 4.57zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"
+                  ></path>
+                </svg>
+                <span
+                  class="font-label-md text-label-md text-on-primary dark:text-charcoal"
+                  >Continue with Apple</span
+                >
+              </button>
+            </div>
+
+            <div class="relative flex items-center py-4">
+              <div
+                class="flex-grow border-t border-soft-border dark:border-outline-variant"
+              ></div>
+              <span
+                class="flex-shrink-0 mx-4 font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant uppercase tracking-wider"
+                >or sign in with email</span
+              >
+              <div
+                class="flex-grow border-t border-soft-border dark:border-outline-variant"
+              ></div>
+            </div>
+
+            <form class="space-y-6" id="loginForm">
+              <div class="space-y-4">
+                <div class="relative group">
+                  <input
+                    class="w-full h-[56px] px-4 pt-4 pb-1 bg-surface dark:bg-surface-container-high border border-soft-border dark:border-outline-variant rounded-lg focus:border-charcoal dark:focus:border-parchment-white focus:ring-0 transition-colors peer placeholder-transparent font-body-md text-body-md text-on-surface dark:text-charcoal"
+                    id="email"
+                    placeholder="name@example.com"
+                    required
+                    type="email"
+                  />
+                  <label
+                    class="absolute left-4 top-2 font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-body-md peer-focus:top-2 peer-focus:text-label-sm peer-focus:text-charcoal pointer-events-none"
+                    for="email"
+                    >Email address</label
+                  >
+                </div>
+                <div class="relative group">
+                  <input
+                    class="w-full h-[56px] px-4 pt-4 pb-1 bg-surface dark:bg-surface-container-high border border-soft-border dark:border-outline-variant rounded-lg focus:border-charcoal dark:focus:border-parchment-white focus:ring-0 transition-colors peer placeholder-transparent font-body-md text-body-md text-on-surface dark:text-charcoal"
+                    id="password"
+                    placeholder="Password"
+                    required
+                    type="password"
+                  />
+                  <label
+                    class="absolute left-4 top-2 font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-body-md peer-focus:top-2 peer-focus:text-label-sm peer-focus:text-charcoal pointer-events-none"
+                    for="password"
+                    >Password</label
+                  >
+                  <button
+                    class="absolute right-4 top-4 text-on-surface-variant hover:text-charcoal transition-colors"
+                    onclick="togglePassword()"
+                    type="button"
+                  >
+                    <span
+                      class="material-symbols-outlined text-[20px]"
+                      id="visibilityIcon"
+                      >visibility_off</span
+                    >
+                  </button>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-2 cursor-pointer group">
+                  <div class="relative w-5 h-5">
+                    <input class="peer sr-only" type="checkbox" />
+                    <div
+                      class="w-5 h-5 border border-soft-border dark:border-outline-variant rounded bg-surface dark:bg-surface-container-high peer-checked:bg-charcoal dark:peer-checked:bg-parchment-white peer-checked:border-charcoal transition-colors group-hover:border-charcoal"
+                    ></div>
+                    <span
+                      class="material-symbols-outlined absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[16px] text-on-primary dark:text-charcoal opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"
+                      >check</span
+                    >
+                  </div>
+                  <span
+                    class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant group-hover:text-on-surface transition-colors"
+                    >Remember me</span
+                  >
+                </label>
+                <a
+                  class="font-label-sm text-label-sm text-charcoal dark:text-parchment-white hover:text-secondary transition-colors underline-offset-4 hover:underline"
+                  href="forgot-password.html"
+                  >Forgot password?</a
+                >
+              </div>
+
+              <button
+                class="w-full h-[56px] bg-charcoal dark:bg-parchment-white text-on-primary dark:text-charcoal font-label-md text-label-md rounded-lg shadow-lg shadow-charcoal/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden group"
+                type="submit"
+              >
+                <span
+                  class="relative z-10 flex items-center justify-center gap-2"
+                >
+                  Log In
+                  <span
+                    class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform"
+                    >arrow_forward</span
+                  >
+                </span>
+                <div
+                  class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                ></div>
+              </button>
+            </form>
+
+            <p
+              class="text-center font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant pt-4"
+            >
+              Don't have an account?
+              <a
+                class="font-label-md text-label-md text-charcoal dark:text-parchment-white hover:text-secondary underline-offset-4 hover:underline"
+                href="signup.html"
+                >Request access</a
+              >
+            </p>
+          </div>
+        </div>
+
+        <!-- Right Column: Image -->
+        <div
+          class="hidden lg:block lg:w-1/2 relative overflow-hidden bg-surface-container-high rounded-l-[48px] ml-[-48px] z-0 shadow-[-20px_0_40px_rgba(44,44,44,0.05)]"
+        >
+          <div
+            class="absolute inset-0 bg-cover bg-center"
+            style="
+              background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAkTandRl2EduQ9TRrASLSNCnYqa2WA6RYjy_-5-RsBjP8YxRJQncnMAgkYWjQ_QuAl12zu-wBed1npG-gMe60gVhhv3inKhAW_A2dxRGMj1Ob3bUvTfMHGTg06KYcVyIU0OnEjkf-MqBT7LTg8hDd_2k3ks9MIh-8fbvZRlWGa1xwn2tOL0ezCUTXvKektFGCZI6cVOd9TLGSlCi4Ml38XrUF5IdHlLzt6D3UQKL1dRvAmvafOrgAK&quot;);
+            "
+          ></div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent"
+          ></div>
+          <div
+            class="absolute inset-0 mix-blend-overlay bg-surface-container-low/10"
+          ></div>
+
+          <div
+            class="absolute bottom-margin-desktop left-margin-desktop right-margin-desktop text-on-primary"
+          >
+            <div
+              class="bg-surface/10 backdrop-blur-md border border-surface/20 p-8 rounded-2xl shadow-2xl"
+            >
+              <span
+                class="material-symbols-outlined text-[32px] text-warning-amber mb-4"
+                >format_quote</span
+              >
+              <blockquote
+                class="font-headline-md text-headline-md font-light mb-6"
+              >
+                "Glamora has transformed how we manage our high-end clientele.
+                The efficiency and elegance of the platform align perfectly with
+                our salon's ethos."
+              </blockquote>
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-12 h-12 rounded-full bg-cover bg-center border-2 border-surface/30"
+                  style="
+                    background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCkDytft2Z-8lA5nhArWMa5bF-I75Kc_pzcYrI-PSEcwPobyW6_oUc5PI-BsLmywzdQlDMjt16qg4bcHaMV6W46yjEyhjjQ7h9ynegbAzxG1488o89akIJhNPbPcXpJQii_WIjcuUVU-BNoSsjeD8u1E3r6QXYQ3TDHGHy2jDjjJcVmXkYJb59GhJXHcCPNDnxa82y0JukPje-S2siIGxIKlTxurZ-qv7f3AJjPpMlpPDbdWVo9LWP1&quot;);
+                  "
+                ></div>
+                <div>
+                  <p class="font-label-md text-label-md text-on-primary">
+                    Elena Rostova
+                  </p>
+                  <p
+                    class="font-label-sm text-label-sm text-surface-variant opacity-80"
+                  >
+                    Founder, The Obsidian Spa
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/login.js"></script>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+/* Base layer overrides */
+@layer base {
+    html, body {
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        overscroll-behavior: none;
+    }
+    main > :first-child {
+        margin-top: 0 !important;
+    }
+    main > :last-child {
+        margin-bottom: 0 !important;
+    }
+}
+
+/* Hide scrollbar for a cleaner aesthetic */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* 
+ * CSS Variables Strategy for Light/Dark Mode 
+ * Tailwind config refers to these variables so classes dynamically update.
+ */
+:root {
+    /* Light Theme (Default) */
+    --color-background: #faf9f6;
+    --color-on-background: #1b1c1a;
+    --color-surface: #faf9f6;
+    --color-on-surface: #1b1c1a;
+    --color-surface-variant: #e3e2df;
+    --color-on-surface-variant: #444748;
+    
+    --color-surface-container-lowest: #ffffff;
+    --color-surface-container-low: #f4f3f0;
+    --color-surface-container: #efeeeb;
+    --color-surface-container-high: #e9e8e5;
+    
+    --color-primary: #171818;
+    --color-on-primary: #ffffff;
+    --color-charcoal: #2C2C2C;
+    --color-surface-tint: #5f5e5e;
+    
+    --color-secondary-container: #d6e7d8; /* Sage Base */
+    --color-on-secondary-container: #59685c;
+    
+    --color-error: #A64D4D; /* Muted Terracotta/Error Base */
+    --color-soft-border: #E2E2DE;
+}
+
+/* Dark Theme Overrides */
+html.dark {
+    --color-background: #121212;
+    --color-on-background: #faf9f6;
+    --color-surface: #121212;
+    --color-on-surface: #faf9f6;
+    --color-surface-variant: #2C2C2C;
+    --color-on-surface-variant: #c4c7c7;
+    
+    --color-surface-container-lowest: #1a1a1a;
+    --color-surface-container-low: #222222;
+    --color-surface-container: #2a2a2a;
+    --color-surface-container-high: #333333;
+    
+    --color-primary: #faf9f6;
+    --color-on-primary: #171818;
+    --color-charcoal: #e4e2e1;
+    --color-surface-tint: #a0a0a0;
+    
+    --color-secondary-container: #3c4a40; /* Darker Sage */
+    --color-on-secondary-container: #d6e7d8;
+    
+    --color-error: #BC7C6C; 
+    --color-soft-border: #333333;
+}

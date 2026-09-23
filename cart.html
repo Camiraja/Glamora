@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="en" class="system">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Glamora | Your Cart</title>
+
+    <!-- External Fonts & Icons -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS (Variables for Light/Dark mode) -->
+    <link rel="stylesheet" href="css/general.css" />
+
+    <!-- Tailwind CSS CDN & Configuration -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed-variant": "#474747",
+              "on-primary-container": "#949393",
+              "surface-container-highest": "#e3e2df",
+              "parchment-white": "#F7F6F3",
+              "secondary-container": "#d6e7d8",
+              "surface-container-low": "#f4f3f0",
+              "on-secondary-fixed-variant": "#3c4a40",
+              "on-error-container": "#93000a",
+              "inverse-surface": "#2f312f",
+              "on-tertiary-container": "#c48373",
+              "on-secondary-container": "#59685c",
+              "surface-variant": "#e3e2df",
+              "inverse-primary": "#c8c6c5",
+              "on-tertiary": "#ffffff",
+              "on-secondary": "#ffffff",
+              error: "#ba1a1a",
+              outline: "#747878",
+              "secondary-fixed-dim": "#bacbbd",
+              "on-surface": "#1b1c1a",
+              "inverse-on-surface": "#f2f1ee",
+              "error-container": "#ffdad6",
+              charcoal: "#2C2C2C",
+              "on-tertiary-fixed": "#360f06",
+              "surface-tint": "#5f5e5e",
+              "error-red": "#A64D4D",
+              "on-background": "#1b1c1a",
+              "surface-container": "#efeeeb",
+              "surface-container-lowest": "#ffffff",
+              "soft-border": "#E2E2DE",
+              background: "#faf9f6",
+              "on-secondary-fixed": "#111e16",
+              "on-surface-variant": "#444748",
+              primary: "#171818",
+              "success-green": "#5A705F",
+              "primary-fixed-dim": "#c8c6c5",
+              "surface-container-high": "#e9e8e5",
+              "secondary-fixed": "#d6e7d8",
+              "surface-dim": "#dbdad7",
+              "tertiary-container": "#4b1f14",
+              "tertiary-fixed-dim": "#feb5a3",
+              sage: "#8A9A8D",
+              "surface-bright": "#faf9f6",
+              "tertiary-fixed": "#ffdad2",
+              surface: "#faf9f6",
+              "outline-variant": "#c4c7c7",
+              "muted-terracotta": "#BC7C6C",
+              "primary-fixed": "#e4e2e1",
+              tertiary: "#310b03",
+              "on-tertiary-fixed-variant": "#6b392c",
+              "warning-amber": "#C49D6A",
+              "on-error": "#ffffff",
+              secondary: "#536257",
+              "primary-container": "#2c2c2c",
+              "on-primary": "#ffffff",
+              "on-primary-fixed": "#1b1c1c",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              xl: "80px",
+              gutter: "24px",
+              "margin-mobile": "16px",
+              lg: "48px",
+              base: "8px",
+              xs: "4px",
+              "margin-desktop": "64px",
+              md: "24px",
+              sm: "12px",
+            },
+            fontFamily: {
+              "label-md": ["Hanken Grotesk"],
+              "body-md": ["Hanken Grotesk"],
+              "label-sm": ["Hanken Grotesk"],
+              "body-sm": ["Hanken Grotesk"],
+              "headline-lg-mobile": ["Hanken Grotesk"],
+              "headline-xl-mobile": ["Hanken Grotesk"],
+              "headline-lg": ["Hanken Grotesk"],
+              "body-lg": ["Hanken Grotesk"],
+              "headline-xl": ["Hanken Grotesk"],
+              "headline-md": ["Hanken Grotesk"],
+            },
+            fontSize: {
+              "label-md": [
+                "14px",
+                { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" },
+              ],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+              "label-sm": [
+                "12px",
+                { lineHeight: "1", letterSpacing: "0.03em", fontWeight: "600" },
+              ],
+              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "headline-xl-mobile": [
+                "36px",
+                { lineHeight: "1.1", fontWeight: "600" },
+              ],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "500" }],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+
+  <body
+    class="bg-background font-body-md text-on-surface transition-colors duration-300"
+  >
+    <header
+      class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-soft-border transition-colors duration-300"
+    >
+      <div
+        class="h-16 max-w-[1440px] mx-auto px-margin-desktop flex items-center justify-between"
+      >
+        <button
+          onclick="history.back()"
+          class="p-0 border-none bg-transparent text-on-surface hover:text-primary cursor-pointer flex items-center justify-center leading-none"
+          title="Go Back"
+        >
+          <span class="material-symbols-outlined text-[24px]">arrow_back</span>
+        </button>
+        <a href="index.html" class="flex items-center gap-base">
+          <img
+            alt="Glamora Logo"
+            class="h-8 w-auto object-contain"
+            src="images/glamora_background-removebg-preview.png"
+          />
+          <span
+            class="font-headline-md text-headline-md text-primary tracking-tight"
+            >GLAMORA</span
+          >
+        </a>
+        <nav class="hidden md:flex items-center gap-lg h-full">
+          <a
+            href="index.html"
+            class="flex items-center h-full px-xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+            >Home</a
+          >
+          <a
+            href="marketplace.html"
+            class="flex items-center h-full px-xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+            >Marketplace</a
+          >
+          <a
+            href="favorite.html"
+            class="flex items-center h-full px-xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+            >Favorites</a
+          >
+          <a
+            href="bookings.html"
+            class="flex items-center h-full px-xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors"
+            >My Bookings</a
+          >
+        </nav>
+        <div class="flex items-center gap-md">
+          <div class="flex items-center gap-sm">
+            <a
+              href="cart.html"
+              aria-current="page"
+              class="p-xs text-primary font-semibold transition-colors flex items-center border-b-2 border-primary"
+            >
+              <span class="material-symbols-outlined">shopping_bag</span>
+            </a>
+            <a
+              href="notifications.html"
+              class="p-xs text-on-surface-variant hover:text-primary transition-colors flex items-center"
+            >
+              <span class="material-symbols-outlined">notifications</span>
+            </a>
+          </div>
+          <a
+            href="profile.html"
+            class="flex items-center gap-sm cursor-pointer group"
+          >
+            <img
+              alt="Profile"
+              class="w-8 h-8 rounded-full object-cover border border-soft-border group-hover:border-primary transition-colors"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAksYm7Vpu3y6nFXAdnowe6h9yhNcma3tOmWqhGqQ-yieKVgv8IOaIQ21a9oK4barmnxBtCbmquE3v8ijlXgSV-zbE8NktlwkPDfGYPsqoh8T0NODzVrMTSMZLOGIWxZ5sK5uG09XBqCUJsvcsc8RrecRsLG5xdSZ2m8MUH3WXsWax75A3uBbiT_shFBUTYsOu9dyHNTK3QCaWYe77GnvN4ZQ-67ApBKuv20ipR9qLJlf0O_ZyvafdN"
+            />
+            <span
+              class="material-symbols-outlined text-on-surface-variant group-hover:text-primary"
+              >expand_more</span
+            >
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main
+      class="w-full pt-16 bg-background min-h-screen transition-colors duration-300"
+    >
+      <div class="flex flex-col w-full">
+        <div
+          class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop w-full pb-xl flex flex-col gap-lg lg:gap-xl"
+        >
+          <!-- Header Section -->
+          <div
+            class="flex flex-col md:flex-row justify-between items-start md:items-end gap-md mt-lg"
+          >
+            <div class="flex flex-col max-w-lg">
+              <span
+                class="font-label-sm text-label-sm text-sage uppercase tracking-widest mb-xs"
+                >Checkout</span
+              >
+              <h1 class="font-headline-xl text-headline-xl text-on-surface">
+                Your Procurement
+              </h1>
+              <p
+                class="font-body-md text-body-md text-on-surface-variant mt-sm"
+              >
+                Review your selected architectural beauty treatments and
+                professional formulations.
+              </p>
+            </div>
+
+            <!-- Shipping Progress Visual -->
+            <div
+              class="w-full md:w-72 bg-surface-container shadow-sm p-md rounded-xl flex flex-col gap-xs border border-soft-border"
+            >
+              <div class="flex justify-between items-center">
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant"
+                  >Lagos Free Shipping</span
+                >
+                <span class="font-label-sm text-label-sm text-success-green"
+                  >Unlocked</span
+                >
+              </div>
+              <div
+                class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden"
+              >
+                <div
+                  class="h-full bg-success-green w-full transition-all duration-1000"
+                ></div>
+              </div>
+              <span
+                class="font-body-sm text-body-sm text-on-surface-variant mt-xs"
+                >Complimentary VIP dispatch applied.</span
+              >
+            </div>
+          </div>
+
+          <!-- Main Layout: Grid -->
+          <div
+            class="grid grid-cols-1 lg:grid-cols-12 gap-lg lg:gap-xl"
+            id="cart-container"
+          >
+            <!-- Left Column: Items List -->
+            <div class="lg:col-span-7 flex flex-col gap-md">
+              <!-- Select All Checkbox -->
+              <div
+                class="flex items-center gap-sm pb-sm border-b border-soft-border"
+              >
+                <input
+                  type="checkbox"
+                  id="select-all"
+                  class="w-5 h-5 accent-charcoal cursor-pointer rounded"
+                  checked
+                />
+                <label
+                  for="select-all"
+                  class="font-label-md text-label-md text-on-surface cursor-pointer select-none"
+                  >Select All Items</label
+                >
+              </div>
+
+              <div id="cart-items-wrapper" class="flex flex-col gap-md">
+                <!-- Item 1 -->
+                <div
+                  class="cart-item flex flex-col sm:flex-row gap-md bg-surface-container-lowest border border-soft-border shadow-sm p-sm rounded-xl hover:shadow-md transition-shadow relative"
+                  data-price="45000"
+                >
+                  <div class="flex items-center pl-xs">
+                    <input
+                      type="checkbox"
+                      class="item-checkbox w-5 h-5 accent-charcoal cursor-pointer rounded"
+                      checked
+                    />
+                  </div>
+                  <div
+                    class="bg-cover bg-center w-full sm:w-40 h-48 sm:h-auto rounded-lg shadow-sm"
+                    style="
+                      background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCTte3RhfkhblSY66DLgyrVDVi_mW3jwynIgISY-in2cpYdBQMZNmthJacgSGJSDeNYSUn-WVbOsz7lhPdy-yuHvI1e4g1fFl6hhgt79PLXef8QQBZN1dSwli6gA2lewTy-YT310IWgFB-V2s0uiz12bBb3nQ5ReWMWHvz54Xb7tD0GmweJFvHNVYL9PTQ8tD-mNwbQEzI-tH9-CLOktMLPY8lZQ2GqSJxXeWzyCbDswqk7KPpQXYZH&quot;);
+                    "
+                  ></div>
+                  <div class="flex flex-col justify-between p-sm flex-1">
+                    <div class="flex justify-between items-start gap-sm">
+                      <div class="flex flex-col">
+                        <h3
+                          class="font-headline-md text-headline-md text-on-surface"
+                        >
+                          Peptide Resurfacing
+                        </h3>
+                        <span
+                          class="font-body-sm text-body-sm text-on-surface-variant mt-xs"
+                          >Molecular restructuring complex, 30ml</span
+                        >
+                      </div>
+                      <span
+                        class="font-headline-md text-headline-md text-on-surface"
+                        >₦45,000</span
+                      >
+                    </div>
+                    <div class="flex justify-between items-end mt-lg">
+                      <div
+                        class="flex items-center gap-sm bg-surface-container shadow-sm rounded-full px-sm py-xs border border-soft-border"
+                      >
+                        <button
+                          class="decrease-btn w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"
+                        >
+                          <span class="material-symbols-outlined text-[16px]"
+                            >remove</span
+                          >
+                        </button>
+                        <span
+                          class="quantity-val font-label-md text-label-md text-on-surface w-4 text-center"
+                          >2</span
+                        >
+                        <button
+                          class="increase-btn w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"
+                        >
+                          <span class="material-symbols-outlined text-[16px]"
+                            >add</span
+                          >
+                        </button>
+                      </div>
+                      <button
+                        class="remove-btn font-label-sm text-label-sm text-muted-terracotta hover:text-error-red transition-colors flex items-center gap-xs"
+                      >
+                        <span class="material-symbols-outlined text-[16px]"
+                          >delete</span
+                        >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div
+                  class="cart-item flex flex-col sm:flex-row gap-md bg-surface-container-lowest border border-soft-border shadow-sm p-sm rounded-xl hover:shadow-md transition-shadow relative"
+                  data-price="25500"
+                >
+                  <div class="flex items-center pl-xs">
+                    <input
+                      type="checkbox"
+                      class="item-checkbox w-5 h-5 accent-charcoal cursor-pointer rounded"
+                      checked
+                    />
+                  </div>
+                  <div
+                    class="bg-cover bg-center w-full sm:w-40 h-48 sm:h-auto rounded-lg shadow-sm"
+                    style="
+                      background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAXsQifbODgWswoM9Q2cqKo8OGhn8ZDNSYD16nPhbb3p-6oMsS5TLVSAgXh-b47T4BjyKRfnW7-Ia6T_3pgzx_Ohk09sFyWcvrpJ3kLGz1LNTjNygYOw9X3yfcTF9bzfme6-XqyT51yzrHsrPwcUS1WEDtBqjEKWl5TVApIjVnLEpWVeuaGT4pdJfEatd3iaegizxUL9OvcqeMjYE766fG-Qywp2CsWM4vkAem6NYfluKJnf_3scNYu&quot;);
+                    "
+                  ></div>
+                  <div class="flex flex-col justify-between p-sm flex-1">
+                    <div class="flex justify-between items-start gap-sm">
+                      <div class="flex flex-col">
+                        <h3
+                          class="font-headline-md text-headline-md text-on-surface"
+                        >
+                          Squalane Hair Elixir
+                        </h3>
+                        <span
+                          class="font-body-sm text-body-sm text-on-surface-variant mt-xs"
+                          >Thermal protection concentrate, 50ml</span
+                        >
+                      </div>
+                      <span
+                        class="font-headline-md text-headline-md text-on-surface"
+                        >₦25,500</span
+                      >
+                    </div>
+                    <div class="flex justify-between items-end mt-lg">
+                      <div
+                        class="flex items-center gap-sm bg-surface-container shadow-sm rounded-full px-sm py-xs border border-soft-border"
+                      >
+                        <button
+                          class="decrease-btn w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"
+                        >
+                          <span class="material-symbols-outlined text-[16px]"
+                            >remove</span
+                          >
+                        </button>
+                        <span
+                          class="quantity-val font-label-md text-label-md text-on-surface w-4 text-center"
+                          >1</span
+                        >
+                        <button
+                          class="increase-btn w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"
+                        >
+                          <span class="material-symbols-outlined text-[16px]"
+                            >add</span
+                          >
+                        </button>
+                      </div>
+                      <button
+                        class="remove-btn font-label-sm text-label-sm text-muted-terracotta hover:text-error-red transition-colors flex items-center gap-xs"
+                      >
+                        <span class="material-symbols-outlined text-[16px]"
+                          >delete</span
+                        >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Order Summary (Sticky) -->
+            <div class="lg:col-span-5 relative">
+              <div
+                class="sticky top-24 bg-surface-container-lowest border border-soft-border shadow-md rounded-xl p-lg flex flex-col gap-lg -mt-md lg:mt-0"
+              >
+                <h2 class="font-headline-lg text-headline-lg text-on-surface">
+                  Order Summary
+                </h2>
+                <div class="flex flex-col gap-sm">
+                  <div
+                    class="flex justify-between items-center font-body-md text-body-md text-on-surface"
+                  >
+                    <span id="summary-items-count">Subtotal (3 items)</span>
+                    <span id="summary-subtotal">₦115,500.00</span>
+                  </div>
+                  <div
+                    class="flex justify-between items-center font-body-md text-body-md text-on-surface"
+                  >
+                    <span>Professional Discount (10%)</span>
+                    <span class="text-sage" id="summary-discount"
+                      >-₦11,550.00</span
+                    >
+                  </div>
+                  <div
+                    class="flex justify-between items-center font-body-md text-body-md text-on-surface"
+                  >
+                    <span>Taxes (7.5% VAT)</span>
+                    <span id="summary-tax">₦7,796.25</span>
+                  </div>
+                  <div
+                    class="flex justify-between items-center font-body-md text-body-md text-on-surface"
+                  >
+                    <span>Dispatch</span>
+                    <span class="text-success-green">Complimentary</span>
+                  </div>
+                </div>
+
+                <!-- Structural Divider -->
+                <div class="w-full h-[1px] bg-soft-border"></div>
+
+                <div class="flex justify-between items-end">
+                  <div class="flex flex-col">
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-xs"
+                      >Total</span
+                    >
+                    <span
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                      >NGN, inclusive of applicable taxes</span
+                    >
+                  </div>
+                  <span
+                    class="font-headline-xl text-headline-xl text-primary tracking-tight"
+                    id="summary-total"
+                    >₦111,746.25</span
+                  >
+                </div>
+
+                <a
+                  href="checkout.html"
+                  id="checkout-btn"
+                  class="w-full bg-charcoal text-on-primary font-label-md text-label-md py-md rounded-lg shadow-md hover:shadow-xl hover:bg-surface-tint transition-all flex justify-center items-center gap-sm mt-sm"
+                >
+                  Proceed to Authorization
+                  <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+                <div
+                  class="flex items-center justify-center gap-xs text-on-surface-variant opacity-70"
+                >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >lock</span
+                  >
+                  <span class="font-label-sm text-label-sm"
+                    >Encrypted professional checkout via Paystack</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer
+      class="w-full bg-surface-container-lowest py-xl border-t border-soft-border transition-colors duration-300"
+    >
+      <div class="max-w-[1440px] mx-auto px-margin-desktop">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-lg mb-lg">
+          <div class="col-span-1 md:col-span-1">
+            <img
+              alt="Glamora"
+              class="h-8 mb-base"
+              src="images/screen-removebg-preview.png"
+            />
+            <p class="text-body-sm font-body-sm text-on-surface-variant mb-xs">
+              connect. get booked. get styled.
+            </p>
+            <p class="text-body-sm font-body-sm text-on-surface-variant">
+              Elevating the professional beauty standard through architectural
+              precision and efficiency.
+            </p>
+          </div>
+        </div>
+        <div
+          class="flex justify-between items-center pt-md border-t border-soft-border text-label-sm font-label-sm text-on-surface-variant"
+        >
+          <span>© 2026 GLAMORA. All rights reserved.</span>
+          <div class="flex gap-md">
+            <a href="settings.html" class="hover:text-primary transition-colors"
+              >Settings</a
+            >
+            <a href="privacy.html" class="hover:text-primary transition-colors"
+              >Privacy</a
+            >
+            <a href="terms.html" class="hover:text-primary transition-colors"
+              >Terms</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Custom JavaScript for Cart Logic -->
+    <script src="js/cart.js" defer></script>
+  </body>
+</html>

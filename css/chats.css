@@ -1,0 +1,93 @@
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    overscroll-behavior: none;
+  }
+  main > :first-child {
+    margin-top: 0 !important;
+  }
+  main > :last-child {
+    margin-bottom: 0 !important;
+  }
+}
+
+/* Custom Scrollbar Removal */
+::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Transition for Theme Switching */
+body, header, aside, main, footer, div, input, textarea, button {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+/* --- Dark Theme Palette Overrides --- */
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark body,
+html.dark main {
+  background-color: #121214 !important;
+  color: #e3e2df !important;
+}
+
+html.dark .bg-background {
+  background-color: #121214 !important;
+}
+
+html.dark .bg-surface\/80 {
+  background-color: rgba(24, 24, 27, 0.85) !important;
+}
+
+html.dark .bg-surface-container-lowest {
+  background-color: #1c1c1f !important;
+}
+
+html.dark .bg-surface-container-low {
+  background-color: #242428 !important;
+}
+
+html.dark .bg-surface-container {
+  background-color: #2c2c30 !important;
+}
+
+html.dark .border-soft-border {
+  border-color: #2e2e34 !important;
+}
+
+html.dark .text-on-surface {
+  color: #f2f1ee !important;
+}
+
+html.dark .text-on-surface-variant {
+  color: #9e9ea5 !important;
+}
+
+html.dark .text-primary {
+  color: #f2f1ee !important;
+}
+
+html.dark .bg-charcoal {
+  background-color: #3b3b40 !important;
+}
+
+html.dark .bg-primary-container {
+  background-color: #44444a !important;
+}
+
+html.dark .bg-secondary-container {
+  background-color: #27382c !important;
+}
+
+html.dark .text-on-secondary-container {
+  background-color: transparent !important;
+  color: #a8caa8 !important;
+}

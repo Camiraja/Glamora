@@ -1,0 +1,1088 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Vendor Dashboard | GLAMORA</title>
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#949393",
+              "on-primary-fixed-variant": "#474747",
+              "surface-container-highest": "#e3e2df",
+              "inverse-on-surface": "#f2f1ee",
+              "surface-container": "#efeeeb",
+              "on-tertiary-fixed-variant": "#6b392c",
+              "surface-container-lowest": "#ffffff",
+              primary: "#171818",
+              "surface-bright": "#faf9f6",
+              surface: "#faf9f6",
+              "success-green": "#5A705F",
+              "on-primary-fixed": "#1b1c1c",
+              "on-surface": "#1b1c1a",
+              tertiary: "#310b03",
+              "on-secondary-fixed-variant": "#3c4a40",
+              "secondary-fixed-dim": "#bacbbd",
+              "surface-container-high": "#e9e8e5",
+              "primary-container": "#2c2c2c",
+              "on-error-container": "#93000a",
+              secondary: "#536257",
+              "tertiary-container": "#4b1f14",
+              "muted-terracotta": "#BC7C6C",
+              "surface-variant": "#e3e2df",
+              "on-tertiary": "#ffffff",
+              "surface-dim": "#dbdad7",
+              "on-secondary": "#ffffff",
+              "on-surface-variant": "#444748",
+              background: "#faf9f6",
+              "on-error": "#ffffff",
+              "error-container": "#ffdad6",
+              "secondary-container": "#d6e7d8",
+              "outline-variant": "#c4c7c7",
+              "on-secondary-fixed": "#111e16",
+              "parchment-white": "#F7F6F3",
+              outline: "#747878",
+              "on-primary": "#ffffff",
+              "surface-container-low": "#f4f3f0",
+              "soft-border": "#E2E2DE",
+              "primary-fixed": "#e4e2e1",
+              "on-background": "#1b1c1a",
+              "inverse-primary": "#c8c6c5",
+              error: "#ba1a1a",
+              "tertiary-fixed-dim": "#feb5a3",
+              "inverse-surface": "#2f312f",
+              sage: "#8A9A8D",
+              "on-tertiary-container": "#c48373",
+              "warning-amber": "#C49D6A",
+              "secondary-fixed": "#d6e7d8",
+              "on-tertiary-fixed": "#360f06",
+              charcoal: "#2C2C2C",
+              "error-red": "#A64D4D",
+              "tertiary-fixed": "#ffdad2",
+              "surface-tint": "#5f5e5e",
+              "on-secondary-container": "#59685c",
+              "primary-fixed-dim": "#c8c6c5",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              lg: "48px",
+              "margin-desktop": "64px",
+              "margin-mobile": "16px",
+              sm: "12px",
+              xs: "4px",
+              gutter: "24px",
+              xl: "80px",
+              md: "24px",
+              base: "8px",
+            },
+            fontFamily: {
+              "headline-xl-mobile": ["Hanken Grotesk"],
+              "headline-lg-mobile": ["Hanken Grotesk"],
+              "label-md": ["Hanken Grotesk"],
+              "headline-md": ["Hanken Grotesk"],
+              "headline-lg": ["Hanken Grotesk"],
+              "label-sm": ["Hanken Grotesk"],
+              "headline-xl": ["Hanken Grotesk"],
+              "body-lg": ["Hanken Grotesk"],
+              "body-sm": ["Hanken Grotesk"],
+              "body-md": ["Hanken Grotesk"],
+            },
+            fontSize: {
+              "headline-xl-mobile": [
+                "36px",
+                { lineHeight: "1.1", fontWeight: "600" },
+              ],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "label-md": [
+                "14px",
+                { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "500" }],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-sm": [
+                "12px",
+                { lineHeight: "1", letterSpacing: "0.03em", fontWeight: "600" },
+              ],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="bg-background font-body-md text-on-surface flex">
+    <!-- Mobile Header -->
+    <div
+      class="lg:hidden fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl border-b border-soft-border px-margin-mobile py-sm flex items-center justify-between"
+    >
+      <div class="flex items-center gap-base">
+        <img
+          alt="Glamora Logo"
+          class="h-7 w-auto object-contain"
+          src="images/glamora_background-removebg-preview.png"
+        />
+        <span class="font-headline-md text-[18px] text-primary tracking-tight"
+          >GLAMORA</span
+        >
+      </div>
+
+      <div class="flex items-center gap-sm">
+        <!-- Vendor/Client Toggle (Mobile) -->
+        <div
+          class="bg-surface-container p-1 rounded-full flex text-label-sm border border-soft-border -ml-3 scale-105"
+        >
+          <button
+            type="button"
+            onclick="switchRole('vendor')"
+            class="px-2.5 py-1 rounded-full text-[11px] bg-primary text-on-primary font-semibold shadow-sm transition-all"
+          >
+            Vendor
+          </button>
+          <button
+            type="button"
+            onclick="switchRole('customer')"
+            class="px-2.5 py-1 rounded-full text-[11px] text-on-surface-variant font-medium hover:text-primary transition-all"
+          >
+            Client
+          </button>
+        </div>
+        <!-- Hamburger Menu -->
+        <button
+          class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors"
+          onclick="toggleMobileSidebar()"
+        >
+          <span class="material-symbols-outlined text-[20px]">menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Sidebar Drawer -->
+    <div class="hidden fixed inset-0 z-50 lg:hidden" id="mobile-sidebar">
+      <div
+        class="fixed inset-0 bg-primary/40 backdrop-blur-sm"
+        onclick="toggleMobileSidebar()"
+      ></div>
+      <aside
+        class="relative w-72 max-w-[80vw] h-full bg-surface-container-lowest border-r border-soft-border p-md flex flex-col shadow-lg z-10 overflow-y-auto"
+      >
+        <div
+          class="flex items-center justify-between pb-sm border-b border-soft-border mb-md"
+        >
+          <div class="flex items-center gap-base">
+            <img
+              alt="Glamora Logo"
+              class="h-7 w-auto object-contain"
+              src="images/glamora_background-removebg-preview.png"
+            />
+            <span
+              class="font-headline-md text-[18px] text-primary tracking-tight"
+              >GLAMORA</span
+            >
+          </div>
+          <button
+            class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant"
+            onclick="toggleMobileSidebar()"
+          >
+            <span class="material-symbols-outlined text-[18px]">close</span>
+          </button>
+        </div>
+
+        <nav class="flex-1 space-y-xs font-label-md text-label-md">
+          <a
+            class="flex items-center px-md py-sm rounded-lg transition-all group bg-surface-container-high text-primary font-bold"
+            href="vendor-dashboard.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >dashboard</span
+            >
+            Dashboard
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="service-management.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >list_alt</span
+            >
+            Services
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-schedule-and-availability.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >calendar_today</span
+            >
+            Schedule
+          </a>
+          <!-- Updated to vendor-wallet.html -->
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-wallet.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >payments</span
+            >
+            Earnings
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="chats.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >chat_bubble</span
+            >
+            Chats
+          </a>
+        </nav>
+
+        <nav class="pt-md border-t border-soft-border">
+          <a
+            class="px-sm py-base rounded-lg text-label-md text-on-surface-variant hover:bg-surface-container transition-colors flex items-center gap-base"
+            data-path="settings"
+            href="vendor-profile.html"
+            ><span class="material-symbols-outlined text-[20px]">settings</span>
+            Settings</a
+          >
+        </nav>
+      </aside>
+    </div>
+
+    <!-- Desktop Sidebar -->
+    <aside
+      class="hidden lg:flex fixed left-0 top-0 h-full w-72 bg-surface-container-lowest border-r border-soft-border z-50 flex-col"
+    >
+      <div
+        class="p-md flex items-center gap-base border-b border-soft-border mb-base"
+      >
+        <img
+          alt="Glamora Logo"
+          class="h-8 w-auto"
+          src="images/glamora_background-removebg-preview.png"
+        />
+        <span class="font-headline-md text-headline-md tracking-tight"
+          >GLAMORA</span
+        >
+      </div>
+      <div class="px-md py-base mb-sm">
+        <div
+          class="bg-surface-container flex rounded-full p-xs border border-soft-border"
+        >
+          <button
+            onclick="switchRole('vendor')"
+            class="flex-1 text-label-sm font-label-sm py-xs rounded-full bg-white shadow-sm text-primary font-semibold"
+          >
+            Vendor Mode
+          </button>
+          <button
+            onclick="switchRole('customer')"
+            class="flex-1 text-label-sm font-label-sm py-xs text-on-surface-variant hover:text-on-surface transition-colors"
+          >
+            Client Mode
+          </button>
+        </div>
+      </div>
+      <nav class="flex-1 px-sm space-y-xs font-label-md text-label-md">
+        <a
+          aria-current="page"
+          class="flex items-center px-md py-sm rounded-lg transition-all group bg-surface-container-high text-primary font-bold"
+          href="vendor-dashboard.html"
+        >
+          <span class="material-symbols-outlined mr-md">dashboard</span>
+          Dashboard
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="service-management.html"
+        >
+          <span class="material-symbols-outlined mr-md">list_alt</span> Services
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-schedule-and-availability.html"
+        >
+          <span class="material-symbols-outlined mr-md">calendar_today</span>
+          Schedule
+        </a>
+        <!-- Updated to vendor-wallet.html -->
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-wallet.html"
+        >
+          <span class="material-symbols-outlined mr-md">payments</span> Earnings
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="chats.html"
+        >
+          <span class="material-symbols-outlined mr-md">chat_bubble</span> Chats
+        </a>
+      </nav>
+      <!-- Replace the bottom <nav> in the Desktop Sidebar -->
+      <div class="px-sm pb-md w-full">
+        <nav class="pt-sm border-t border-soft-border">
+          <a
+            class="flex items-center px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            data-path="settings"
+            href="vendor-profile.html"
+          >
+            <span class="material-symbols-outlined mr-md">settings</span>
+            Settings
+          </a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <div class="w-full lg:pl-72 flex flex-col min-h-screen relative">
+      <!-- Desktop Header -->
+      <header
+        class="hidden lg:flex fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl border-b border-soft-border z-40 items-center justify-end px-margin-desktop gap-md"
+      >
+        <a
+          href="service-management.html"
+          class="flex items-center gap-xs px-md py-xs bg-primary text-on-primary rounded-full font-label-sm text-label-sm hover:bg-surface-tint transition-colors"
+        >
+          <span class="material-symbols-outlined text-[18px]">add</span> New
+          Service
+        </a>
+        <div class="flex items-center gap-sm pl-md border-l border-soft-border">
+          <img
+            alt="Profile"
+            class="w-8 h-8 rounded-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAksYm7Vpu3y6nFXAdnowe6h9yhNcma3tOmWqhGqQ-yieKVgv8IOaIQ21a9oK4barmnxBtCbmquE3v8ijlXgSV-zbE8NktlwkPDfGYPsqoh8T0NODzVrMTSMZLOGIWxZ5sK5uG09XBqCUJsvcsc8RrecRsLG5xdSZ2m8MUH3WXsWax75A3uBbiT_shFBUTYsOu9dyHNTK3QCaWYe77GnvN4ZQ-67ApBKuv20ipR9qLJlf0O_ZyvafdN"
+          />
+          <span class="font-label-md text-label-md text-primary"
+            >Alexander V.</span
+          >
+        </div>
+      </header>
+
+      <!-- Main Dashboard Content -->
+      <main class="relative pt-16 lg:pt-16 bg-background flex-1 flex flex-col">
+        <div
+          class="flex flex-col w-full h-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop py-lg gap-lg"
+        >
+          <!-- Header Section -->
+          <section
+            class="flex flex-col gap-sm md:flex-row md:items-end md:justify-between w-full mt-lg"
+          >
+            <div class="flex flex-col gap-xs max-w-2xl">
+              <h1
+                class="font-headline-xl text-headline-xl text-on-background tracking-tight"
+              >
+                Dashboard Overview
+              </h1>
+              <p
+                class="font-body-lg text-body-lg text-on-surface-variant max-w-xl"
+              >
+                Welcome back, Alexander. Here’s a summary of your schedule and
+                performance for today, October 24th.
+              </p>
+            </div>
+            <div class="flex items-center gap-sm shrink-0">
+              <a
+                href="vendor-schedule-and-availability.html"
+                class="flex items-center gap-xs px-md py-sm bg-surface-container rounded-full hover:bg-surface-container-high transition-colors text-on-surface font-label-md text-label-md shadow-sm"
+              >
+                <span class="material-symbols-outlined text-[20px]"
+                  >calendar_month</span
+                >
+                View Calendar
+              </a>
+            </div>
+          </section>
+
+          <!-- Key Metrics Bento Grid -->
+          <section class="grid grid-cols-1 md:grid-cols-3 gap-md w-full">
+            <!-- Metric 1: Today's Appointments -->
+            <div
+              class="flex flex-col justify-between p-lg rounded-xl bg-surface-container-low border border-soft-border min-h-[200px] relative overflow-hidden group hover:border-outline-variant transition-colors"
+            >
+              <div
+                class="absolute -right-8 -top-8 w-32 h-32 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors"
+              ></div>
+              <div
+                class="flex items-start justify-between relative z-10 w-full"
+              >
+                <h3
+                  class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest"
+                >
+                  Today's Appointments
+                </h3>
+                <span class="material-symbols-outlined text-on-surface-variant"
+                  >schedule</span
+                >
+              </div>
+              <div class="flex flex-col gap-xs relative z-10">
+                <div class="flex items-baseline gap-sm">
+                  <span
+                    class="font-headline-xl text-headline-xl text-on-surface"
+                    >6</span
+                  >
+                  <span
+                    class="font-body-sm text-body-sm text-on-surface-variant"
+                    >/ 8 slots filled</span
+                  >
+                </div>
+                <div class="flex items-center gap-xs mt-sm">
+                  <span
+                    class="flex w-2 h-2 rounded-full bg-success-green"
+                  ></span>
+                  <span class="font-label-sm text-label-sm text-success-green"
+                    >2 starting soon</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Metric 2: Pending Requests -->
+            <div
+              class="flex flex-col justify-between p-lg rounded-xl bg-surface-container-low border border-soft-border min-h-[200px] relative overflow-hidden group hover:border-outline-variant transition-colors"
+            >
+              <div
+                class="absolute -left-8 -bottom-8 w-32 h-32 bg-warning-amber/10 rounded-full blur-2xl group-hover:bg-warning-amber/20 transition-colors"
+              ></div>
+              <div
+                class="flex items-start justify-between relative z-10 w-full"
+              >
+                <h3
+                  class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest"
+                >
+                  Pending Requests
+                </h3>
+                <span class="material-symbols-outlined text-warning-amber"
+                  >pending_actions</span
+                >
+              </div>
+              <div class="flex flex-col gap-xs relative z-10">
+                <div class="flex items-baseline gap-sm">
+                  <span
+                    class="font-headline-xl text-headline-xl text-on-surface"
+                    >12</span
+                  >
+                  <span
+                    class="font-body-sm text-body-sm text-on-surface-variant"
+                    >requires action</span
+                  >
+                </div>
+                <a
+                  href="vendor-schedule-and-availability.html"
+                  class="mt-sm self-start flex items-center gap-xs px-sm py-xs border border-soft-border rounded-md hover:bg-surface-container transition-colors text-on-surface font-label-sm text-label-sm"
+                >
+                  Review Now
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+            </div>
+
+            <!-- Metric 3: Total Earnings (Month) - Updated to vendor-wallet.html -->
+            <a
+              href="vendor-wallet.html"
+              class="flex flex-col justify-between p-lg rounded-xl bg-primary text-on-primary min-h-[200px] relative overflow-hidden group hover:bg-primary-container transition-all cursor-pointer"
+            >
+              <svg
+                class="absolute bottom-0 right-0 w-full h-1/2 opacity-20"
+                preserveaspectratio="none"
+                viewbox="0 0 200 100"
+              >
+                <path
+                  d="M0,100 C40,80 60,90 100,50 C140,10 160,30 200,0 L200,100 Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+              <div
+                class="flex items-start justify-between relative z-10 w-full"
+              >
+                <h3
+                  class="font-label-md text-label-md text-on-primary-fixed-variant uppercase tracking-widest opacity-80"
+                >
+                  Earnings (Oct)
+                </h3>
+                <span
+                  class="material-symbols-outlined text-on-primary opacity-80"
+                  >account_balance_wallet</span
+                >
+              </div>
+              <div class="flex flex-col gap-xs relative z-10">
+                <div class="flex items-baseline gap-xs">
+                  <span class="font-headline-md text-headline-md opacity-80"
+                    >$</span
+                  >
+                  <span
+                    class="font-headline-xl text-headline-xl text-on-primary"
+                    >8,450.00</span
+                  >
+                </div>
+                <div class="flex items-center justify-between mt-sm">
+                  <div class="flex items-center gap-xs text-success-green">
+                    <span class="material-symbols-outlined text-[16px]"
+                      >trending_up</span
+                    >
+                    <span class="font-label-sm text-label-sm"
+                      >+14% vs last month</span
+                    >
+                  </div>
+                  <span
+                    class="material-symbols-outlined text-[18px] text-on-primary opacity-0 group-hover:opacity-100 transition-opacity"
+                    >arrow_forward</span
+                  >
+                </div>
+              </div>
+            </a>
+          </section>
+
+          <!-- Main Content Area: Split View -->
+          <div class="flex flex-col xl:flex-row gap-lg w-full mt-md">
+            <!-- Left Column: Upcoming Appointments -->
+            <section class="flex flex-col w-full xl:w-2/3 gap-md">
+              <div
+                class="flex items-center justify-between border-b border-soft-border pb-sm"
+              >
+                <h2 class="font-headline-md text-headline-md text-on-surface">
+                  Today's Schedule
+                </h2>
+                <a
+                  class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors flex items-center gap-xs"
+                  href="vendor-schedule-and-availability.html"
+                >
+                  View Full Schedule
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </a>
+              </div>
+
+              <div class="flex flex-col gap-sm">
+                <!-- Appointment Item 1 -->
+                <article
+                  class="flex flex-col sm:flex-row sm:items-center justify-between p-md bg-surface-container-lowest rounded-xl border border-soft-border hover:shadow-md transition-shadow gap-md relative overflow-hidden group"
+                >
+                  <div
+                    class="absolute left-0 top-0 bottom-0 w-1 bg-charcoal group-hover:bg-primary transition-colors"
+                  ></div>
+                  <div class="flex items-center gap-md pl-sm min-w-0">
+                    <div
+                      class="flex flex-col items-center justify-center bg-surface-container w-16 h-16 rounded-lg shrink-0"
+                    >
+                      <span
+                        class="font-headline-md text-headline-md text-on-surface leading-none"
+                        >09</span
+                      >
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-xs"
+                        >AM</span
+                      >
+                    </div>
+                    <div class="flex flex-col min-w-0">
+                      <h4
+                        class="font-headline-md text-headline-md text-on-surface truncate"
+                      >
+                        Bridal Makeup Trial
+                      </h4>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-xs truncate mt-xs"
+                      >
+                        <span class="material-symbols-outlined text-[16px]"
+                          >person</span
+                        >
+                        Sarah Jenkins
+                        <span class="mx-xs opacity-50 text-[10px]">●</span>
+                        <span class="material-symbols-outlined text-[16px]"
+                          >timer</span
+                        >
+                        90 min
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center justify-end gap-sm sm:pl-md w-full sm:w-auto shrink-0"
+                  >
+                    <span
+                      class="inline-flex items-center px-sm py-xs bg-sage/20 text-on-secondary-container rounded-full font-label-sm text-label-sm"
+                    >
+                      Confirmed
+                    </span>
+                    <a
+                      href="chats.html"
+                      class="p-xs hover:bg-surface-container rounded-full transition-colors text-on-surface-variant hover:text-primary"
+                      aria-label="Message Client"
+                    >
+                      <span class="material-symbols-outlined">chat</span>
+                    </a>
+                  </div>
+                </article>
+
+                <!-- Appointment Item 2 -->
+                <article
+                  class="flex flex-col sm:flex-row sm:items-center justify-between p-md bg-surface-container-lowest rounded-xl border border-soft-border hover:shadow-md transition-shadow gap-md relative overflow-hidden group"
+                >
+                  <div
+                    class="absolute left-0 top-0 bottom-0 w-1 bg-soft-border group-hover:bg-charcoal transition-colors"
+                  ></div>
+                  <div class="flex items-center gap-md pl-sm min-w-0">
+                    <div
+                      class="flex flex-col items-center justify-center bg-surface-container w-16 h-16 rounded-lg shrink-0"
+                    >
+                      <span
+                        class="font-headline-md text-headline-md text-on-surface leading-none"
+                        >11</span
+                      >
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-xs"
+                        >AM</span
+                      >
+                    </div>
+                    <div class="flex flex-col min-w-0">
+                      <h4
+                        class="font-headline-md text-headline-md text-on-surface truncate"
+                      >
+                        Editorial Hair Styling
+                      </h4>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-xs truncate mt-xs"
+                      >
+                        <span class="material-symbols-outlined text-[16px]"
+                          >person</span
+                        >
+                        Elena Rostova
+                        <span class="mx-xs opacity-50 text-[10px]">●</span>
+                        <span class="material-symbols-outlined text-[16px]"
+                          >timer</span
+                        >
+                        120 min
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center justify-end gap-sm sm:pl-md w-full sm:w-auto shrink-0"
+                  >
+                    <span
+                      class="inline-flex items-center px-sm py-xs bg-warning-amber/20 text-tertiary-container rounded-full font-label-sm text-label-sm"
+                    >
+                      Deposit Pending
+                    </span>
+                    <a
+                      href="chats.html"
+                      class="p-xs hover:bg-surface-container rounded-full transition-colors text-on-surface-variant hover:text-primary"
+                      aria-label="Message Client"
+                    >
+                      <span class="material-symbols-outlined">chat</span>
+                    </a>
+                  </div>
+                </article>
+
+                <!-- Empty State / Add Slot -->
+                <button
+                  onclick="openModal('manualBookingModal')"
+                  class="w-full py-md border-2 border-dashed border-soft-border rounded-xl flex items-center justify-center gap-sm text-on-surface-variant hover:text-on-surface hover:border-outline-variant hover:bg-surface-container-lowest transition-all group"
+                >
+                  <span
+                    class="material-symbols-outlined group-hover:scale-110 transition-transform"
+                    >add_circle</span
+                  >
+                  <span class="font-label-md text-label-md"
+                    >Add Manual Booking</span
+                  >
+                </button>
+              </div>
+            </section>
+
+            <!-- Right Column: Quick Actions & Recent Activity -->
+            <section class="flex flex-col w-full xl:w-1/3 gap-lg">
+              <!-- Quick Actions -->
+              <div class="flex flex-col gap-sm">
+                <h2
+                  class="font-headline-md text-headline-md text-on-surface border-b border-soft-border pb-sm"
+                >
+                  Quick Actions
+                </h2>
+                <div class="grid grid-cols-2 gap-sm">
+                  <a
+                    href="service-management.html"
+                    class="flex flex-col items-center justify-center p-md bg-surface-container-lowest rounded-xl border border-soft-border hover:border-charcoal hover:shadow-sm transition-all text-center gap-sm"
+                  >
+                    <span
+                      class="material-symbols-outlined text-[32px] text-on-surface-variant"
+                      >auto_awesome</span
+                    >
+                    <span class="font-label-sm text-label-sm text-on-surface"
+                      >New Service</span
+                    >
+                  </a>
+                  <a
+                    href="product-management.html"
+                    class="flex flex-col items-center justify-center p-md bg-surface-container-lowest rounded-xl border border-soft-border hover:border-charcoal hover:shadow-sm transition-all text-center gap-sm"
+                  >
+                    <span
+                      class="material-symbols-outlined text-[32px] text-on-surface-variant"
+                      >inventory_2</span
+                    >
+                    <span class="font-label-sm text-label-sm text-on-surface"
+                      >Upload Product</span
+                    >
+                  </a>
+                  <a
+                    href="create-promo.html"
+                    class="flex flex-col items-center justify-center p-md bg-surface-container-lowest rounded-xl border border-soft-border hover:border-charcoal hover:shadow-sm transition-all text-center gap-sm"
+                  >
+                    <span
+                      class="material-symbols-outlined text-[32px] text-on-surface-variant"
+                      >campaign</span
+                    >
+                    <span class="font-label-sm text-label-sm text-on-surface"
+                      >Create Promo</span
+                    >
+                  </a>
+                  <a
+                    href="vendor-schedule-and-availability.html"
+                    class="flex flex-col items-center justify-center p-md bg-surface-container-lowest rounded-xl border border-soft-border hover:border-charcoal hover:shadow-sm transition-all text-center gap-sm"
+                  >
+                    <span
+                      class="material-symbols-outlined text-[32px] text-on-surface-variant"
+                      >settings_suggest</span
+                    >
+                    <span class="font-label-sm text-label-sm text-on-surface"
+                      >Availability</span
+                    >
+                  </a>
+                </div>
+              </div>
+
+              <!-- Recent Activity List -->
+              <div class="flex flex-col gap-sm">
+                <h2
+                  class="font-headline-md text-headline-md text-on-surface border-b border-soft-border pb-sm"
+                >
+                  Recent Activity
+                </h2>
+                <div
+                  class="flex flex-col bg-surface-container-lowest rounded-xl border border-soft-border p-md"
+                >
+                  <!-- Activity 1 -->
+                  <div
+                    class="flex items-start gap-sm py-sm border-b border-soft-border relative"
+                  >
+                    <div
+                      class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center shrink-0 z-10 relative"
+                    >
+                      <span
+                        class="material-symbols-outlined text-[16px] text-on-surface-variant"
+                        >star</span
+                      >
+                    </div>
+                    <div
+                      class="absolute left-4 top-8 bottom-0 w-px bg-soft-border -z-0 h-full"
+                    ></div>
+                    <div class="flex flex-col">
+                      <p class="font-body-sm text-body-sm text-on-surface">
+                        <span class="font-bold">Mila K.</span> left a 5-star
+                        review for
+                        <span class="italic">Signature Balayage</span>.
+                      </p>
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant mt-xs"
+                        >2 hours ago</span
+                      >
+                    </div>
+                  </div>
+
+                  <!-- Activity 2 -->
+                  <div
+                    class="flex items-start gap-sm py-sm border-b border-soft-border relative"
+                  >
+                    <div
+                      class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center shrink-0 z-10 relative"
+                    >
+                      <span
+                        class="material-symbols-outlined text-[16px] text-on-surface-variant"
+                        >shopping_bag</span
+                      >
+                    </div>
+                    <div
+                      class="absolute left-4 top-8 bottom-0 w-px bg-soft-border -z-0 h-full"
+                    ></div>
+                    <div class="flex flex-col">
+                      <p class="font-body-sm text-body-sm text-on-surface">
+                        New product order:
+                        <span class="font-bold">2x Hydrating Serum</span>.
+                      </p>
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant mt-xs"
+                        >4 hours ago</span
+                      >
+                    </div>
+                  </div>
+
+                  <!-- Activity 3 -->
+                  <div class="flex items-start gap-sm py-sm relative">
+                    <div
+                      class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center shrink-0 z-10 relative"
+                    >
+                      <span
+                        class="material-symbols-outlined text-[16px] text-on-surface-variant"
+                        >cancel</span
+                      >
+                    </div>
+                    <div
+                      class="absolute left-4 top-8 bottom-0 w-px bg-soft-border -z-0 h-full hidden"
+                      id="activity3-line"
+                    ></div>
+                    <div class="flex flex-col">
+                      <p class="font-body-sm text-body-sm text-on-surface">
+                        <span class="font-bold">David R.</span> cancelled
+                        appointment.
+                        <span class="text-error-red"
+                          >Breakage fee applied.</span
+                        >
+                      </p>
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant mt-xs"
+                        >Yesterday</span
+                      >
+                    </div>
+                  </div>
+
+                  <!-- Hidden Activities container -->
+                  <div id="hiddenActivities" class="hidden flex-col">
+                    <!-- Activity 4 -->
+                    <div
+                      class="flex items-start gap-sm py-sm border-t border-soft-border relative"
+                    >
+                      <div
+                        class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center shrink-0 z-10 relative"
+                      >
+                        <span
+                          class="material-symbols-outlined text-[16px] text-on-surface-variant"
+                          >check_circle</span
+                        >
+                      </div>
+                      <div
+                        class="absolute left-4 top-8 bottom-0 w-px bg-soft-border -z-0 h-full"
+                      ></div>
+                      <div class="flex flex-col">
+                        <p class="font-body-sm text-body-sm text-on-surface">
+                          <span class="font-bold">Jane S.</span> completed
+                          appointment for
+                          <span class="italic">Bridal Trial</span>.
+                        </p>
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant mt-xs"
+                          >Yesterday</span
+                        >
+                      </div>
+                    </div>
+
+                    <!-- Activity 5 -->
+                    <div
+                      class="flex items-start gap-sm py-sm border-t border-soft-border relative"
+                    >
+                      <div
+                        class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center shrink-0 z-10 relative"
+                      >
+                        <span
+                          class="material-symbols-outlined text-[16px] text-on-surface-variant"
+                          >payments</span
+                        >
+                      </div>
+                      <div class="flex flex-col">
+                        <p class="font-body-sm text-body-sm text-on-surface">
+                          Payout of
+                          <span class="font-bold">$1,250.00</span> processed
+                          successfully.
+                        </p>
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant mt-xs"
+                          >2 days ago</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Load More History Button -->
+                  <div class="flex justify-center w-full pt-md mt-sm">
+                    <button
+                      id="loadMoreHistoryBtn"
+                      onclick="loadMoreActivity(event)"
+                      class="px-6 py-2 border border-outline-variant bg-surface-container-lowest rounded-full text-on-surface font-label-md text-label-md hover:bg-surface-container transition-colors shadow-sm"
+                    >
+                      Load More History
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- MODAL: Add Manual Booking -->
+    <div
+      id="manualBookingModal"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-md"
+    >
+      <div
+        class="bg-surface-container-lowest border border-soft-border rounded-2xl max-w-lg w-full p-lg shadow-xl"
+      >
+        <div
+          class="flex justify-between items-center border-b border-soft-border pb-md mb-md"
+        >
+          <h3 class="text-headline-md font-headline-md text-on-surface">
+            Add Manual Booking
+          </h3>
+          <button
+            onclick="closeModal('manualBookingModal')"
+            class="text-on-surface-variant hover:text-on-surface transition-colors"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+
+        <form onsubmit="handleManualBookingSubmit(event)" class="space-y-md">
+          <div>
+            <label
+              class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+              >Client Name / Email</label
+            >
+            <input
+              type="text"
+              required
+              placeholder="Search or add new client..."
+              class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-body-sm text-on-surface focus:outline-none focus:border-charcoal"
+            />
+          </div>
+          <div>
+            <label
+              class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+              >Select Service</label
+            >
+            <select
+              required
+              class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-body-sm text-on-surface focus:outline-none focus:border-charcoal"
+            >
+              <option value="" disabled selected>Choose a service</option>
+              <option>Bridal Makeup Trial</option>
+              <option>Editorial Hair Styling</option>
+              <option>Signature Balayage</option>
+            </select>
+          </div>
+          <div class="grid grid-cols-2 gap-sm">
+            <div>
+              <label
+                class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+                >Date</label
+              >
+              <input
+                type="date"
+                required
+                class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-body-sm text-on-surface focus:outline-none focus:border-charcoal"
+              />
+            </div>
+            <div>
+              <label
+                class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+                >Time</label
+              >
+              <input
+                type="time"
+                required
+                class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-body-sm text-on-surface focus:outline-none focus:border-charcoal"
+              />
+            </div>
+          </div>
+          <div>
+            <label
+              class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+              >Internal Notes (Optional)</label
+            >
+            <textarea
+              rows="2"
+              class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-body-sm text-on-surface focus:outline-none focus:border-charcoal resize-none"
+              placeholder="Add any specific requirements..."
+            ></textarea>
+          </div>
+
+          <div class="flex gap-sm pt-sm">
+            <button
+              type="button"
+              onclick="closeModal('manualBookingModal')"
+              class="flex-1 py-sm border border-soft-border text-on-surface font-label-md text-label-md rounded-xl hover:bg-surface-container-low transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="flex-1 py-sm bg-primary text-on-primary font-label-md text-label-md rounded-xl hover:bg-surface-tint transition-colors shadow-sm"
+            >
+              Confirm Booking
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Script Import -->
+    <script src="js/vendor-dashboard.js"></script>
+  </body>
+</html>

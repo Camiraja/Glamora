@@ -1,0 +1,26 @@
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+  }
+  body {
+    overscroll-behavior: none;
+  }
+  main > :first-child {
+    margin-top: 0 !important;
+  }
+  main > :last-child {
+    margin-bottom: 0 !important;
+  }
+}
+
+/* Hide scrollbar for horizontal product slider */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}

@@ -1,0 +1,1271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Glamora - Admin Dashboard</title>
+
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
+      @keyframes spin {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      .animate-spin {
+        animation: spin 1s linear infinite;
+      }
+
+      /* Custom class for filter button active states to avoid long Tailwind strings via JS */
+      .active-filter {
+        @apply bg-surface-container-lowest dark:bg-primary-container text-charcoal dark:text-parchment-white shadow-sm;
+      }
+      .inactive-filter {
+        @apply bg-transparent text-on-surface-variant dark:text-outline-variant hover:text-charcoal dark:hover:text-parchment-white shadow-none;
+      }
+    </style>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;1,400;1,600&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind Framework & Config -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error-container": "#ffdad6",
+              "secondary-fixed": "#d6e7d8",
+              "muted-terracotta": "#BC7C6C",
+              "surface-bright": "#faf9f6",
+              "inverse-primary": "#c8c6c5",
+              "on-tertiary-fixed": "#360f06",
+              surface: "#faf9f6",
+              "surface-container": "#efeeeb",
+              tertiary: "#310b03",
+              "soft-border": "#E2E2DE",
+              outline: "#747878",
+              "primary-container": "#2c2c2c",
+              "on-surface-variant": "#444748",
+              "on-tertiary-container": "#c48373",
+              "tertiary-container": "#4b1f14",
+              "on-background": "#1b1c1a",
+              "on-secondary-fixed-variant": "#3c4a40",
+              "inverse-on-surface": "#f2f1ee",
+              "on-secondary-container": "#59685c",
+              "surface-container-highest": "#e3e2df",
+              "secondary-fixed-dim": "#bacbbd",
+              "error-red": "#A64D4D",
+              "on-error-container": "#93000a",
+              "on-primary": "#ffffff",
+              "on-surface": "#1b1c1a",
+              "primary-fixed-dim": "#c8c6c5",
+              "surface-tint": "#5f5e5e",
+              error: "#ba1a1a",
+              "secondary-container": "#d6e7d8",
+              "on-tertiary": "#ffffff",
+              sage: "#8A9A8D",
+              primary: "#171818",
+              "success-green": "#5A705F",
+              "on-error": "#ffffff",
+              "warning-amber": "#C49D6A",
+              "surface-container-low": "#f4f3f0",
+              "surface-variant": "#e3e2df",
+              "on-secondary-fixed": "#111e16",
+              "inverse-surface": "#2f312f",
+              secondary: "#536257",
+              "outline-variant": "#c4c7c7",
+              "parchment-white": "#F7F6F3",
+              "tertiary-fixed": "#ffdad2",
+              "on-secondary": "#ffffff",
+              "on-tertiary-fixed-variant": "#6b392c",
+              "primary-fixed": "#e4e2e1",
+              charcoal: "#2C2C2C",
+              "on-primary-container": "#949393",
+              background: "#faf9f6",
+              "on-primary-fixed-variant": "#474747",
+              "on-primary-fixed": "#1b1c1c",
+              "surface-dim": "#dbdad7",
+              "tertiary-fixed-dim": "#feb5a3",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-high": "#e9e8e5",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              gutter: "24px",
+              md: "24px",
+              xl: "80px",
+              "margin-desktop": "64px",
+              "margin-mobile": "16px",
+              sm: "12px",
+              base: "8px",
+              lg: "48px",
+              xs: "4px",
+            },
+            fontFamily: {
+              "headline-lg": ["Hanken Grotesk"],
+              "label-sm": ["Hanken Grotesk"],
+              "headline-lg-mobile": ["Hanken Grotesk"],
+              "body-sm": ["Hanken Grotesk"],
+              "body-md": ["Hanken Grotesk"],
+              "body-lg": ["Hanken Grotesk"],
+              "headline-xl": ["Hanken Grotesk"],
+              "headline-xl-mobile": ["Hanken Grotesk"],
+              "label-md": ["Hanken Grotesk"],
+              "headline-md": ["Hanken Grotesk"],
+            },
+            fontSize: {
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-sm": [
+                "12px",
+                { lineHeight: "1", letterSpacing: "0.03em", fontWeight: "600" },
+              ],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-xl-mobile": [
+                "36px",
+                { lineHeight: "1.1", fontWeight: "600" },
+              ],
+              "label-md": [
+                "14px",
+                { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "500" }],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-surface dark:bg-charcoal font-body-md text-body-md text-on-surface dark:text-parchment-white antialiased transition-colors duration-300"
+  >
+    <!-- Mobile Sidebar Overlay -->
+    <div
+      id="sidebar-overlay"
+      class="fixed inset-0 bg-charcoal/50 backdrop-blur-sm z-40 hidden lg:hidden opacity-0 transition-opacity duration-300"
+    ></div>
+
+    <aside
+      id="sidebar"
+      class="fixed left-0 top-0 h-full w-72 bg-surface-container-low dark:bg-primary-container z-50 flex flex-col justify-between py-6 px-4 shadow-[0_1px_8px_rgba(0,0,0,0.04)] dark:shadow-none border-r border-transparent dark:border-outline-variant/20 -translate-x-full lg:translate-x-0 transition-transform duration-300"
+    >
+      <div class="flex flex-col gap-6">
+        <div class="flex items-center justify-between px-3 py-2">
+          <div class="flex items-center gap-3">
+            <img
+              alt="Modern minimalist abstract geometric mark for a beauty and wellness platform named Glamora."
+              class="h-8 w-auto object-contain dark:invert"
+              src="../images/glamora_background-removebg-preview.png"
+            />
+            <div class="flex flex-col">
+              <span
+                class="font-headline-md text-body-md text-on-surface dark:text-parchment-white tracking-tight font-semibold"
+                >GLAMORA</span
+              >
+              <span
+                class="font-label-sm text-label-sm text-secondary tracking-widest uppercase"
+                >ADMIN CORE</span
+              >
+            </div>
+          </div>
+          <button
+            id="close-sidebar-btn"
+            class="lg:hidden text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-parchment-white"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="px-3">
+          <div
+            class="flex items-center gap-2 px-3 py-2 rounded bg-surface-container-high dark:bg-surface-tint/20"
+          >
+            <span
+              class="w-2 h-2 rounded-full bg-success-green animate-pulse"
+            ></span>
+            <span
+              class="font-label-sm text-label-sm text-on-surface dark:text-parchment-white"
+              >ESCROW VAULT SYNCED</span
+            >
+          </div>
+        </div>
+        <nav
+          id="sidebar-nav"
+          class="flex flex-col gap-1"
+          data-active-classes="bg-primary dark:bg-parchment-white text-on-primary dark:text-charcoal font-semibold"
+        >
+          <a
+            aria-current="page"
+            class="nav-item flex items-center gap-3 px-3 py-3 rounded transition-colors bg-primary dark:bg-parchment-white text-on-primary dark:text-charcoal font-semibold"
+            data-path="overview"
+            href="#"
+          >
+            <span class="material-symbols-outlined text-[20px]">dashboard</span>
+            <span class="font-label-md text-label-md">Overview</span>
+          </a>
+          <a
+            class="nav-item flex items-center gap-3 px-3 py-3 rounded text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-tint/20 hover:text-on-surface dark:hover:text-parchment-white transition-colors"
+            data-path="user-and-vendor-management"
+            href="#"
+          >
+            <span class="material-symbols-outlined text-[20px]">people</span>
+            <span class="font-label-md text-label-md"
+              >User &amp; Vendor Management</span
+            >
+          </a>
+          <a
+            class="nav-item flex items-center gap-3 px-3 py-3 rounded text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-tint/20 hover:text-on-surface dark:hover:text-parchment-white transition-colors"
+            data-path="trust-safety-and-reports"
+            href="#"
+          >
+            <span class="material-symbols-outlined text-[20px]">shield</span>
+            <span class="font-label-md text-label-md"
+              >Trust, Safety &amp; Reports</span
+            >
+          </a>
+          <a
+            class="nav-item flex items-center gap-3 px-3 py-3 rounded text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-tint/20 hover:text-on-surface dark:hover:text-parchment-white transition-colors"
+            data-path="escrow-and-financial-treasury"
+            href="#"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >account_balance</span
+            >
+            <span class="font-label-md text-label-md"
+              >Escrow &amp; Treasury</span
+            >
+          </a>
+          <a
+            class="nav-item flex items-center gap-3 px-3 py-3 rounded text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-tint/20 hover:text-on-surface dark:hover:text-parchment-white transition-colors"
+            data-path="platform-governance-and-audits"
+            href="#"
+          >
+            <span class="material-symbols-outlined text-[20px]">gavel</span>
+            <span class="font-label-md text-label-md">Platform Governance</span>
+          </a>
+        </nav>
+      </div>
+      <div
+        class="flex flex-col gap-3 px-3 pt-4 bg-surface-container-lowest dark:bg-charcoal rounded p-3 border border-transparent dark:border-outline-variant/20"
+      >
+        <div class="flex items-center justify-between">
+          <span
+            class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant uppercase tracking-wider"
+            >System Status</span
+          >
+          <span
+            class="font-label-sm text-label-sm text-success-green font-semibold"
+            >Optimal</span
+          >
+        </div>
+        <div
+          class="w-full bg-surface-container dark:bg-surface-tint/30 h-1.5 rounded-full overflow-hidden"
+        >
+          <div class="bg-success-green h-full w-[99.8%]"></div>
+        </div>
+        <div
+          class="flex items-center justify-between text-on-surface-variant dark:text-outline-variant"
+        >
+          <span class="font-label-sm text-label-sm">Node 01-A</span>
+          <span class="font-label-sm text-label-sm">99.98% uptime</span>
+        </div>
+      </div>
+    </aside>
+
+    <div
+      class="lg:pl-72 flex flex-col min-h-screen transition-all duration-300"
+    >
+      <header
+        class="fixed top-0 left-0 lg:left-72 right-0 h-16 bg-surface/80 dark:bg-charcoal/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] dark:shadow-none dark:border-b dark:border-outline-variant/20 z-30 flex items-center justify-between px-4 lg:px-8 transition-all duration-300"
+      >
+        <div class="flex items-center gap-4 lg:gap-6">
+          <button
+            id="open-sidebar-btn"
+            class="lg:hidden p-1 text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-parchment-white"
+          >
+            <span class="material-symbols-outlined text-[24px]">menu</span>
+          </button>
+          <div
+            class="hidden sm:flex items-center gap-2 text-on-surface-variant dark:text-outline-variant font-label-md text-label-md"
+          >
+            <span
+              class="hover:text-on-surface dark:hover:text-parchment-white transition-colors cursor-pointer"
+              >Admin</span
+            >
+            <span class="material-symbols-outlined text-[16px]"
+              >chevron_right</span
+            >
+            <span
+              class="text-on-surface dark:text-parchment-white font-semibold"
+              >Operations</span
+            >
+          </div>
+          <div
+            class="hidden lg:flex items-center gap-2 pl-4 bg-surface-container-high dark:bg-primary-container rounded px-3 py-1.5 w-80 focus-within:ring-1 focus-within:ring-charcoal dark:focus-within:ring-parchment-white transition-shadow"
+          >
+            <span
+              class="material-symbols-outlined text-on-surface-variant dark:text-outline-variant text-[18px]"
+              >search</span
+            >
+            <input
+              id="global-search"
+              class="bg-transparent border-none outline-none font-body-sm text-body-sm text-on-surface dark:text-parchment-white placeholder:text-on-surface-variant dark:placeholder:text-outline-variant w-full"
+              placeholder="Search users, reports, transactions..."
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="flex items-center gap-3 lg:gap-5">
+          <div
+            class="hidden xl:flex items-center gap-2 bg-secondary-container dark:bg-secondary-container/20 text-on-secondary-container dark:text-secondary-fixed px-3 py-1 rounded font-label-sm text-label-sm"
+          >
+            <span class="w-1.5 h-1.5 rounded-full bg-success-green"></span>
+            <span>All Systems Operational</span>
+          </div>
+          <button
+            class="relative p-2 rounded text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-primary-container hover:text-on-surface dark:hover:text-parchment-white transition-colors"
+          >
+            <span class="material-symbols-outlined text-[22px]"
+              >notifications</span
+            >
+            <span
+              class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-muted-terracotta"
+            ></span>
+          </button>
+
+          <button
+            id="theme-toggle"
+            class="p-2 rounded text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-primary-container hover:text-on-surface dark:hover:text-parchment-white transition-colors"
+            title="Toggle Theme"
+          >
+            <span class="material-symbols-outlined text-[22px] dark:hidden"
+              >dark_mode</span
+            >
+            <span
+              class="material-symbols-outlined text-[22px] hidden dark:block"
+              >light_mode</span
+            >
+          </button>
+
+          <div
+            class="h-6 w-px bg-surface-container-highest dark:bg-outline-variant/20 hidden sm:block"
+          ></div>
+          <div class="flex items-center gap-3">
+            <div class="hidden sm:flex flex-col text-right">
+              <span
+                class="font-label-md text-label-md text-on-surface dark:text-parchment-white"
+                >Super Admin</span
+              >
+              <span
+                class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant"
+                >Compliance Officer</span
+              >
+            </div>
+            <img
+              alt="Profile"
+              class="w-8 h-8 rounded-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuChoCbjie88QsUOlmC9oHTDCD2A6Dll15vH_jwerSpbJAk4yD5KRhWGyFdUBUGAKfi0Pk5UBWnYy7pXjKmzxQVNL1ysKy2bxixVadPBoLgLApJnhJoXclGqnFneGYv8iNN2bW2fWbIzVW4fw5HY1wTRunCeEDjyhB5RjkpiDNH85PSaqiMGSl81ZQ0bN4yQfN6KiR1R-85Ar2JbB4LOPTCz8epS1Wz8Pu4ryMWJB17EpJvCofpHoNIZ"
+            />
+          </div>
+        </div>
+      </header>
+
+      <main
+        class="relative pt-24 bg-surface dark:bg-charcoal min-h-screen w-full px-4 lg:px-8 pb-12 flex-grow"
+      >
+        <div class="flex flex-col w-full">
+          <div
+            class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8"
+          >
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center gap-3">
+                <span
+                  class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-secondary-container dark:bg-secondary-container/20 text-on-secondary-container dark:text-secondary-fixed font-label-sm text-label-sm uppercase tracking-wider"
+                >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-success-green animate-ping"
+                  ></span>
+                  Live Mainnet
+                </span>
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant font-mono"
+                  >NODE-AFR-WEST-1</span
+                >
+              </div>
+              <h1
+                class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-charcoal dark:text-parchment-white tracking-tight"
+              >
+                Platform Overview &amp; Governance Command
+              </h1>
+              <p
+                class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant flex flex-wrap items-center gap-2"
+              >
+                <span class="material-symbols-outlined text-sage text-[18px]"
+                  >verified_user</span
+                >
+                <span
+                  >Escrow Vault Active:
+                  <strong
+                    class="text-charcoal dark:text-parchment-white font-semibold"
+                    >₦42,850,000</strong
+                  >
+                  Bonded</span
+                >
+                <span class="text-outline-variant hidden sm:inline">•</span>
+                <span class="w-full sm:w-auto"
+                  >Automated Daily Cron Running (<span id="cron-time"
+                    >23:59</span
+                  >
+                  WAT)</span
+                >
+              </p>
+            </div>
+            <div class="flex flex-wrap items-center gap-3">
+              <button
+                class="flex items-center gap-2 px-4 py-2.5 rounded bg-surface-container-high dark:bg-primary-container hover:bg-surface-container-highest dark:hover:bg-surface-tint/20 text-charcoal dark:text-parchment-white font-label-md text-label-md transition-all"
+                onclick="
+                  triggerToast('Audit sequence initiated across ledger nodes.')
+                "
+              >
+                <span class="material-symbols-outlined text-[18px]">rule</span>
+                <span>Run System Audit</span>
+              </button>
+              <button
+                class="flex items-center gap-2 px-5 py-2.5 rounded bg-charcoal dark:bg-parchment-white hover:bg-primary text-on-primary dark:text-charcoal font-label-md text-label-md transition-all shadow-sm"
+                onclick="
+                  triggerToast(
+                    'Preparing SEC &amp; CBN compliant regulatory export...',
+                  )
+                "
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >ios_share</span
+                >
+                <span>Export Regulatory Ledger</span>
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4 pb-10"
+          >
+            <div
+              class="bg-surface-container-lowest dark:bg-primary-container p-6 rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group border border-transparent dark:border-outline-variant/10"
+            >
+              <div
+                class="absolute -right-4 -top-4 w-20 h-20 bg-secondary-container/40 dark:bg-secondary/10 rounded-full blur-xl group-hover:scale-125 transition-transform"
+              ></div>
+              <div class="flex items-center justify-between pb-3 relative z-10">
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant uppercase tracking-wider"
+                  >Gross Platform GMV</span
+                >
+                <span
+                  class="p-1.5 rounded bg-surface-container-low dark:bg-charcoal text-charcoal dark:text-parchment-white"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >payments</span
+                  >
+                </span>
+              </div>
+              <div class="flex flex-col gap-1 relative z-10">
+                <div
+                  class="font-headline-lg text-headline-lg text-charcoal dark:text-parchment-white"
+                >
+                  ₦184,290,000
+                </div>
+                <div
+                  class="flex items-center gap-1.5 font-label-sm text-label-sm text-success-green"
+                >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >trending_up</span
+                  >
+                  <span class="font-semibold">+18.4% MoM</span>
+                  <span
+                    class="text-on-surface-variant dark:text-outline-variant text-[11px] font-normal pl-1"
+                    >vs prev 30d</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-surface-container-lowest dark:bg-primary-container p-6 rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group border border-transparent dark:border-outline-variant/10"
+            >
+              <div
+                class="absolute -right-4 -top-4 w-20 h-20 bg-sage/20 dark:bg-sage/10 rounded-full blur-xl group-hover:scale-125 transition-transform"
+              ></div>
+              <div class="flex items-center justify-between pb-3 relative z-10">
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant uppercase tracking-wider"
+                  >Escrow Breakage Vault</span
+                >
+                <span
+                  class="p-1.5 rounded bg-secondary-container dark:bg-secondary-container/20 text-on-secondary-container dark:text-secondary-fixed"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >lock</span
+                  >
+                </span>
+              </div>
+              <div class="flex flex-col gap-1 relative z-10">
+                <div
+                  class="font-headline-lg text-headline-lg text-charcoal dark:text-parchment-white"
+                >
+                  ₦42,850,000
+                </div>
+                <div
+                  class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant"
+                >
+                  Across
+                  <span
+                    class="font-semibold text-charcoal dark:text-parchment-white"
+                    >3,420</span
+                  >
+                  pending bookings
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-surface-container-lowest dark:bg-primary-container p-6 rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group border border-transparent dark:border-outline-variant/10"
+            >
+              <div class="flex items-center justify-between pb-3 relative z-10">
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant uppercase tracking-wider"
+                  >Verified Studios</span
+                >
+                <span
+                  class="p-1.5 rounded bg-surface-container-low dark:bg-charcoal text-charcoal dark:text-parchment-white"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >storefront</span
+                  >
+                </span>
+              </div>
+              <div class="flex flex-col gap-1 relative z-10">
+                <div
+                  class="font-headline-lg text-headline-lg text-charcoal dark:text-parchment-white"
+                >
+                  482
+                </div>
+                <div
+                  class="flex items-center gap-1.5 font-label-sm text-label-sm text-warning-amber"
+                >
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-warning-amber"
+                  ></span>
+                  <span class="font-semibold">14 pending vetting</span>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-surface-container-lowest dark:bg-primary-container p-6 rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group border border-transparent dark:border-outline-variant/10"
+            >
+              <div class="flex items-center justify-between pb-3 relative z-10">
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant uppercase tracking-wider"
+                  >Registered Clients</span
+                >
+                <span
+                  class="p-1.5 rounded bg-surface-container-low dark:bg-charcoal text-charcoal dark:text-parchment-white"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >group</span
+                  >
+                </span>
+              </div>
+              <div class="flex flex-col gap-1 relative z-10">
+                <div
+                  class="font-headline-lg text-headline-lg text-charcoal dark:text-parchment-white"
+                >
+                  18,940
+                </div>
+                <div
+                  class="flex items-center gap-1 font-label-sm text-label-sm text-secondary dark:text-secondary-fixed-dim"
+                >
+                  <span class="font-medium">+420 net new this week</span>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-surface-container-lowest dark:bg-primary-container p-6 rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden border-l-4 border-l-muted-terracotta border border-transparent dark:border-y-outline-variant/10 dark:border-r-outline-variant/10"
+            >
+              <div class="flex items-center justify-between pb-3">
+                <span
+                  class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant uppercase tracking-wider"
+                  >Incident Radar</span
+                >
+                <span
+                  class="p-1.5 rounded bg-error-container dark:bg-error-container/20 text-on-error-container dark:text-error-container"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >warning</span
+                  >
+                </span>
+              </div>
+              <div class="flex flex-col gap-1">
+                <div class="flex items-baseline gap-2">
+                  <span class="font-headline-lg text-headline-lg text-error-red"
+                    >6</span
+                  >
+                  <span
+                    class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant"
+                    >open flags</span
+                  >
+                </div>
+                <div
+                  class="font-label-sm text-label-sm text-muted-terracotta font-semibold"
+                >
+                  Immediate review required
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 pb-10">
+            <div
+              class="xl:col-span-2 bg-surface-container-lowest dark:bg-primary-container rounded-xl p-6 lg:p-8 shadow-sm flex flex-col justify-between border border-transparent dark:border-outline-variant/10"
+            >
+              <div
+                class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6"
+              >
+                <div>
+                  <span
+                    class="font-label-sm text-label-sm text-secondary dark:text-secondary-fixed-dim uppercase tracking-wider"
+                    >Volume Distribution</span
+                  >
+                  <h2
+                    class="font-headline-md text-headline-md text-charcoal dark:text-parchment-white pt-0.5"
+                  >
+                    Platform Transaction Velocity &amp; Segments
+                  </h2>
+                </div>
+                <div
+                  class="flex items-center gap-1.5 bg-surface-container dark:bg-charcoal p-1 rounded overflow-x-auto w-full sm:w-auto"
+                >
+                  <button
+                    class="filter-btn active-filter px-3 py-1 bg-surface-container-lowest dark:bg-primary-container rounded text-charcoal dark:text-parchment-white font-label-sm text-label-sm font-semibold shadow-sm flex-shrink-0"
+                    data-filter="24h"
+                  >
+                    Real-time (24h)
+                  </button>
+                  <button
+                    class="filter-btn px-3 py-1 rounded text-on-surface-variant dark:text-outline-variant hover:text-charcoal dark:hover:text-parchment-white font-label-sm text-label-sm transition-colors flex-shrink-0"
+                    data-filter="7d"
+                  >
+                    7 Days
+                  </button>
+                  <button
+                    class="filter-btn px-3 py-1 rounded text-on-surface-variant dark:text-outline-variant hover:text-charcoal dark:hover:text-parchment-white font-label-sm text-label-sm transition-colors flex-shrink-0"
+                    data-filter="30d"
+                  >
+                    30 Days
+                  </button>
+                </div>
+              </div>
+              <div class="w-full h-44 mb-6 relative">
+                <svg
+                  class="w-full h-full"
+                  fill="none"
+                  preserveAspectRatio="none"
+                  viewBox="0 0 680 140"
+                >
+                  <defs>
+                    <linearGradient
+                      id="velocityGrad"
+                      x1="0"
+                      x2="0"
+                      y1="0"
+                      y2="1"
+                    >
+                      <stop
+                        offset="0%"
+                        stop-color="#8A9A8D"
+                        stop-opacity="0.35"
+                      ></stop>
+                      <stop
+                        offset="100%"
+                        stop-color="#8A9A8D"
+                        stop-opacity="0.0"
+                      ></stop>
+                    </linearGradient>
+                  </defs>
+                  <line
+                    stroke="currentColor"
+                    class="text-surface-container dark:text-outline-variant/20"
+                    stroke-dasharray="3 3"
+                    x1="0"
+                    x2="680"
+                    y1="20"
+                    y2="20"
+                  ></line>
+                  <line
+                    stroke="currentColor"
+                    class="text-surface-container dark:text-outline-variant/20"
+                    stroke-dasharray="3 3"
+                    x1="0"
+                    x2="680"
+                    y1="60"
+                    y2="60"
+                  ></line>
+                  <line
+                    stroke="currentColor"
+                    class="text-surface-container dark:text-outline-variant/20"
+                    stroke-dasharray="3 3"
+                    x1="0"
+                    x2="680"
+                    y1="100"
+                    y2="100"
+                  ></line>
+                  <path
+                    d="M0,95 C45,90 90,55 140,62 C190,69 230,30 280,35 C330,40 370,80 420,68 C470,56 510,18 560,24 C610,30 645,5 680,10 L680,140 L0,140 Z"
+                    fill="url(#velocityGrad)"
+                  ></path>
+                  <path
+                    d="M0,95 C45,90 90,55 140,62 C190,69 230,30 280,35 C330,40 370,80 420,68 C470,56 510,18 560,24 C610,30 645,5 680,10"
+                    stroke="#5A705F"
+                    stroke-linecap="round"
+                    stroke-width="2.5"
+                  ></path>
+                  <circle
+                    cx="560"
+                    cy="24"
+                    class="fill-charcoal dark:fill-parchment-white"
+                    r="4"
+                  ></circle>
+                  <circle
+                    cx="560"
+                    cy="24"
+                    fill="#5A705F"
+                    fill-opacity="0.2"
+                    r="8"
+                  ></circle>
+                </svg>
+                <div
+                  class="absolute top-2 right-4 sm:right-28 bg-charcoal dark:bg-parchment-white text-on-primary dark:text-charcoal text-[11px] font-mono px-2 py-0.5 rounded shadow-sm"
+                >
+                  Peak: ₦14.2M / hr
+                </div>
+              </div>
+              <div
+                class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-surface-container dark:border-outline-variant/20"
+              >
+                <div class="flex flex-col gap-1">
+                  <div
+                    class="flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant"
+                  >
+                    <span
+                      class="w-2 h-2 rounded-full bg-charcoal dark:bg-parchment-white"
+                    ></span>
+                    <span>Hair Installation</span>
+                  </div>
+                  <span
+                    class="font-headline-md text-headline-md text-charcoal dark:text-parchment-white"
+                    >42%</span
+                  >
+                  <span
+                    class="font-label-sm text-label-sm text-secondary dark:text-secondary-fixed-dim font-mono"
+                    >₦77.4M settlement</span
+                  >
+                </div>
+                <div class="flex flex-col gap-1">
+                  <div
+                    class="flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant"
+                  >
+                    <span class="w-2 h-2 rounded-full bg-sage"></span>
+                    <span>Trichology / Scalp</span>
+                  </div>
+                  <span
+                    class="font-headline-md text-headline-md text-charcoal dark:text-parchment-white"
+                    >28%</span
+                  >
+                  <span
+                    class="font-label-sm text-label-sm text-secondary dark:text-secondary-fixed-dim font-mono"
+                    >₦51.6M settlement</span
+                  >
+                </div>
+                <div class="flex flex-col gap-1">
+                  <div
+                    class="flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant"
+                  >
+                    <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                    <span>Nails &amp; Aesthetic</span>
+                  </div>
+                  <span
+                    class="font-headline-md text-headline-md text-charcoal dark:text-parchment-white"
+                    >18%</span
+                  >
+                  <span
+                    class="font-label-sm text-label-sm text-secondary dark:text-secondary-fixed-dim font-mono"
+                    >₦33.1M settlement</span
+                  >
+                </div>
+                <div class="flex flex-col gap-1">
+                  <div
+                    class="flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant"
+                  >
+                    <span
+                      class="w-2 h-2 rounded-full bg-muted-terracotta"
+                    ></span>
+                    <span>Retail Marketplace</span>
+                  </div>
+                  <span
+                    class="font-headline-md text-headline-md text-charcoal dark:text-parchment-white"
+                    >12%</span
+                  >
+                  <span
+                    class="font-label-sm text-label-sm text-secondary dark:text-secondary-fixed-dim font-mono"
+                    >₦22.1M settlement</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-surface-container-lowest dark:bg-primary-container rounded-xl p-6 lg:p-8 shadow-sm flex flex-col justify-between border border-transparent dark:border-outline-variant/10"
+            >
+              <div>
+                <div class="flex items-center justify-between pb-4">
+                  <div class="flex flex-col">
+                    <span
+                      class="font-label-sm text-label-sm text-secondary dark:text-secondary-fixed-dim uppercase tracking-wider"
+                      >Automations</span
+                    >
+                    <h2
+                      class="font-headline-md text-headline-md text-charcoal dark:text-parchment-white"
+                    >
+                      System Health &amp; Cron
+                    </h2>
+                  </div>
+                  <span
+                    class="px-2 py-0.5 rounded bg-secondary-container dark:bg-secondary-container/20 text-on-secondary-container dark:text-secondary-fixed font-label-sm text-label-sm font-mono whitespace-nowrap"
+                    >23:59 WAT</span
+                  >
+                </div>
+                <p
+                  class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant pb-6"
+                >
+                  Deterministic distributed workers managing automated
+                  cancellations, collateral safety pools, and ledger
+                  reconciliations.
+                </p>
+                <div class="flex flex-col gap-4">
+                  <div
+                    class="p-3.5 rounded bg-surface-container-low dark:bg-charcoal flex flex-col gap-2"
+                  >
+                    <div class="flex items-center justify-between">
+                      <span
+                        class="font-label-md text-label-md text-charcoal dark:text-parchment-white"
+                        >Breakage Settlement</span
+                      >
+                      <span
+                        class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-secondary-container dark:bg-secondary-container/20 text-success-green font-semibold"
+                        >Operational</span
+                      >
+                    </div>
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant"
+                    >
+                      <span>Success Rate: 99.98%</span>
+                      <span class="font-mono">Sync: 14s ago</span>
+                    </div>
+                    <div
+                      class="w-full bg-surface-container dark:bg-surface-tint/30 h-1 rounded-full overflow-hidden"
+                    >
+                      <div class="bg-success-green h-full w-[99.98%]"></div>
+                    </div>
+                  </div>
+                  <div
+                    class="p-3.5 rounded bg-surface-container-low dark:bg-charcoal flex flex-col gap-2"
+                  >
+                    <div class="flex items-center justify-between">
+                      <span
+                        class="font-label-md text-label-md text-charcoal dark:text-parchment-white"
+                        >30-Min Cancel Engine</span
+                      >
+                      <span
+                        class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-secondary-container dark:bg-secondary-container/20 text-success-green font-semibold"
+                        >Healthy</span
+                      >
+                    </div>
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant"
+                    >
+                      <span>0 Policy Bypasses</span>
+                      <span class="font-mono">Queue: Clear</span>
+                    </div>
+                    <div
+                      class="w-full bg-surface-container dark:bg-surface-tint/30 h-1 rounded-full overflow-hidden"
+                    >
+                      <div class="bg-sage h-full w-[100%]"></div>
+                    </div>
+                  </div>
+                  <div
+                    class="p-3.5 rounded bg-surface-container-low dark:bg-charcoal flex flex-col gap-2"
+                  >
+                    <div class="flex items-center justify-between">
+                      <span
+                        class="font-label-md text-label-md text-charcoal dark:text-parchment-white"
+                        >Escrow Liquidation</span
+                      >
+                      <span
+                        class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high dark:bg-surface-tint/20 text-charcoal dark:text-parchment-white font-semibold whitespace-nowrap"
+                        >Scheduled</span
+                      >
+                    </div>
+                    <div
+                      class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant"
+                    >
+                      <span>Batch Run at 23:59 WAT</span>
+                      <span class="font-mono text-muted-terracotta"
+                        >₦14.6M Batch</span
+                      >
+                    </div>
+                    <div
+                      class="w-full bg-surface-container dark:bg-surface-tint/30 h-1 rounded-full overflow-hidden"
+                    >
+                      <div class="bg-warning-amber h-full w-[65%]"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="pt-6 flex flex-wrap items-center justify-between text-on-surface-variant dark:text-outline-variant font-label-sm text-label-sm gap-2"
+              >
+                <span class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-success-green"></span>
+                  Escrow Latency: 42ms
+                </span>
+                <button
+                  class="hover:text-charcoal dark:hover:text-parchment-white underline"
+                  onclick="triggerToast('Daemon logs refreshed.')"
+                >
+                  Daemon Logs
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-4">
+            <div
+              class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2"
+            >
+              <div class="flex flex-col">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-muted-terracotta"></span>
+                  <span
+                    class="font-label-sm text-label-sm text-muted-terracotta font-semibold uppercase tracking-wider"
+                    >Critical Queue</span
+                  >
+                </div>
+                <h2
+                  class="font-headline-md text-headline-md text-charcoal dark:text-parchment-white"
+                >
+                  Priority Action Queue &amp; Moderation Radar
+                </h2>
+              </div>
+              <span
+                class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant bg-surface-container-low dark:bg-primary-container px-3 py-1 rounded-full"
+              >
+                3 Urgent Actions Pending Clearance
+              </span>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div
+                class="bg-surface-container-lowest dark:bg-primary-container rounded-xl p-6 shadow-sm flex flex-col justify-between border-t-2 border-t-muted-terracotta border-x border-b border-transparent dark:border-x-outline-variant/10 dark:border-b-outline-variant/10"
+              >
+                <div class="flex flex-col gap-4">
+                  <div class="flex items-start justify-between gap-2">
+                    <span
+                      class="px-2.5 py-1 rounded bg-error-container dark:bg-error-container/20 text-on-error-container dark:text-error-container font-label-sm text-label-sm uppercase font-semibold"
+                      >Vendor Escrow Dispute</span
+                    >
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant font-mono"
+                      >CASE #DS-9021</span
+                    >
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <h3
+                      class="font-label-md text-label-md text-charcoal dark:text-parchment-white font-semibold"
+                    >
+                      Elena Vance Studio vs. Client #9021
+                    </h3>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant"
+                    >
+                      Late cancellation fee dispute. Client claims salon locked
+                      gates 15 mins prior to slot; studio provided timestamped
+                      geofence logs in Lekki.
+                    </p>
+                  </div>
+                  <div
+                    class="p-3 bg-surface-container-low dark:bg-charcoal rounded flex items-center justify-between font-label-sm text-label-sm"
+                  >
+                    <span
+                      class="text-on-surface-variant dark:text-outline-variant"
+                      >Contested Escrow Bond:</span
+                    >
+                    <span
+                      class="font-mono text-charcoal dark:text-parchment-white font-semibold"
+                      >₦28,500</span
+                    >
+                  </div>
+                </div>
+                <div class="pt-6 flex flex-col gap-2">
+                  <button
+                    class="w-full py-2 px-3 rounded bg-surface-container-high dark:bg-charcoal hover:bg-surface-container-highest dark:hover:bg-surface-tint/20 text-charcoal dark:text-parchment-white font-label-sm text-label-sm font-semibold transition-colors flex items-center justify-center gap-1.5"
+                    onclick="
+                      triggerToast(
+                        'Opening audit dossier DS-9021 with geofence traces...',
+                      )
+                    "
+                  >
+                    <span class="material-symbols-outlined text-[16px]"
+                      >visibility</span
+                    >
+                    <span>Inspect Evidence &amp; Logs</span>
+                  </button>
+                  <div class="grid grid-cols-2 gap-2">
+                    <button
+                      class="py-2 px-3 rounded bg-charcoal dark:bg-parchment-white hover:bg-primary text-on-primary dark:text-charcoal font-label-sm text-label-sm font-semibold transition-colors"
+                      onclick="
+                        triggerToast('Released ₦28,500 back to Client #9021.')
+                      "
+                    >
+                      Release Escrow
+                    </button>
+                    <button
+                      class="py-2 px-3 rounded bg-muted-terracotta hover:opacity-90 text-on-primary font-label-sm text-label-sm font-semibold transition-colors"
+                      onclick="
+                        triggerToast(
+                          'Deducted ₦28,500 Breakage to Elena Vance Studio.',
+                        )
+                      "
+                    >
+                      Deduct Breakage
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="bg-surface-container-lowest dark:bg-primary-container rounded-xl p-6 shadow-sm flex flex-col justify-between border-t-2 border-t-warning-amber border-x border-b border-transparent dark:border-x-outline-variant/10 dark:border-b-outline-variant/10"
+              >
+                <div class="flex flex-col gap-4">
+                  <div class="flex items-start justify-between gap-2">
+                    <span
+                      class="px-2.5 py-1 rounded bg-surface-container-high dark:bg-surface-tint/20 text-charcoal dark:text-parchment-white font-label-sm text-label-sm uppercase font-semibold"
+                      >NAFDAC Compliance</span
+                    >
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant font-mono"
+                      >FLAG #MD-448</span
+                    >
+                  </div>
+                  <div class="flex items-start sm:items-center gap-3">
+                    <img
+                      class="w-16 h-16 rounded object-cover flex-shrink-0 bg-surface-container dark:bg-charcoal"
+                      data-alt="High-end beauty product packaging"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-qgJdXYD3kLcN1T7k-4-iGU77pnpNoJrql7RTqSxbABL7lNKNNw41pW_kBg-iSIesV02wuKJMjX4gLl15v_WTR1G7s1XS2M4apDKnop3bLVsRZlQPq_39eihz0KFWGuYUAoKw6EAsgIBkH8p-kFuXZr8o_hRtln9gQNzXDXJ6mNG9vs0Dew0AhYhpP_MaEdAHS2E0wMe4EuDbhHP2uIOfE3bbwxn10eJc_r8ZIADaPhhJ2Ard7ZmT"
+                    />
+                    <div class="flex flex-col">
+                      <h3
+                        class="font-label-md text-label-md text-charcoal dark:text-parchment-white font-semibold leading-tight"
+                      >
+                        Unbranded Scalp Bleach 500ml
+                      </h3>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant"
+                      >
+                        Vendor: Aura Hair Lab
+                      </p>
+                      <span
+                        class="font-label-sm text-label-sm text-muted-terracotta mt-1"
+                        >Missing batch verification ID</span
+                      >
+                    </div>
+                  </div>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant"
+                  >
+                    Automated OCR flagged listing for missing NAFDAC
+                    certification numbers before marketplace publication.
+                  </p>
+                </div>
+                <div class="pt-6 grid grid-cols-2 gap-2">
+                  <button
+                    class="py-2.5 px-3 rounded bg-error-container dark:bg-error-container/20 text-on-error-container dark:text-error-container font-label-sm text-label-sm font-semibold transition-colors"
+                    onclick="
+                      triggerToast(
+                        'Listing quarantined from marketplace catalog.',
+                      )
+                    "
+                  >
+                    Quarantine Listing
+                  </button>
+                  <button
+                    class="py-2.5 px-3 rounded bg-surface-container-high dark:bg-charcoal hover:bg-surface-container-highest dark:hover:bg-surface-tint/20 text-charcoal dark:text-parchment-white font-label-sm text-label-sm font-semibold transition-colors"
+                    onclick="
+                      triggerToast(
+                        'Compliance clearance request dispatched to Aura Hair Lab.',
+                      )
+                    "
+                  >
+                    Request Cert
+                  </button>
+                </div>
+              </div>
+
+              <div
+                class="bg-surface-container-lowest dark:bg-primary-container rounded-xl p-6 shadow-sm flex flex-col justify-between border-t-2 border-t-sage border-x border-b border-transparent dark:border-x-outline-variant/10 dark:border-b-outline-variant/10"
+              >
+                <div class="flex flex-col gap-4">
+                  <div class="flex items-start justify-between gap-2">
+                    <span
+                      class="px-2.5 py-1 rounded bg-secondary-container dark:bg-secondary-container/20 text-on-secondary-container dark:text-secondary-fixed font-label-sm text-label-sm uppercase font-semibold"
+                      >Tier 1 Studio Vetting</span
+                    >
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant font-mono"
+                      >KYC #VT-102</span
+                    >
+                  </div>
+                  <div class="flex items-start sm:items-center gap-3">
+                    <img
+                      class="w-16 h-16 rounded object-cover flex-shrink-0 bg-surface-container dark:bg-charcoal"
+                      data-alt="Modern architectural beauty studio facade"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7CpmcKctvKb6SuejETd02ldnTDqPcZe2s6Mq7iYyjq-FT9zSZPDOdfKA8FnRGXWW0huDpgQ8DvZfmvhxWNqRUcSpcU0_VnkI9qpz8L_uSMA0IkEt3UTK8aPATi4D9686M-JRxfPBXvA2SIS55KJFR7HUt03X4dzRt_ICxLHWzjdRC1WZndEwDy6ynvKmmbTvYFs4tVpoCUrKVir9aYtPo4AKObz4XOWzTyVRxwO68JbT7LQvc4-2p"
+                    />
+                    <div class="flex flex-col">
+                      <h3
+                        class="font-label-md text-label-md text-charcoal dark:text-parchment-white font-semibold leading-tight"
+                      >
+                        Maison Noir Aesthetics
+                      </h3>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant"
+                      >
+                        Lekki Phase 1, Lagos
+                      </p>
+                      <span
+                        class="font-label-sm text-label-sm text-success-green flex items-center gap-1 mt-1"
+                      >
+                        <span class="material-symbols-outlined text-[14px]"
+                          >check_circle</span
+                        >
+                        LASEPA Verified
+                      </span>
+                    </div>
+                  </div>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant"
+                  >
+                    Document integrity verified via Lagos State Environmental
+                    Protection Agency automated cross-reference api.
+                  </p>
+                </div>
+                <div class="pt-6 grid grid-cols-2 gap-2">
+                  <button
+                    class="py-2.5 px-3 rounded bg-surface-container-high dark:bg-charcoal hover:bg-surface-container-highest dark:hover:bg-surface-tint/20 text-charcoal dark:text-parchment-white font-label-sm text-label-sm font-semibold transition-colors"
+                    onclick="
+                      triggerToast(
+                        'Additional sanitation documentation requested.',
+                      )
+                    "
+                  >
+                    Request Resubmission
+                  </button>
+                  <button
+                    class="py-2.5 px-3 rounded bg-charcoal dark:bg-parchment-white hover:bg-primary text-on-primary dark:text-charcoal font-label-sm text-label-sm font-semibold transition-colors"
+                    onclick="
+                      triggerToast(
+                        'Maison Noir Aesthetics approved for Tier 1 Escrow Vault.',
+                      )
+                    "
+                  >
+                    Approve Tier 1
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Toast Notification Base -->
+          <div
+            id="toast"
+            class="fixed bottom-6 right-6 bg-charcoal dark:bg-parchment-white text-on-primary dark:text-charcoal px-4 py-3 rounded-lg shadow-xl font-label-md text-label-md flex items-center gap-3 transition-opacity duration-300 opacity-0 pointer-events-none z-50 transform translate-y-2"
+          >
+            <span
+              class="material-symbols-outlined text-sage dark:text-secondary text-[20px]"
+              >info</span
+            >
+            <span id="toast-text">Action executed</span>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="admin dashboard.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1799 @@
+<!-- customer-profile_2.html -->
+<html class="scroll-smooth" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Glamora - Customer Profile</title>
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Solid Dark Mode Overrides (No Glassmorphism / No Transparency) */
+      .dark {
+        --bg-color: #121312;
+        --surface-color: #1b1c1a;
+        --surface-low-color: #242624;
+        --surface-high-color: #2f312f;
+        --text-primary: #f2f1ee;
+        --text-muted: #a4a7a7;
+        --border-color: #323533;
+      }
+      .dark body {
+        background-color: var(--bg-color) !important;
+        color: var(--text-primary) !important;
+      }
+      .dark header {
+        background-color: #1b1c1a !important; /* Solid background, no transparency */
+        border-color: var(--border-color) !important;
+        backdrop-filter: none !important;
+      }
+      .dark footer {
+        background-color: #171817 !important;
+        border-color: var(--border-color) !important;
+      }
+      .dark section,
+      .dark aside,
+      .dark div.bg-surface,
+      .dark .bg-surface-container {
+        background-color: var(--surface-color) !important;
+        border-color: var(--border-color) !important;
+        backdrop-filter: none !important;
+      }
+      .dark .bg-background {
+        background-color: var(--bg-color) !important;
+      }
+      .dark .bg-surface-container-low {
+        background-color: var(--surface-low-color) !important;
+      }
+      .dark .bg-surface-container-high {
+        background-color: var(--surface-high-color) !important;
+      }
+      .dark .bg-surface-container-lowest {
+        background-color: #171817 !important;
+      }
+      .dark .text-on-surface {
+        color: var(--text-primary) !important;
+      }
+      .dark .text-on-surface-variant {
+        color: var(--text-muted) !important;
+      }
+      .dark .border-soft-border {
+        border-color: var(--border-color) !important;
+      }
+      .dark input,
+      .dark select {
+        background-color: var(--surface-low-color) !important;
+        color: var(--text-primary) !important;
+        border-color: var(--border-color) !important;
+      }
+      .dark input:focus,
+      .dark select:focus {
+        border-color: #ffffff !important;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed-variant": "#474747",
+              "on-primary-container": "#949393",
+              "surface-container-highest": "#e3e2df",
+              "parchment-white": "#F7F6F3",
+              "secondary-container": "#d6e7d8",
+              "surface-container-low": "#f4f3f0",
+              "on-secondary-fixed-variant": "#3c4a40",
+              "on-error-container": "#93000a",
+              "inverse-surface": "#2f312f",
+              "on-tertiary-container": "#c48373",
+              "on-secondary-container": "#59685c",
+              "surface-variant": "#e3e2df",
+              "inverse-primary": "#c8c6c5",
+              "on-tertiary": "#ffffff",
+              "on-secondary": "#ffffff",
+              error: "#ba1a1a",
+              outline: "#747878",
+              "secondary-fixed-dim": "#bacbbd",
+              "on-surface": "#1b1c1a",
+              "inverse-on-surface": "#f2f1ee",
+              "error-container": "#ffdad6",
+              charcoal: "#2C2C2C",
+              "on-tertiary-fixed": "#360f06",
+              "surface-tint": "#5f5e5e",
+              "error-red": "#A64D4D",
+              "on-background": "#1b1c1a",
+              "surface-container": "#efeeeb",
+              "surface-container-lowest": "#ffffff",
+              "soft-border": "#E2E2DE",
+              background: "#faf9f6",
+              "on-secondary-fixed": "#111e16",
+              "on-surface-variant": "#444748",
+              primary: "#171818",
+              "success-green": "#5A705F",
+              "primary-fixed-dim": "#c8c6c5",
+              "surface-container-high": "#e9e8e5",
+              "secondary-fixed": "#d6e7d8",
+              "surface-dim": "#dbdad7",
+              "tertiary-container": "#4b1f14",
+              "tertiary-fixed-dim": "#feb5a3",
+              sage: "#8A9A8D",
+              "surface-bright": "#faf9f6",
+              "tertiary-fixed": "#ffdad2",
+              surface: "#faf9f6",
+              "outline-variant": "#c4c7c7",
+              "muted-terracotta": "#BC7C6C",
+              "primary-fixed": "#e4e2e1",
+              tertiary: "#310b03",
+              "on-tertiary-fixed-variant": "#6b392c",
+              "warning-amber": "#C49D6A",
+              "on-error": "#ffffff",
+              secondary: "#536257",
+              "primary-container": "#2c2c2c",
+              "on-primary": "#ffffff",
+              "on-primary-fixed": "#1b1c1c",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              xl: "80px",
+              gutter: "24px",
+              "margin-mobile": "16px",
+              lg: "48px",
+              base: "8px",
+              xs: "4px",
+              "margin-desktop": "64px",
+              md: "24px",
+              sm: "12px",
+            },
+            fontFamily: {
+              "label-md": ["Hanken Grotesk", "sans-serif"],
+              "body-md": ["Hanken Grotesk", "sans-serif"],
+              "label-sm": ["Hanken Grotesk", "sans-serif"],
+              "body-sm": ["Hanken Grotesk", "sans-serif"],
+              "headline-lg-mobile": ["Hanken Grotesk", "sans-serif"],
+              "headline-xl-mobile": ["Hanken Grotesk", "sans-serif"],
+              "headline-lg": ["Hanken Grotesk", "sans-serif"],
+              "body-lg": ["Hanken Grotesk", "sans-serif"],
+              "headline-xl": ["Hanken Grotesk", "sans-serif"],
+              "headline-md": ["Hanken Grotesk", "sans-serif"],
+            },
+            fontSize: {
+              "label-md": [
+                "14px",
+                { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" },
+              ],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+              "label-sm": [
+                "12px",
+                { lineHeight: "1", letterSpacing: "0.03em", fontWeight: "600" },
+              ],
+              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "headline-xl-mobile": [
+                "36px",
+                { lineHeight: "1.1", fontWeight: "600" },
+              ],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "500" }],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="bg-background font-body-md text-on-surface transition-colors duration-300"
+  >
+    <!-- Hidden File Input for Avatar Upload -->
+    <input accept="image/*" class="hidden" id="avatar-file-input" type="file" />
+
+    <!-- Toast Container -->
+    <div
+      class="fixed bottom-6 right-6 z-50 flex flex-col gap-xs pointer-events-none"
+      id="toast-container"
+    ></div>
+
+    <!-- HEADER -->
+    <header
+      class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl dark:bg-charcoal dark:backdrop-blur-none border-b border-soft-border dark:border-primary-container"
+    >
+      <div
+        class="h-16 w-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex items-center justify-between"
+      >
+        <button
+          onclick="history.back()"
+          class="p-0 border-none bg-transparent text-on-surface hover:text-primary cursor-pointer leading-none"
+          title="Go Back"
+        >
+          <span class="material-symbols-outlined text-[24px]">arrow_back</span>
+        </button>
+        <div class="flex items-center gap-base shrink-0">
+          <img
+            alt="Glamora Logo"
+            class="h-8 w-auto object-contain shrink-0"
+            src="images/glamora_background-removebg-preview.png"
+          />
+          <span
+            class="font-headline-md text-headline-md text-primary dark:text-inverse-primary tracking-tight"
+            >GLAMORA</span
+          >
+        </div>
+        <nav class="hidden md:flex items-center gap-lg">
+          <a
+            aria-current="page"
+            class="transition-colors text-primary dark:text-inverse-primary font-semibold"
+            href="index.html"
+            >Home</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors"
+            href="services.html"
+            >Services</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors"
+            href="marketplace.html"
+            >Marketplace</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors"
+            href="chats.html"
+            >Chats</a
+          >
+        </nav>
+        <div class="flex items-center gap-xs sm:gap-sm md:gap-md">
+          <div class="flex items-center gap-xs sm:gap-sm">
+            <a
+              href="cart.html"
+              aria-current="page"
+              class="p-xs text-primary font-semibold transition-colors flex items-center border-b-2 border-primary"
+            >
+              <span class="material-symbols-outlined">shopping_bag</span>
+            </a>
+            <a
+              href="notifications.html"
+              class="p-xs text-on-surface-variant hover:text-primary transition-colors flex items-center"
+            >
+              <span class="material-symbols-outlined">notifications</span>
+            </a>
+          </div>
+
+          <div class="flex items-center gap-xs sm:gap-sm cursor-pointer group">
+            <img
+              alt="Profile"
+              class="w-8 h-8 rounded-full object-cover border border-soft-border group-hover:border-primary dark:group-hover:border-inverse-primary transition-colors shrink-0"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAksYm7Vpu3y6nFXAdnowe6h9yhNcma3tOmWqhGqQ-yieKVgv8IOaIQ21a9oK4barmnxBtCbmquE3v8ijlXgSV-zbE8NktlwkPDfGYPsqoh8T0NODzVrMTSMZLOGIWxZ5sK5uG09XBqCUJsvcsc8RrecRsLG5xdSZ2m8MUH3WXsWax75A3uBbiT_shFBUTYsOu9dyHNTK3QCaWYe77GnvN4ZQ-67ApBKuv20ipR9qLJlf0O_ZyvafdN"
+            />
+            <span
+              class="material-symbols-outlined text-on-surface-variant dark:text-outline hidden md:block"
+              >expand_more</span
+            >
+          </div>
+          <!-- Hamburger Menu Button -->
+          <button
+            id="mobile-menu-btn"
+            class="md:hidden flex items-center justify-center p-2 text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors shrink-0"
+          >
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Sidebar Backdrop -->
+    <div
+      id="mobile-sidebar-backdrop"
+      class="fixed inset-0 bg-black/60 z-[60] hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm"
+    ></div>
+
+    <!-- Mobile Sidebar -->
+    <aside
+      id="mobile-sidebar"
+      class="fixed top-0 left-0 w-[80%] max-w-[300px] h-screen bg-surface dark:bg-charcoal z-[70] transform -translate-x-full transition-transform duration-300 flex flex-col shadow-2xl border-r border-soft-border dark:border-primary-container"
+    >
+      <!-- Sidebar Header -->
+      <div
+        class="h-16 px-margin-mobile flex items-center justify-between border-b border-soft-border dark:border-primary-container shrink-0"
+      >
+        <div class="flex items-center gap-base">
+          <img
+            alt="Glamora Logo"
+            class="h-8 w-auto object-contain"
+            src="images/glamora_background-removebg-preview.png"
+          />
+          <span
+            class="font-headline-md text-headline-md text-primary dark:text-inverse-primary tracking-tight"
+            >GLAMORA</span
+          >
+        </div>
+        <button
+          id="close-sidebar-btn"
+          class="w-8 h-8 rounded-full bg-surface-container dark:bg-primary-container flex items-center justify-center text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors shrink-0"
+        >
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Sidebar Navigation Links -->
+      <nav
+        class="flex-1 px-margin-mobile py-md overflow-y-auto flex flex-col gap-xs"
+      >
+        <a
+          href="index.html"
+          class="flex items-center gap-md px-md py-sm rounded-xl bg-primary dark:bg-inverse-surface text-on-primary font-semibold transition-colors"
+        >
+          <span class="material-symbols-outlined text-[22px]">home</span>
+          Dashboard
+        </a>
+        <a
+          href="mybookings.html"
+          class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant dark:text-outline hover:bg-surface-container dark:hover:bg-primary-container hover:text-primary dark:hover:text-inverse-primary transition-colors font-medium"
+        >
+          <span class="material-symbols-outlined text-[22px]"
+            >calendar_today</span
+          >
+          Services & Bookings
+        </a>
+        <a
+          href="marketplace.html"
+          class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant dark:text-outline hover:bg-surface-container dark:hover:bg-primary-container hover:text-primary dark:hover:text-inverse-primary transition-colors font-medium"
+        >
+          <span class="material-symbols-outlined text-[22px]">storefront</span>
+          Marketplace
+        </a>
+        <a
+          href="favorites.html"
+          class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant dark:text-outline hover:bg-surface-container dark:hover:bg-primary-container hover:text-primary dark:hover:text-inverse-primary transition-colors font-medium"
+        >
+          <span class="material-symbols-outlined text-[22px]">favorite</span>
+          Favorites
+        </a>
+        <a
+          href="chats.html"
+          class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant dark:text-outline hover:bg-surface-container dark:hover:bg-primary-container hover:text-primary dark:hover:text-inverse-primary transition-colors font-medium"
+        >
+          <span class="material-symbols-outlined text-[22px]"
+            >chat_bubble_outline</span
+          >
+          Messages
+        </a>
+        <a
+          href="cart.html"
+          class="flex items-center gap-md px-md py-sm rounded-xl text-on-surface-variant dark:text-outline hover:bg-surface-container dark:hover:bg-primary-container hover:text-primary dark:hover:text-inverse-primary transition-colors font-medium"
+        >
+          <span class="material-symbols-outlined text-[22px]"
+            >shopping_bag</span
+          >
+          My Orders
+        </a>
+      </nav>
+
+      <!-- Sidebar Footer (Profile Card) -->
+      <div
+        class="p-margin-mobile border-t border-soft-border dark:border-primary-container shrink-0 mt-auto"
+      >
+        <div
+          class="flex items-center gap-md p-sm rounded-xl bg-surface-container dark:bg-primary-container"
+        >
+          <img
+            alt="Profile"
+            class="w-10 h-10 rounded-full object-cover border border-soft-border dark:border-outline-variant shrink-0"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAksYm7Vpu3y6nFXAdnowe6h9yhNcma3tOmWqhGqQ-yieKVgv8IOaIQ21a9oK4barmnxBtCbmquE3v8ijlXgSV-zbE8NktlwkPDfGYPsqoh8T0NODzVrMTSMZLOGIWxZ5sK5uG09XBqCUJsvcsc8RrecRsLG5xdSZ2m8MUH3WXsWax75A3uBbiT_shFBUTYsOu9dyHNTK3QCaWYe77GnvN4ZQ-67ApBKuv20ipR9qLJlf0O_ZyvafdN"
+          />
+          <div class="flex flex-col min-w-0">
+            <span
+              class="font-headline-md text-body-md font-semibold text-on-surface dark:text-inverse-on-surface truncate"
+              >Alex Vanguard</span
+            >
+            <span
+              class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline truncate"
+              >Customer Account</span
+            >
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="w-full pt-16 bg-background transition-colors duration-300">
+      <div class="flex flex-col w-full">
+        <div class="max-w-[1440px] mx-auto w-full px-margin-desktop py-lg">
+          <div class="flex flex-col lg:flex-row gap-lg">
+            <!-- SIDEBAR -->
+            <aside class="w-full lg:w-72 flex-shrink-0">
+              <div class="sticky top-24 flex flex-col gap-md">
+                <div class="flex items-center gap-md mb-md">
+                  <div
+                    class="relative w-20 h-20 rounded-full overflow-hidden bg-surface-container shadow-sm border border-soft-border group shrink-0"
+                  >
+                    <img
+                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 user-avatar-img"
+                      id="main-avatar-img"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuChoCbjie88QsUOlmC9oHTDCD2A6Dll15vH_jwerSpbJAk4yD5KRhWGyFdUBUGAKfi0Pk5UBWnYy7pXjKmzxQVNL1ysKy2bxixVadPBoLgLApJnhJoXclGqnFneGYv8iNN2bW2fWbIzVW4fw5HY1wTRunCeEDjyhB5RjkpiDNH85PSaqiMGSl81ZQ0bN4yQfN6KiR1R-85Ar2JbB4LOPTCz8epS1Wz8Pu4ryMWJB17EpJvCofpHoNIZ"
+                    />
+                    <button
+                      class="absolute inset-0 bg-charcoal/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                      id="change-avatar-btn"
+                      title="Change Avatar"
+                    >
+                      <span class="material-symbols-outlined text-on-primary"
+                        >photo_camera</span
+                      >
+                    </button>
+                  </div>
+                  <div>
+                    <h2
+                      class="font-headline-md text-headline-md text-on-surface"
+                      id="profile-display-name"
+                    >
+                      Amina Bello
+                    </h2>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-xs mt-xs"
+                    >
+                      <span
+                        class="material-symbols-outlined text-[16px] text-warning-amber"
+                        >workspace_premium</span
+                      >
+                      Premium Member
+                    </p>
+                  </div>
+                </div>
+                <nav class="flex flex-col gap-xs" id="profile-nav">
+                  <button
+                    class="w-full flex items-center justify-between p-sm rounded-lg bg-surface-container-high text-on-surface transition-colors cursor-pointer"
+                    data-target="personal-info"
+                  >
+                    <div class="flex items-center gap-sm">
+                      <span class="material-symbols-outlined">person</span>
+                      <span class="font-label-md text-label-md"
+                        >Personal Info</span
+                      >
+                    </div>
+                    <span class="material-symbols-outlined text-[18px]"
+                      >chevron_right</span
+                    >
+                  </button>
+                  <button
+                    class="w-full flex items-center justify-between p-sm rounded-lg hover:bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer"
+                    data-target="delivery-details"
+                  >
+                    <div class="flex items-center gap-sm">
+                      <span class="material-symbols-outlined"
+                        >local_shipping</span
+                      >
+                      <span class="font-label-md text-label-md"
+                        >Delivery Details</span
+                      >
+                    </div>
+                    <span class="material-symbols-outlined text-[18px]"
+                      >chevron_right</span
+                    >
+                  </button>
+                  <button
+                    class="w-full flex items-center justify-between p-sm rounded-lg hover:bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer"
+                    data-target="display-theme"
+                  >
+                    <div class="flex items-center gap-sm">
+                      <span class="material-symbols-outlined">palette</span>
+                      <span class="font-label-md text-label-md"
+                        >Display & Theme</span
+                      >
+                    </div>
+                    <span class="material-symbols-outlined text-[18px]"
+                      >chevron_right</span
+                    >
+                  </button>
+                  <button
+                    class="w-full flex items-center justify-between p-sm rounded-lg hover:bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer"
+                    data-target="payment-methods"
+                  >
+                    <div class="flex items-center gap-sm">
+                      <span class="material-symbols-outlined">credit_card</span>
+                      <span class="font-label-md text-label-md"
+                        >Payment Methods</span
+                      >
+                    </div>
+                    <span class="material-symbols-outlined text-[18px]"
+                      >chevron_right</span
+                    >
+                  </button>
+                  <button
+                    class="w-full flex items-center justify-between p-sm rounded-lg hover:bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer"
+                    data-target="security"
+                  >
+                    <div class="flex items-center gap-sm">
+                      <span class="material-symbols-outlined">security</span>
+                      <span class="font-label-md text-label-md">Security</span>
+                    </div>
+                    <span class="material-symbols-outlined text-[18px]"
+                      >chevron_right</span
+                    >
+                  </button>
+                  <button
+                    class="w-full flex items-center justify-between p-sm rounded-lg hover:bg-surface-container-low text-error-red transition-colors cursor-pointer"
+                    data-target="account-actions"
+                  >
+                    <div class="flex items-center gap-sm">
+                      <span class="material-symbols-outlined">warning</span>
+                      <span class="font-label-md text-label-md"
+                        >Account Actions</span
+                      >
+                    </div>
+                    <span class="material-symbols-outlined text-[18px]"
+                      >chevron_right</span
+                    >
+                  </button>
+                  <button
+                    class="w-full flex items-center justify-between p-sm rounded-lg hover:bg-surface-container-low text-error-red transition-colors mt-lg cursor-pointer"
+                    id="signout-btn"
+                  >
+                    <div class="flex items-center gap-sm">
+                      <span class="material-symbols-outlined">logout</span>
+                      <span class="font-label-md text-label-md">Sign Out</span>
+                    </div>
+                  </button>
+                </nav>
+              </div>
+            </aside>
+
+            <!-- MAIN CONTENT SECTIONS -->
+            <main class="flex-1 min-w-0 flex flex-col gap-xl">
+              <!-- Personal Information Section -->
+              <section
+                class="flex flex-col gap-md transition-opacity duration-300"
+                id="personal-info"
+              >
+                <form id="personal-info-form" onsubmit="return false;">
+                  <div
+                    class="flex items-end justify-between border-b border-soft-border pb-sm"
+                  >
+                    <div>
+                      <h3
+                        class="font-headline-lg text-headline-lg text-on-surface"
+                      >
+                        Personal Information
+                      </h3>
+                      <p
+                        class="font-body-md text-body-md text-on-surface-variant mt-xs"
+                      >
+                        Manage your profile details and preferences.
+                      </p>
+                    </div>
+                    <button
+                      class="px-md py-sm bg-primary text-on-primary font-label-md text-label-md rounded-full hover:opacity-90 transition-opacity flex items-center gap-xs cursor-pointer"
+                      id="save-personal-info-btn"
+                      type="button"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >save</span
+                      >
+                      <span>Save Changes</span>
+                    </button>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter mt-sm">
+                    <div class="flex flex-col gap-xs">
+                      <label
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >First Name</label
+                      >
+                      <input
+                        class="w-full px-sm py-sm rounded bg-surface border border-soft-border font-body-md text-body-md text-on-surface focus:outline-none focus:border-charcoal transition-colors"
+                        id="input-first-name"
+                        type="text"
+                        value="Amina"
+                      />
+                    </div>
+                    <div class="flex flex-col gap-xs">
+                      <label
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >Last Name</label
+                      >
+                      <input
+                        class="w-full px-sm py-sm rounded bg-surface border border-soft-border font-body-md text-body-md text-on-surface focus:outline-none focus:border-charcoal transition-colors"
+                        id="input-last-name"
+                        type="text"
+                        value="Bello"
+                      />
+                    </div>
+                    <div class="flex flex-col gap-xs md:col-span-2">
+                      <label
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >Email Address</label
+                      >
+                      <input
+                        class="w-full px-sm py-sm rounded bg-surface border border-soft-border font-body-md text-body-md text-on-surface focus:outline-none focus:border-charcoal transition-colors"
+                        id="input-email"
+                        type="email"
+                        value="amina.bello@example.ng"
+                      />
+                      <span
+                        class="font-body-sm text-body-sm text-sage flex items-center gap-xs mt-xs"
+                      >
+                        <span class="material-symbols-outlined text-[16px]"
+                          >check_circle</span
+                        >
+                        Verified
+                      </span>
+                    </div>
+                  </div>
+                </form>
+
+                <!-- Functional SMS Notification Toggle with Conditional Phone Input -->
+                <div
+                  class="mt-md p-md bg-surface-container rounded-xl flex flex-col gap-md border border-soft-border shadow-sm"
+                >
+                  <div class="flex items-center gap-md">
+                    <div
+                      class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0"
+                    >
+                      <span class="material-symbols-outlined"
+                        >notifications_active</span
+                      >
+                    </div>
+                    <div class="flex-1">
+                      <h4 class="font-label-md text-label-md text-on-surface">
+                        SMS Notifications
+                      </h4>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        Receive booking confirmations and appointment alerts via
+                        text message.
+                      </p>
+                    </div>
+                    <button
+                      aria-checked="true"
+                      class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary transition-colors duration-300 focus:outline-none cursor-pointer shrink-0"
+                      id="sms-notification-toggle"
+                      role="switch"
+                    >
+                      <span
+                        class="translate-x-6 inline-block h-4 w-4 transform rounded-full bg-on-primary transition-transform duration-300"
+                        id="sms-toggle-knob"
+                      ></span>
+                    </button>
+                  </div>
+
+                  <!-- Dynamic Phone Number Input for SMS -->
+                  <div
+                    class="pt-sm border-t border-soft-border transition-all duration-300"
+                    id="sms-phone-container"
+                  >
+                    <label
+                      class="font-label-sm text-label-sm text-on-surface-variant block mb-xs"
+                      >SMS Notification Phone Number</label
+                    >
+                    <div
+                      class="flex items-center rounded bg-surface border border-soft-border overflow-hidden"
+                    >
+                      <span
+                        class="px-sm py-sm bg-surface-container-high text-on-surface font-label-md text-label-md border-r border-soft-border"
+                        >+234</span
+                      >
+                      <input
+                        class="w-full px-sm py-sm bg-transparent font-body-md text-body-md text-on-surface focus:outline-none"
+                        id="sms-phone-input"
+                        maxlength="10"
+                        placeholder="8012345678"
+                        type="tel"
+                        value="8031234567"
+                      />
+                    </div>
+                    <span
+                      class="font-body-sm text-[12px] text-on-surface-variant mt-xs block"
+                      >Local Nigerian SMS charges apply per booking alert.</span
+                    >
+                  </div>
+                </div>
+              </section>
+
+              <!-- Delivery Details Section (Nigerian Address Context) -->
+              <section
+                class="flex flex-col gap-md transition-opacity duration-300"
+                id="delivery-details"
+              >
+                <div
+                  class="flex items-end justify-between border-b border-soft-border pb-sm"
+                >
+                  <div>
+                    <h3
+                      class="font-headline-lg text-headline-lg text-on-surface"
+                    >
+                      Delivery Details
+                    </h3>
+                    <p
+                      class="font-body-md text-body-md text-on-surface-variant mt-xs"
+                    >
+                      Manage your default shipping address for appointments and
+                      beauty purchases (₦).
+                    </p>
+                  </div>
+                  <button
+                    class="px-md py-sm bg-primary text-on-primary font-label-md text-label-md rounded-full hover:opacity-90 transition-opacity flex items-center gap-xs cursor-pointer"
+                    id="save-delivery-btn"
+                    type="button"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >save</span
+                    >
+                    <span>Save Address</span>
+                  </button>
+                </div>
+                <form
+                  class="grid grid-cols-1 md:grid-cols-2 gap-gutter mt-sm"
+                  id="delivery-form"
+                  onsubmit="return false;"
+                >
+                  <div class="flex flex-col gap-xs md:col-span-2">
+                    <label
+                      class="font-label-sm text-label-sm text-on-surface-variant"
+                      >Street Address</label
+                    >
+                    <input
+                      class="w-full px-sm py-sm rounded bg-surface border border-soft-border font-body-md text-body-md text-on-surface focus:outline-none focus:border-charcoal transition-colors"
+                      id="input-delivery-address"
+                      placeholder="e.g. 14 Admiralty Way, Lekki Phase 1"
+                      type="text"
+                      value="14 Admiralty Way, Lekki Phase 1"
+                    />
+                  </div>
+                  <div class="flex flex-col gap-xs">
+                    <label
+                      class="font-label-sm text-label-sm text-on-surface-variant"
+                      >City / Town</label
+                    >
+                    <input
+                      class="w-full px-sm py-sm rounded bg-surface border border-soft-border font-body-md text-body-md text-on-surface focus:outline-none focus:border-charcoal transition-colors"
+                      id="input-delivery-city"
+                      placeholder="e.g. Ikeja"
+                      type="text"
+                      value="Ikeja"
+                    />
+                  </div>
+                  <div class="flex flex-col gap-xs">
+                    <label
+                      class="font-label-sm text-label-sm text-on-surface-variant"
+                      >State</label
+                    >
+                    <select
+                      class="w-full px-sm py-sm rounded bg-surface border border-soft-border font-body-md text-body-md text-on-surface focus:outline-none focus:border-charcoal transition-colors"
+                      id="select-delivery-state"
+                    >
+                      <option value="Lagos" selected>Lagos</option>
+                      <option value="Abuja">FCT - Abuja</option>
+                      <option value="Rivers">Rivers</option>
+                      <option value="Delta">Delta</option>
+                      <option value="Oyo">Oyo</option>
+                      <option value="Kano">Kano</option>
+                      <option value="Enugu">Enugu</option>
+                      <option value="Ogun">Ogun</option>
+                    </select>
+                  </div>
+                  <div class="flex flex-col gap-xs md:col-span-2">
+                    <label
+                      class="font-label-sm text-label-sm text-on-surface-variant"
+                      >Delivery Contact Phone</label
+                    >
+                    <div
+                      class="flex items-center rounded bg-surface border border-soft-border overflow-hidden"
+                    >
+                      <span
+                        class="px-sm py-sm bg-surface-container-high text-on-surface font-label-md text-label-md border-r border-soft-border"
+                        >+234</span
+                      >
+                      <input
+                        class="w-full px-sm py-sm bg-transparent font-body-md text-body-md text-on-surface focus:outline-none"
+                        id="input-delivery-phone"
+                        maxlength="10"
+                        placeholder="8012345678"
+                        type="tel"
+                        value="8012345678"
+                      />
+                    </div>
+                  </div>
+                </form>
+              </section>
+
+              <!-- Display & Theme Preferences Section (Dedicated Selection Area) -->
+              <section
+                class="flex flex-col gap-md transition-opacity duration-300"
+                id="display-theme"
+              >
+                <div class="border-b border-soft-border pb-sm">
+                  <h3 class="font-headline-lg text-headline-lg text-on-surface">
+                    Display & Theme Preferences
+                  </h3>
+                  <p
+                    class="font-body-md text-body-md text-on-surface-variant mt-xs"
+                  >
+                    Select your preferred interface mode. This will be saved
+                    across all pages.
+                  </p>
+                </div>
+                <!-- Changed to always be 2 columns side by side -->
+                <div class="grid grid-cols-2 gap-md mt-sm">
+                  <!-- Light Mode Card -->
+                  <div
+                    class="theme-card p-md rounded-xl bg-surface border-2 border-soft-border cursor-pointer transition-all flex flex-col justify-between gap-md"
+                    id="theme-card-light"
+                  >
+                    <div
+                      class="h-28 rounded-lg bg-parchment-white border border-soft-border flex items-center justify-center p-sm"
+                    >
+                      <div
+                        class="w-full h-full bg-white rounded border border-soft-border p-xs flex flex-col gap-xs"
+                      >
+                        <div class="h-2 w-1/3 bg-charcoal rounded"></div>
+                        <div
+                          class="h-2 w-2/3 bg-surface-container-high rounded"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-xs">
+                        <span class="material-symbols-outlined text-primary"
+                          >light_mode</span
+                        >
+                        <span
+                          class="font-label-md text-label-md text-on-surface"
+                          >Light Mode</span
+                        >
+                      </div>
+                      <span
+                        class="material-symbols-outlined text-primary"
+                        id="radio-icon-light"
+                        >radio_button_unchecked</span
+                      >
+                    </div>
+                  </div>
+
+                  <!-- Dark Mode Card -->
+                  <div
+                    class="theme-card p-md rounded-xl bg-surface border-2 border-soft-border cursor-pointer transition-all flex flex-col justify-between gap-md"
+                    id="theme-card-dark"
+                  >
+                    <div
+                      class="h-28 rounded-lg bg-[#121312] border border-[#323533] flex items-center justify-center p-sm"
+                    >
+                      <div
+                        class="w-full h-full bg-[#1b1c1a] rounded border border-[#323533] p-xs flex flex-col gap-xs"
+                      >
+                        <div class="h-2 w-1/3 bg-[#f2f1ee] rounded"></div>
+                        <div class="h-2 w-2/3 bg-[#2f312f] rounded"></div>
+                      </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-xs">
+                        <span class="material-symbols-outlined text-primary"
+                          >dark_mode</span
+                        >
+                        <span
+                          class="font-label-md text-label-md text-on-surface"
+                          >Dark Mode</span
+                        >
+                      </div>
+                      <span
+                        class="material-symbols-outlined text-primary"
+                        id="radio-icon-dark"
+                        >radio_button_unchecked</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Payment Methods Section -->
+              <section
+                class="flex flex-col gap-md transition-opacity duration-300"
+                id="payment-methods"
+              >
+                <div
+                  class="flex items-end justify-between border-b border-soft-border pb-sm"
+                >
+                  <div>
+                    <h3
+                      class="font-headline-lg text-headline-lg text-on-surface"
+                    >
+                      Payment Methods
+                    </h3>
+                    <p
+                      class="font-body-md text-body-md text-on-surface-variant mt-xs"
+                    >
+                      Securely manage your saved cards for quick checkout (₦).
+                    </p>
+                  </div>
+                  <button
+                    class="px-md py-sm bg-transparent text-on-surface border border-soft-border font-label-md text-label-md rounded-full hover:bg-surface-container transition-colors flex items-center gap-xs cursor-pointer"
+                    id="open-add-card-btn"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >add</span
+                    >
+                    Add New
+                  </button>
+                </div>
+                <div
+                  class="grid grid-cols-1 md:grid-cols-2 gap-md mt-sm"
+                  id="payment-cards-grid"
+                >
+                  <!-- Card 1 (Default) -->
+                  <div
+                    class="card-item relative p-md rounded-xl bg-charcoal text-on-primary overflow-hidden shadow-md group cursor-pointer transition-transform hover:-translate-y-1"
+                    data-card-id="1"
+                  >
+                    <div
+                      class="flex justify-between items-start mb-lg relative z-10"
+                    >
+                      <span class="material-symbols-outlined text-[32px]"
+                        >credit_card</span
+                      >
+                      <span
+                        class="card-badge px-xs py-xs bg-white/20 rounded font-label-sm text-label-sm text-on-primary"
+                        >DEFAULT</span
+                      >
+                    </div>
+                    <div
+                      class="font-headline-md text-headline-md tracking-[0.2em] mb-sm relative z-10"
+                    >
+                      •••• •••• •••• 5521
+                    </div>
+                    <div class="flex justify-between items-end relative z-10">
+                      <div class="flex flex-col">
+                        <span
+                          class="font-label-sm text-label-sm text-on-primary/70 uppercase"
+                          >Exp</span
+                        >
+                        <span class="font-label-md text-label-md">11/27</span>
+                      </div>
+                      <div class="w-10 h-6">
+                        <svg
+                          class="w-full h-full text-on-primary"
+                          fill="none"
+                          viewbox="0 0 40 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <circle
+                            cx="12"
+                            cy="12"
+                            fill="currentColor"
+                            fill-opacity="0.6"
+                            r="12"
+                          ></circle>
+                          <circle
+                            cx="28"
+                            cy="12"
+                            fill="currentColor"
+                            fill-opacity="0.8"
+                            r="12"
+                          ></circle>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Card 2 -->
+                  <div
+                    class="card-item relative p-md rounded-xl bg-surface border border-soft-border text-on-surface group cursor-pointer transition-transform hover:-translate-y-1 shadow-sm flex flex-col justify-between"
+                    data-card-id="2"
+                  >
+                    <div class="flex justify-between items-start mb-lg">
+                      <span
+                        class="material-symbols-outlined text-[32px] text-on-surface-variant"
+                        >credit_card</span
+                      >
+                      <div class="flex items-center gap-xs">
+                        <button
+                          class="set-default-card-btn p-xs text-on-surface-variant hover:text-primary transition-colors text-[12px] underline cursor-pointer"
+                          title="Set Default"
+                        >
+                          Set Default
+                        </button>
+                        <button
+                          class="delete-card-btn p-xs text-on-surface-variant hover:text-error-red transition-colors cursor-pointer"
+                          title="Delete Card"
+                        >
+                          <span class="material-symbols-outlined text-[20px]"
+                            >delete</span
+                          >
+                        </button>
+                      </div>
+                    </div>
+                    <div
+                      class="font-headline-md text-headline-md tracking-[0.2em] mb-sm text-on-surface-variant"
+                    >
+                      •••• •••• •••• 9012
+                    </div>
+                    <div class="flex justify-between items-end">
+                      <div class="flex flex-col">
+                        <span
+                          class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                          >Exp</span
+                        >
+                        <span
+                          class="font-label-md text-label-md text-on-surface"
+                          >08/26</span
+                        >
+                      </div>
+                      <div class="w-10 h-6">
+                        <svg
+                          class="w-full h-full text-on-surface-variant"
+                          fill="none"
+                          viewbox="0 0 40 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 0H40V24H0V0Z"
+                            fill="currentColor"
+                            fill-opacity="0.2"
+                          ></path>
+                          <path
+                            d="M20 12L30 20H10L20 12Z"
+                            fill="currentColor"
+                            fill-opacity="0.6"
+                          ></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Security Section -->
+              <section
+                class="flex flex-col gap-md transition-opacity duration-300"
+                id="security"
+              >
+                <div
+                  class="flex items-end justify-between border-b border-soft-border pb-sm"
+                >
+                  <div>
+                    <h3
+                      class="font-headline-lg text-headline-lg text-on-surface"
+                    >
+                      Security
+                    </h3>
+                    <p
+                      class="font-body-md text-body-md text-on-surface-variant mt-xs"
+                    >
+                      Manage your password, authentication, and active sessions.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Change Password Card -->
+                <div
+                  class="p-md rounded-xl bg-surface border border-soft-border flex flex-col gap-md shadow-sm"
+                >
+                  <h4
+                    class="font-headline-md text-headline-md text-on-surface flex items-center gap-xs"
+                  >
+                    <span class="material-symbols-outlined text-primary"
+                      >key</span
+                    >
+                    Change Password
+                  </h4>
+                  <form
+                    class="flex flex-col gap-sm"
+                    id="password-form"
+                    onsubmit="return false;"
+                  >
+                    <div class="flex flex-col gap-xs">
+                      <label
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >Current Password</label
+                      >
+                      <div class="relative">
+                        <input
+                          class="w-full px-sm py-sm pr-10 rounded bg-surface border border-soft-border font-body-md text-body-md text-on-surface focus:outline-none focus:border-charcoal transition-colors"
+                          id="current-password"
+                          placeholder="••••••••"
+                          required=""
+                          type="password"
+                        />
+                        <button
+                          class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary cursor-pointer"
+                          type="button"
+                        >
+                          <span class="material-symbols-outlined text-[20px]"
+                            >visibility</span
+                          >
+                        </button>
+                      </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+                      <div class="flex flex-col gap-xs">
+                        <label
+                          class="font-label-sm text-label-sm text-on-surface-variant"
+                          >New Password</label
+                        >
+                        <div class="relative">
+                          <input
+                            class="w-full px-sm py-sm pr-10 rounded bg-surface border border-soft-border font-body-md text-body-md text-on-surface focus:outline-none focus:border-charcoal transition-colors"
+                            id="new-password"
+                            placeholder="••••••••"
+                            required=""
+                            type="password"
+                          />
+                          <button
+                            class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary cursor-pointer"
+                            type="button"
+                          >
+                            <span class="material-symbols-outlined text-[20px]"
+                              >visibility</span
+                            >
+                          </button>
+                        </div>
+                        <!-- Dynamic Strength Bar -->
+                        <div class="flex items-center gap-xs mt-xs">
+                          <div
+                            class="h-1.5 flex-1 bg-surface-container-high rounded-full overflow-hidden"
+                          >
+                            <div
+                              class="h-full w-0 bg-error-red transition-all duration-300"
+                              id="password-strength-bar"
+                            ></div>
+                          </div>
+                          <span
+                            class="font-label-sm text-[11px] text-on-surface-variant"
+                            id="password-strength-text"
+                            >Weak</span
+                          >
+                        </div>
+                      </div>
+                      <div class="flex flex-col gap-xs">
+                        <label
+                          class="font-label-sm text-label-sm text-on-surface-variant"
+                          >Confirm New Password</label
+                        >
+                        <div class="relative">
+                          <input
+                            class="w-full px-sm py-sm pr-10 rounded bg-surface border border-soft-border font-body-md text-body-md text-on-surface focus:outline-none focus:border-charcoal transition-colors"
+                            id="confirm-password"
+                            placeholder="••••••••"
+                            required=""
+                            type="password"
+                          />
+                          <button
+                            class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary cursor-pointer"
+                            type="button"
+                          >
+                            <span class="material-symbols-outlined text-[20px]"
+                              >visibility</span
+                            >
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex justify-end mt-xs">
+                      <button
+                        class="px-md py-sm bg-primary text-on-primary font-label-md text-label-md rounded-full hover:opacity-90 transition-opacity flex items-center gap-xs cursor-pointer"
+                        id="update-password-btn"
+                        type="submit"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >lock_reset</span
+                        >
+                        <span>Update Password</span>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+
+                <!-- Two-Factor Authentication (2FA) -->
+                <div
+                  class="p-md rounded-xl bg-surface border border-soft-border flex items-center justify-between shadow-sm"
+                >
+                  <div class="flex items-center gap-md">
+                    <div
+                      class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0"
+                    >
+                      <span class="material-symbols-outlined"
+                        >verified_user</span
+                      >
+                    </div>
+                    <div>
+                      <div class="flex items-center gap-xs">
+                        <h4 class="font-label-md text-label-md text-on-surface">
+                          Two-Factor Authentication (2FA)
+                        </h4>
+                        <span
+                          class="px-xs py-[2px] bg-sage/20 text-sage text-[11px] font-bold rounded"
+                          id="twofa-badge"
+                          >ENABLED</span
+                        >
+                      </div>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        Add extra security to your account using authenticator
+                        apps.
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    aria-checked="true"
+                    class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary transition-colors duration-300 focus:outline-none shrink-0 cursor-pointer"
+                    id="twofa-toggle"
+                    role="switch"
+                  >
+                    <span
+                      class="translate-x-6 inline-block h-4 w-4 transform rounded-full bg-on-primary transition-transform duration-300"
+                      id="twofa-knob"
+                    ></span>
+                  </button>
+                </div>
+
+                <!-- Active Sessions -->
+                <div
+                  class="p-md rounded-xl bg-surface border border-soft-border flex flex-col gap-md shadow-sm"
+                >
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <h4
+                        class="font-headline-md text-headline-md text-on-surface flex items-center gap-xs"
+                      >
+                        <span class="material-symbols-outlined text-primary"
+                          >devices</span
+                        >
+                        Active Sessions
+                      </h4>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        Devices currently logged into your account.
+                      </p>
+                    </div>
+                    <button
+                      class="text-error-red hover:underline font-label-md text-label-md flex items-center gap-xs cursor-pointer"
+                      id="revoke-all-sessions-btn"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >logout</span
+                      >
+                      Sign out other devices
+                    </button>
+                  </div>
+                  <div
+                    class="flex flex-col gap-xs border-t border-soft-border pt-md"
+                    id="sessions-container"
+                  >
+                    <div
+                      class="flex items-center justify-between p-sm rounded-lg bg-surface-container-low"
+                    >
+                      <div class="flex items-center gap-md">
+                        <span
+                          class="material-symbols-outlined text-primary text-[28px]"
+                          >laptop_mac</span
+                        >
+                        <div>
+                          <p
+                            class="font-label-md text-label-md text-on-surface"
+                          >
+                            Chrome on macOS
+                            <span
+                              class="ml-2 px-xs py-[2px] bg-primary/10 text-primary text-[10px] font-bold rounded"
+                              >Current</span
+                            >
+                          </p>
+                          <p
+                            class="font-body-sm text-[12px] text-on-surface-variant"
+                          >
+                            Lagos, Nigeria • Active now
+                          </p>
+                        </div>
+                      </div>
+                      <span class="material-symbols-outlined text-sage"
+                        >check_circle</span
+                      >
+                    </div>
+                    <div
+                      class="session-item flex items-center justify-between p-sm rounded-lg bg-surface-container-low"
+                    >
+                      <div class="flex items-center gap-md">
+                        <span
+                          class="material-symbols-outlined text-on-surface-variant text-[28px]"
+                          >smartphone</span
+                        >
+                        <div>
+                          <p
+                            class="font-label-md text-label-md text-on-surface"
+                          >
+                            Glamora Mobile (iPhone 15)
+                          </p>
+                          <p
+                            class="font-body-sm text-[12px] text-on-surface-variant"
+                          >
+                            Abuja, Nigeria • 2 hours ago
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        class="revoke-single-session p-xs text-on-surface-variant hover:text-error-red transition-colors cursor-pointer"
+                        title="Revoke Session"
+                      >
+                        <span class="material-symbols-outlined text-[20px]"
+                          >close</span
+                        >
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Account Actions Section (Deactivate & Erase Data) -->
+              <section
+                class="flex flex-col gap-md transition-opacity duration-300"
+                id="account-actions"
+              >
+                <div class="border-b border-soft-border pb-sm">
+                  <h3 class="font-headline-lg text-headline-lg text-error-red">
+                    Account Actions
+                  </h3>
+                  <p
+                    class="font-body-md text-body-md text-on-surface-variant mt-xs"
+                  >
+                    Manage critical profile options and account data privacy.
+                  </p>
+                </div>
+                <div
+                  class="p-md rounded-xl bg-surface border border-error-red/30 flex flex-col gap-md shadow-sm"
+                >
+                  <div
+                    class="flex flex-col sm:flex-row sm:items-center justify-between gap-sm border-b border-soft-border pb-md"
+                  >
+                    <div>
+                      <h4 class="font-label-md text-label-md text-on-surface">
+                        Deactivate Profile
+                      </h4>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant mt-xs"
+                      >
+                        Temporarily disable your profile and hide your active
+                        bookings.
+                      </p>
+                    </div>
+                    <button
+                      class="px-md py-sm bg-warning-amber text-on-primary font-label-md text-label-md rounded-full hover:opacity-90 transition-opacity shrink-0 cursor-pointer"
+                      id="deactivate-profile-btn"
+                    >
+                      Deactivate Profile
+                    </button>
+                  </div>
+                  <div
+                    class="flex flex-col sm:flex-row sm:items-center justify-between gap-sm"
+                  >
+                    <div>
+                      <h4 class="font-label-md text-label-md text-error-red">
+                        Erase Profile Data
+                      </h4>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant mt-xs"
+                      >
+                        Permanently delete your profile details, delivery info,
+                        and order history.
+                      </p>
+                    </div>
+                    <button
+                      class="px-md py-sm bg-error-red text-on-error font-label-md text-label-md rounded-full hover:opacity-90 transition-opacity shrink-0 cursor-pointer"
+                      id="erase-profile-btn"
+                    >
+                      Erase Profile Data
+                    </button>
+                  </div>
+                </div>
+              </section>
+            </main>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ADD CARD MODAL -->
+    <div
+      class="fixed inset-0 z-50 bg-charcoal/60 dark:bg-charcoal/90 dark:backdrop-blur-none flex items-center justify-center p-md opacity-0 pointer-events-none transition-opacity duration-300"
+      id="add-card-modal"
+    >
+      <div
+        class="bg-surface border border-soft-border rounded-xl shadow-2xl max-w-md w-full p-lg flex flex-col gap-md transform scale-95 transition-transform duration-300"
+        id="add-card-modal-content"
+      >
+        <div
+          class="flex items-center justify-between border-b border-soft-border pb-sm"
+        >
+          <h3
+            class="font-headline-md text-headline-md text-on-surface flex items-center gap-xs"
+          >
+            <span class="material-symbols-outlined text-primary">add_card</span>
+            Add Payment Method
+          </h3>
+          <button
+            class="text-on-surface-variant hover:text-on-surface cursor-pointer"
+            id="close-card-modal"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <form
+          class="flex flex-col gap-sm"
+          id="add-card-form"
+          onsubmit="return false;"
+        >
+          <div class="flex flex-col gap-xs">
+            <label class="font-label-sm text-label-sm text-on-surface-variant"
+              >Cardholder Name</label
+            >
+            <input
+              class="w-full px-sm py-sm rounded bg-surface-container-low border border-soft-border font-body-md text-body-md text-on-surface focus:outline-none focus:border-charcoal"
+              id="modal-card-name"
+              placeholder="Amina Bello"
+              required=""
+              type="text"
+            />
+          </div>
+          <div class="flex flex-col gap-xs">
+            <label class="font-label-sm text-label-sm text-on-surface-variant"
+              >Card Number</label
+            >
+            <div class="relative">
+              <input
+                class="w-full px-sm py-sm rounded bg-surface-container-low border border-soft-border font-body-md text-body-md text-on-surface focus:outline-none focus:border-charcoal"
+                id="modal-card-number"
+                maxlength="19"
+                placeholder="5399 •••• •••• 8888"
+                required=""
+                type="text"
+              />
+              <span
+                class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+                >credit_card</span
+              >
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-sm">
+            <div class="flex flex-col gap-xs">
+              <label class="font-label-sm text-label-sm text-on-surface-variant"
+                >Expiry Date</label
+              >
+              <input
+                class="w-full px-sm py-sm rounded bg-surface-container-low border border-soft-border font-body-md text-body-md text-on-surface focus:outline-none focus:border-charcoal"
+                id="modal-card-expiry"
+                maxlength="5"
+                placeholder="MM/YY"
+                required=""
+                type="text"
+              />
+            </div>
+            <div class="flex flex-col gap-xs">
+              <label class="font-label-sm text-label-sm text-on-surface-variant"
+                >CVC / CVV</label
+              >
+              <input
+                class="w-full px-sm py-sm rounded bg-surface-container-low border border-soft-border font-body-md text-body-md text-on-surface focus:outline-none focus:border-charcoal"
+                id="modal-card-cvc"
+                maxlength="4"
+                placeholder="123"
+                required=""
+                type="password"
+              />
+            </div>
+          </div>
+          <label class="flex items-center gap-sm mt-xs cursor-pointer">
+            <input
+              class="w-4 h-4 rounded border-soft-border text-primary focus:ring-0 cursor-pointer"
+              id="modal-card-default"
+              type="checkbox"
+            />
+            <span class="font-body-sm text-body-sm text-on-surface-variant"
+              >Set as default payment method</span
+            >
+          </label>
+          <div class="flex justify-end gap-sm mt-md">
+            <button
+              class="px-md py-sm bg-surface-container-high text-on-surface font-label-md text-label-md rounded-full hover:bg-surface-container-highest cursor-pointer"
+              id="cancel-card-modal"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button
+              class="px-md py-sm bg-primary text-on-primary font-label-md text-label-md rounded-full hover:opacity-90 cursor-pointer"
+              id="submit-card-btn"
+              type="submit"
+            >
+              Save Card
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- 2FA VERIFICATION MODAL -->
+    <div
+      class="fixed inset-0 z-50 bg-charcoal/60 dark:bg-charcoal/90 dark:backdrop-blur-none flex items-center justify-center p-md opacity-0 pointer-events-none transition-opacity duration-300"
+      id="twofa-modal"
+    >
+      <div
+        class="bg-surface border border-soft-border rounded-xl shadow-2xl max-w-sm w-full p-lg flex flex-col gap-md transform scale-95 transition-transform duration-300"
+        id="twofa-modal-content"
+      >
+        <div class="flex flex-col items-center text-center">
+          <div
+            class="w-12 h-12 rounded-full bg-secondary-container text-secondary flex items-center justify-center mb-sm"
+          >
+            <span class="material-symbols-outlined text-[28px]"
+              >lock_person</span
+            >
+          </div>
+          <h3 class="font-headline-md text-headline-md text-on-surface">
+            Verify Identity
+          </h3>
+          <p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">
+            Enter the 6-digit code sent to your email or authenticator app to
+            securely enable 2FA.
+          </p>
+        </div>
+        <div class="flex justify-center gap-xs mt-sm" id="twofa-inputs">
+          <input
+            type="text"
+            maxlength="1"
+            class="w-10 h-12 text-center rounded bg-surface-container-low border border-soft-border font-headline-md text-headline-md focus:outline-none focus:border-primary"
+          />
+          <input
+            type="text"
+            maxlength="1"
+            class="w-10 h-12 text-center rounded bg-surface-container-low border border-soft-border font-headline-md text-headline-md focus:outline-none focus:border-primary"
+          />
+          <input
+            type="text"
+            maxlength="1"
+            class="w-10 h-12 text-center rounded bg-surface-container-low border border-soft-border font-headline-md text-headline-md focus:outline-none focus:border-primary"
+          />
+          <input
+            type="text"
+            maxlength="1"
+            class="w-10 h-12 text-center rounded bg-surface-container-low border border-soft-border font-headline-md text-headline-md focus:outline-none focus:border-primary"
+          />
+          <input
+            type="text"
+            maxlength="1"
+            class="w-10 h-12 text-center rounded bg-surface-container-low border border-soft-border font-headline-md text-headline-md focus:outline-none focus:border-primary"
+          />
+          <input
+            type="text"
+            maxlength="1"
+            class="w-10 h-12 text-center rounded bg-surface-container-low border border-soft-border font-headline-md text-headline-md focus:outline-none focus:border-primary"
+          />
+        </div>
+        <div class="flex gap-sm justify-center mt-md">
+          <button
+            class="flex-1 py-sm bg-surface-container-high text-on-surface font-label-md text-label-md rounded-full hover:bg-surface-container-highest cursor-pointer"
+            id="cancel-twofa-btn"
+          >
+            Cancel
+          </button>
+          <button
+            class="flex-1 py-sm bg-primary text-on-primary font-label-md text-label-md rounded-full hover:opacity-90 cursor-pointer"
+            id="confirm-twofa-btn"
+          >
+            Verify & Enable
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEACTIVATE PROFILE MODAL -->
+    <div
+      class="fixed inset-0 z-50 bg-charcoal/60 dark:bg-charcoal/90 dark:backdrop-blur-none flex items-center justify-center p-md opacity-0 pointer-events-none transition-opacity duration-300"
+      id="deactivate-modal"
+    >
+      <div
+        class="bg-surface border border-soft-border rounded-xl shadow-2xl max-w-sm w-full p-lg flex flex-col gap-md text-center transform scale-95 transition-transform duration-300"
+        id="deactivate-modal-content"
+      >
+        <div
+          class="w-12 h-12 rounded-full bg-warning-amber/20 text-warning-amber flex items-center justify-center mx-auto"
+        >
+          <span class="material-symbols-outlined text-[28px]"
+            >pause_circle</span
+          >
+        </div>
+        <div>
+          <h3 class="font-headline-md text-headline-md text-on-surface">
+            Deactivate Profile?
+          </h3>
+          <p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">
+            Your profile and appointments will be hidden. You can reactivate
+            anytime by logging back in.
+          </p>
+        </div>
+        <div class="flex gap-sm justify-center mt-sm">
+          <button
+            class="flex-1 py-sm bg-surface-container-high text-on-surface font-label-md text-label-md rounded-full hover:bg-surface-container-highest cursor-pointer"
+            id="cancel-deactivate-btn"
+          >
+            Cancel
+          </button>
+          <button
+            class="flex-1 py-sm bg-warning-amber text-on-primary font-label-md text-label-md rounded-full hover:opacity-90 cursor-pointer"
+            id="confirm-deactivate-btn"
+          >
+            Deactivate
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ERASE PROFILE DATA MODAL -->
+    <div
+      class="fixed inset-0 z-50 bg-charcoal/60 dark:bg-charcoal/90 dark:backdrop-blur-none flex items-center justify-center p-md opacity-0 pointer-events-none transition-opacity duration-300"
+      id="erase-modal"
+    >
+      <div
+        class="bg-surface border border-soft-border rounded-xl shadow-2xl max-w-sm w-full p-lg flex flex-col gap-md text-center transform scale-95 transition-transform duration-300"
+        id="erase-modal-content"
+      >
+        <div
+          class="w-12 h-12 rounded-full bg-error-container text-error-red flex items-center justify-center mx-auto"
+        >
+          <span class="material-symbols-outlined text-[28px]"
+            >delete_forever</span
+          >
+        </div>
+        <div>
+          <h3 class="font-headline-md text-headline-md text-on-surface">
+            Erase Profile Data?
+          </h3>
+          <p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">
+            This will permanently delete all stored personal details, saved
+            delivery addresses, and payment data. This cannot be undone.
+          </p>
+        </div>
+        <div class="flex gap-sm justify-center mt-sm">
+          <button
+            class="flex-1 py-sm bg-surface-container-high text-on-surface font-label-md text-label-md rounded-full hover:bg-surface-container-highest cursor-pointer"
+            id="cancel-erase-btn"
+          >
+            Cancel
+          </button>
+          <button
+            class="flex-1 py-sm bg-error-red text-on-error font-label-md text-label-md rounded-full hover:opacity-90 cursor-pointer"
+            id="confirm-erase-btn"
+          >
+            Erase Data
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIGN OUT MODAL -->
+    <div
+      class="fixed inset-0 z-50 bg-charcoal/60 dark:bg-charcoal/90 dark:backdrop-blur-none flex items-center justify-center p-md opacity-0 pointer-events-none transition-opacity duration-300"
+      id="signout-modal"
+    >
+      <div
+        class="bg-surface border border-soft-border rounded-xl shadow-2xl max-w-sm w-full p-lg flex flex-col gap-md text-center transform scale-95 transition-transform duration-300"
+        id="signout-modal-content"
+      >
+        <div
+          class="w-12 h-12 rounded-full bg-error-container text-error-red flex items-center justify-center mx-auto"
+        >
+          <span class="material-symbols-outlined text-[28px]">logout</span>
+        </div>
+        <div>
+          <h3 class="font-headline-md text-headline-md text-on-surface">
+            Sign Out?
+          </h3>
+          <p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">
+            Are you sure you want to sign out of your Glamora account?
+          </p>
+        </div>
+        <div class="flex gap-sm justify-center mt-sm">
+          <button
+            class="flex-1 py-sm bg-surface-container-high text-on-surface font-label-md text-label-md rounded-full hover:bg-surface-container-highest cursor-pointer"
+            id="cancel-signout-btn"
+          >
+            Cancel
+          </button>
+          <button
+            class="flex-1 py-sm bg-error-red text-on-error font-label-md text-label-md rounded-full hover:opacity-90 cursor-pointer"
+            id="confirm-signout-btn"
+          >
+            Sign Out
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer
+      class="w-full bg-surface-container-lowest py-xl border-t border-soft-border transition-colors duration-300"
+    >
+      <div class="max-w-[1440px] mx-auto px-margin-desktop">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-lg mb-lg">
+          <div class="col-span-1 md:col-span-1">
+            <div class="flex items-center gap-xs mb-base">
+              <img
+                alt="Glamora"
+                class="h-8 mb-base"
+                src="images/screen-removebg-preview.png"
+              />
+            </div>
+            <p class="text-body-sm font-body-sm text-on-surface-variant">
+              Elevating the professional beauty standard through architectural
+              precision and efficiency.
+            </p>
+          </div>
+        </div>
+        <div
+          class="flex justify-between items-center pt-md border-t border-soft-border text-label-sm font-label-sm text-on-surface-variant"
+        >
+          <span>© 2026 GLAMORA. All rights reserved.</span>
+          <div class="flex gap-md">
+            <a
+              class="hover:text-primary transition-colors"
+              data-path="settings"
+              href="#"
+              >Settings</a
+            >
+            <a class="hover:text-primary transition-colors" href="#">Privacy</a>
+            <a class="hover:text-primary transition-colors" href="#">Terms</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPTS -->
+    <script src="js/customer-profile.js" defer></script>
+  </body>
+</html>
