@@ -1,0 +1,2580 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Glamora Search & Discovery</title>
+    <style>
+      @layer base {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed-variant": "#474747",
+              "on-primary-container": "#949393",
+              "surface-container-highest": "#e3e2df",
+              "parchment-white": "#F7F6F3",
+              "secondary-container": "#e2ebe4",
+              "surface-container-low": "#f4f3f0",
+              "on-secondary-fixed-variant": "#3c4a40",
+              "on-error-container": "#93000a",
+              "inverse-surface": "#2f312f",
+              "on-tertiary-container": "#c48373",
+              "on-secondary-container": "#3d4a41",
+              "surface-variant": "#e3e2df",
+              "inverse-primary": "#c8c6c5",
+              "on-tertiary": "#ffffff",
+              "on-secondary": "#ffffff",
+              error: "#ba1a1a",
+              outline: "#747878",
+              "secondary-fixed-dim": "#bacbbd",
+              "on-surface": "#1b1c1a",
+              "inverse-on-surface": "#f2f1ee",
+              "error-container": "#ffdad6",
+              charcoal: "#2C2C2C",
+              "on-tertiary-fixed": "#360f06",
+              "surface-tint": "#5f5e5e",
+              "error-red": "#A64D4D",
+              "on-background": "#1b1c1a",
+              "surface-container": "#efeeeb",
+              "surface-container-lowest": "#ffffff",
+              "soft-border": "#E2E2DE",
+              background: "#faf9f6",
+              "on-secondary-fixed": "#111e16",
+              "on-surface-variant": "#545859",
+              primary: "#171818",
+              "success-green": "#5A705F",
+              "primary-fixed-dim": "#c8c6c5",
+              "surface-container-high": "#e9e8e5",
+              "secondary-fixed": "#d6e7d8",
+              "surface-dim": "#dbdad7",
+              "tertiary-container": "#4b1f14",
+              "tertiary-fixed-dim": "#feb5a3",
+              sage: "#728776",
+              "surface-bright": "#faf9f6",
+              "tertiary-fixed": "#ffdad2",
+              surface: "#faf9f6",
+              "outline-variant": "#c4c7c7",
+              "muted-terracotta": "#BC7C6C",
+              "primary-fixed": "#e4e2e1",
+              tertiary: "#310b03",
+              "on-tertiary-fixed-variant": "#6b392c",
+              "warning-amber": "#C49D6A",
+              "on-error": "#ffffff",
+              secondary: "#4a584f",
+              "primary-container": "#2c2c2c",
+              "on-primary": "#ffffff",
+              "on-primary-fixed": "#1b1c1c",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              xl: "80px",
+              gutter: "24px",
+              "margin-mobile": "16px",
+              lg: "48px",
+              base: "8px",
+              xs: "4px",
+              "margin-desktop": "64px",
+              md: "24px",
+              sm: "12px",
+            },
+            fontFamily: {
+              "label-md": ["Hanken Grotesk", "sans-serif"],
+              "body-md": ["Hanken Grotesk", "sans-serif"],
+              "label-sm": ["Hanken Grotesk", "sans-serif"],
+              "body-sm": ["Hanken Grotesk", "sans-serif"],
+              "headline-lg-mobile": ["Hanken Grotesk", "sans-serif"],
+              "headline-xl-mobile": ["Hanken Grotesk", "sans-serif"],
+              "headline-lg": ["Hanken Grotesk", "sans-serif"],
+              "body-lg": ["Hanken Grotesk", "sans-serif"],
+              "headline-xl": ["Hanken Grotesk", "sans-serif"],
+              "headline-md": ["Hanken Grotesk", "sans-serif"],
+            },
+            fontSize: {
+              "label-md": [
+                "14px",
+                { lineHeight: "1", letterSpacing: "0.04em", fontWeight: "600" },
+              ],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+              "label-sm": [
+                "12px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "0.03em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "headline-xl-mobile": [
+                "36px",
+                { lineHeight: "1.1", fontWeight: "600" },
+              ],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": ["22px", { lineHeight: "1.3", fontWeight: "600" }],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-background font-body-md text-on-surface antialiased">
+    <!-- Action Toast Notification -->
+    <div
+      id="actionToast"
+      class="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-charcoal text-on-primary px-5 py-3 rounded-xl shadow-xl transition-all duration-300 transform translate-y-24 opacity-0 pointer-events-none"
+    >
+      <span
+        id="toastIcon"
+        class="material-symbols-outlined text-sage text-[20px]"
+        >check_circle</span
+      >
+      <span id="toastMessage" class="text-body-sm text-[13px] font-medium"
+        >Notification message</span
+      >
+    </div>
+
+    <!-- Mobile Header -->
+    <div
+      class="lg:hidden fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl border-b border-soft-border px-margin-mobile py-sm flex items-center justify-between"
+    >
+      <div class="flex items-center gap-base">
+        <img
+          alt="Glamora Logo"
+          class="h-7 w-auto object-contain"
+          src="images/glamora_background-removebg-preview.png"
+        />
+        <span class="font-headline-md text-[18px] text-primary tracking-tight"
+          >GLAMORA</span
+        >
+      </div>
+
+      <div class="flex items-center gap-sm">
+        <!-- Vendor/Client Toggle (Mobile) -->
+        <div class="flex items-center gap-sm">
+          <div
+            class="bg-surface-container p-1 rounded-full flex text-label-sm border border-soft-border -ml-3 scale-105"
+          >
+            <button
+              type="button"
+              onclick="switchRole('vendor')"
+              class="px-2.5 py-1 rounded-full text-[11px] bg-primary text-on-primary font-semibold shadow-sm transition-all"
+            >
+              Vendor
+            </button>
+            <button
+              type="button"
+              onclick="switchRole('customer')"
+              class="px-2.5 py-1 rounded-full text-[11px] text-on-surface-variant font-medium hover:text-primary transition-all"
+            >
+              Client
+            </button>
+          </div>
+          <!-- Hamburger Menu -->
+          <button
+            class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors"
+            onclick="toggleMobileSidebar()"
+          >
+            <span class="material-symbols-outlined text-[20px]">menu</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Sidebar Drawer -->
+    <div class="hidden fixed inset-0 z-50 lg:hidden" id="mobile-sidebar">
+      <div
+        class="fixed inset-0 bg-primary/40 backdrop-blur-sm"
+        onclick="toggleMobileSidebar()"
+      ></div>
+      <aside
+        class="relative w-72 max-w-[80vw] h-full bg-surface-container-lowest border-r border-soft-border p-md flex flex-col shadow-lg z-10 overflow-y-auto"
+      >
+        <div
+          class="flex items-center justify-between pb-sm border-b border-soft-border mb-md"
+        >
+          <div class="flex items-center gap-base">
+            <img
+              alt="Glamora Logo"
+              class="h-7 w-auto object-contain"
+              src="images/glamora_background-removebg-preview.png"
+            />
+            <span
+              class="font-headline-md text-[18px] text-primary tracking-tight"
+              >GLAMORA</span
+            >
+          </div>
+          <button
+            class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant"
+            onclick="toggleMobileSidebar()"
+          >
+            <span class="material-symbols-outlined text-[18px]">close</span>
+          </button>
+        </div>
+
+        <nav class="flex-1 space-y-xs font-label-md text-label-md">
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-dashboard.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >dashboard</span
+            >
+            Dashboard
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="service-management.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >list_alt</span
+            >
+            Services
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-schedule-and-availability.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >date_range</span
+            >
+            Schedule
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-wallet.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >payments</span
+            >
+            Earnings
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-appointment.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >event_available</span
+            >
+            Appointments
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="Products-management.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >inventory_2</span
+            >
+            Products
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-analytics.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >monitoring</span
+            >
+            Analytics
+          </a>
+        </nav>
+
+        <nav class="pt-md border-t border-soft-border">
+          <a
+            class="px-sm py-base rounded-lg text-label-md text-on-surface-variant hover:bg-surface-container transition-colors flex items-center gap-base"
+            data-path="settings"
+            href="vendor-profile.html"
+            ><span class="material-symbols-outlined text-[20px]">settings</span>
+            Settings</a
+          >
+        </nav>
+      </aside>
+    </div>
+
+    <!-- Desktop Sidebar -->
+    <aside
+      class="hidden lg:flex fixed left-0 top-0 h-full w-72 bg-surface-container-lowest border-r border-soft-border z-50 flex-col"
+    >
+      <div
+        class="p-md flex items-center gap-base border-b border-soft-border mb-base"
+      >
+        <img
+          alt="Glamora Logo"
+          class="h-8 w-auto"
+          src="images/glamora_background-removebg-preview.png"
+        />
+        <span class="font-headline-md text-headline-md tracking-tight"
+          >GLAMORA</span
+        >
+      </div>
+      <div class="px-md py-base mb-sm">
+        <div
+          class="bg-surface-container flex rounded-full p-xs border border-soft-border"
+        >
+          <button
+            onclick="switchRole('vendor')"
+            class="flex-1 text-label-sm font-label-sm py-xs rounded-full bg-white shadow-sm text-primary font-semibold"
+          >
+            Vendor Mode
+          </button>
+          <button
+            onclick="switchRole('customer')"
+            class="flex-1 text-label-sm font-label-sm py-xs text-on-surface-variant hover:text-on-surface transition-colors"
+          >
+            Client Mode
+          </button>
+        </div>
+      </div>
+      <nav class="flex-1 px-sm space-y-xs font-label-md text-label-md">
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-dashboard.html"
+        >
+          <span class="material-symbols-outlined mr-md">dashboard</span>
+          Dashboard
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="service-management.html"
+        >
+          <span class="material-symbols-outlined mr-md">list_alt</span> Services
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-schedule-and-availability.html"
+        >
+          <span class="material-symbols-outlined mr-md">date_range</span>
+          Schedule
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-wallet.html"
+        >
+          <span class="material-symbols-outlined mr-md">payments</span> Earnings
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-appointments.html"
+        >
+          <span class="material-symbols-outlined mr-md">event_available</span>
+          Appointments
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="products-management.html"
+        >
+          <span class="material-symbols-outlined mr-md">inventory_2</span>
+          Products
+        </a>
+        <a
+          aria-current="page"
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-analytics.html"
+        >
+          <span class="material-symbols-outlined mr-md">monitoring</span>
+          Analytics
+        </a>
+      </nav>
+      <div class="px-sm pb-md w-full">
+        <nav class="pt-sm border-t border-soft-border">
+          <a
+            class="flex items-center px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            data-path="settings"
+            href="vendor-profile.html"
+          >
+            <span class="material-symbols-outlined mr-md">settings</span>
+            Settings
+          </a>
+        </nav>
+      </div>
+    </aside>
+
+    <div class="w-full lg:pl-72 flex flex-col min-h-screen relative">
+      <!-- Main Application Content Area -->
+      <main class="pt-16 lg:pt-0 min-h-screen bg-background flex flex-col">
+        <div class="flex flex-col w-full flex-1">
+          <!-- STICKY TOP CONTAINER -->
+          <header
+            class="sticky top-16 lg:top-0 z-30 bg-surface-container-lowest border-b border-soft-border shadow-xs"
+          >
+            <!-- Top Multi-Faceted Search & Discovery Bar -->
+            <section
+              class="bg-surface-container-lowest px-6 lg:px-10 py-4 border-b border-soft-border"
+            >
+              <div class="max-w-7xl mx-auto flex flex-col gap-3">
+                <!-- Top Row: Search Bar & View Toggle -->
+                <div
+                  class="flex flex-col lg:flex-row items-center justify-between gap-4 w-full"
+                >
+                  <!-- Search Bar Wrapper with Integrated Dropdown Filters -->
+                  <div class="relative w-full lg:max-w-2xl">
+                    <div
+                      class="flex items-center bg-surface-container-low px-4 py-2 rounded-full border border-soft-border gap-2 text-on-surface-variant text-body-sm transition-all focus-within:border-sage focus-within:ring-1 focus-within:ring-sage shadow-inner shadow-black/5"
+                    >
+                      <span
+                        class="material-symbols-outlined text-[18px] text-outline"
+                        >search</span
+                      >
+                      <input
+                        class="bg-transparent border-0 text-body-sm text-primary placeholder:text-outline focus:outline-none w-full p-0"
+                        id="global-search-input"
+                        placeholder="Search treatments, locations, or pricing..."
+                        type="text"
+                      />
+                      <div class="h-6 w-px bg-soft-border mx-1"></div>
+                      <!-- SEARCH BAR FILTER BUTTON -->
+                      <button
+                        type="button"
+                        id="search-bar-filter-btn"
+                        class="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-surface-container text-on-surface-variant hover:text-charcoal transition-colors cursor-pointer shrink-0"
+                        title="Search Filters"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >tune</span
+                        >
+                        <span
+                          class="text-[13px] font-semibold tracking-wide hidden sm:block"
+                          >Filters</span
+                        >
+                        <span
+                          id="search-bar-filter-indicator"
+                          class="hidden w-2 h-2 rounded-full bg-sage"
+                        ></span>
+                      </button>
+                    </div>
+
+                    <!-- SEARCH BAR FILTERS DROPDOWN POPPER -->
+                    <div
+                      id="search-filter-dropdown"
+                      class="hidden absolute top-full left-0 right-0 mt-3 z-40 bg-surface-container-lowest border border-soft-border rounded-2xl shadow-2xl p-5 text-on-surface transition-all"
+                    >
+                      <div
+                        class="flex items-center justify-between pb-3 border-b border-soft-border mb-4"
+                      >
+                        <h3
+                          class="font-headline-md text-[16px] font-bold text-charcoal flex items-center gap-2"
+                        >
+                          <span
+                            class="material-symbols-outlined text-sage text-[20px]"
+                            >tune</span
+                          >
+                          Search Bar Filters
+                        </h3>
+                        <button
+                          type="button"
+                          id="close-search-filter-dropdown"
+                          class="text-on-surface-variant hover:text-charcoal p-1 rounded-full hover:bg-surface-container"
+                        >
+                          <span class="material-symbols-outlined text-[18px]"
+                            >close</span
+                          >
+                        </button>
+                      </div>
+
+                      <div
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-body-sm"
+                      >
+                        <!-- Location Filter -->
+                        <div class="flex flex-col gap-1.5">
+                          <label
+                            for="search-filter-location"
+                            class="text-[11px] font-bold text-charcoal uppercase tracking-wider"
+                            >Location</label
+                          >
+                          <select
+                            id="search-filter-location"
+                            class="bg-surface-container-low border border-soft-border rounded-xl px-3 py-2 text-[13px] text-charcoal focus:outline-none focus:border-sage cursor-pointer"
+                          >
+                            <option value="all">All Locations (Lagos)</option>
+                            <option value="lekki">Lekki Phase 1</option>
+                            <option value="victoria island">
+                              Victoria Island
+                            </option>
+                            <option value="ikoyi">Ikoyi</option>
+                            <option value="oniru">Oniru</option>
+                          </select>
+                        </div>
+
+                        <!-- Max Price Filter -->
+                        <div class="flex flex-col gap-1.5">
+                          <label
+                            for="search-filter-max-price"
+                            class="text-[11px] font-bold text-charcoal uppercase tracking-wider"
+                            >Max Price (₦)</label
+                          >
+                          <select
+                            id="search-filter-max-price"
+                            class="bg-surface-container-low border border-soft-border rounded-xl px-3 py-2 text-[13px] text-charcoal focus:outline-none focus:border-sage cursor-pointer"
+                          >
+                            <option value="all">Any Price</option>
+                            <option value="25000">Under ₦25,000</option>
+                            <option value="35000">Under ₦35,000</option>
+                            <option value="50000">Under ₦50,000</option>
+                          </select>
+                        </div>
+
+                        <!-- Service Delivery Filter -->
+                        <div class="flex flex-col gap-1.5">
+                          <label
+                            for="search-filter-delivery"
+                            class="text-[11px] font-bold text-charcoal uppercase tracking-wider"
+                            >Delivery Option</label
+                          >
+                          <select
+                            id="search-filter-delivery"
+                            class="bg-surface-container-low border border-soft-border rounded-xl px-3 py-2 text-[13px] text-charcoal focus:outline-none focus:border-sage cursor-pointer"
+                          >
+                            <option value="all">All Delivery Modes</option>
+                            <option value="home">Home Service Available</option>
+                            <option value="studio">In-Studio Only</option>
+                          </select>
+                        </div>
+
+                        <!-- Treatment Category Filter -->
+                        <div class="flex flex-col gap-1.5">
+                          <label
+                            for="search-filter-category"
+                            class="text-[11px] font-bold text-charcoal uppercase tracking-wider"
+                            >Treatment Category</label
+                          >
+                          <select
+                            id="search-filter-category"
+                            class="bg-surface-container-low border border-soft-border rounded-xl px-3 py-2 text-[13px] text-charcoal focus:outline-none focus:border-sage cursor-pointer"
+                          >
+                            <option value="all">All Categories</option>
+                            <option value="hair">
+                              Hair &amp; Wig Customization
+                            </option>
+                            <option value="scalp-skin">
+                              Dermal &amp; Scalp Care
+                            </option>
+                            <option value="nails">Nail Artistry</option>
+                          </select>
+                        </div>
+
+                        <!-- Special Offers Toggle -->
+                        <div class="flex flex-col gap-1.5 justify-center">
+                          <label
+                            class="text-[11px] font-bold text-charcoal uppercase tracking-wider"
+                            >Special Offers</label
+                          >
+                          <label
+                            class="flex items-center gap-2 cursor-pointer pt-1"
+                          >
+                            <input
+                              type="checkbox"
+                              id="search-filter-promo"
+                              class="w-4 h-4 rounded text-sage focus:ring-sage border-soft-border bg-surface-container-low"
+                            />
+                            <span class="text-[13px] font-medium text-charcoal"
+                              >Promo &amp; Discounts Only</span
+                            >
+                          </label>
+                        </div>
+
+                        <!-- Minimum Rating -->
+                        <div class="flex flex-col gap-1.5">
+                          <label
+                            for="search-filter-rating"
+                            class="text-[11px] font-bold text-charcoal uppercase tracking-wider"
+                            >Minimum Rating</label
+                          >
+                          <select
+                            id="search-filter-rating"
+                            class="bg-surface-container-low border border-soft-border rounded-xl px-3 py-2 text-[13px] text-charcoal focus:outline-none focus:border-sage cursor-pointer"
+                          >
+                            <option value="all">Any Rating</option>
+                            <option value="4.9">4.9★ &amp; above</option>
+                            <option value="4.95">4.95★ &amp; above</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div
+                        class="flex items-center justify-end gap-3 pt-4 mt-4 border-t border-soft-border"
+                      >
+                        <button
+                          type="button"
+                          id="reset-search-dropdown-filters"
+                          class="px-4 py-2 text-on-surface-variant hover:text-charcoal text-[12px] font-semibold transition-colors"
+                        >
+                          Reset Filters
+                        </button>
+                        <button
+                          type="button"
+                          id="apply-search-dropdown-filters"
+                          class="px-5 py-2 bg-charcoal hover:bg-primary-container text-on-primary rounded-xl text-[12px] font-semibold transition-colors shadow-xs"
+                        >
+                          Apply Filters
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- View Switcher & Scope Tag Row -->
+                  <div
+                    class="flex items-center justify-between lg:justify-end gap-3 w-full lg:w-auto shrink-0"
+                  >
+                    <div class="flex items-center gap-2">
+                      <span
+                        class="px-3.5 py-1.5 bg-surface-container text-charcoal rounded-full font-label-md text-label-sm flex items-center gap-2 border border-soft-border"
+                      >
+                        <span
+                          class="material-symbols-outlined text-sage text-[16px]"
+                          >verified</span
+                        >
+                        <span>Specialist Services</span>
+                      </span>
+                    </div>
+
+                    <!-- VIEW SWITCHER TOGGLE -->
+                    <div
+                      class="flex items-center bg-surface-container-low p-1 rounded-full border border-soft-border"
+                    >
+                      <button
+                        class="px-3.5 py-1 rounded-full bg-surface-container-lowest text-charcoal shadow-xs font-label-sm flex items-center gap-1.5 transition-all cursor-pointer"
+                        id="view-split-btn"
+                      >
+                        <span class="material-symbols-outlined text-[15px]"
+                          >view_column</span
+                        >
+                        Split Map
+                      </button>
+                      <button
+                        class="px-3.5 py-1 rounded-full text-on-surface-variant font-label-sm flex items-center gap-1.5 hover:text-charcoal transition-all cursor-pointer"
+                        id="view-list-btn"
+                      >
+                        <span class="material-symbols-outlined text-[15px]"
+                          >grid_view</span
+                        >
+                        Grid Only
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Functional Interactive Filter Chips Layer -->
+            <section class="bg-surface px-6 lg:px-10 py-3">
+              <div
+                class="max-w-7xl mx-auto flex items-center justify-between gap-4 overflow-x-auto no-scrollbar"
+              >
+                <div
+                  class="flex items-center gap-2 flex-nowrap"
+                  id="filter-chips-container"
+                >
+                  <!-- Filter 1: All -->
+                  <button
+                    class="filter-chip active-chip px-3.5 py-1.5 bg-charcoal text-on-primary rounded-full font-label-sm text-[12px] whitespace-nowrap shadow-xs transition-colors cursor-pointer"
+                    data-filter="all"
+                  >
+                    All Services
+                  </button>
+                  <!-- Filter 2: Promo & Discounts -->
+                  <button
+                    class="filter-chip px-3.5 py-1.5 bg-surface-container-lowest border border-soft-border text-on-surface-variant hover:text-charcoal hover:bg-surface-container rounded-full font-label-sm text-[12px] whitespace-nowrap transition-colors flex items-center gap-1.5 cursor-pointer"
+                    data-filter="promo"
+                  >
+                    <span
+                      class="material-symbols-outlined text-[14px] text-muted-terracotta"
+                      >local_offer</span
+                    >
+                    <span>Promo &amp; Discounts</span>
+                  </button>
+                  <!-- Filter 3: Home Service Available -->
+                  <button
+                    class="filter-chip px-3.5 py-1.5 bg-surface-container-lowest border border-soft-border text-on-surface-variant hover:text-charcoal hover:bg-surface-container rounded-full font-label-sm text-[12px] whitespace-nowrap transition-colors flex items-center gap-1.5 cursor-pointer"
+                    data-filter="home-service"
+                  >
+                    <span
+                      class="material-symbols-outlined text-[14px] text-sage"
+                      >home_pin</span
+                    >
+                    <span>Home Service Available</span>
+                  </button>
+                  <!-- Filter 4: In-Studio Only -->
+                  <button
+                    class="filter-chip px-3.5 py-1.5 bg-surface-container-lowest border border-soft-border text-on-surface-variant hover:text-charcoal hover:bg-surface-container rounded-full font-label-sm text-[12px] whitespace-nowrap transition-colors flex items-center gap-1.5 cursor-pointer"
+                    data-filter="in-studio"
+                  >
+                    <span class="material-symbols-outlined text-[14px]"
+                      >storefront</span
+                    >
+                    <span>In-Studio Only</span>
+                  </button>
+                  <!-- Filter 5: Under ₦25,000 -->
+                  <button
+                    class="filter-chip px-3.5 py-1.5 bg-surface-container-lowest border border-soft-border text-on-surface-variant hover:text-charcoal hover:bg-surface-container rounded-full font-label-sm text-[12px] whitespace-nowrap transition-colors cursor-pointer"
+                    data-filter="under-25k"
+                  >
+                    Under ₦25,000
+                  </button>
+                </div>
+                <button
+                  class="flex items-center gap-1.5 text-on-surface-variant hover:text-charcoal font-label-sm text-[12px] whitespace-nowrap pl-3 shrink-0 cursor-pointer"
+                  id="reset-filters-btn"
+                >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >filter_alt_off</span
+                  >
+                  <span>Reset Filters</span>
+                </button>
+              </div>
+            </section>
+          </header>
+
+          <!-- Editorial Discovery Header -->
+          <div class="px-6 lg:px-10 pt-8 pb-4 max-w-7xl mx-auto w-full">
+            <div
+              class="flex flex-col md:flex-row md:items-end justify-between gap-2 border-b border-soft-border pb-4"
+            >
+              <div>
+                <p
+                  class="text-[12px] font-semibold text-sage uppercase tracking-wider mb-1 flex items-center gap-1.5"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full bg-sage"></span>
+                  <span>Verified Services Catalog • Lagos Cluster</span>
+                </p>
+                <h1
+                  class="font-headline-lg text-[28px] lg:text-[32px] font-bold text-charcoal tracking-tight"
+                  id="catalog-title"
+                >
+                  Curated Beauty &amp; Wellness Treatments
+                </h1>
+              </div>
+              <div class="flex items-center gap-3">
+                <p
+                  class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1.5"
+                  id="results-count-text"
+                >
+                  <span class="material-symbols-outlined text-sage text-[18px]"
+                    >verified_user</span
+                  >
+                  Showing 6 verified treatments
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Primary Canvas: Split Results & Cluster Map -->
+          <div class="px-6 lg:px-10 pb-16 max-w-7xl mx-auto w-full">
+            <div class="grid grid-cols-12 gap-8 items-start">
+              <!-- Left Column: Service-Centric Cards Listing -->
+              <div
+                class="col-span-12 lg:col-span-7 flex flex-col gap-6"
+                id="results-column"
+              >
+                <!-- Active Filter Summary Pill -->
+                <div
+                  class="hidden items-center justify-between bg-surface-container-low px-4 py-2.5 rounded-xl border border-soft-border text-label-sm"
+                  id="filter-summary-bar"
+                >
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="text-on-surface-variant">Active filters:</span>
+                    <span
+                      class="font-bold text-charcoal bg-surface-container-highest px-2.5 py-0.5 rounded-full text-[12px]"
+                      id="active-filter-label"
+                      >All Services</span
+                    >
+                  </div>
+                  <button
+                    class="text-secondary hover:text-charcoal underline text-[12px] shrink-0"
+                    id="clear-active-filter"
+                  >
+                    Clear filter
+                  </button>
+                </div>
+
+                <!-- Service Cards Container -->
+                <div class="flex flex-col gap-6" id="services-cards-list">
+                  <!-- SERVICE CARD 1 -->
+                  <article
+                    class="service-card bg-surface-container-lowest rounded-2xl p-5 border border-soft-border shadow-xs hover:shadow-md hover:border-charcoal/30 transition-all cursor-pointer group"
+                    data-category="hair"
+                    data-delivery="home"
+                    data-duration="120"
+                    data-id="serv-1"
+                    data-location="lekki"
+                    data-price="45000"
+                    data-promo="true"
+                    data-rating="4.98"
+                    data-title="Luxury Custom Wig Revamping &amp; Lace Melting"
+                    data-vendor="Alexander Vanguard Studio"
+                  >
+                    <div class="flex flex-col md:flex-row gap-5">
+                      <div
+                        class="relative w-full md:w-52 h-60 md:h-auto rounded-xl overflow-hidden shrink-0 bg-surface-container"
+                      >
+                        <img
+                          alt="Precision Silk Press &amp; Scalp Detox Therapy"
+                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN9Bhy4ViY821uUUiXkFmlZe8qPiCF75rRwMlehzIvIA9-f4l2e-XyIqc6qzu4MVHbUOsjkTi9uXL3goOMcOKQzGOQhVNs-PpZQJd0B7_BqaNgNGmeFmJa1JKG0aWzrB9qLi_Loi6V3oqtfxEWTHgHrwMqlLSdiD7rTlXX0rSu2v1THU6Fcada1SCWNRYBSPokW3y6yZojnaSG_HQgeeVqtrO80TxJFkz8d9q4fzMzIsymkysng-Qf"
+                        />
+                        <div
+                          class="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent"
+                        ></div>
+                        <div
+                          class="absolute top-2.5 left-2.5 flex flex-col gap-1.5 items-start"
+                        >
+                          <span
+                            class="bg-muted-terracotta text-on-tertiary text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-xs flex items-center gap-1"
+                          >
+                            <span class="material-symbols-outlined text-[12px]"
+                              >local_offer</span
+                            >
+                            15% Promo Applied
+                          </span>
+                          <span
+                            class="bg-charcoal/85 backdrop-blur-md text-on-primary text-[11px] font-semibold px-2 py-0.5 rounded-full"
+                          >
+                            Top Booked
+                          </span>
+                        </div>
+                        <div
+                          class="absolute bottom-2.5 left-2.5 right-2.5 flex items-center text-on-primary text-[11px] font-medium"
+                        >
+                          <span
+                            class="flex items-center gap-1 bg-charcoal/60 backdrop-blur-xs px-2 py-0.5 rounded-md"
+                          >
+                            <span class="material-symbols-outlined text-[13px]"
+                              >schedule</span
+                            >
+                            120 mins
+                          </span>
+                          <span
+                            class="bg-secondary-container/90 text-on-secondary-container font-semibold px-2 py-0.5 rounded-md"
+                          >
+                            Hair &amp; Wig
+                          </span>
+                        </div>
+                      </div>
+                      <div class="flex-1 flex flex-col min-w-0">
+                        <div>
+                          <div class="flex items-start justify-between gap-3">
+                            <div class="min-w-0">
+                              <h2
+                                class="font-headline-md text-[20px] font-bold text-charcoal tracking-tight leading-snug group-hover:text-secondary transition-colors"
+                              >
+                                Luxury Custom Wig Revamping &amp; Lace Melting
+                              </h2>
+                              <p
+                                class="text-body-sm text-[13px] text-on-surface-variant line-clamp-2 mt-1"
+                              >
+                                Full structural rebuild, knot bleaching, custom
+                                HD lace pluck, elastic band resizing, botanical
+                                hot oil steam and sleek press styling.
+                              </p>
+                            </div>
+                            <button
+                              class="bookmark-btn text-on-surface-variant hover:text-charcoal p-1.5 rounded-full hover:bg-surface-container transition-colors shrink-0"
+                              title="Save Service"
+                            >
+                              <span
+                                class="material-symbols-outlined text-[20px]"
+                                >bookmark_border</span
+                              >
+                            </button>
+                          </div>
+                          <div
+                            class="flex flex-wrap items-center gap-2 mt-3 mb-2"
+                          >
+                            <span
+                              class="px-2.5 py-1 bg-secondary-container text-on-secondary-container rounded-md text-[11px] font-semibold tracking-wide flex items-center gap-1"
+                            >
+                              <span
+                                class="material-symbols-outlined text-[14px]"
+                                >home_pin</span
+                              >
+                              Home Service Available (+₦5k Lekki radius)
+                            </span>
+                            <span
+                              class="px-2.5 py-1 bg-surface-container text-charcoal rounded-md text-[11px] font-medium flex items-center gap-1"
+                            >
+                              <span
+                                class="material-symbols-outlined text-sage text-[14px]"
+                                >verified_user</span
+                              >
+                              25% Escrow Deposit • ₦11,250
+                            </span>
+                          </div>
+                          <div
+                            class="p-3 bg-surface-container-low rounded-xl border border-soft-border flex items-center justify-between my-2"
+                          >
+                            <div>
+                              <div class="flex items-baseline gap-2">
+                                <span
+                                  class="text-headline-md text-[22px] font-bold text-charcoal"
+                                  >₦45,000</span
+                                >
+                                <span
+                                  class="text-body-sm text-outline line-through text-[14px]"
+                                  >₦52,900</span
+                                >
+                              </div>
+                              <span
+                                class="text-[11px] text-sage font-semibold flex items-center gap-1 mt-0.5"
+                              >
+                                <span
+                                  class="w-1.5 h-1.5 rounded-full bg-sage"
+                                ></span>
+                                100% Escrow Bonded • Pay remainder after service
+                              </span>
+                            </div>
+                            <div class="text-right">
+                              <span
+                                class="text-[11px] uppercase tracking-wider text-on-surface-variant font-bold block"
+                                >Weekend Slot</span
+                              >
+                              <span
+                                class="text-label-sm font-semibold text-charcoal"
+                                >Sat 11:30 AM</span
+                              >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="pt-3 border-t border-soft-border mt-1">
+                          <div
+                            class="flex flex-wrap items-center justify-between gap-3"
+                          >
+                            <a
+                              class="flex items-center gap-2.5 group/vendor hover:opacity-80 transition-opacity"
+                              href="beautician-details.html"
+                              onclick="event.stopPropagation()"
+                            >
+                              <img
+                                alt="Alexander Vanguard"
+                                class="w-7 h-7 rounded-full object-cover border border-soft-border"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4yndTLzdFwxNxob2bDO3qIzrcVZxpHO44kMNNwH9vFIqsI3lYIk1Edfrc5c8BCU84fbnCzUSmhZOC2LL1H_t5jJCH4V7dd1MRbx6c229FQSsMkNkITfmbXzlli0nOescEFcC-Q60UAWfehnGBrnqv2QB-f4udpAxX7kIT_1e3-XONjyi6AVs6bPKkRKt7dI96aaEIXYUsmJ4UNH772OhNQGfpE26LJoUCB9uts-4tmDGvKquzEY7J"
+                              />
+                              <div class="flex flex-col text-left">
+                                <span
+                                  class="text-label-sm font-semibold text-charcoal text-[13px] flex items-center gap-1"
+                                >
+                                  Alexander Vanguard Studio
+                                  <span
+                                    class="material-symbols-outlined text-sage text-[15px]"
+                                    >verified</span
+                                  >
+                                </span>
+                                <span
+                                  class="text-[11px] text-on-surface-variant"
+                                  >Lekki Phase 1 • 1.8km • ★ 4.98 (312
+                                  reviews)</span
+                                >
+                              </div>
+                            </a>
+                            <div class="flex items-center gap-2">
+                              <button
+                                class="open-modal-trigger px-3.5 py-1.5 bg-surface-container hover:bg-surface-container-high text-charcoal font-label-sm text-[12px] rounded-lg transition-colors"
+                              >
+                                Service Details
+                              </button>
+                              <a
+                                class="px-4 py-2 bg-charcoal hover:bg-primary-container text-on-primary font-label-sm text-[12px] rounded-lg shadow-xs transition-colors flex items-center gap-1.5"
+                                href="booking.html"
+                                onclick="event.stopPropagation()"
+                              >
+                                <span>Book Now</span>
+                                <span
+                                  class="material-symbols-outlined text-[15px]"
+                                  >arrow_forward</span
+                                >
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+
+                  <!-- SERVICE CARD 2 -->
+                  <article
+                    class="service-card bg-surface-container-lowest rounded-2xl p-5 border border-soft-border shadow-xs hover:shadow-md hover:border-charcoal/30 transition-all cursor-pointer group"
+                    data-category="hair"
+                    data-delivery="studio"
+                    data-duration="75"
+                    data-id="serv-2"
+                    data-location="victoria island"
+                    data-price="35000"
+                    data-promo="false"
+                    data-rating="4.96"
+                    data-title="Precision Silk Press &amp; Scalp Detox Therapy"
+                    data-vendor="Alexander Vanguard Studio"
+                  >
+                    <div class="flex flex-col md:flex-row gap-5">
+                      <div
+                        class="relative w-full md:w-52 h-60 md:h-auto rounded-xl overflow-hidden shrink-0 bg-surface-container"
+                      >
+                        <img
+                          alt="Precision Silk Press &amp; Scalp Detox Therapy"
+                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN9Bhy4ViY821uUUiXkFmlZe8qPiCF75rRwMlehzIvIA9-f4l2e-XyIqc6qzu4MVHbUOsjkTi9uXL3goOMcOKQzGOQhVNs-PpZQJd0B7_BqaNgNGmeFmJa1JKG0aWzrB9qLi_Loi6V3oqtfxEWTHgHrwMqlLSdiD7rTlXX0rSu2v1THU6Fcada1SCWNRYBSPokW3y6yZojnaSG_HQgeeVqtrO80TxJFkz8d9q4fzMzIsymkysng-Qf"
+                        />
+                        <div
+                          class="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent"
+                        ></div>
+                        <div
+                          class="absolute top-2.5 left-2.5 flex flex-col gap-1.5 items-start"
+                        >
+                          <span
+                            class="bg-charcoal/85 backdrop-blur-md text-on-primary text-[11px] font-semibold px-2 py-0.5 rounded-full"
+                          >
+                            Zero Heat Damage Guarantee
+                          </span>
+                        </div>
+                        <div
+                          class="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-on-primary text-[11px] font-medium"
+                        >
+                          <span
+                            class="flex items-center gap-1 bg-charcoal/60 backdrop-blur-xs px-2 py-0.5 rounded-md"
+                          >
+                            <span class="material-symbols-outlined text-[13px]"
+                              >schedule</span
+                            >
+                            75 mins
+                          </span>
+                          <span
+                            class="bg-surface-container-highest/90 text-charcoal font-semibold px-2 py-0.5 rounded-md"
+                          >
+                            Hair &amp; Scalp
+                          </span>
+                        </div>
+                      </div>
+                      <div class="flex-1 flex flex-col justify-between min-w-0">
+                        <div>
+                          <div class="flex items-start justify-between gap-3">
+                            <div class="min-w-0">
+                              <h2
+                                class="font-headline-md text-[20px] font-bold text-charcoal tracking-tight leading-snug group-hover:text-secondary transition-colors"
+                              >
+                                Precision Silk Press &amp; Scalp Detox Therapy
+                              </h2>
+                              <p
+                                class="text-body-sm text-[13px] text-on-surface-variant line-clamp-2 mt-1"
+                              >
+                                Deep clarifying tea-tree scalp scrub, nano-steam
+                                hydration infusion, split-end micro-trim, and
+                                diamond titanium silk press.
+                              </p>
+                            </div>
+                            <button
+                              class="bookmark-btn text-on-surface-variant hover:text-charcoal p-1.5 rounded-full hover:bg-surface-container transition-colors shrink-0"
+                              title="Save Service"
+                            >
+                              <span
+                                class="material-symbols-outlined text-[20px]"
+                                >bookmark_border</span
+                              >
+                            </button>
+                          </div>
+                          <div
+                            class="flex flex-wrap items-center gap-2 mt-3 mb-2"
+                          >
+                            <span
+                              class="px-2.5 py-1 bg-surface-container text-charcoal rounded-md text-[11px] font-semibold tracking-wide flex items-center gap-1"
+                            >
+                              <span
+                                class="material-symbols-outlined text-[14px]"
+                                >storefront</span
+                              >
+                              In-Studio Only (Ergonomic Chair)
+                            </span>
+                            <span
+                              class="px-2.5 py-1 bg-secondary-container text-on-secondary-container rounded-md text-[11px] font-semibold flex items-center gap-1"
+                            >
+                              <span
+                                class="material-symbols-outlined text-sage text-[14px]"
+                                >verified_user</span
+                              >
+                              25% Escrow Deposit • ₦8,750
+                            </span>
+                          </div>
+                          <div
+                            class="p-3 bg-surface-container-low rounded-xl border border-soft-border flex items-center justify-between my-2"
+                          >
+                            <div>
+                              <div class="flex items-baseline gap-2">
+                                <span
+                                  class="text-headline-md text-[22px] font-bold text-charcoal"
+                                  >₦35,000</span
+                                >
+                              </div>
+                              <span
+                                class="text-[11px] text-secondary font-semibold flex items-center gap-1 mt-0.5"
+                              >
+                                <span
+                                  class="w-1.5 h-1.5 rounded-full bg-sage"
+                                ></span>
+                                Escrow Vault Protected • Release upon check-in
+                              </span>
+                            </div>
+                            <div class="text-right">
+                              <span
+                                class="text-[11px] uppercase tracking-wider text-secondary font-bold block"
+                                >Available Today</span
+                              >
+                              <span
+                                class="text-label-sm font-semibold text-charcoal"
+                                >4:30 PM &amp; 6:00 PM</span
+                              >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="pt-3 border-t border-soft-border mt-1">
+                          <div
+                            class="flex flex-wrap items-center justify-between gap-3"
+                          >
+                            <a
+                              class="flex items-center gap-2.5 group/vendor hover:opacity-80 transition-opacity"
+                              href="beautician-details.html"
+                              onclick="event.stopPropagation()"
+                            >
+                              <img
+                                alt="Alexander Vanguard"
+                                class="w-7 h-7 rounded-full object-cover border border-soft-border"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4yndTLzdFwxNxob2bDO3qIzrcVZxpHO44kMNNwH9vFIqsI3lYIk1Edfrc5c8BCU84fbnCzUSmhZOC2LL1H_t5jJCH4V7dd1MRbx6c229FQSsMkNkITfmbXzlli0nOescEFcC-Q60UAWfehnGBrnqv2QB-f4udpAxX7kIT_1e3-XONjyi6AVs6bPKkRKt7dI96aaEIXYUsmJ4UNH772OhNQGfpE26LJoUCB9uts-4tmDGvKquzEY7J"
+                              />
+                              <div class="flex flex-col text-left">
+                                <span
+                                  class="text-label-sm font-semibold text-charcoal text-[13px] flex items-center gap-1"
+                                >
+                                  Alexander Vanguard Studio
+                                  <span
+                                    class="material-symbols-outlined text-sage text-[15px]"
+                                    >verified</span
+                                  >
+                                </span>
+                                <span
+                                  class="text-[11px] text-on-surface-variant"
+                                  >Victoria Island • 2.1km • ★ 4.96</span
+                                >
+                              </div>
+                            </a>
+                            <div class="flex items-center gap-2">
+                              <button
+                                class="open-modal-trigger px-3.5 py-1.5 bg-surface-container hover:bg-surface-container-high text-charcoal font-label-sm text-[12px] rounded-lg transition-colors"
+                              >
+                                Service Details
+                              </button>
+                              <a
+                                class="px-4 py-2 bg-charcoal hover:bg-primary-container text-on-primary font-label-sm text-[12px] rounded-lg shadow-xs transition-colors flex items-center gap-1.5"
+                                href="booking.html"
+                                onclick="event.stopPropagation()"
+                              >
+                                <span>Book Now</span>
+                                <span
+                                  class="material-symbols-outlined text-[15px]"
+                                  >arrow_forward</span
+                                >
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+
+                  <!-- SERVICE CARD 3 -->
+                  <article
+                    class="service-card bg-surface-container-lowest rounded-2xl p-5 border border-soft-border shadow-xs hover:shadow-md hover:border-charcoal/30 transition-all cursor-pointer group"
+                    data-category="scalp-skin"
+                    data-delivery="home"
+                    data-duration="60"
+                    data-id="serv-3"
+                    data-location="lekki"
+                    data-price="28000"
+                    data-promo="true"
+                    data-rating="4.95"
+                    data-title="Deep Dermal Hydration &amp; Botanical Peeling"
+                    data-vendor="Maison Noir Aesthetics"
+                  >
+                    <div class="flex flex-col md:flex-row gap-5">
+                      <div
+                        class="relative w-full md:w-52 h-60 md:h-auto rounded-xl overflow-hidden shrink-0 bg-surface-container"
+                      >
+                        <img
+                          alt="Deep Dermal Hydration &amp; Botanical Peeling"
+                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsL87l1hyxJ4p5dWZLIkLygihMpCe-U_Sl_BVF_fAnOvWtwYmuNDxkFYhxesCdjcIMyv8op3ssxc7YQ1WXEql_yIQNXtakJ_637J4aN84GX19-ob1cM-7SAYY8aYl7ysXwlOT5FwEMrMA01Jn3Wr-rK9rgaGTQKYUtMwmvSJTP5tozq33iO2saCS6WD95vThlk1R_Dne4Ldg2Gb-r2KRYG3jy66-QssLZNd5gEoxgHmnWzO1Ax0HVz"
+                        />
+                        <div
+                          class="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent"
+                        ></div>
+                        <div
+                          class="absolute top-2.5 left-2.5 flex flex-col gap-1.5 items-start"
+                        >
+                          <span
+                            class="bg-muted-terracotta text-on-tertiary text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-xs flex items-center gap-1"
+                          >
+                            <span class="material-symbols-outlined text-[12px]"
+                              >local_offer</span
+                            >
+                            20% Promo Deal
+                          </span>
+                        </div>
+                        <div
+                          class="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-on-primary text-[11px] font-medium"
+                        >
+                          <span
+                            class="flex items-center gap-1 bg-charcoal/60 backdrop-blur-xs px-2 py-0.5 rounded-md"
+                          >
+                            <span class="material-symbols-outlined text-[13px]"
+                              >schedule</span
+                            >
+                            60 mins
+                          </span>
+                          <span
+                            class="bg-surface-container-highest/90 text-charcoal font-semibold px-2 py-0.5 rounded-md"
+                          >
+                            Dermal Clinic
+                          </span>
+                        </div>
+                      </div>
+                      <div class="flex-1 flex flex-col justify-between min-w-0">
+                        <div>
+                          <div class="flex items-start justify-between gap-3">
+                            <div class="min-w-0">
+                              <h2
+                                class="font-headline-md text-[20px] font-bold text-charcoal tracking-tight leading-snug group-hover:text-secondary transition-colors"
+                              >
+                                Deep Dermal Hydration &amp; Botanical Peeling
+                              </h2>
+                              <p
+                                class="text-body-sm text-[13px] text-on-surface-variant line-clamp-2 mt-1"
+                              >
+                                Medical-grade enzymatic exfoliation, ultrasound
+                                serum infusion, lymphatic facial drainage, and
+                                LED phototherapy mask.
+                              </p>
+                            </div>
+                            <button
+                              class="bookmark-btn text-on-surface-variant hover:text-charcoal p-1.5 rounded-full hover:bg-surface-container transition-colors shrink-0"
+                              title="Save Service"
+                            >
+                              <span
+                                class="material-symbols-outlined text-[20px]"
+                                >bookmark_border</span
+                              >
+                            </button>
+                          </div>
+                          <div
+                            class="flex flex-wrap items-center gap-2 mt-3 mb-2"
+                          >
+                            <span
+                              class="px-2.5 py-1 bg-secondary-container text-on-secondary-container rounded-md text-[11px] font-semibold tracking-wide flex items-center gap-1"
+                            >
+                              <span
+                                class="material-symbols-outlined text-[14px]"
+                                >home_pin</span
+                              >
+                              Home Service Available (+₦7,500 travel kit)
+                            </span>
+                            <span
+                              class="px-2.5 py-1 bg-surface-container text-charcoal rounded-md text-[11px] font-medium flex items-center gap-1"
+                            >
+                              <span
+                                class="material-symbols-outlined text-sage text-[14px]"
+                                >verified_user</span
+                              >
+                              20% Escrow Deposit • ₦5,600
+                            </span>
+                          </div>
+                          <div
+                            class="p-3 bg-surface-container-low rounded-xl border border-soft-border flex items-center justify-between my-2"
+                          >
+                            <div>
+                              <div class="flex items-baseline gap-2">
+                                <span
+                                  class="text-headline-md text-[22px] font-bold text-charcoal"
+                                  >₦28,000</span
+                                >
+                                <span
+                                  class="text-body-sm text-outline line-through text-[14px]"
+                                  >₦35,000</span
+                                >
+                              </div>
+                              <span
+                                class="text-[11px] text-sage font-semibold flex items-center gap-1 mt-0.5"
+                              >
+                                <span
+                                  class="w-1.5 h-1.5 rounded-full bg-sage"
+                                ></span>
+                                Dermatologist Supervised Formula
+                              </span>
+                            </div>
+                            <div class="text-right">
+                              <span
+                                class="text-[11px] uppercase tracking-wider text-on-surface-variant font-bold block"
+                                >Next Opening</span
+                              >
+                              <span
+                                class="text-label-sm font-semibold text-charcoal"
+                                >Tomorrow 11:00 AM</span
+                              >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="pt-3 border-t border-soft-border mt-1">
+                          <div
+                            class="flex flex-wrap items-center justify-between gap-3"
+                          >
+                            <a
+                              class="flex items-center gap-2.5 group/vendor hover:opacity-80 transition-opacity"
+                              href="beautician-details.html"
+                              onclick="event.stopPropagation()"
+                            >
+                              <img
+                                alt="Maison Noir Aesthetics"
+                                class="w-7 h-7 rounded-full object-cover border border-soft-border"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsL87l1hyxJ4p5dWZLIkLygihMpCe-U_Sl_BVF_fAnOvWtwYmuNDxkFYhxesCdjcIMyv8op3ssxc7YQ1WXEql_yIQNXtakJ_637J4aN84GX19-ob1cM-7SAYY8aYl7ysXwlOT5FwEMrMA01Jn3Wr-rK9rgaGTQKYUtMwmvSJTP5tozq33iO2saCS6WD95vThlk1R_Dne4Ldg2Gb-r2KRYG3jy66-QssLZNd5gEoxgHmnWzO1Ax0HVz"
+                              />
+                              <div class="flex flex-col text-left">
+                                <span
+                                  class="text-label-sm font-semibold text-charcoal text-[13px] flex items-center gap-1"
+                                >
+                                  Maison Noir Aesthetics
+                                  <span
+                                    class="material-symbols-outlined text-sage text-[15px]"
+                                    >verified</span
+                                  >
+                                </span>
+                                <span
+                                  class="text-[11px] text-on-surface-variant"
+                                  >Lekki Phase 1 • Admiralty Way • ★ 4.95</span
+                                >
+                              </div>
+                            </a>
+                            <div class="flex items-center gap-2">
+                              <button
+                                class="open-modal-trigger px-3.5 py-1.5 bg-surface-container hover:bg-surface-container-high text-charcoal font-label-sm text-[12px] rounded-lg transition-colors"
+                              >
+                                Service Details
+                              </button>
+                              <a
+                                class="px-4 py-2 bg-charcoal hover:bg-primary-container text-on-primary font-label-sm text-[12px] rounded-lg shadow-xs transition-colors flex items-center gap-1.5"
+                                href="booking.html"
+                                onclick="event.stopPropagation()"
+                              >
+                                <span>Book Now</span>
+                                <span
+                                  class="material-symbols-outlined text-[15px]"
+                                  >arrow_forward</span
+                                >
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+
+                  <!-- SERVICE CARD 4 -->
+                  <article
+                    class="service-card bg-surface-container-lowest rounded-2xl p-5 border border-soft-border shadow-xs hover:shadow-md hover:border-charcoal/30 transition-all cursor-pointer group"
+                    data-category="nails"
+                    data-delivery="studio"
+                    data-duration="90"
+                    data-id="serv-4"
+                    data-location="ikoyi"
+                    data-price="22000"
+                    data-promo="false"
+                    data-rating="5.0"
+                    data-title="BIAB Structured Gel &amp; Russian Dry Manicure"
+                    data-vendor="Jordan Lee Nails"
+                  >
+                    <div class="flex flex-col md:flex-row gap-5">
+                      <div
+                        class="relative w-full md:w-52 h-60 md:h-auto rounded-xl overflow-hidden shrink-0 bg-surface-container"
+                      >
+                        <img
+                          alt="BIAB Structured Gel &amp; Russian Dry Manicure"
+                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-mSyAr8UoovuEd3aiS3hjxFcD-721x0LFMWCeLXcPOwlRhBSAMGLgIXVp89xkJ040ryeWf14395Uf_HbVlZ3eUpMmam3V7Iaedf1Z3SOudAvj8DuNyuWJTW5wm5HYUgTWlZTYBhrH_NnL-J27jSATg7eoD-T8CrwqYyyK0lSCBBW2HehP3tafFQUVjlf8J-rVAXt-CZlY8mQu011q6YRPZfeNTDWmFEoHsZOXXGw2mVOE-YEWGORc"
+                        />
+                        <div
+                          class="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent"
+                        ></div>
+                        <div
+                          class="absolute top-2.5 left-2.5 flex flex-col gap-1.5 items-start"
+                        >
+                          <span
+                            class="bg-charcoal/85 backdrop-blur-md text-on-primary text-[11px] font-semibold px-2 py-0.5 rounded-full"
+                          >
+                            5.0 Flawless (89 Reviews)
+                          </span>
+                        </div>
+                        <div
+                          class="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-on-primary text-[11px] font-medium"
+                        >
+                          <span
+                            class="flex items-center gap-1 bg-charcoal/60 backdrop-blur-xs px-2 py-0.5 rounded-md"
+                          >
+                            <span class="material-symbols-outlined text-[13px]"
+                              >schedule</span
+                            >
+                            90 mins
+                          </span>
+                          <span
+                            class="bg-surface-container-highest/90 text-charcoal font-semibold px-2 py-0.5 rounded-md"
+                          >
+                            Nail Artistry
+                          </span>
+                        </div>
+                      </div>
+                      <div class="flex-1 flex flex-col justify-between min-w-0">
+                        <div>
+                          <div class="flex items-start justify-between gap-3">
+                            <div class="min-w-0">
+                              <h2
+                                class="font-headline-md text-[20px] font-bold text-charcoal tracking-tight leading-snug group-hover:text-secondary transition-colors"
+                              >
+                                BIAB Structured Gel &amp; Russian Dry Manicure
+                              </h2>
+                              <p
+                                class="text-body-sm text-[13px] text-on-surface-variant line-clamp-2 mt-1"
+                              >
+                                Sterile e-file cuticle care, Builder In A Bottle
+                                architectural apex reinforcement, hypoallergenic
+                                Korean gel coating, and cuticle oil massage.
+                              </p>
+                            </div>
+                            <button
+                              class="bookmark-btn text-on-surface-variant hover:text-charcoal p-1.5 rounded-full hover:bg-surface-container transition-colors shrink-0"
+                              title="Save Service"
+                            >
+                              <span
+                                class="material-symbols-outlined text-[20px]"
+                                >bookmark_border</span
+                              >
+                            </button>
+                          </div>
+                          <div
+                            class="flex flex-wrap items-center gap-2 mt-3 mb-2"
+                          >
+                            <span
+                              class="px-2.5 py-1 bg-surface-container text-charcoal rounded-md text-[11px] font-semibold tracking-wide flex items-center gap-1"
+                            >
+                              <span
+                                class="material-symbols-outlined text-[14px]"
+                                >storefront</span
+                              >
+                              In-Studio Chair Only
+                            </span>
+                            <span
+                              class="px-2.5 py-1 bg-secondary-container text-on-secondary-container rounded-md text-[11px] font-semibold flex items-center gap-1"
+                            >
+                              <span
+                                class="material-symbols-outlined text-sage text-[14px]"
+                                >verified_user</span
+                              >
+                              30% Escrow Deposit • ₦6,600
+                            </span>
+                          </div>
+                          <div
+                            class="p-3 bg-surface-container-low rounded-xl border border-soft-border flex items-center justify-between my-2"
+                          >
+                            <div>
+                              <div class="flex items-baseline gap-2">
+                                <span
+                                  class="text-headline-md text-[22px] font-bold text-charcoal"
+                                  >₦22,000</span
+                                >
+                              </div>
+                              <span
+                                class="text-[11px] text-secondary font-semibold flex items-center gap-1 mt-0.5"
+                              >
+                                <span
+                                  class="w-1.5 h-1.5 rounded-full bg-sage"
+                                ></span>
+                                Autoclave Medical Cleaned Equipment
+                              </span>
+                            </div>
+                            <div class="text-right">
+                              <span
+                                class="text-[11px] uppercase tracking-wider text-warning-amber font-bold block"
+                                >Only 2 Slots Left</span
+                              >
+                              <span
+                                class="text-label-sm font-semibold text-charcoal"
+                                >Today 3:00 PM</span
+                              >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="pt-3 border-t border-soft-border mt-1">
+                          <div
+                            class="flex flex-wrap items-center justify-between gap-3"
+                          >
+                            <a
+                              class="flex items-center gap-2.5 group/vendor hover:opacity-80 transition-opacity"
+                              href="beautician-details.html"
+                              onclick="event.stopPropagation()"
+                            >
+                              <img
+                                alt="Jordan Lee"
+                                class="w-7 h-7 rounded-full object-cover border border-soft-border"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-mSyAr8UoovuEd3aiS3hjxFcD-721x0LFMWCeLXcPOwlRhBSAMGLgIXVp89xkJ040ryeWf14395Uf_HbVlZ3eUpMmam3V7Iaedf1Z3SOudAvj8DuNyuWJTW5wm5HYUgTWlZTYBhrH_NnL-J27jSATg7eoD-T8CrwqYyyK0lSCBBW2HehP3tafFQUVjlf8J-rVAXt-CZlY8mQu011q6YRPZfeNTDWmFEoHsZOXXGw2mVOE-YEWGORc"
+                              />
+                              <div class="flex flex-col text-left">
+                                <span
+                                  class="text-label-sm font-semibold text-charcoal text-[13px] flex items-center gap-1"
+                                >
+                                  Jordan Lee Nails
+                                  <span
+                                    class="material-symbols-outlined text-sage text-[15px]"
+                                    >verified</span
+                                  >
+                                </span>
+                                <span
+                                  class="text-[11px] text-on-surface-variant"
+                                  >Ikoyi • 4.1km away • ★ 5.0</span
+                                >
+                              </div>
+                            </a>
+                            <div class="flex items-center gap-2">
+                              <button
+                                class="open-modal-trigger px-3.5 py-1.5 bg-surface-container hover:bg-surface-container-high text-charcoal font-label-sm text-[12px] rounded-lg transition-colors"
+                              >
+                                Service Details
+                              </button>
+                              <a
+                                class="px-4 py-2 bg-charcoal hover:bg-primary-container text-on-primary font-label-sm text-[12px] rounded-lg shadow-xs transition-colors flex items-center gap-1.5"
+                                href="booking.html"
+                                onclick="event.stopPropagation()"
+                              >
+                                <span>Book Now</span>
+                                <span
+                                  class="material-symbols-outlined text-[15px]"
+                                  >arrow_forward</span
+                                >
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+
+                  <!-- SERVICE CARD 5 -->
+                  <article
+                    class="service-card bg-surface-container-lowest rounded-2xl p-5 border border-soft-border shadow-xs hover:shadow-md hover:border-charcoal/30 transition-all cursor-pointer group"
+                    data-category="scalp-skin"
+                    data-delivery="studio"
+                    data-duration="90"
+                    data-id="serv-5"
+                    data-location="oniru"
+                    data-price="50000"
+                    data-promo="false"
+                    data-rating="4.96"
+                    data-title="Micro-Needling Scalp Regeneration &amp; Follicle Scan"
+                    data-vendor="Dr. Samira Patel Trichology"
+                  >
+                    <div class="flex flex-col md:flex-row gap-5">
+                      <div
+                        class="relative w-full md:w-52 h-60 md:h-auto rounded-xl overflow-hidden shrink-0 bg-surface-container"
+                      >
+                        <img
+                          alt="Micro-Needling Scalp Regeneration"
+                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN9Bhy4ViY821uUUiXkFmlZe8qPiCF75rRwMlehzIvIA9-f4l2e-XyIqc6qzu4MVHbUOsjkTi9uXL3goOMcOKQzGOQhVNs-PpZQJd0B7_BqaNgNGmeFmJa1JKG0aWzrB9qLi_Loi6V3oqtfxEWTHgHrwMqlLSdiD7rTlXX0rSu2v1THU6Fcada1SCWNRYBSPokW3y6yZojnaSG_HQgeeVqtrO80TxJFkz8d9q4fzMzIsymkysng-Qf"
+                        />
+                        <div
+                          class="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent"
+                        ></div>
+                        <div
+                          class="absolute top-2.5 left-2.5 flex flex-col gap-1.5 items-start"
+                        >
+                          <span
+                            class="bg-charcoal/85 backdrop-blur-md text-on-primary text-[11px] font-semibold px-2 py-0.5 rounded-full"
+                          >
+                            Certified Trichologist
+                          </span>
+                        </div>
+                        <div
+                          class="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-on-primary text-[11px] font-medium"
+                        >
+                          <span
+                            class="flex items-center gap-1 bg-charcoal/60 backdrop-blur-xs px-2 py-0.5 rounded-md"
+                          >
+                            <span class="material-symbols-outlined text-[13px]"
+                              >schedule</span
+                            >
+                            90 mins
+                          </span>
+                          <span
+                            class="bg-surface-container-highest/90 text-charcoal font-semibold px-2 py-0.5 rounded-md"
+                          >
+                            Clinical Trichology
+                          </span>
+                        </div>
+                      </div>
+                      <div class="flex-1 flex flex-col justify-between min-w-0">
+                        <div>
+                          <div class="flex items-start justify-between gap-3">
+                            <div class="min-w-0">
+                              <h2
+                                class="font-headline-md text-[20px] font-bold text-charcoal tracking-tight leading-snug group-hover:text-secondary transition-colors"
+                              >
+                                Micro-Needling Scalp Regeneration &amp; Follicle
+                                Scan
+                              </h2>
+                              <p
+                                class="text-body-sm text-[13px] text-on-surface-variant line-clamp-2 mt-1"
+                              >
+                                High-definition trichoscope diagnostic, peptide
+                                growth factor cocktail micro-infusion, and cold
+                                low-level laser follicle stimulation.
+                              </p>
+                            </div>
+                            <button
+                              class="bookmark-btn text-on-surface-variant hover:text-charcoal p-1.5 rounded-full hover:bg-surface-container transition-colors shrink-0"
+                              title="Save Service"
+                            >
+                              <span
+                                class="material-symbols-outlined text-[20px]"
+                                >bookmark_border</span
+                              >
+                            </button>
+                          </div>
+                          <div
+                            class="flex flex-wrap items-center gap-2 mt-3 mb-2"
+                          >
+                            <span
+                              class="px-2.5 py-1 bg-surface-container text-charcoal rounded-md text-[11px] font-semibold tracking-wide flex items-center gap-1"
+                            >
+                              <span
+                                class="material-symbols-outlined text-[14px]"
+                                >storefront</span
+                              >
+                              In-Studio Clinical Lab
+                            </span>
+                            <span
+                              class="px-2.5 py-1 bg-secondary-container text-on-secondary-container rounded-md text-[11px] font-semibold flex items-center gap-1"
+                            >
+                              <span
+                                class="material-symbols-outlined text-sage text-[14px]"
+                                >verified_user</span
+                              >
+                              25% Escrow Deposit • ₦12,500
+                            </span>
+                          </div>
+                          <div
+                            class="p-3 bg-surface-container-low rounded-xl border border-soft-border flex items-center justify-between my-2"
+                          >
+                            <div>
+                              <div class="flex items-baseline gap-2">
+                                <span
+                                  class="text-headline-md text-[22px] font-bold text-charcoal"
+                                  >₦50,000</span
+                                >
+                              </div>
+                              <span
+                                class="text-[11px] text-sage font-semibold flex items-center gap-1 mt-0.5"
+                              >
+                                <span
+                                  class="w-1.5 h-1.5 rounded-full bg-sage"
+                                ></span>
+                                Includes full medical analysis report
+                              </span>
+                            </div>
+                            <div class="text-right">
+                              <span
+                                class="text-[11px] uppercase tracking-wider text-on-surface-variant font-bold block"
+                                >Next Session</span
+                              >
+                              <span
+                                class="text-label-sm font-semibold text-charcoal"
+                                >Thursday 2:00 PM</span
+                              >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="pt-3 border-t border-soft-border mt-1">
+                          <div
+                            class="flex flex-wrap items-center justify-between gap-3"
+                          >
+                            <a
+                              class="flex items-center gap-2.5 group/vendor hover:opacity-80 transition-opacity"
+                              href="beautician-details.html"
+                              onclick="event.stopPropagation()"
+                            >
+                              <img
+                                alt="Dr. Samira Patel"
+                                class="w-7 h-7 rounded-full object-cover border border-soft-border"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN9Bhy4ViY821uUUiXkFmlZe8qPiCF75rRwMlehzIvIA9-f4l2e-XyIqc6qzu4MVHbUOsjkTi9uXL3goOMcOKQzGOQhVNs-PpZQJd0B7_BqaNgNGmeFmJa1JKG0aWzrB9qLi_Loi6V3oqtfxEWTHgHrwMqlLSdiD7rTlXX0rSu2v1THU6Fcada1SCWNRYBSPokW3y6yZojnaSG_HQgeeVqtrO80TxJFkz8d9q4fzMzIsymkysng-Qf"
+                              />
+                              <div class="flex flex-col text-left">
+                                <span
+                                  class="text-label-sm font-semibold text-charcoal text-[13px] flex items-center gap-1"
+                                >
+                                  Dr. Samira Patel Trichology
+                                  <span
+                                    class="material-symbols-outlined text-sage text-[15px]"
+                                    >verified</span
+                                  >
+                                </span>
+                                <span
+                                  class="text-[11px] text-on-surface-variant"
+                                  >Oniru • 2.5km away • ★ 4.96</span
+                                >
+                              </div>
+                            </a>
+                            <div class="flex items-center gap-2">
+                              <button
+                                class="open-modal-trigger px-3.5 py-1.5 bg-surface-container hover:bg-surface-container-high text-charcoal font-label-sm text-[12px] rounded-lg transition-colors"
+                              >
+                                Service Details
+                              </button>
+                              <a
+                                class="px-4 py-2 bg-charcoal hover:bg-primary-container text-on-primary font-label-sm text-[12px] rounded-lg shadow-xs transition-colors flex items-center gap-1.5"
+                                href="booking.html"
+                                onclick="event.stopPropagation()"
+                              >
+                                <span>Book Now</span>
+                                <span
+                                  class="material-symbols-outlined text-[15px]"
+                                  >arrow_forward</span
+                                >
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+
+                  <!-- SERVICE CARD 6 -->
+                  <article
+                    class="service-card bg-surface-container-lowest rounded-2xl p-5 border border-soft-border shadow-xs hover:shadow-md hover:border-charcoal/30 transition-all cursor-pointer group"
+                    data-category="hair"
+                    data-delivery="home"
+                    data-duration="90"
+                    data-id="serv-6"
+                    data-location="lekki"
+                    data-price="24000"
+                    data-promo="true"
+                    data-rating="4.92"
+                    data-title="Braided Wig Customization, Tint &amp; Edge Styling"
+                    data-vendor="Alexander Vanguard Studio"
+                  >
+                    <div class="flex flex-col md:flex-row gap-5">
+                      <div
+                        class="relative w-full md:w-52 h-60 md:h-auto rounded-xl overflow-hidden shrink-0 bg-surface-container"
+                      >
+                        <img
+                          alt="Braided Wig Customization &amp; Tint"
+                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN9Bhy4ViY821uUUiXkFmlZe8qPiCF75rRwMlehzIvIA9-f4l2e-XyIqc6qzu4MVHbUOsjkTi9uXL3goOMcOKQzGOQhVNs-PpZQJd0B7_BqaNgNGmeFmJa1JKG0aWzrB9qLi_Loi6V3oqtfxEWTHgHrwMqlLSdiD7rTlXX0rSu2v1THU6Fcada1SCWNRYBSPokW3y6yZojnaSG_HQgeeVqtrO80TxJFkz8d9q4fzMzIsymkysng-Qf"
+                        />
+                        <div
+                          class="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent"
+                        ></div>
+                        <div
+                          class="absolute top-2.5 left-2.5 flex flex-col gap-1.5 items-start"
+                        >
+                          <span
+                            class="bg-muted-terracotta text-on-tertiary text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-xs flex items-center gap-1"
+                          >
+                            <span class="material-symbols-outlined text-[12px]"
+                              >local_offer</span
+                            >
+                            Special Offer
+                          </span>
+                        </div>
+                        <div
+                          class="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-on-primary text-[11px] font-medium"
+                        >
+                          <span
+                            class="flex items-center gap-1 bg-charcoal/60 backdrop-blur-xs px-2 py-0.5 rounded-md"
+                          >
+                            <span class="material-symbols-outlined text-[13px]"
+                              >schedule</span
+                            >
+                            90 mins
+                          </span>
+                          <span
+                            class="bg-surface-container-highest/90 text-charcoal font-semibold px-2 py-0.5 rounded-md"
+                          >
+                            Wig Custom
+                          </span>
+                        </div>
+                      </div>
+                      <div class="flex-1 flex flex-col min-w-0">
+                        <div>
+                          <div class="flex items-start gap-3">
+                            <div class="min-w-0">
+                              <h2
+                                class="font-headline-md text-[20px] font-bold text-charcoal tracking-tight leading-snug group-hover:text-secondary transition-colors"
+                              >
+                                Braided Wig Customization, Tint &amp; Edge
+                                Styling
+                              </h2>
+                              <p
+                                class="text-body-sm text-[13px] text-on-surface-variant line-clamp-2 mt-1"
+                              >
+                                Professional Swiss lace undertone tinting to
+                                match scalp tones, baby hair perimeter setting,
+                                weight balancing, and secure comb insertion.
+                              </p>
+                            </div>
+                            <button
+                              class="bookmark-btn text-on-surface-variant hover:text-charcoal p-1.5 rounded-full hover:bg-surface-container transition-colors shrink-0"
+                              title="Save Service"
+                            >
+                              <span
+                                class="material-symbols-outlined text-[20px]"
+                                >bookmark_border</span
+                              >
+                            </button>
+                          </div>
+                          <div
+                            class="flex flex-wrap items-center gap-2 mt-3 mb-2"
+                          >
+                            <span
+                              class="px-2.5 py-1 bg-secondary-container text-on-secondary-container rounded-md text-[11px] font-semibold tracking-wide flex items-center gap-1"
+                            >
+                              <span
+                                class="material-symbols-outlined text-[14px]"
+                                >home_pin</span
+                              >
+                              Home Service Available (+₦4,500)
+                            </span>
+                            <span
+                              class="px-2.5 py-1 bg-surface-container text-charcoal rounded-md text-[11px] font-medium flex items-center gap-1"
+                            >
+                              <span
+                                class="material-symbols-outlined text-sage text-[14px]"
+                                >verified_user</span
+                              >
+                              25% Escrow Deposit • ₦6,000
+                            </span>
+                          </div>
+                          <div
+                            class="p-3 bg-surface-container-low rounded-xl border border-soft-border flex items-center justify-between my-2"
+                          >
+                            <div>
+                              <div class="flex items-baseline gap-2">
+                                <span
+                                  class="text-headline-md text-[22px] font-bold text-charcoal"
+                                  >₦24,000</span
+                                >
+                                <span
+                                  class="text-body-sm text-outline line-through text-[14px]"
+                                  >₦30,000</span
+                                >
+                              </div>
+                              <span
+                                class="text-[11px] text-secondary font-semibold flex items-center gap-1 mt-0.5"
+                              >
+                                <span
+                                  class="w-1.5 h-1.5 rounded-full bg-sage"
+                                ></span>
+                                Under ₦25k Budget Choice
+                              </span>
+                            </div>
+                            <div class="text-right">
+                              <span
+                                class="text-[11px] uppercase tracking-wider text-secondary font-bold block"
+                                >Weekend Open</span
+                              >
+                              <span
+                                class="text-label-sm font-semibold text-charcoal"
+                                >Sunday 1:00 PM</span
+                              >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="pt-3 border-t border-soft-border mt-1">
+                          <div
+                            class="flex flex-wrap items-center justify-between gap-3"
+                          >
+                            <a
+                              class="flex items-center gap-2.5 group/vendor hover:opacity-80 transition-opacity"
+                              href="beautician-details.html"
+                              onclick="event.stopPropagation()"
+                            >
+                              <img
+                                alt="Alexander Vanguard"
+                                class="w-7 h-7 rounded-full object-cover border border-soft-border"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4yndTLzdFwxNxob2bDO3qIzrcVZxpHO44kMNNwH9vFIqsI3lYIk1Edfrc5c8BCU84fbnCzUSmhZOC2LL1H_t5jJCH4V7dd1MRbx6c229FQSsMkNkITfmbXzlli0nOescEFcC-Q60UAWfehnGBrnqv2QB-f4udpAxX7kIT_1e3-XONjyi6AVs6bPKkRKt7dI96aaEIXYUsmJ4UNH772OhNQGfpE26LJoUCB9uts-4tmDGvKquzEY7J"
+                              />
+                              <div class="flex flex-col text-left">
+                                <span
+                                  class="text-label-sm font-semibold text-charcoal text-[13px] flex items-center gap-1"
+                                >
+                                  Alexander Vanguard Studio
+                                  <span
+                                    class="material-symbols-outlined text-sage text-[15px]"
+                                    >verified</span
+                                  >
+                                </span>
+                                <span
+                                  class="text-[11px] text-on-surface-variant"
+                                  >Lekki Phase 1 • 1.8km • ★ 4.98</span
+                                >
+                              </div>
+                            </a>
+                            <div class="flex items-center gap-2">
+                              <button
+                                class="open-modal-trigger px-3.5 py-1.5 bg-surface-container hover:bg-surface-container-high text-charcoal font-label-sm text-[12px] rounded-lg transition-colors"
+                              >
+                                Service Details
+                              </button>
+                              <a
+                                class="px-4 py-2 bg-charcoal hover:bg-primary-container text-on-primary font-label-sm text-[12px] rounded-lg shadow-xs transition-colors flex items-center gap-1.5"
+                                href="booking.html"
+                                onclick="event.stopPropagation()"
+                              >
+                                <span>Book Now</span>
+                                <span
+                                  class="material-symbols-outlined text-[15px]"
+                                  >arrow_forward</span
+                                >
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+
+                <!-- Empty State -->
+                <div
+                  class="hidden p-12 text-center bg-surface-container-lowest rounded-2xl border border-soft-border"
+                  id="no-results-state"
+                >
+                  <span
+                    class="material-symbols-outlined text-outline text-[48px] mb-3"
+                    >search_off</span
+                  >
+                  <h3
+                    class="font-headline-md text-charcoal text-[18px] font-bold"
+                  >
+                    No services match your criteria
+                  </h3>
+                  <p
+                    class="text-body-sm text-on-surface-variant mt-1 max-w-sm mx-auto"
+                  >
+                    Try clearing selected filters or searching for terms like
+                    "wig", "press", "scalp", or "facial".
+                  </p>
+                  <button
+                    class="mt-4 px-4 py-2 bg-charcoal text-on-primary rounded-lg font-label-sm text-[13px] cursor-pointer hover:bg-primary-container transition-colors"
+                    id="reset-empty-btn"
+                  >
+                    Reset Search &amp; Filters
+                  </button>
+                </div>
+
+                <!-- Pagination Bar -->
+                <div
+                  class="flex items-center justify-between p-4 bg-surface-container-lowest border border-soft-border rounded-xl shadow-xs"
+                  id="pagination-bar"
+                >
+                  <span
+                    class="text-body-sm text-[13px] text-on-surface-variant"
+                    id="pagination-text"
+                    >Showing 1 to 6 of 6 Verified Services</span
+                  >
+                  <div
+                    class="flex items-center gap-1.5"
+                    id="pagination-controls"
+                  >
+                    <button
+                      class="w-8 h-8 rounded-lg bg-charcoal text-on-primary font-label-sm text-[12px] font-semibold"
+                    >
+                      1
+                    </button>
+                    <button
+                      class="w-8 h-8 rounded-lg hover:bg-surface-container text-charcoal font-label-sm text-[12px] font-semibold transition-colors"
+                    >
+                      2
+                    </button>
+                    <button
+                      class="px-3 h-8 rounded-lg hover:bg-surface-container text-charcoal font-label-sm text-[12px] font-semibold transition-colors flex items-center gap-1"
+                    >
+                      <span>Next</span>
+                      <span class="material-symbols-outlined text-[14px]"
+                        >chevron_right</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Column: Interactive Map & Geo Proximity Widget -->
+              <div
+                class="col-span-12 lg:col-span-5 sticky top-36 flex flex-col gap-4 transition-all"
+                id="map-column"
+              >
+                <div
+                  class="bg-surface-container-lowest rounded-2xl overflow-hidden border border-soft-border shadow-xs flex flex-col"
+                >
+                  <div
+                    class="p-3.5 px-4 flex items-center justify-between bg-surface-container-low border-b border-soft-border"
+                  >
+                    <div class="flex items-center gap-2">
+                      <span
+                        class="material-symbols-outlined text-secondary text-[18px]"
+                        >explore</span
+                      >
+                      <span class="text-label-md font-semibold text-charcoal"
+                        >Lekki • VI Service Studios</span
+                      >
+                    </div>
+                    <span
+                      class="text-[10px] font-bold text-secondary uppercase tracking-widest bg-secondary-container px-2 py-0.5 rounded-full"
+                      >Bonded Map</span
+                    >
+                  </div>
+
+                  <!-- Interactive Map Area -->
+                  <div
+                    class="relative h-[460px] w-full bg-surface-container overflow-hidden"
+                  >
+                    <svg
+                      class="w-full h-full object-cover opacity-60"
+                      fill="none"
+                      viewBox="0 0 500 500"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect fill="#f4f3f0" height="500" width="500"></rect>
+                      <path
+                        d="M-50 180 C 150 160, 300 240, 550 200"
+                        stroke="#E2E2DE"
+                        stroke-linecap="round"
+                        stroke-width="18"
+                      ></path>
+                      <path
+                        d="M120 -50 C 140 200, 220 320, 250 550"
+                        stroke="#E2E2DE"
+                        stroke-width="14"
+                      ></path>
+                      <path
+                        d="M360 -50 C 350 150, 420 300, 480 550"
+                        stroke="#E2E2DE"
+                        stroke-width="12"
+                      ></path>
+                      <path
+                        d="M0 380 Q 200 350, 500 420"
+                        stroke="#dcdbce"
+                        stroke-width="10"
+                      ></path>
+                      <path
+                        d="M0 0 L500 0 L500 70 C 380 90, 220 40, 0 60 Z"
+                        fill="#e2ebe4"
+                        opacity="0.8"
+                      ></path>
+                      <path
+                        d="M0 440 C 160 430, 340 450, 500 430 L500 500 L0 500 Z"
+                        fill="#e2ebe4"
+                        opacity="0.6"
+                      ></path>
+                    </svg>
+
+                    <!-- Map Floating Pins -->
+                    <div
+                      class="map-pin absolute top-28 left-20 group cursor-pointer"
+                      data-serv-id="serv-1"
+                      onclick="openServiceModalById('serv-1')"
+                    >
+                      <div
+                        class="bg-charcoal text-on-primary px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5 text-label-sm text-[11px] group-hover:scale-105 transition-transform ring-2 ring-sage/50"
+                      >
+                        <span class="w-2 h-2 rounded-full bg-sage"></span>
+                        <span>Wig Revamp • ₦45k</span>
+                      </div>
+                      <div
+                        class="w-2 h-2 bg-charcoal rotate-45 mx-auto -mt-1"
+                      ></div>
+                    </div>
+
+                    <div
+                      class="map-pin absolute top-52 right-12 group cursor-pointer"
+                      data-serv-id="serv-3"
+                      onclick="openServiceModalById('serv-3')"
+                    >
+                      <div
+                        class="bg-surface-container-lowest text-charcoal border border-soft-border px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5 text-label-sm text-[11px] group-hover:scale-105 transition-transform hover:bg-surface-container-low"
+                      >
+                        <span class="w-2 h-2 rounded-full bg-sage"></span>
+                        <span>Dermal Hydration • ₦28k</span>
+                      </div>
+                      <div
+                        class="w-2 h-2 bg-surface-container-lowest rotate-45 mx-auto -mt-1 border-r border-b border-soft-border"
+                      ></div>
+                    </div>
+
+                    <div
+                      class="map-pin absolute bottom-32 left-28 group cursor-pointer"
+                      data-serv-id="serv-5"
+                      onclick="openServiceModalById('serv-5')"
+                    >
+                      <div
+                        class="bg-surface-container-lowest text-charcoal border border-soft-border px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5 text-label-sm text-[11px] group-hover:scale-105 transition-transform hover:bg-surface-container-low"
+                      >
+                        <span class="w-2 h-2 rounded-full bg-sage"></span>
+                        <span>Scalp Clinic • ₦50k</span>
+                      </div>
+                      <div
+                        class="w-2 h-2 bg-surface-container-lowest rotate-45 mx-auto -mt-1 border-r border-b border-soft-border"
+                      ></div>
+                    </div>
+
+                    <div
+                      class="map-pin absolute top-40 left-56 group cursor-pointer"
+                      data-serv-id="serv-4"
+                      onclick="openServiceModalById('serv-4')"
+                    >
+                      <div
+                        class="bg-surface-container-lowest text-charcoal border border-soft-border px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5 text-label-sm text-[11px] group-hover:scale-105 transition-transform hover:bg-surface-container-low"
+                      >
+                        <span class="w-2 h-2 rounded-full bg-sage"></span>
+                        <span>Russian BIAB • ₦22k</span>
+                      </div>
+                      <div
+                        class="w-2 h-2 bg-surface-container-lowest rotate-45 mx-auto -mt-1 border-r border-b border-soft-border"
+                      ></div>
+                    </div>
+
+                    <!-- Map Controls -->
+                    <div
+                      class="absolute bottom-4 right-4 flex flex-col gap-1.5 bg-surface-container-lowest/95 backdrop-blur-md p-1 rounded-xl shadow-xs border border-soft-border"
+                    >
+                      <button
+                        class="w-8 h-8 rounded-lg bg-surface hover:bg-surface-container-high flex items-center justify-center text-charcoal transition-colors cursor-pointer"
+                        title="Zoom in"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >add</span
+                        >
+                      </button>
+                      <div class="h-px bg-soft-border mx-1"></div>
+                      <button
+                        class="w-8 h-8 rounded-lg bg-surface hover:bg-surface-container-high flex items-center justify-center text-charcoal transition-colors cursor-pointer"
+                        title="Zoom out"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >remove</span
+                        >
+                      </button>
+                    </div>
+                    <div class="absolute top-4 left-1/2 -translate-x-1/2">
+                      <button
+                        id="refresh-map-btn"
+                        class="bg-charcoal/90 backdrop-blur-md text-on-primary px-4 py-1.5 rounded-full shadow-md text-label-sm text-[12px] flex items-center gap-1.5 hover:bg-charcoal transition-all cursor-pointer"
+                      >
+                        <span class="material-symbols-outlined text-[14px]"
+                          >refresh</span
+                        >
+                        <span>Refresh Nearby Services</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="p-3.5 px-4 bg-surface-container-lowest border-t border-soft-border flex items-center justify-between"
+                  >
+                    <div class="flex items-center gap-3">
+                      <div
+                        class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >shield</span
+                        >
+                      </div>
+                      <div>
+                        <p
+                          class="text-label-md text-[13px] font-semibold text-charcoal leading-tight"
+                        >
+                          Glamora Escrow Guarantee
+                        </p>
+                        <p
+                          class="text-body-sm text-[12px] text-on-surface-variant"
+                        >
+                          Deposit held in vault until appointment QR scan
+                        </p>
+                      </div>
+                    </div>
+                    <a
+                      class="text-label-sm text-[12px] text-secondary hover:text-charcoal transition-colors font-medium underline"
+                      href="#"
+                      >Policy</a
+                    >
+                  </div>
+                </div>
+                <div
+                  class="bg-surface-container-low p-4 rounded-2xl border border-soft-border flex flex-col gap-1.5"
+                >
+                  <div class="flex items-center gap-2 text-secondary">
+                    <span class="material-symbols-outlined text-[18px]"
+                      >lock</span
+                    >
+                    <span
+                      class="text-label-sm font-bold uppercase tracking-wider text-charcoal text-[11px]"
+                      >Strict 30-Min Guardrail</span
+                    >
+                  </div>
+                  <p
+                    class="text-body-sm text-[13px] text-on-surface-variant leading-relaxed"
+                  >
+                    Full deposit refund if cancelled with 30-minute notice or if
+                    specialist fails to start within grace window.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Editorial Brand Footer -->
+          <footer
+            class="bg-surface-container-lowest mt-auto border-t border-soft-border py-8 px-6 lg:px-10"
+          >
+            <div
+              class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6"
+            >
+              <div class="flex items-center gap-3">
+                <img
+                  alt="Glamora"
+                  class="h-6 w-6 object-contain"
+                  src="images/glamora_background-removebg-preview.png"
+                />
+                <span
+                  class="font-headline-md text-[16px] font-bold tracking-wider text-charcoal"
+                  >GLAMORA</span
+                >
+                <span class="h-4 w-px bg-soft-border mx-1"></span>
+                <p class="text-body-sm text-[13px] text-on-surface-variant">
+                  © 2026 Glamora Technologies Ltd. Lagos • London
+                </p>
+              </div>
+              <div class="flex flex-wrap items-center gap-6">
+                <a
+                  class="text-label-sm text-[13px] text-on-surface-variant hover:text-charcoal transition-colors"
+                  href="#"
+                  >Service Standards</a
+                >
+                <a
+                  class="text-label-sm text-[13px] text-on-surface-variant hover:text-charcoal transition-colors"
+                  href="#"
+                  >Breakage Insurance</a
+                >
+                <a
+                  class="text-label-sm text-[13px] text-on-surface-variant hover:text-charcoal transition-colors"
+                  href="#"
+                  >Escrow Protocol</a
+                >
+                <a
+                  class="text-label-sm text-[13px] text-on-surface-variant hover:text-charcoal transition-colors"
+                  href="#"
+                  >Concierge Support</a
+                >
+              </div>
+            </div>
+          </footer>
+        </div>
+      </main>
+
+      <!-- RICH INTERACTIVE SERVICE DETAIL MODAL -->
+      <div
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"
+        id="service-detail-modal"
+      >
+        <div
+          class="bg-surface-container-lowest rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-soft-border shadow-2xl transform scale-95 transition-transform duration-300 flex flex-col relative"
+          id="modal-dialog-panel"
+        >
+          <button
+            class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-surface/90 hover:bg-surface-container text-charcoal flex items-center justify-center border border-soft-border transition-colors shadow-xs cursor-pointer"
+            id="close-modal-btn"
+            title="Close Modal (Esc)"
+          >
+            <span class="material-symbols-outlined text-[20px]">close</span>
+          </button>
+
+          <div
+            class="relative h-64 w-full bg-surface-container overflow-hidden shrink-0"
+          >
+            <img
+              alt="Service Preview"
+              class="w-full h-full object-cover"
+              id="modal-service-img"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4yndTLzdFwxNxob2bDO3qIzrcVZxpHO44kMNNwH9vFIqsI3lYIk1Edfrc5c8BCU84fbnCzUSmhZOC2LL1H_t5jJCH4V7dd1MRbx6c229FQSsMkNkITfmbXzlli0nOescEFcC-Q60UAWfehnGBrnqv2QB-f4udpAxX7kIT_1e3-XONjyi6AVs6bPKkRKt7dI96aaEIXYUsmJ4UNH772OhNQGfpE26LJoUCB9uts-4tmDGvKquzEY7J"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent"
+            ></div>
+            <div class="absolute top-4 left-4 flex items-center gap-2">
+              <span
+                class="bg-charcoal/80 backdrop-blur-md text-on-primary text-[12px] font-semibold px-3 py-1 rounded-full"
+                id="modal-category-badge"
+              >
+                Hair Architecture
+              </span>
+              <span
+                class="bg-muted-terracotta text-on-tertiary text-[12px] font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-xs"
+                id="modal-promo-badge"
+              >
+                <span class="material-symbols-outlined text-[13px]"
+                  >local_offer</span
+                >
+                15% Promo
+              </span>
+            </div>
+            <div class="absolute bottom-4 left-5 right-5 text-on-primary">
+              <h2
+                class="font-headline-md text-[24px] font-bold tracking-tight leading-tight"
+                id="modal-service-title"
+              >
+                Luxury Custom Wig Revamping &amp; Lace Melting
+              </h2>
+              <p
+                class="text-surface-dim text-[13px] mt-1 flex items-center gap-3"
+                id="modal-service-subtitle"
+              >
+                <span class="flex items-center gap-1"
+                  ><span class="material-symbols-outlined text-[15px]"
+                    >schedule</span
+                  >
+                  <span id="modal-duration">120 mins</span></span
+                >
+                <span>•</span>
+                <span id="modal-escrow-summary">25% Bond Deposit</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="p-6 flex flex-col gap-6">
+            <div
+              class="bg-surface-container-low p-4 rounded-xl border border-soft-border flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+            >
+              <div>
+                <span
+                  class="text-[11px] uppercase tracking-wider font-bold text-on-surface-variant block"
+                  >Total Service Fee</span
+                >
+                <div class="flex items-baseline gap-2 mt-0.5">
+                  <span
+                    class="text-[26px] font-bold text-charcoal"
+                    id="modal-price-full"
+                    >₦45,000</span
+                  >
+                  <span
+                    class="text-[15px] text-outline line-through"
+                    id="modal-price-strike"
+                    >₦52,900</span
+                  >
+                </div>
+              </div>
+              <div
+                class="sm:text-right border-t sm:border-t-0 sm:border-l border-soft-border pt-2 sm:pt-0 sm:pl-5"
+              >
+                <span
+                  class="text-[11px] uppercase tracking-wider font-bold text-secondary flex items-center sm:justify-end gap-1"
+                >
+                  <span class="material-symbols-outlined text-sage text-[15px]"
+                    >shield</span
+                  >
+                  Glamora Escrow Deposit
+                </span>
+                <span
+                  class="text-[18px] font-bold text-charcoal block mt-0.5"
+                  id="modal-deposit-calc"
+                  >₦11,250 to be deposited</span
+                >
+                <span class="text-[11px] text-on-surface-variant"
+                  >Balance paid after appointment completion</span
+                >
+              </div>
+            </div>
+
+            <div
+              class="flex items-start gap-3 p-3.5 rounded-xl bg-secondary-container/40 border border-secondary/20"
+            >
+              <span
+                class="material-symbols-outlined text-sage text-[20px] mt-0.5"
+                >airport_shuttle</span
+              >
+              <div class="flex flex-col text-[13px]">
+                <span class="font-bold text-charcoal" id="modal-delivery-title"
+                  >Home Service Available</span
+                >
+                <span class="text-on-surface-variant" id="modal-delivery-desc">
+                  Specialist travels to Lekki Phase 1, Victoria Island, &amp;
+                  Ikoyi with full sanitization mobile station.
+                </span>
+              </div>
+            </div>
+
+            <div>
+              <h4
+                class="text-label-md font-bold text-charcoal uppercase tracking-wider text-[12px] mb-2 flex items-center gap-1.5"
+              >
+                <span class="material-symbols-outlined text-[16px] text-sage"
+                  >checklist</span
+                >
+                What's Included in this Treatment
+              </h4>
+              <ul
+                class="flex flex-col gap-2 text-[13px] text-on-surface-variant"
+                id="modal-included-list"
+              >
+                <li class="flex items-start gap-2">
+                  <span
+                    class="material-symbols-outlined text-sage text-[16px] mt-0.5"
+                    >check_circle</span
+                  >
+                  <span
+                    >Deep steam clarifying bath with botanical scalp cleansing
+                    oils.</span
+                  >
+                </li>
+                <li class="flex items-start gap-2">
+                  <span
+                    class="material-symbols-outlined text-sage text-[16px] mt-0.5"
+                    >check_circle</span
+                  >
+                  <span
+                    >Precision HD lace knot bleaching and gradual density pluck
+                    for ultra-realistic hairline.</span
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div
+              class="p-3 bg-surface-container rounded-lg flex items-center justify-between text-[12px]"
+            >
+              <span class="flex items-center gap-2 text-charcoal font-medium">
+                <span
+                  class="material-symbols-outlined text-secondary text-[16px]"
+                  >clean_hands</span
+                >
+                Autoclave Heat Sterilization &amp; Disposable Towels
+              </span>
+              <span class="text-sage font-bold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-sage"></span> Certified
+                Clean
+              </span>
+            </div>
+
+            <div
+              class="p-4 bg-surface-container-low rounded-xl border border-soft-border flex items-center justify-between"
+            >
+              <div class="flex items-center gap-3">
+                <img
+                  alt="Vendor Avatar"
+                  class="w-11 h-11 rounded-full object-cover border border-soft-border"
+                  id="modal-vendor-avatar"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4yndTLzdFwxNxob2bDO3qIzrcVZxpHO44kMNNwH9vFIqsI3lYIk1Edfrc5c8BCU84fbnCzUSmhZOC2LL1H_t5jJCH4V7dd1MRbx6c229FQSsMkNkITfmbXzlli0nOescEFcC-Q60UAWfehnGBrnqv2QB-f4udpAxX7kIT_1e3-XONjyi6AVs6bPKkRKt7dI96aaEIXYUsmJ4UNH772OhNQGfpE26LJoUCB9uts-4tmDGvKquzEY7J"
+                />
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <span
+                      class="font-bold text-charcoal text-[14px]"
+                      id="modal-vendor-name"
+                      >Alexander Vanguard Studio</span
+                    >
+                    <span
+                      class="material-symbols-outlined text-sage text-[16px]"
+                      >verified</span
+                    >
+                  </div>
+                  <p
+                    class="text-[12px] text-on-surface-variant"
+                    id="modal-vendor-meta"
+                  >
+                    Master Hair Architect • Lekki Phase 1 • 4.98 ★
+                  </p>
+                </div>
+              </div>
+              <a
+                class="px-3 py-1.5 bg-surface-container hover:bg-surface-container-high text-charcoal rounded-lg text-label-sm text-[12px] font-semibold transition-colors"
+                href="beautician-details.html"
+              >
+                View Profile
+              </a>
+            </div>
+
+            <div class="text-[11px] text-outline flex items-center gap-2">
+              <span class="material-symbols-outlined text-[15px]">info</span>
+              <span
+                >Glamora Escrow Guarantee: Cancel up to 30 mins before
+                appointment for 100% deposit refund. Remainder released upon
+                service QR scan.</span
+              >
+            </div>
+
+            <div class="flex items-center gap-3 pt-2">
+              <a
+                class="flex-1 py-3 bg-charcoal hover:bg-primary-container text-on-primary rounded-xl font-label-md text-[14px] text-center font-bold shadow-md transition-colors flex items-center justify-center gap-2"
+                href="booking.html"
+              >
+                <span>Proceed to Reserve &amp; Escrow</span>
+                <span class="material-symbols-outlined text-[18px]"
+                  >arrow_forward</span
+                >
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Complete Client & Interactive Discovery Logic -->
+    <script src="js/search-results.js" defer></script>
+  </body>
+</html>

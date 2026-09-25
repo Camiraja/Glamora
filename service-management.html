@@ -24,6 +24,9 @@
       ::-webkit-scrollbar {
         display: none;
       }
+      .service-card {
+        border-radius: 0.75rem;
+      }
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
     <script id="tailwind-config">
@@ -186,31 +189,33 @@
 
       <div class="flex items-center gap-sm">
         <!-- Vendor/Client Toggle (Mobile) -->
-        <div
-          class="bg-surface-container p-1 rounded-full flex text-label-sm border border-soft-border -ml-3 scale-105"
-        >
-          <button
-            type="button"
-            onclick="switchRole('vendor')"
-            class="px-2.5 py-1 rounded-full text-[11px] bg-primary text-on-primary font-semibold shadow-sm transition-all"
+        <div class="flex items-center gap-sm">
+          <div
+            class="bg-surface-container p-1 rounded-full flex text-label-sm border border-soft-border -ml-3 scale-105"
           >
-            Vendor
-          </button>
+            <button
+              type="button"
+              onclick="switchRole('vendor')"
+              class="px-2.5 py-1 rounded-full text-[11px] bg-primary text-on-primary font-semibold shadow-sm transition-all"
+            >
+              Vendor
+            </button>
+            <button
+              type="button"
+              onclick="switchRole('customer')"
+              class="px-2.5 py-1 rounded-full text-[11px] text-on-surface-variant font-medium hover:text-primary transition-all"
+            >
+              Client
+            </button>
+          </div>
+          <!-- Hamburger Menu -->
           <button
-            type="button"
-            onclick="switchRole('customer')"
-            class="px-2.5 py-1 rounded-full text-[11px] text-on-surface-variant font-medium hover:text-primary transition-all"
+            class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors"
+            onclick="toggleMobileSidebar()"
           >
-            Client
+            <span class="material-symbols-outlined text-[20px]">menu</span>
           </button>
         </div>
-        <!-- Hamburger Menu -->
-        <button
-          class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors"
-          onclick="toggleMobileSidebar()"
-        >
-          <span class="material-symbols-outlined text-[20px]">menu</span>
-        </button>
       </div>
     </div>
 
@@ -269,11 +274,10 @@
             href="vendor-schedule-and-availability.html"
           >
             <span class="material-symbols-outlined mr-md text-[20px]"
-              >calendar_today</span
+              >date_range</span
             >
             Schedule
           </a>
-          <!-- Updated to vendor-wallet.html -->
           <a
             class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
             href="vendor-wallet.html"
@@ -285,13 +289,41 @@
           </a>
           <a
             class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
-            href="chats.html"
+            href="vendor-appointment.html"
           >
             <span class="material-symbols-outlined mr-md text-[20px]"
-              >chat_bubble</span
+              >event_available</span
             >
-            Chats
+            Appointments
           </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="Products-management.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >inventory_2</span
+            >
+            Products
+          </a>
+          <a
+            class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            href="vendor-analytics.html"
+          >
+            <span class="material-symbols-outlined mr-md text-[20px]"
+              >monitoring</span
+            >
+            Analytics
+          </a>
+        </nav>
+
+        <nav class="pt-md border-t border-soft-border">
+          <a
+            class="px-sm py-base rounded-lg text-label-md text-on-surface-variant hover:bg-surface-container transition-colors flex items-center gap-base"
+            data-path="settings"
+            href="vendor-profile.html"
+            ><span class="material-symbols-outlined text-[20px]">settings</span>
+            Settings</a
+          >
         </nav>
       </aside>
     </div>
@@ -349,7 +381,7 @@
           class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
           href="vendor-schedule-and-availability.html"
         >
-          <span class="material-symbols-outlined mr-md">calendar_today</span>
+          <span class="material-symbols-outlined mr-md">date_range</span>
           Schedule
         </a>
         <!-- Updated to vendor-wallet.html -->
@@ -361,15 +393,45 @@
         </a>
         <a
           class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
-          href="chats.html"
+          href="vendor-appointments.html"
         >
-          <span class="material-symbols-outlined mr-md">chat_bubble</span> Chats
+          <span class="material-symbols-outlined mr-md">event_available</span>
+          Appointments
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="products-management.html"
+        >
+          <span class="material-symbols-outlined mr-md">inventory_2</span>
+          Products
+        </a>
+        <a
+          class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all group"
+          href="vendor-analytics.html"
+        >
+          <span class="material-symbols-outlined mr-md">monitoring</span>
+          Analytics
         </a>
       </nav>
+      <!-- Replace the bottom <nav> in the Desktop Sidebar -->
+      <div class="px-sm pb-md w-full">
+        <nav class="pt-sm border-t border-soft-border">
+          <a
+            class="flex items-center px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-all group"
+            data-path="settings"
+            href="vendor-profile.html"
+          >
+            <span class="material-symbols-outlined mr-md">settings</span>
+            Settings
+          </a>
+        </nav>
+      </div>
     </aside>
 
     <!-- Main Workspace -->
-    <main class="w-full lg:pl-72 pt-16 min-h-screen bg-background relative">
+    <main
+      class="w-full lg:pl-72 pt-20 lg:pt-16 min-h-screen bg-background relative"
+    >
       <div class="max-w-[1440px] mx-auto px-margin-desktop py-lg">
         <!-- Top Header & Add Button -->
         <div
@@ -377,18 +439,18 @@
         >
           <div>
             <span
-              class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-widest"
+              class="text-label-sm font-semibold text-on-surface-variant uppercase tracking-widest"
               >— PORTFOLIO</span
             >
             <h1
-              class="text-headline-xl font-headline-xl text-on-surface mt-xs tracking-tight"
+              class="text-[32px] font-bold text-on-surface mt-xs tracking-tight"
             >
               Service Directory
             </h1>
           </div>
           <button
             onclick="openModal('new')"
-            class="inline-flex items-center gap-base px-md py-sm bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:bg-surface-tint transition-all shadow-sm self-start md:self-auto"
+            class="inline-flex items-center gap-base px-md py-sm bg-primary text-on-primary rounded-lg font-semibold text-[14px] hover:bg-surface-tint transition-all shadow-sm self-start md:self-auto"
           >
             <span class="material-symbols-outlined text-[20px]">add</span>
             <span>New Service</span>
@@ -403,25 +465,25 @@
             class="inline-flex items-center p-xs bg-surface-container rounded-full border border-soft-border self-start overflow-x-auto max-w-full"
           >
             <button
-              class="filter-btn px-md py-xs rounded-full bg-white text-on-surface font-label-sm text-label-sm shadow-sm transition-all whitespace-nowrap"
+              class="filter-btn px-md py-xs rounded-full bg-white text-on-surface font-semibold text-[12px] shadow-sm transition-all whitespace-nowrap"
               data-filter="all"
             >
               All
             </button>
             <button
-              class="filter-btn px-md py-xs rounded-full text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all whitespace-nowrap"
+              class="filter-btn px-md py-xs rounded-full text-on-surface-variant hover:text-on-surface font-semibold text-[12px] transition-all whitespace-nowrap"
               data-filter="haircuts"
             >
               Haircuts
             </button>
             <button
-              class="filter-btn px-md py-xs rounded-full text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all whitespace-nowrap"
+              class="filter-btn px-md py-xs rounded-full text-on-surface-variant hover:text-on-surface font-semibold text-[12px] transition-all whitespace-nowrap"
               data-filter="coloring"
             >
               Coloring
             </button>
             <button
-              class="filter-btn px-md py-xs rounded-full text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all whitespace-nowrap"
+              class="filter-btn px-md py-xs rounded-full text-on-surface-variant hover:text-on-surface font-semibold text-[12px] transition-all whitespace-nowrap"
               data-filter="treatments"
             >
               Treatments
@@ -436,7 +498,7 @@
               type="text"
               id="searchInput"
               placeholder="Search services..."
-              class="w-full pl-8 pr-md py-sm bg-transparent border-b border-soft-border text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:border-primary text-body-sm font-body-sm transition-colors"
+              class="w-full pl-8 pr-md py-sm bg-transparent border-b border-soft-border text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:border-primary text-[14px] transition-colors"
             />
           </div>
         </div>
@@ -448,194 +510,357 @@
         >
           <!-- Card 1 -->
           <div
-            class="service-card bg-surface-container-lowest rounded-xl border border-soft-border p-md flex flex-col justify-between shadow-sm hover:border-primary/40 transition-all"
+            class="service-card relative bg-surface-container-lowest border border-soft-border flex flex-col shadow-sm hover:border-primary/40 transition-all group"
             data-category="haircuts"
           >
-            <div class="mb-lg">
-              <div
-                class="inline-block px-sm py-xs rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider mb-md"
-              >
-                HAIRCUTS
-              </div>
-              <h3
-                class="text-headline-md font-headline-md text-on-surface mb-sm leading-snug"
-              >
-                Signature Precision Cut
-              </h3>
-              <p
-                class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed"
-              >
-                A fully customized haircut utilizing advanced texturizing
-                techniques to suit your face shape and personal style.
-              </p>
-            </div>
+            <!-- Image Banner -->
             <div
-              class="pt-md border-t border-soft-border flex items-center justify-between"
+              class="w-full h-32 rounded-t-xl bg-surface-container-high relative overflow-hidden"
             >
-              <div class="space-y-xs">
-                <span
-                  class="block text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider"
-                  >PRICE</span
+              <img
+                src="https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=600&auto=format&fit=crop"
+                alt="Signature Precision Cut"
+                class="service-img w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <!-- Badges -->
+              <div
+                class="absolute top-3 left-3 flex flex-col gap-1 items-start"
+              >
+                <div
+                  class="bg-surface-container-lowest/90 backdrop-blur-sm px-2 py-1 rounded text-on-surface-variant font-bold text-[10px] uppercase tracking-wider shadow-sm service-category-badge"
                 >
-                <span class="text-headline-md font-headline-md text-on-surface"
-                  >₦15,000</span
+                  HAIRCUTS
+                </div>
+                <div
+                  class="status-badge bg-success-green/90 backdrop-blur-sm px-2 py-1 rounded text-white font-bold text-[10px] uppercase tracking-wider shadow-sm"
                 >
+                  ACTIVE
+                </div>
               </div>
-              <div class="h-8 w-[1px] bg-soft-border"></div>
-              <div class="space-y-xs text-right">
-                <span
-                  class="block text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider"
-                  >DURATION</span
+            </div>
+
+            <!-- Action Menu (Moved outside overflow-hidden) -->
+            <div class="absolute top-3 right-3 z-20">
+              <button
+                type="button"
+                onclick="toggleCardMenu(event, this)"
+                class="w-8 h-8 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm flex items-center justify-center text-on-surface hover:bg-white transition-colors shadow-sm"
+              >
+                <span class="material-symbols-outlined text-[20px]"
+                  >more_vert</span
                 >
-                <span class="text-headline-md font-headline-md text-on-surface"
-                  >60 min</span
+              </button>
+              <div
+                class="card-menu hidden absolute top-full right-0 mt-1 w-36 bg-surface-container-lowest border border-soft-border rounded-lg shadow-lg overflow-hidden"
+              >
+                <button
+                  type="button"
+                  onclick="editService(this)"
+                  class="w-full flex items-center gap-2 px-3 py-2 text-left text-[14px] hover:bg-surface-container-low transition-colors"
                 >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >edit</span
+                  >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  onclick="toggleVisibility(this)"
+                  class="w-full flex items-center gap-2 px-3 py-2 text-left text-[14px] hover:bg-surface-container-low transition-colors visibility-btn"
+                >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >visibility_off</span
+                  >
+                  Hide
+                </button>
+                <button
+                  type="button"
+                  onclick="deleteService(this)"
+                  class="w-full flex items-center gap-2 px-3 py-2 text-left text-[14px] text-error hover:bg-error-container transition-colors"
+                >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >delete</span
+                  >
+                  Delete
+                </button>
+              </div>
+            </div>
+
+            <!-- Content Area -->
+            <div
+              class="p-6 min-h-[220px] flex flex-col flex-1 justify-between rounded-b-xl bg-surface-container-lowest relative z-0"
+            >
+              <div class="mb-4">
+                <h3
+                  class="service-title text-[20px] font-bold text-on-surface mb-2 leading-snug"
+                >
+                  Signature Precision Cut
+                </h3>
+                <p
+                  class="service-desc text-[14px] text-on-surface-variant leading-relaxed line-clamp-3"
+                >
+                  A fully customized haircut utilizing advanced texturizing
+                  techniques to suit your face shape and personal style.
+                </p>
+              </div>
+              <div
+                class="pt-4 border-t border-soft-border flex items-center justify-between"
+              >
+                <div class="space-y-1">
+                  <span
+                    class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-wider"
+                    >PRICE</span
+                  >
+                  <span
+                    class="service-price text-[18px] font-bold text-on-surface"
+                    >₦15,000</span
+                  >
+                </div>
+                <div class="h-8 w-[1px] bg-soft-border"></div>
+                <div class="space-y-1 text-right">
+                  <span
+                    class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-wider"
+                    >DURATION</span
+                  >
+                  <span
+                    class="service-duration text-[18px] font-bold text-on-surface"
+                    >60 min</span
+                  >
+                </div>
               </div>
             </div>
           </div>
 
           <!-- Card 2 -->
           <div
-            class="service-card bg-surface-container-lowest rounded-xl border border-soft-border p-md flex flex-col justify-between shadow-sm hover:border-primary/40 transition-all"
+            class="service-card relative bg-surface-container-lowest border border-soft-border flex flex-col shadow-sm hover:border-primary/40 transition-all group"
             data-category="coloring"
           >
-            <div class="mb-lg">
+            <div
+              class="w-full h-32 rounded-t-xl bg-surface-container-high relative overflow-hidden"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1620331311520-246422fd82f9?q=80&w=600&auto=format&fit=crop"
+                alt="Balayage & Toner"
+                class="service-img w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
               <div
-                class="inline-block px-sm py-xs rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider mb-md"
+                class="absolute top-3 left-3 flex flex-col gap-1 items-start"
               >
-                COLORING
+                <div
+                  class="bg-surface-container-lowest/90 backdrop-blur-sm px-2 py-1 rounded text-on-surface-variant font-bold text-[10px] uppercase tracking-wider shadow-sm service-category-badge"
+                >
+                  COLORING
+                </div>
+                <div
+                  class="status-badge bg-success-green/90 backdrop-blur-sm px-2 py-1 rounded text-white font-bold text-[10px] uppercase tracking-wider shadow-sm"
+                >
+                  ACTIVE
+                </div>
               </div>
-              <h3
-                class="text-headline-md font-headline-md text-on-surface mb-sm leading-snug"
+            </div>
+            <div class="absolute top-3 right-3 z-20">
+              <button
+                type="button"
+                onclick="toggleCardMenu(event, this)"
+                class="w-8 h-8 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm flex items-center justify-center text-on-surface hover:bg-white transition-colors shadow-sm"
               >
-                Balayage &amp; Toner
-              </h3>
-              <p
-                class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed"
+                <span class="material-symbols-outlined text-[20px]"
+                  >more_vert</span
+                >
+              </button>
+              <div
+                class="card-menu hidden absolute top-full right-0 mt-1 w-36 bg-surface-container-lowest border border-soft-border rounded-lg shadow-lg overflow-hidden"
               >
-                Hand-painted, sunkissed highlights tailored to enhance your
-                natural color flow. Includes gloss toner treatment.
-              </p>
+                <button
+                  type="button"
+                  onclick="editService(this)"
+                  class="w-full flex items-center gap-2 px-3 py-2 text-left text-[14px] hover:bg-surface-container-low transition-colors"
+                >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >edit</span
+                  >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  onclick="toggleVisibility(this)"
+                  class="w-full flex items-center gap-2 px-3 py-2 text-left text-[14px] hover:bg-surface-container-low transition-colors visibility-btn"
+                >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >visibility_off</span
+                  >
+                  Hide
+                </button>
+                <button
+                  type="button"
+                  onclick="deleteService(this)"
+                  class="w-full flex items-center gap-2 px-3 py-2 text-left text-[14px] text-error hover:bg-error-container transition-colors"
+                >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >delete</span
+                  >
+                  Delete
+                </button>
+              </div>
             </div>
             <div
-              class="pt-md border-t border-soft-border flex items-center justify-between"
+              class="p-6 min-h-[220px] flex flex-col flex-1 justify-between rounded-b-xl bg-surface-container-lowest relative z-0"
             >
-              <div class="space-y-xs">
-                <span
-                  class="block text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider"
-                  >PRICE</span
+              <div class="mb-4">
+                <h3
+                  class="service-title text-[20px] font-bold text-on-surface mb-2 leading-snug"
                 >
-                <span class="text-headline-md font-headline-md text-on-surface"
-                  >₦45,000</span
+                  Balayage &amp; Toner
+                </h3>
+                <p
+                  class="service-desc text-[14px] text-on-surface-variant leading-relaxed line-clamp-3"
                 >
+                  Hand-painted, sunkissed highlights tailored to enhance your
+                  natural color flow. Includes gloss toner treatment.
+                </p>
               </div>
-              <div class="h-8 w-[1px] bg-soft-border"></div>
-              <div class="space-y-xs text-right">
-                <span
-                  class="block text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider"
-                  >DURATION</span
-                >
-                <span class="text-headline-md font-headline-md text-on-surface"
-                  >150 min</span
-                >
+              <div
+                class="pt-4 border-t border-soft-border flex items-center justify-between"
+              >
+                <div class="space-y-1">
+                  <span
+                    class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-wider"
+                    >PRICE</span
+                  >
+                  <span
+                    class="service-price text-[18px] font-bold text-on-surface"
+                    >₦45,000</span
+                  >
+                </div>
+                <div class="h-8 w-[1px] bg-soft-border"></div>
+                <div class="space-y-1 text-right">
+                  <span
+                    class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-wider"
+                    >DURATION</span
+                  >
+                  <span
+                    class="service-duration text-[18px] font-bold text-on-surface"
+                    >150 min</span
+                  >
+                </div>
               </div>
             </div>
           </div>
 
           <!-- Card 3 -->
           <div
-            class="service-card bg-surface-container-lowest rounded-xl border border-soft-border p-md flex flex-col justify-between shadow-sm hover:border-primary/40 transition-all"
+            class="service-card relative bg-surface-container-lowest border border-soft-border flex flex-col shadow-sm hover:border-primary/40 transition-all group"
             data-category="treatments"
           >
-            <div class="mb-lg">
+            <div
+              class="w-full h-32 rounded-t-xl bg-surface-container-high relative overflow-hidden"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1595476108010-b4d1f10d5e43?q=80&w=600&auto=format&fit=crop"
+                alt="Keratin Smoothing"
+                class="service-img w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
               <div
-                class="inline-block px-sm py-xs rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider mb-md"
+                class="absolute top-3 left-3 flex flex-col gap-1 items-start"
               >
-                TREATMENTS
+                <div
+                  class="bg-surface-container-lowest/90 backdrop-blur-sm px-2 py-1 rounded text-on-surface-variant font-bold text-[10px] uppercase tracking-wider shadow-sm service-category-badge"
+                >
+                  TREATMENTS
+                </div>
+                <div
+                  class="status-badge bg-success-green/90 backdrop-blur-sm px-2 py-1 rounded text-white font-bold text-[10px] uppercase tracking-wider shadow-sm"
+                >
+                  ACTIVE
+                </div>
               </div>
-              <h3
-                class="text-headline-md font-headline-md text-on-surface mb-sm leading-snug"
+            </div>
+            <div class="absolute top-3 right-3 z-20">
+              <button
+                type="button"
+                onclick="toggleCardMenu(event, this)"
+                class="w-8 h-8 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm flex items-center justify-center text-on-surface hover:bg-white transition-colors shadow-sm"
               >
-                Keratin Smoothing
-              </h3>
-              <p
-                class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed"
+                <span class="material-symbols-outlined text-[20px]"
+                  >more_vert</span
+                >
+              </button>
+              <div
+                class="card-menu hidden absolute top-full right-0 mt-1 w-36 bg-surface-container-lowest border border-soft-border rounded-lg shadow-lg overflow-hidden"
               >
-                Frizz-reducing intensive protein treatment that seals the
-                cuticle for a sleek, glossy finish lasting up to 4 months.
-              </p>
+                <button
+                  type="button"
+                  onclick="editService(this)"
+                  class="w-full flex items-center gap-2 px-3 py-2 text-left text-[14px] hover:bg-surface-container-low transition-colors"
+                >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >edit</span
+                  >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  onclick="toggleVisibility(this)"
+                  class="w-full flex items-center gap-2 px-3 py-2 text-left text-[14px] hover:bg-surface-container-low transition-colors visibility-btn"
+                >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >visibility_off</span
+                  >
+                  Hide
+                </button>
+                <button
+                  type="button"
+                  onclick="deleteService(this)"
+                  class="w-full flex items-center gap-2 px-3 py-2 text-left text-[14px] text-error hover:bg-error-container transition-colors"
+                >
+                  <span class="material-symbols-outlined text-[16px]"
+                    >delete</span
+                  >
+                  Delete
+                </button>
+              </div>
             </div>
             <div
-              class="pt-md border-t border-soft-border flex items-center justify-between"
+              class="p-6 min-h-[220px] flex flex-col flex-1 justify-between rounded-b-xl bg-surface-container-lowest relative z-0"
             >
-              <div class="space-y-xs">
-                <span
-                  class="block text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider"
-                  >PRICE</span
+              <div class="mb-4">
+                <h3
+                  class="service-title text-[20px] font-bold text-on-surface mb-2 leading-snug"
                 >
-                <span class="text-headline-md font-headline-md text-on-surface"
-                  >₦35,000</span
+                  Keratin Smoothing
+                </h3>
+                <p
+                  class="service-desc text-[14px] text-on-surface-variant leading-relaxed line-clamp-3"
                 >
+                  Frizz-reducing intensive protein treatment that seals the
+                  cuticle for a sleek, glossy finish lasting up to 4 months.
+                </p>
               </div>
-              <div class="h-8 w-[1px] bg-soft-border"></div>
-              <div class="space-y-xs text-right">
-                <span
-                  class="block text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider"
-                  >DURATION</span
-                >
-                <span class="text-headline-md font-headline-md text-on-surface"
-                  >120 min</span
-                >
-              </div>
-            </div>
-          </div>
-
-          <!-- Draft Card -->
-          <div
-            onclick="openModal('draft')"
-            class="service-card draft-card bg-surface-container-lowest/60 rounded-xl border border-dashed border-soft-border p-md flex flex-col justify-between cursor-pointer hover:bg-surface-container-lowest transition-colors group"
-            data-category="draft"
-          >
-            <div class="mb-lg">
               <div
-                class="inline-block px-sm py-xs rounded-md bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider mb-md"
+                class="pt-4 border-t border-soft-border flex items-center justify-between"
               >
-                DRAFT
-              </div>
-              <h3
-                class="text-headline-md font-headline-md text-on-surface/80 italic mb-sm leading-snug group-hover:text-primary group-hover:not-italic transition-all"
-              >
-                Men's Executive Grooming
-              </h3>
-              <p
-                class="text-body-sm font-body-sm text-on-surface-variant/70 italic"
-              >
-                Service description pending... Click to complete.
-              </p>
-            </div>
-            <div
-              class="pt-md border-t border-dashed border-soft-border flex items-center justify-between"
-            >
-              <div class="space-y-xs">
-                <span
-                  class="block text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider"
-                  >PRICE</span
-                >
-                <span
-                  class="text-headline-md font-headline-md text-on-surface/70"
-                  >--</span
-                >
-              </div>
-              <div class="h-8 w-[1px] bg-soft-border"></div>
-              <div class="space-y-xs text-right">
-                <span
-                  class="block text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider"
-                  >DURATION</span
-                >
-                <span
-                  class="text-headline-md font-headline-md text-on-surface/70"
-                  >45 min</span
-                >
+                <div class="space-y-1">
+                  <span
+                    class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-wider"
+                    >PRICE</span
+                  >
+                  <span
+                    class="service-price text-[18px] font-bold text-on-surface"
+                    >₦35,000</span
+                  >
+                </div>
+                <div class="h-8 w-[1px] bg-soft-border"></div>
+                <div class="space-y-1 text-right">
+                  <span
+                    class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-wider"
+                    >DURATION</span
+                  >
+                  <span
+                    class="service-duration text-[18px] font-bold text-on-surface"
+                    >120 min</span
+                  >
+                </div>
               </div>
             </div>
           </div>
@@ -643,19 +868,17 @@
           <!-- Add Service Trigger Card -->
           <div
             onclick="openModal('new')"
-            class="add-service-card rounded-xl border border-soft-border bg-surface-container-low p-md flex flex-col items-center justify-center text-center group cursor-pointer hover:bg-surface-container hover:border-primary/30 transition-all min-h-[280px]"
+            class="add-service-card rounded-xl border border-soft-border bg-surface-container-low p-6 flex flex-col items-center justify-center text-center group cursor-pointer hover:bg-surface-container hover:border-primary/30 transition-all min-h-[348px]"
           >
             <div
-              class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface mb-base group-hover:bg-white transition-all shadow-sm"
+              class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface mb-3 group-hover:bg-white transition-all shadow-sm"
             >
               <span class="material-symbols-outlined text-[24px]">add</span>
             </div>
-            <h3 class="text-headline-md font-headline-md text-on-surface mb-xs">
+            <h3 class="text-[20px] font-bold text-on-surface mb-1">
               Add Service
             </h3>
-            <p
-              class="text-body-sm font-body-sm text-on-surface-variant max-w-[220px]"
-            >
+            <p class="text-[14px] text-on-surface-variant max-w-[220px]">
               Expand your portfolio and attract new clientele.
             </p>
           </div>
@@ -669,18 +892,19 @@
       class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-md"
     >
       <div
-        class="bg-surface-container-lowest border border-soft-border rounded-2xl max-w-xl w-full p-lg shadow-xl relative max-h-[90vh] overflow-y-auto"
+        class="bg-surface-container-lowest border border-soft-border rounded-2xl max-w-xl w-full p-md sm:p-lg shadow-xl relative max-h-[90vh] overflow-y-auto"
       >
         <div
           class="flex justify-between items-center border-b border-soft-border pb-md mb-md"
         >
           <h2
             id="modalTitle"
-            class="text-headline-md font-headline-md text-on-surface tracking-tight"
+            class="text-[24px] font-bold text-on-surface tracking-tight"
           >
             Add New Service
           </h2>
           <button
+            type="button"
             onclick="closeModal()"
             class="text-on-surface-variant hover:text-on-surface transition-colors"
           >
@@ -693,9 +917,69 @@
           onsubmit="handleServiceSubmit(event)"
           class="space-y-md"
         >
+          <!-- Interactive Drag & Drop Image Upload -->
           <div>
             <label
-              class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+              class="block text-[12px] font-bold text-on-surface-variant mb-xs"
+              >Service Image</label
+            >
+            <div
+              class="mt-1 flex flex-col items-center justify-center px-4 py-6 border-2 border-soft-border border-dashed rounded-xl hover:border-primary/50 transition-colors relative bg-surface-container-low cursor-pointer"
+              id="imageDropzone"
+            >
+              <input
+                id="serviceImage"
+                name="serviceImage"
+                type="file"
+                class="hidden"
+                accept="image/*"
+              />
+
+              <!-- Standard Upload UI -->
+              <div
+                class="space-y-2 text-center transition-opacity"
+                id="imageUploadUI"
+              >
+                <span
+                  class="material-symbols-outlined text-[32px] text-on-surface-variant"
+                  >add_photo_alternate</span
+                >
+                <div class="text-[14px] text-on-surface-variant">
+                  <span class="font-medium text-primary">Click to upload</span>
+                  or drag and drop
+                </div>
+                <p class="text-[11px] text-on-surface-variant/70">
+                  PNG, JPG, WEBP up to 5MB
+                </p>
+              </div>
+
+              <!-- Image Preview Container -->
+              <div
+                id="imagePreviewContainer"
+                class="hidden absolute inset-0 rounded-xl overflow-hidden bg-surface-container-lowest z-10"
+              >
+                <img
+                  id="imagePreview"
+                  src=""
+                  alt="Service Preview"
+                  class="w-full h-full object-cover"
+                />
+                <button
+                  type="button"
+                  onclick="removeImage(event)"
+                  class="absolute top-3 right-3 bg-black/60 text-white rounded-full p-1 hover:bg-black/80 transition-colors flex items-center justify-center shadow-md"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >close</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label
+              class="block text-[12px] font-bold text-on-surface-variant mb-xs"
               >Service Name</label
             >
             <input
@@ -703,20 +987,20 @@
               id="serviceName"
               required
               placeholder="e.g. Signature Precision Cut"
-              class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-body-sm text-on-surface focus:outline-none focus:border-charcoal transition-colors"
+              class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-[14px] text-on-surface focus:outline-none focus:border-charcoal transition-colors"
             />
           </div>
 
           <div class="grid grid-cols-2 gap-sm">
             <div>
               <label
-                class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+                class="block text-[12px] font-bold text-on-surface-variant mb-xs"
                 >Category</label
               >
               <select
                 id="serviceCategory"
                 required
-                class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-body-sm text-on-surface focus:outline-none focus:border-charcoal transition-colors"
+                class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-[14px] text-on-surface focus:outline-none focus:border-charcoal transition-colors"
               >
                 <option value="" disabled selected>Select category</option>
                 <option value="haircuts">Haircuts</option>
@@ -726,7 +1010,7 @@
             </div>
             <div>
               <label
-                class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+                class="block text-[12px] font-bold text-on-surface-variant mb-xs"
                 >Duration (mins)</label
               >
               <input
@@ -736,14 +1020,14 @@
                 placeholder="e.g. 60"
                 min="15"
                 step="15"
-                class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-body-sm text-on-surface focus:outline-none focus:border-charcoal transition-colors"
+                class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-[14px] text-on-surface focus:outline-none focus:border-charcoal transition-colors"
               />
             </div>
           </div>
 
           <div>
             <label
-              class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+              class="block text-[12px] font-bold text-on-surface-variant mb-xs"
               >Price (₦)</label
             >
             <input
@@ -753,13 +1037,13 @@
               placeholder="e.g. 15000"
               min="1000"
               step="500"
-              class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-body-sm text-on-surface focus:outline-none focus:border-charcoal transition-colors"
+              class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-[14px] text-on-surface focus:outline-none focus:border-charcoal transition-colors"
             />
           </div>
 
           <div>
             <label
-              class="block text-label-sm font-label-sm text-on-surface-variant mb-xs"
+              class="block text-[12px] font-bold text-on-surface-variant mb-xs"
               >Description</label
             >
             <textarea
@@ -767,7 +1051,7 @@
               rows="3"
               required
               placeholder="Detail what the service includes..."
-              class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-body-sm text-on-surface focus:outline-none focus:border-charcoal resize-none transition-colors"
+              class="w-full bg-surface-container border border-soft-border rounded-xl p-sm text-[14px] text-on-surface focus:outline-none focus:border-charcoal resize-none transition-colors"
             ></textarea>
           </div>
 
@@ -775,13 +1059,13 @@
             <button
               type="button"
               onclick="closeModal()"
-              class="flex-1 py-sm border border-soft-border text-on-surface font-label-md text-label-md rounded-xl hover:bg-surface-container-low transition-colors"
+              class="flex-1 py-sm border border-soft-border text-on-surface font-semibold text-[14px] rounded-xl hover:bg-surface-container-low transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
-              class="flex-1 py-sm bg-primary text-on-primary font-label-md text-label-md rounded-xl hover:bg-surface-tint transition-colors shadow-sm"
+              class="flex-1 py-sm bg-primary text-on-primary font-semibold text-[14px] rounded-xl hover:bg-surface-tint transition-colors shadow-sm"
             >
               Save Service
             </button>
@@ -790,7 +1074,45 @@
       </div>
     </div>
 
-    <!-- Interactive Scripts -->
-    <script src="js/service management.js" defer></script>
+    <!-- Delete Confirmation Modal -->
+    <div
+      id="deleteModal"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] hidden flex items-center justify-center p-md"
+    >
+      <div
+        class="bg-surface-container-lowest border border-soft-border rounded-2xl max-w-sm w-full p-md shadow-xl text-center"
+      >
+        <div
+          class="w-12 h-12 rounded-full bg-error-container text-error mx-auto flex items-center justify-center mb-4"
+        >
+          <span class="material-symbols-outlined text-[24px]">delete</span>
+        </div>
+        <h3 class="text-[20px] font-bold text-on-surface mb-2">
+          Delete Service?
+        </h3>
+        <p class="text-[14px] text-on-surface-variant mb-6">
+          Are you sure you want to delete this service? This action cannot be
+          undone.
+        </p>
+        <div class="flex gap-sm">
+          <button
+            type="button"
+            onclick="closeDeleteModal()"
+            class="flex-1 py-sm border border-soft-border text-on-surface font-semibold text-[14px] rounded-xl hover:bg-surface-container-low transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            onclick="confirmDelete()"
+            class="flex-1 py-sm bg-error text-white font-semibold text-[14px] rounded-xl hover:bg-error/90 transition-colors shadow-sm"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/service-management.js"></script>
   </body>
 </html>

@@ -8,19 +8,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// --- Vendor Capabilities & Logistics Config ---
+const vendorConfig = {
+    offersWalkIn: true,      // Set to false to test disabled Walk-In option
+    offersHomeService: true, // Set to false to test disabled Home Service option
+    travelFee: 5000          // Logistics / Travel / Call-Out fee in NGN
+};
+
+// --- Percentage Deposit Config ---
+const BREAKAGE_FEE_PERCENTAGE = 0.20; // 20% Breakage Fee required to lock slot
+
 // --- State Management ---
-const today = new Date(); // Automatically uses current contextual date
+const today = new Date();
 let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
 
 let selectedDate = null;
 let selectedSlots = [];
+let selectedLocation = 'walk-in'; // 'walk-in' or 'home-service'
 const PRICE_PER_SLOT = 15000; // ₦15,000 per 30-min slot
 
-// Global record of booked slots (In reality, this comes from the database/API)
-let globallyBookedSlots = {
-    // Format: 'YYYY-MM-DD': ['09:00 AM', '01:00 PM']
-};
+// Global record of booked slots
+let globallyBookedSlots = {};
 
 // --- DOM Elements ---
 const monthYearLabel = document.getElementById('current-month-year');
@@ -33,13 +42,25 @@ const clearSlotsBtn = document.getElementById('clear-slots-btn');
 const slotSelectionCount = document.getElementById('slot-selection-count');
 const checkoutBtn = document.getElementById('checkout-btn');
 
+// Location DOM Elements
+const walkInRadio = document.getElementById('radio-walkin');
+const walkInLabel = document.getElementById('option-walkin');
+const homeRadio = document.getElementById('radio-homeservice');
+const homeLabel = document.getElementById('option-homeservice');
+const homeFeeBadge = document.getElementById('home-service-fee-badge');
+
 // Summary DOM Elements
 const summaryDateTime = document.getElementById('summary-date-time');
 const summaryServices = document.getElementById('summary-services');
 const summarySubtotal = document.getElementById('summary-subtotal');
+const summaryTravelRow = document.getElementById('summary-travel-row');
+const summaryTravelFee = document.getElementById('summary-travel-fee');
 const summaryTaxes = document.getElementById('summary-taxes');
 const summaryTotal = document.getElementById('summary-total');
-const summaryDeposit = document.getElementById('summary-deposit');
+const summaryDueNow = document.getElementById('summary-due-now');
+const summaryBalance = document.getElementById('summary-balance');
+const dueNowLabel = document.getElementById('due-now-label');
+const dueNowDescription = document.getElementById('due-now-description');
 
 // --- Helper Functions ---
 const formatCurrency = (amount) => {
@@ -50,6 +71,43 @@ const formatDateObj = (dateObj) => {
     return dateObj.toLocaleDateString('en-NG', { weekday: 'short', month: 'short', day: 'numeric' });
 };
 
+// --- Service Delivery Location Logic ---
+function initServiceLocation() {
+    if (homeFeeBadge) {
+        homeFeeBadge.textContent = `+${formatCurrency(vendorConfig.travelFee)} logistics`;
+    }
+
+    // Grey out Walk-In option if vendor doesn't accept studio visits
+    if (!vendorConfig.offersWalkIn) {
+        walkInRadio.disabled = true;
+        walkInRadio.checked = false;
+        walkInLabel.classList.add('opacity-40', 'cursor-not-allowed', 'bg-surface-container-low', 'dark:bg-primary-container');
+        walkInLabel.classList.remove('cursor-pointer', 'hover:border-primary', 'dark:hover:border-parchment-white');
+        
+        selectedLocation = 'home-service';
+        homeRadio.checked = true;
+    }
+
+    // Grey out Home Service option if vendor doesn't offer mobile services
+    if (!vendorConfig.offersHomeService) {
+        homeRadio.disabled = true;
+        homeRadio.checked = false;
+        homeLabel.classList.add('opacity-40', 'cursor-not-allowed', 'bg-surface-container-low', 'dark:bg-primary-container');
+        homeLabel.classList.remove('cursor-pointer', 'hover:border-primary', 'dark:hover:border-parchment-white');
+        
+        selectedLocation = 'walk-in';
+        walkInRadio.checked = true;
+    }
+
+    // Radio change handlers
+    document.querySelectorAll('input[name="delivery_location"]').forEach((radio) => {
+        radio.addEventListener('change', (e) => {
+            selectedLocation = e.target.value;
+            updateSummary();
+        });
+    });
+}
+
 // --- Calendar Logic ---
 function renderCalendar(month, year) {
     calendarGrid.innerHTML = '';
@@ -57,7 +115,6 @@ function renderCalendar(month, year) {
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     
-    // Set Month/Year Label
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     monthYearLabel.textContent = `${monthNames[month]} ${year}`;
 
@@ -73,23 +130,18 @@ function renderCalendar(month, year) {
         const dateBtn = document.createElement('button');
         const loopDate = new Date(year, month, day);
         
-        // Strip times for accurate today comparison
         const loopDateString = loopDate.toDateString();
         const todayString = today.toDateString();
         
-        // Default classes
         dateBtn.className = "aspect-square rounded-lg flex items-center justify-center font-body-md text-body-md transition-colors relative";
         dateBtn.textContent = day;
 
-        // Check if date is in the past
         if (loopDate < today && loopDateString !== todayString) {
             dateBtn.classList.add("text-outline-variant", "dark:text-surface-variant", "opacity-50", "cursor-not-allowed", "line-through", "decoration-outline-variant", "dark:decoration-surface-variant");
             dateBtn.disabled = true;
         } else {
-            // Interactive date
             dateBtn.classList.add("text-on-surface", "dark:text-parchment-white", "hover:bg-surface-container-low", "dark:hover:bg-surface-container-high");
             
-            // Check if selected
             if (selectedDate && loopDateString === selectedDate.toDateString()) {
                 dateBtn.classList.remove("text-on-surface", "dark:text-parchment-white", "hover:bg-surface-container-low", "dark:hover:bg-surface-container-high");
                 dateBtn.classList.add("bg-charcoal", "dark:bg-parchment-white", "text-on-primary", "dark:text-charcoal", "shadow-md");
@@ -101,7 +153,7 @@ function renderCalendar(month, year) {
             
             dateBtn.addEventListener('click', () => {
                 selectedDate = loopDate;
-                selectedSlots = []; // Reset slots when day changes
+                selectedSlots = [];
                 renderCalendar(currentMonth, currentYear);
                 renderTimeSlots();
                 updateSummary();
@@ -172,7 +224,6 @@ function toggleSlot(time) {
         selectedSlots = selectedSlots.filter(t => t !== time);
     } else {
         selectedSlots.push(time);
-        // Sort slots chronologically to ensure they look right in the summary
         selectedSlots.sort((a, b) => new Date('1970/01/01 ' + a) - new Date('1970/01/01 ' + b));
     }
     renderTimeSlots();
@@ -180,22 +231,22 @@ function toggleSlot(time) {
 }
 
 function updateSummary() {
-    // Update count labels
     slotSelectionCount.textContent = `${selectedSlots.length} slot(s) selected`;
+    
     if (selectedSlots.length > 0) {
         clearSlotsBtn.classList.remove('hidden');
         checkoutBtn.disabled = false;
         
-        // Update summary datetime text
         const firstSlot = selectedSlots[0];
         const lastSlot = selectedSlots[selectedSlots.length - 1];
         summaryDateTime.textContent = `${formatDateObj(selectedDate)} • ${firstSlot}${selectedSlots.length > 1 ? ' - ' + lastSlot : ''}`;
         
-        // Populate services HTML
+        const locationBadge = selectedLocation === 'home-service' ? ' (Home Service)' : ' (Studio Walk-In)';
+        
         summaryServices.innerHTML = `
             <div class="flex justify-between items-start group">
               <div class="flex flex-col gap-xs pr-md">
-                <span class="font-label-md text-label-md text-primary dark:text-parchment-white">Precision Cut & Style (Senior Stylist)</span>
+                <span class="font-label-md text-label-md text-primary dark:text-parchment-white">Precision Cut & Style${locationBadge}</span>
                 <span class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant">${selectedSlots.length * 30} mins</span>
               </div>
               <div class="flex flex-col items-end gap-xs">
@@ -204,30 +255,75 @@ function updateSummary() {
             </div>
         `;
 
-        // Financial calculations
+        // 1. Core Component Breakdown
         const subtotal = PRICE_PER_SLOT * selectedSlots.length;
-        const vat = subtotal * 0.075; // 7.5% VAT in Nigeria
-        const total = subtotal + vat;
-        const deposit = total * 0.20; // 20% Deposit Rule
+        const travelFee = (selectedLocation === 'home-service') ? vendorConfig.travelFee : 0;
+        
+        // 2. Full VAT (7.5%) on service + travel
+        const vat = (subtotal + travelFee) * 0.075; 
+        
+        // 3. Gross Total
+        const total = subtotal + travelFee + vat;
+        
+        // 4. Base 20% Breakage Fee
+        const breakageFee = subtotal * BREAKAGE_FEE_PERCENTAGE; 
+        
+        // 5. Upfront Total: Breakage + 100% VAT (+ Logistics if applicable)
+        let dueNow = breakageFee + vat;
+
+        if (selectedLocation === 'home-service') {
+            summaryTravelRow.classList.remove('hidden');
+            summaryTravelRow.classList.add('flex');
+            summaryTravelFee.textContent = formatCurrency(travelFee);
+            
+            dueNow += travelFee;
+            dueNowLabel.textContent = "Due Now (Breakage + Logistics + VAT)";
+            dueNowDescription.innerHTML = `The <span class="font-bold text-muted-terracotta dark:text-tertiary-fixed">20% breakage fee, logistics, and full VAT</span> are paid upfront to secure your booking.`;
+        } else {
+            summaryTravelRow.classList.add('hidden');
+            summaryTravelRow.classList.remove('flex');
+            
+            dueNowLabel.textContent = "Due Now (20% Breakage + VAT)";
+            dueNowDescription.innerHTML = `The <span class="font-bold text-muted-terracotta dark:text-tertiary-fixed">20% breakage fee and full VAT</span> are paid upfront to hold your time slot.`;
+        }
+
+        // 6. Remaining Balance (Always equals 80% of base service)
+        const remainingBalance = total - dueNow;
 
         summarySubtotal.textContent = formatCurrency(subtotal);
         summaryTaxes.textContent = formatCurrency(vat);
         summaryTotal.textContent = formatCurrency(total);
-        summaryDeposit.textContent = formatCurrency(deposit);
+        summaryDueNow.textContent = formatCurrency(dueNow);
+        summaryBalance.textContent = formatCurrency(remainingBalance);
+
+        checkoutBtn.innerHTML = `
+            Pay Due Amount (${formatCurrency(dueNow)})
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+        `;
 
     } else {
         clearSlotsBtn.classList.add('hidden');
         checkoutBtn.disabled = true;
         summaryDateTime.textContent = "Awaiting selection...";
         summaryServices.innerHTML = '<p class="font-body-sm text-on-surface-variant dark:text-outline-variant text-center py-md">Select time slots to view your total.</p>';
+        summaryTravelRow.classList.add('hidden');
+        summaryTravelRow.classList.remove('flex');
+        
+        dueNowLabel.textContent = "Due Now (20% Breakage + VAT)";
+        dueNowDescription.innerHTML = `The <span class="font-bold text-muted-terracotta dark:text-tertiary-fixed">20% breakage fee and full VAT</span> are paid upfront to hold your time slot.`;
+
         summarySubtotal.textContent = "₦0.00";
         summaryTaxes.textContent = "₦0.00";
         summaryTotal.textContent = "₦0.00";
-        summaryDeposit.textContent = "₦0.00";
-    }
-}
+        summaryDueNow.textContent = "₦0.00";
+        summaryBalance.textContent = "₦0.00";
 
-// --- Event Listeners ---
+        checkoutBtn.innerHTML = `
+            Proceed to Payment
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+        `;
+    }
+}// --- Event Listeners ---
 prevMonthBtn.addEventListener('click', () => {
     currentMonth--;
     if (currentMonth < 0) {
@@ -255,23 +351,27 @@ clearSlotsBtn.addEventListener('click', () => {
 checkoutBtn.addEventListener('click', () => {
     if (selectedSlots.length === 0 || !selectedDate) return;
     
-    // Simulate successful payment/booking via Paystack
     const dateKey = `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`;
     
     if (!globallyBookedSlots[dateKey]) {
         globallyBookedSlots[dateKey] = [];
     }
     
-    // Add selected slots to the booked record
     globallyBookedSlots[dateKey].push(...selectedSlots);
     
-    alert(`Payment successful! Your appointment on ${formatDateObj(selectedDate)} has been secured.`);
+    const subtotal = PRICE_PER_SLOT * selectedSlots.length;
+    const travelFee = (selectedLocation === 'home-service') ? vendorConfig.travelFee : 0;
+    const breakageFee = subtotal * BREAKAGE_FEE_PERCENTAGE;
+    const dueNow = selectedLocation === 'home-service' ? breakageFee + travelFee : breakageFee;
+
+    const locationType = selectedLocation === 'home-service' ? 'Home Service' : 'Studio Walk-In';
+    alert(`Payment of ${formatCurrency(dueNow)} successful! Your ${locationType} appointment on ${formatDateObj(selectedDate)} is confirmed.`);
     
-    // Reset selections and re-render so those slots disappear/disable
     selectedSlots = [];
     renderTimeSlots();
     updateSummary();
 });
 
 // --- Initialization ---
+initServiceLocation();
 renderCalendar(currentMonth, currentYear);

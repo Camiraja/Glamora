@@ -117,44 +117,6 @@
               "body-sm": ["Hanken Grotesk"],
               "body-md": ["Hanken Grotesk"],
             },
-            fontSize: {
-              "headline-xl-mobile": [
-                "36px",
-                { lineHeight: "1.1", fontWeight: "600" },
-              ],
-              "headline-lg-mobile": [
-                "28px",
-                { lineHeight: "1.2", fontWeight: "600" },
-              ],
-              "label-md": [
-                "14px",
-                { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" },
-              ],
-              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "500" }],
-              "headline-lg": [
-                "32px",
-                {
-                  lineHeight: "1.2",
-                  letterSpacing: "-0.01em",
-                  fontWeight: "600",
-                },
-              ],
-              "label-sm": [
-                "12px",
-                { lineHeight: "1", letterSpacing: "0.03em", fontWeight: "600" },
-              ],
-              "headline-xl": [
-                "48px",
-                {
-                  lineHeight: "1.1",
-                  letterSpacing: "-0.02em",
-                  fontWeight: "600",
-                },
-              ],
-              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
-              "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
-              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
-            },
           },
         },
       };
@@ -239,16 +201,17 @@
               <h1
                 class="font-headline-xl text-headline-xl text-primary dark:text-parchment-white tracking-tight"
               >
-                Select Date & Time
+                Book Appointment
               </h1>
               <p
                 class="font-body-lg text-body-lg text-on-surface-variant dark:text-outline-variant max-w-2xl"
               >
-                Please choose an available date and select one or more
-                consecutive time slots for your service.
+                Select an available date, your preferred time slot, and service
+                delivery location.
               </p>
             </div>
 
+            <!-- Calendar & Time Slots Block -->
             <div
               class="flex flex-col xl:flex-row gap-lg bg-surface-container-lowest dark:bg-primary-container rounded-2xl shadow-sm border border-soft-border dark:border-outline-variant p-md md:p-lg transition-colors duration-300"
             >
@@ -365,6 +328,84 @@
                 </div>
               </div>
             </div>
+
+            <!-- Service Delivery Location Section -->
+            <div
+              class="bg-surface-container-lowest dark:bg-primary-container rounded-2xl shadow-sm border border-soft-border dark:border-outline-variant p-md md:p-lg transition-colors duration-300"
+            >
+              <div class="flex flex-col gap-xs mb-md">
+                <h2
+                  class="font-headline-md text-headline-md text-primary dark:text-parchment-white"
+                >
+                  Service Delivery Location
+                </h2>
+                <p
+                  class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant"
+                >
+                  Choose whether you want to visit the studio or request a home
+                  visit.
+                </p>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+                <!-- Studio Walk-In Option -->
+                <label
+                  id="option-walkin"
+                  class="flex items-center gap-md p-md rounded-xl border border-soft-border dark:border-outline-variant cursor-pointer hover:border-primary dark:hover:border-parchment-white transition-all"
+                >
+                  <input
+                    type="radio"
+                    name="delivery_location"
+                    value="walk-in"
+                    id="radio-walkin"
+                    class="accent-primary w-4 h-4 cursor-pointer"
+                    checked
+                  />
+                  <div class="flex flex-col">
+                    <span
+                      class="font-label-md text-label-md text-primary dark:text-parchment-white"
+                      >Studio Walk-In</span
+                    >
+                    <span
+                      class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant"
+                      >Visit vendor studio</span
+                    >
+                  </div>
+                </label>
+
+                <!-- Home Service Option -->
+                <label
+                  id="option-homeservice"
+                  class="flex items-center gap-md p-md rounded-xl border border-soft-border dark:border-outline-variant cursor-pointer hover:border-primary dark:hover:border-parchment-white transition-all"
+                >
+                  <input
+                    type="radio"
+                    name="delivery_location"
+                    value="home-service"
+                    id="radio-homeservice"
+                    class="accent-primary w-4 h-4 cursor-pointer"
+                  />
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-xs flex-wrap">
+                      <span
+                        class="font-label-md text-label-md text-primary dark:text-parchment-white"
+                        >Home Service</span
+                      >
+                      <span
+                        id="home-service-fee-badge"
+                        class="font-label-sm text-[11px] bg-secondary-container dark:bg-surface-container-high text-on-secondary-container dark:text-parchment-white px-2 py-0.5 rounded-full font-normal"
+                      >
+                        +₦0 logistics
+                      </span>
+                    </div>
+                    <span
+                      class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant"
+                      >Vendor comes to your venue</span
+                    >
+                  </div>
+                </label>
+              </div>
+            </div>
           </div>
 
           <!-- Right Column: Summary & Policies -->
@@ -399,6 +440,7 @@
                 </p>
               </div>
 
+              <!-- Cost Breakdown -->
               <div
                 class="p-md bg-surface dark:bg-charcoal border-t border-soft-border dark:border-outline-variant flex flex-col gap-sm"
               >
@@ -409,57 +451,59 @@
                   <span id="summary-subtotal">₦0.00</span>
                 </div>
                 <div
+                  id="summary-travel-row"
+                  class="hidden justify-between items-center font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant"
+                >
+                  <span>Logistics / Travel Fee</span>
+                  <span id="summary-travel-fee">₦0.00</span>
+                </div>
+                <div
                   class="flex justify-between items-center font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant"
                 >
                   <span>VAT (7.5%)</span>
                   <span id="summary-taxes">₦0.00</span>
                 </div>
                 <div
-                  class="pt-sm mt-sm border-t border-soft-border dark:border-outline-variant flex justify-between items-center"
+                  class="pt-sm mt-xs border-t border-soft-border dark:border-outline-variant flex justify-between items-center font-body-md text-body-md text-on-surface-variant dark:text-outline-variant"
                 >
-                  <span
-                    class="font-headline-md text-headline-md text-primary dark:text-parchment-white"
-                    >Total</span
-                  >
-                  <span
-                    id="summary-total"
-                    class="font-headline-md text-headline-md text-primary dark:text-parchment-white"
-                    >₦0.00</span
-                  >
+                  <span>Total Service Fee</span>
+                  <span id="summary-total">₦0.00</span>
                 </div>
               </div>
 
+              <!-- Payable Deposit Highlight Box -->
               <div
-                class="p-md bg-tertiary-fixed-dim/20 dark:bg-tertiary-container/30 border-t border-tertiary-fixed-dim/30 dark:border-tertiary-container/50 flex gap-md items-start"
+                class="p-md bg-tertiary-fixed-dim/20 dark:bg-tertiary-container/30 border-t border-tertiary-fixed-dim/30 dark:border-tertiary-container/50 flex flex-col gap-xs"
               >
-                <span
-                  class="material-symbols-outlined text-muted-terracotta dark:text-tertiary-fixed mt-xs"
-                  >warning</span
-                >
-                <div class="flex flex-col gap-sm">
-                  <div class="flex justify-between items-center w-full">
-                    <span
-                      class="font-label-md text-label-md text-tertiary-container dark:text-tertiary-fixed"
-                      >Required Deposit (20%)</span
-                    >
-                    <span
-                      id="summary-deposit"
-                      class="font-label-md text-label-md text-tertiary-container dark:text-tertiary-fixed"
-                      >₦0.00</span
-                    >
-                  </div>
-                  <p
-                    class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant leading-relaxed"
+                <div class="flex justify-between items-center w-full">
+                  <span
+                    id="due-now-label"
+                    class="font-label-md text-label-md text-tertiary-container dark:text-tertiary-fixed"
+                    >Due Now (20% Breakage Fee)</span
                   >
-                    A
-                    <span
-                      class="font-bold text-muted-terracotta dark:text-tertiary-fixed"
-                      >breakage fee deposit</span
-                    >
-                    is required to secure this time slot. This is fully
-                    refundable if canceled within our policy window.
-                  </p>
+                  <span
+                    id="summary-due-now"
+                    class="font-headline-md text-headline-md text-muted-terracotta dark:text-tertiary-fixed"
+                    >₦0.00</span
+                  >
                 </div>
+                <div
+                  class="flex justify-between items-center w-full text-body-sm font-body-sm text-on-surface-variant dark:text-outline-variant mt-xs"
+                >
+                  <span>Remaining Balance (At Venue)</span>
+                  <span id="summary-balance">₦0.00</span>
+                </div>
+                <p
+                  id="due-now-description"
+                  class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant leading-relaxed mt-xs"
+                >
+                  Only the
+                  <span
+                    class="font-bold text-muted-terracotta dark:text-tertiary-fixed"
+                    >20% breakage fee</span
+                  >
+                  is charged today to hold your time slot.
+                </p>
               </div>
 
               <div
@@ -478,8 +522,7 @@
                     class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant"
                   >
                     Cancellations or modifications must be made at least 30
-                    minutes prior to the appointment start time. Late
-                    cancellations or no-shows will forfeit the deposit.
+                    minutes prior to the appointment start time.
                   </p>
                 </div>
               </div>
