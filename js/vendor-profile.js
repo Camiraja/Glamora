@@ -100,7 +100,8 @@ function initRoleToggle() {
         // Set initial disabled state
         formInputs.forEach((input) => input.setAttribute("disabled", "true"));
 
-        profileToggleBtn.addEventListener("click", () => {
+        profileToggleBtn.addEventListener("click", async () => {
+          if (isEditMode && !(await saveBookingSettings())) return;
           isEditMode = !isEditMode;
 
           if (isEditMode) {
@@ -172,10 +173,7 @@ function initRoleToggle() {
               "bg-surface-container",
               "text-on-surface-variant",
             );
-            showToast(
-              "Studio profile and policy configurations saved successfully.",
-              "check_circle",
-            );
+            showToast("Vendor booking settings saved.", "check_circle");
           }
         });
 
@@ -344,13 +342,71 @@ function initRoleToggle() {
         const slider = document.getElementById("depositSlider");
         const display = document.getElementById("depositDisplay");
         const inlineText = document.getElementById("depositInlineText");
-        if (slider && display && inlineText) {
+        if (slider && display) {
           slider.addEventListener("input", function (e) {
             const val = e.target.value;
             display.textContent = val;
-            inlineText.textContent = val + "%";
+            if (inlineText) inlineText.textContent = val + "%";
           });
         }
+
+        async function loadBookingSettings() {
+          const token = localStorage.getItem("glamoraToken");
+          if (!token) return;
+          try {
+            const response = await fetch("http://localhost:3000/api/vendor/business", {
+              headers: { Authorization: `Bearer ${token}` },
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.message || "Could not load booking settings.");
+
+            studioToggle.checked = data.business.deliveryMode !== "HOME_SERVICE_ONLY";
+            mobileToggle.checked = data.business.deliveryMode !== "STUDIO_ONLY";
+            slider.value = data.business.breakagePercent;
+            display.textContent = data.business.breakagePercent;
+            const travelInput = document.getElementById("travelSurchargeInput");
+            travelInput.value = `₦ ${new Intl.NumberFormat("en-NG").format(data.business.logisticsFeeKobo / 100)}`;
+            updateModes();
+          } catch (error) {
+            showToast(error.message || "Could not load booking settings.", "error", true);
+          }
+        }
+
+        async function saveBookingSettings() {
+          const token = localStorage.getItem("glamoraToken");
+          const deliveryMode = studioToggle.checked
+            ? (mobileToggle.checked ? "BOTH" : "STUDIO_ONLY")
+            : (mobileToggle.checked ? "HOME_SERVICE_ONLY" : null);
+          const travelInput = document.getElementById("travelSurchargeInput");
+          const logisticsFee = Number(travelInput.value.replace(/[^\d.]/g, ""));
+          if (!token || !deliveryMode || !Number.isFinite(logisticsFee) || logisticsFee < 0) {
+            showToast("Enable at least one delivery mode and enter a valid logistics fee.", "error", true);
+            return false;
+          }
+
+          try {
+            const response = await fetch("http://localhost:3000/api/vendor/business", {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({
+                deliveryMode,
+                breakagePercent: Number(slider.value),
+                logisticsFeeKobo: Math.round(logisticsFee * 100),
+              }),
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.message || "Could not save booking settings.");
+            return true;
+          } catch (error) {
+            showToast(error.message || "Could not save booking settings.", "error", true);
+            return false;
+          }
+        }
+
+        loadBookingSettings();
 
         // 7. Chair Turnaround Buffer Buttons
         const bufferGroup = document.getElementById("bufferButtonGroup");

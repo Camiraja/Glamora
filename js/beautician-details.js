@@ -55,6 +55,19 @@ const vendorProducts = [
     if (closeSidebarBtn) closeSidebarBtn.addEventListener('click', closeSidebar);
     if (sidebarBackdrop) sidebarBackdrop.addEventListener('click', closeSidebar);
 
+function requireLoginForProtectedFlow(returnTo = "beautician-details.html") {
+  const token = localStorage.getItem("glamoraToken");
+  const user = JSON.parse(localStorage.getItem("glamoraUser") || "null");
+
+  if (!token || !user) {
+    sessionStorage.setItem("glamoraReturnTo", returnTo);
+    window.location.href = "Auth/login.html";
+    return false;
+  }
+
+  return true;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   // Theme Switcher Logic
   const currentMode = localStorage.getItem("themeMode");
@@ -63,6 +76,16 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     document.documentElement.classList.remove("dark");
   }
+
+  const protectedLinks = document.querySelectorAll('[data-protected-action], [data-book-now]');
+  protectedLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const target = link.getAttribute("data-book-target") || "booking.html";
+      if (!requireLoginForProtectedFlow(target)) {
+        event.preventDefault();
+      }
+    });
+  });
 
   // Initialize Product Display Logic
   renderShopProducts();
@@ -181,6 +204,10 @@ function scrollToServices() {
 
 // Service Booking Logic
 function bookService(id, name, price, duration) {
+  if (!requireLoginForProtectedFlow("booking.html")) {
+    return;
+  }
+
   const serviceDetails = {
     id: id,
     vendorId: "vend_01",

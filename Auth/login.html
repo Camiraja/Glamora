@@ -5,7 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Glamora - Login</title>
 
-    <link rel="stylesheet" href="css/auth.css" />
+    <link rel="stylesheet" href="auth.css" />
 
     <!-- Tailwind Framework & Config -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -170,7 +170,7 @@
                 class="w-12 h-12 mb-6 shadow-lg shadow-charcoal/20 overflow-hidden rounded-full"
               >
                 <img
-                  src="images/screen-removebg-preview.png"
+                  src="../images/screen-removebg-preview.png"
                   alt="Glamora Logo"
                   class="w-full h-full object-cover"
                 />
@@ -248,6 +248,7 @@
                 class="flex-grow border-t border-soft-border dark:border-outline-variant"
               ></div>
               <span
+              <p id="loginMessage" class="text-sm mt-2" role="status" aria-live="polite"></p>
                 class="flex-shrink-0 mx-4 font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant uppercase tracking-wider"
                 >or sign in with email</span
               >
@@ -413,6 +414,6 @@
       </div>
     </main>
 
-    <script src="js/login.js"></script>
+    <script src="login.js"></script>
   </body>
 </html>

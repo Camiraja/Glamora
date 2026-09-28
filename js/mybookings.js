@@ -2,7 +2,7 @@
       // --- 1. Theme Configuration Logic ---
       document.addEventListener("DOMContentLoaded", () => {
         initTheme();
-        renderBookings(); 
+        loadBookings();
       });
 
       function initTheme() {
@@ -32,7 +32,7 @@
         const toast = document.createElement("div");
         toast.id = "glamora-toast";
         toast.className = "fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-charcoal dark:bg-parchment-white text-on-primary dark:text-charcoal px-lg py-sm rounded-full shadow-2xl z-[100] font-label-md transition-all duration-300 flex items-center gap-xs w-[90%] sm:w-auto justify-center sm:justify-start opacity-0";
-        toast.innerHTML = `<span class="material-symbols-outlined text-sm">info</span> <span class="truncate">${message}</span>`;
+        toast.innerHTML = `<span class="material-symbols-outlined text-sm">info</span> <span class="truncate">${escapeHtml(message)}</span>`;
 
         document.body.appendChild(toast);
         requestAnimationFrame(() => {
@@ -76,13 +76,15 @@
 
       // --- 5. Actions ---
       function viewDetails(id) {
-        const booking = bookingsData.find(b => b.id === id) || olderBookings.find(b => b.id === id);
+        const booking = bookingsData.find(b => b.id === id);
         if (!booking) return;
 
         const statusEl = document.getElementById('modal-status');
-        statusEl.textContent = booking.status.toUpperCase();
+        statusEl.textContent = booking.statusLabel.toUpperCase();
         
-        if (booking.status === 'upcoming') {
+          if (booking.status === 'pending') {
+            statusEl.className = "text-label-sm font-label-sm text-muted-terracotta bg-tertiary-fixed-dim px-2 py-0.5 rounded-full";
+          } else if (booking.status === 'upcoming') {
            statusEl.className = "text-label-sm font-label-sm text-success-green bg-secondary-container px-2 py-0.5 rounded-full";
         } else if (booking.status === 'completed') {
            statusEl.className = "text-label-sm font-label-sm text-on-surface-variant dark:text-outline-variant bg-surface-container-highest dark:bg-primary-container px-2 py-0.5 rounded-full";
@@ -93,8 +95,7 @@
         document.getElementById('modal-service').textContent = booking.service;
         document.getElementById('modal-vendor').textContent = booking.provider;
         
-        const cleanTime = booking.time.split(' - ')[0];
-        document.getElementById('modal-datetime').textContent = `${booking.date}, 2026 at ${cleanTime}`;
+        document.getElementById('modal-datetime').textContent = `${booking.date}, ${booking.time}`;
         document.getElementById('modal-location').textContent = booking.location;
         document.getElementById('modal-price').textContent = booking.price;
 
@@ -102,7 +103,9 @@
       }
 
       function rebookVendor(id) {
-        window.location.href = 'booking.html';
+        const booking = bookingsData.find((item) => item.id === id);
+        const serviceId = booking?.serviceIds?.[0];
+        window.location.href = serviceId ? `booking.html?serviceId=${encodeURIComponent(serviceId)}` : 'booking.html';
       }
 
       function reportIssue(id) {
@@ -120,90 +123,119 @@
         showToast("Your report has been successfully submitted.");
       }
 
-      function cancelAppointment(id) {
-        const index = bookingsData.findIndex(b => b.id === id);
-        if (index !== -1) {
-          const providerName = bookingsData[index].provider;
-          bookingsData[index].status = 'cancelled';
-          showToast(`Your appointment with ${providerName} has been cancelled.`);
-          renderBookings(); 
+      async function cancelAppointment(id) {
+        if (!window.confirm('Cancel this appointment? This will release the reserved time slot.')) return;
+        const token = localStorage.getItem('glamoraToken');
+        try {
+          const response = await fetch(`http://localhost:3000/api/appointments/${encodeURIComponent(id)}/cancel`, {
+            method: 'POST',
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.message || 'Could not cancel appointment.');
+          showToast('Appointment cancelled.');
+          await loadBookings();
+        } catch (error) {
+          showToast(error.message || 'Could not connect to the booking service.');
         }
       }
 
       // --- 6. Booking Data & Filtering ---
       let currentFilter = 'all';
-      let historyLoaded = false;
+      let bookingsData = [];
 
-      let bookingsData = [
-        {
-          id: 1,
-          status: 'upcoming',
-          date: 'Sep 08',
-          time: '1:40 AM - 3:10 AM',
-          exactDateTime: '2026-09-08T01:40:00', // Within 30 mins
-          provider: 'Adesuwa Bridal Artistry',
-          location: 'Lekki Phase 1, Lagos',
-          service: 'Bridal Makeup Trial',
-          desc: 'Full face application, airbrush foundation, false lashes included.',
-          price: '₦150,000',
-          img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCJFGzGHFSg-Myt90YSsrcSom1lg46P3N1kzNKBMeZ1m9nZW0mjih0AlPeVddZOzEgQ8vPmUg2D6_c5YnwCq2y1DDevZlCACreHx_k3Wz--f-99VaEQ4uaoadhuDFSKpZ7ptZ2kVI9HFGYH9Z14jiVySeMmzYa86f6OHNhApwj5gJLtwlqMaa09nuo9pXqxwlgqn40u3wNpoHdqbjBHCvJRXmb1B4gY3Qp1BQpuC9AnOPJFiBwNHCwT'
-        },
-        {
-          id: 2,
-          status: 'upcoming',
-          date: 'Sep 12',
-          time: '2:00 PM - 3:00 PM',
-          exactDateTime: '2026-09-12T14:00:00', 
-          provider: 'Chinedu Grooming Room',
-          location: 'Wuse II, Abuja',
-          service: 'Structural Haircut',
-          desc: 'Wash, precision cut, and beard sculpting.',
-          price: '₦12,500',
-          img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBHc3RlNC9LxoXGZVLMoaPQcBdnihvATUVWNJULqCA4Eme7FPhgudMp5tzupIbgA3WKdkMpO3I5GxglVj8wNu3I45HKkOko6ZdZqrevgBAriVKQCpv2lAs94Sc4CKepwmnC8v1QbHnpLHsv9hlWajJQt134IqxbKUU8cgdiGTso_PLNwytMwZ_HBQFwWHOxphtR8SGrWUdkMB5Rqser4ichodAgHO2P8Lemu5NMmL0NqRbmiorh77tp'
-        },
-        {
-          id: 3,
-          status: 'completed',
-          date: 'Aug 20',
-          time: '1:00 PM - 2:00 PM',
-          exactDateTime: '2026-08-20T13:00:00',
-          provider: 'Sari Glow Aesthetics',
-          location: 'Victoria Island, Lagos',
-          service: 'Deep Tissue Massage',
-          desc: '60 minutes full body pressure point massage.',
-          price: '₦45,000',
-          img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCJFGzGHFSg-Myt90YSsrcSom1lg46P3N1kzNKBMeZ1m9nZW0mjih0AlPeVddZOzEgQ8vPmUg2D6_c5YnwCq2y1DDevZlCACreHx_k3Wz--f-99VaEQ4uaoadhuDFSKpZ7ptZ2kVI9HFGYH9Z14jiVySeMmzYa86f6OHNhApwj5gJLtwlqMaa09nuo9pXqxwlgqn40u3wNpoHdqbjBHCvJRXmb1B4gY3Qp1BQpuC9AnOPJFiBwNHCwT' 
-        }
-      ];
+      function mapAppointment(appointment) {
+        const start = new Date(appointment.startAt);
+        const end = new Date(appointment.endAt);
+        const services = appointment.services || [];
+        const statusMap = {
+          PENDING_PAYMENT: ['pending', 'PENDING DEPOSIT'],
+          CONFIRMED: ['upcoming', 'CONFIRMED'],
+          CHECKED_IN: ['upcoming', 'CHECKED IN'],
+          COMPLETED: ['completed', 'COMPLETED'],
+          CANCELLED: ['cancelled', 'CANCELLED'],
+          NO_SHOW: ['cancelled', 'NO SHOW'],
+        };
+        const [status, statusLabel] = statusMap[appointment.status] || ['cancelled', appointment.status];
+        const totalKobo = appointment.subtotalKobo + appointment.vatKobo + appointment.logisticsFeeKobo;
+        const upfrontKobo = appointment.depositKobo + appointment.vatKobo + appointment.logisticsFeeKobo;
+        const money = (kobo) => new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN' }).format(kobo / 100);
+        const location = appointment.deliveryMode === 'HOME_SERVICE'
+          ? 'Home service'
+          : (appointment.business?.locations?.[0]?.city || 'Studio walk-in');
 
-      const olderBookings = [
-        {
-          id: 4,
-          status: 'cancelled',
-          date: 'Jul 02',
-          time: '4:30 PM - 5:30 PM',
-          exactDateTime: '2026-07-02T16:30:00',
-          provider: 'The Nail Architecture',
-          location: 'GRA Phase 2, Port Harcourt',
-          service: 'Gel Manicure',
-          desc: 'Solid color, cuticle care, and paraffin wax treatment.',
-          price: '₦18,000',
-          img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB-ju5OXrmxYa1WusD4PlfJtK8L-M_YbUIlbsMRODiEUbZnGzji4soahbBpvyUC7ZEpYBh2Rm17cjplbflGgThppwdz9QuIvRtsQMYQQxSZyuf28fBzLiiOyWk3-Pk9rH59eXof25ztKiAi0RF1TeypYCQzCUxkF-q6GZ_C5VMATwoYvVANzCIDKV5psBBTCSKLIOL4wHbRGusszM0d8r2l-2gY-8nB8pdBix6H2_nhfRJWi_9UBlyZ'
-        },
-        {
-          id: 5,
-          status: 'completed',
-          date: 'Jun 12',
-          time: '11:00 AM - 1:00 PM',
-          exactDateTime: '2026-06-12T11:00:00',
-          provider: 'Lash & Brow Lounge',
-          location: 'Bodija, Ibadan',
-          service: 'Volume Hybrid Lashes',
-          desc: 'Full set wispy eyelash extensions with shaping.',
-          price: '₦30,000',
-          img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB-ju5OXrmxYa1WusD4PlfJtK8L-M_YbUIlbsMRODiEUbZnGzji4soahbBpvyUC7ZEpYBh2Rm17cjplbflGgThppwdz9QuIvRtsQMYQQxSZyuf28fBzLiiOyWk3-Pk9rH59eXof25ztKiAi0RF1TeypYCQzCUxkF-q6GZ_C5VMATwoYvVANzCIDKV5psBBTCSKLIOL4wHbRGusszM0d8r2l-2gY-8nB8pdBix6H2_nhfRJWi_9UBlyZ'
+        return {
+          id: appointment.id,
+          status,
+          statusLabel,
+          date: start.toLocaleDateString('en-NG', { day: 'numeric', month: 'short', year: 'numeric' }),
+          time: `${start.toLocaleTimeString('en-NG', { hour: 'numeric', minute: '2-digit' })} - ${end.toLocaleTimeString('en-NG', { hour: 'numeric', minute: '2-digit' })}`,
+          exactDateTime: appointment.startAt,
+          provider: appointment.business?.name || appointment.vendor?.name || 'Glamora professional',
+          location,
+          service: services.map((service) => service.serviceName).join(', ') || 'Appointment',
+          serviceIds: services.map((service) => service.serviceId),
+          desc: `${appointment.deliveryMode === 'HOME_SERVICE' ? 'Home service' : 'Studio walk-in'} · ${appointment.depositPercent}% breakage deposit`,
+          price: money(totalKobo),
+          upfront: money(upfrontKobo),
+        };
+      }
+
+      async function loadBookings() {
+        const token = localStorage.getItem('glamoraToken');
+        let user;
+        try {
+          user = JSON.parse(localStorage.getItem('glamoraUser') || 'null');
+        } catch {
+          user = null;
         }
-      ];
+        if (!token || !user) {
+          sessionStorage.setItem('glamoraReturnTo', 'mybookings.html');
+          window.location.href = 'Auth/login.html';
+          return;
+        }
+        if (String(user.role || '').toUpperCase() !== 'CUSTOMER') {
+          window.location.href = 'vendor-dashboard.html';
+          return;
+        }
+
+        const container = document.getElementById('bookings-container');
+        container.innerHTML = '<p class="py-lg text-center text-on-surface-variant">Loading your appointments...</p>';
+        try {
+          const response = await fetch('http://localhost:3000/api/appointments', {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.message || 'Could not load appointments.');
+          bookingsData = data.appointments.map(mapAppointment);
+          document.getElementById('load-more-btn')?.classList.add('hidden');
+          renderBookings();
+        } catch (error) {
+          container.innerHTML = `<div class="py-lg text-center text-error">${escapeHtml(error.message || 'Could not load appointments.')}</div>`;
+        }
+      }
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, (character) => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        })[character]);
+      }
+
+      async function payDeposit(id) {
+        const token = localStorage.getItem('glamoraToken');
+        try {
+          const response = await fetch(`http://localhost:3000/api/payments/appointments/${encodeURIComponent(id)}/deposit`, {
+            method: 'POST',
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.message || 'Could not start deposit payment.');
+          if (!data.authorizationUrl) throw new Error('Paystack did not return a checkout link.');
+          window.location.href = data.authorizationUrl;
+        } catch (error) {
+          showToast(error.message || 'Could not connect to the payment service.');
+        }
+      }
 
       function setFilter(filterType) {
         currentFilter = filterType;
@@ -223,19 +255,7 @@
       }
 
       function loadMoreHistory() {
-        if (historyLoaded) return;
-        bookingsData = bookingsData.concat(olderBookings);
-        historyLoaded = true;
-        
-        const btnText = document.getElementById('load-btn-text');
-        const loadBtn = document.getElementById('load-more-btn');
-        if (btnText) btnText.textContent = "All History Loaded";
-        if (loadBtn) {
-          loadBtn.disabled = true;
-          loadBtn.classList.add('opacity-50', 'cursor-not-allowed');
-          loadBtn.querySelector('.material-symbols-outlined').style.display = 'none';
-        }
-        renderBookings();
+        loadBookings();
       }
 
       function renderBookings() {
@@ -244,7 +264,7 @@
 
         const filteredBookings = bookingsData.filter(booking => {
           if (currentFilter === 'all') return true;
-          if (currentFilter === 'active') return booking.status === 'upcoming';
+          if (currentFilter === 'active') return booking.status === 'upcoming' || booking.status === 'pending';
           if (currentFilter === 'completed') return booking.status === 'completed' || booking.status === 'cancelled';
           return true;
         });
@@ -265,115 +285,63 @@
       }
 
       function generateCardHTML(booking) {
-        let ribbonClass, ribbonText, priceStrikethrough, opacityClass, imageGreyscale;
-
-        if (booking.status === 'upcoming') {
-          ribbonClass = "bg-sage dark:bg-sage text-on-surface dark:text-charcoal";
-          ribbonText = "UPCOMING";
-          priceStrikethrough = "";
-          opacityClass = "";
-          imageGreyscale = "";
-        } else if (booking.status === 'completed') {
-          ribbonClass = "bg-surface-container-highest dark:bg-primary-container text-on-surface-variant dark:text-outline-variant";
-          ribbonText = "COMPLETED";
-          priceStrikethrough = "";
-          opacityClass = "opacity-80 group-hover:opacity-100 transition-opacity";
-          imageGreyscale = "grayscale group-hover:grayscale-0 transition-all";
-        } else if (booking.status === 'cancelled') {
-          ribbonClass = "bg-error-container dark:bg-error-container/20 text-on-error-container dark:text-error-container";
-          ribbonText = "CANCELLED";
-          priceStrikethrough = "line-through text-on-surface-variant dark:text-outline-variant";
-          opacityClass = "opacity-60";
-          imageGreyscale = "grayscale";
-        }
-
-        // Cancel Option Logic inside Dropdown
-        const now = new Date();
-        const appointmentTime = new Date(booking.exactDateTime);
-        const diffInMs = appointmentTime - now;
-        const diffInMinutes = diffInMs / (1000 * 60);
-
-        let cancelOptionDropdownHtml = '';
-        if (booking.status === 'upcoming') {
-          if (diffInMinutes <= 30 && diffInMinutes > 0) {
-            cancelOptionDropdownHtml = `
-              <button disabled title="Cannot cancel within 30mins due to platform rules" class="w-full text-left px-md py-sm opacity-50 cursor-not-allowed text-on-surface-variant dark:text-outline-variant flex flex-col border-t border-soft-border dark:border-outline-variant/10">
-                <span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[18px]">block</span> Cancel</span>
-                <span class="text-[10px] text-on-surface-variant/70 dark:text-outline-variant/70 pl-6">Platform rule: < 30 mins</span>
-              </button>`;
-          } else {
-            cancelOptionDropdownHtml = `
-              <button onclick="cancelAppointment(${booking.id}); hideAllMenus();" class="w-full text-left px-md py-sm hover:bg-error-container/20 text-error-red dark:text-error-container flex items-center gap-xs transition-colors border-t border-soft-border dark:border-outline-variant/10">
-                <span class="material-symbols-outlined text-[18px]">cancel</span> Cancel
-              </button>`;
-          }
-        }
+        const ribbonClass = booking.status === 'pending'
+          ? 'bg-tertiary-fixed-dim text-tertiary-container'
+          : booking.status === 'upcoming'
+            ? 'bg-sage dark:bg-sage text-on-surface dark:text-charcoal'
+            : booking.status === 'completed'
+              ? 'bg-surface-container-highest dark:bg-primary-container text-on-surface-variant dark:text-outline-variant'
+              : 'bg-error-container dark:bg-error-container/20 text-on-error-container dark:text-error-container';
+        const diffInMinutes = (new Date(booking.exactDateTime) - new Date()) / 60000;
+        const canCancel = ['pending', 'upcoming'].includes(booking.status);
+        const cancelAction = canCancel
+          ? (diffInMinutes <= 30
+            ? '<span class="px-md py-sm text-xs text-on-surface-variant">Cancellation unavailable within 30 minutes</span>'
+            : `<button onclick="cancelAppointment('${escapeHtml(booking.id)}'); hideAllMenus();" class="w-full text-left px-md py-sm hover:bg-error-container/20 text-error-red dark:text-error-container flex items-center gap-xs border-t border-soft-border"><span class="material-symbols-outlined text-[18px]">cancel</span> Cancel appointment</button>`)
+          : '';
+        const payButton = booking.status === 'pending'
+          ? `<button onclick="payDeposit('${escapeHtml(booking.id)}')" class="px-md py-sm rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container">Pay ${escapeHtml(booking.upfront)} deposit</button>`
+          : '';
+        const id = escapeHtml(booking.id);
 
         return `
-          <div class="bg-surface dark:bg-surface-container-high/40 rounded-xl p-md shadow-sm border border-soft-border dark:border-outline-variant/10 hover:shadow-md transition-shadow relative overflow-visible group">
-            
-            <div class="absolute top-0 right-0 px-md py-xs font-label-sm text-label-sm rounded-bl-lg transition-colors ${ribbonClass} z-10">
-              ${ribbonText}
-            </div>
-            
-            <div class="flex flex-col md:flex-row gap-lg items-start md:items-center ${opacityClass}">
-              <!-- Date Column -->
+          <article class="bg-surface dark:bg-surface-container-high/40 rounded-xl p-md shadow-sm border border-soft-border dark:border-outline-variant/10 hover:shadow-md transition-shadow relative overflow-visible group">
+            <div class="absolute top-0 right-0 px-md py-xs font-label-sm text-label-sm rounded-bl-lg ${ribbonClass} z-10">${escapeHtml(booking.statusLabel)}</div>
+            <div class="flex flex-col md:flex-row gap-lg items-start md:items-center">
               <div class="flex flex-col min-w-[120px]">
-                <span class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant mb-xs transition-colors">DATE</span>
-                <span class="font-headline-md text-headline-md text-on-surface dark:text-parchment-white mb-xs ${booking.status === 'cancelled' ? 'line-through' : ''} transition-colors">${booking.date}</span>
-                <span class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant transition-colors">${booking.time}</span>
+                <span class="font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant mb-xs">DATE</span>
+                <span class="font-headline-md text-headline-md text-on-surface dark:text-parchment-white mb-xs">${escapeHtml(booking.date)}</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant">${escapeHtml(booking.time)}</span>
               </div>
-              
-              <!-- Desktop Divider -->
-              <div class="hidden md:block w-px h-16 bg-soft-border dark:bg-outline-variant/20 transition-colors"></div>
-              
-              <!-- Provider Info -->
+              <div class="hidden md:block w-px h-16 bg-soft-border dark:bg-outline-variant/20"></div>
               <div class="flex items-center gap-md flex-1 w-full">
-                <img class="w-16 h-16 rounded-full object-cover shadow-sm ${imageGreyscale} shrink-0" alt="${booking.provider}" src="${booking.img}" />
+                <div class="w-14 h-14 rounded-full bg-surface-container-high dark:bg-primary-container flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-primary dark:text-parchment-white">storefront</span></div>
                 <div class="min-w-0">
-                  <h3 class="font-headline-md text-headline-md text-on-surface dark:text-parchment-white transition-colors truncate">${booking.provider}</h3>
-                  <p class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant flex items-center gap-xs transition-colors truncate mt-1">
-                    <span class="material-symbols-outlined text-[16px] shrink-0">location_on</span>
-                    <span class="truncate">${booking.location}</span>
-                  </p>
+                  <h3 class="font-headline-md text-headline-md text-on-surface dark:text-parchment-white truncate">${escapeHtml(booking.provider)}</h3>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant flex items-center gap-xs truncate mt-1"><span class="material-symbols-outlined text-[16px] shrink-0">location_on</span><span class="truncate">${escapeHtml(booking.location)}</span></p>
                 </div>
               </div>
-              
-              <!-- Service Description & Price -->
               <div class="flex-1 w-full mt-4 md:mt-0 flex flex-col md:flex-row justify-between items-start md:items-center gap-md">
                 <div>
-                  <h4 class="font-label-md text-label-md text-on-surface dark:text-parchment-white mb-xs transition-colors truncate">${booking.service}</h4>
-                  <p class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant transition-colors line-clamp-2 md:line-clamp-none">${booking.desc}</p>
+                  <h4 class="font-label-md text-label-md text-on-surface dark:text-parchment-white mb-xs truncate">${escapeHtml(booking.service)}</h4>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant">${escapeHtml(booking.desc)}</p>
+                  ${booking.status === 'pending' ? `<p class="font-label-sm text-label-sm text-muted-terracotta mt-xs">Upfront amount pending: ${escapeHtml(booking.upfront)}</p>` : ''}
                 </div>
-                <div class="font-headline-md text-headline-md text-on-surface dark:text-parchment-white ${priceStrikethrough} transition-colors shrink-0">
-                  ${booking.price}
+                <div class="font-headline-md text-headline-md text-on-surface dark:text-parchment-white shrink-0">${escapeHtml(booking.price)}</div>
+              </div>
+              <div class="flex items-center gap-sm self-end md:self-center shrink-0">
+                ${payButton}
+                <div class="relative manage-dropdown-container">
+                  <button onclick="toggleManageMenu('${id}', event)" class="px-md py-sm rounded-lg font-label-md text-label-md border border-soft-border dark:border-outline-variant/30 text-on-surface dark:text-parchment-white hover:bg-surface-container">Manage</button>
+                  <div id="manage-menu-${id}" class="hidden absolute right-0 mt-2 w-52 bg-surface-container-lowest dark:bg-charcoal border border-soft-border dark:border-outline-variant/20 rounded-lg shadow-xl z-30 py-xs text-body-sm">
+                    <button onclick="viewDetails('${id}'); hideAllMenus();" class="w-full text-left px-md py-sm hover:bg-surface-container text-on-surface dark:text-parchment-white flex items-center gap-xs"><span class="material-symbols-outlined text-[18px]">visibility</span> View Details</button>
+                    <button onclick="rebookVendor('${id}'); hideAllMenus();" class="w-full text-left px-md py-sm hover:bg-surface-container text-on-surface dark:text-parchment-white flex items-center gap-xs"><span class="material-symbols-outlined text-[18px]">refresh</span> Rebook</button>
+                    <button onclick="reportIssue('${id}'); hideAllMenus();" class="w-full text-left px-md py-sm hover:bg-surface-container text-on-surface dark:text-parchment-white flex items-center gap-xs"><span class="material-symbols-outlined text-[18px]">flag</span> Report</button>
+                    ${cancelAction}
+                  </div>
                 </div>
               </div>
-
-              <!-- Manage Button & Dropdown Menu -->
-              <div class="relative manage-dropdown-container self-end md:self-center shrink-0">
-                <!-- Clean Manage button without small arrow icon -->
-                <button onclick="toggleManageMenu(${booking.id}, event)" class="px-md py-sm rounded-full font-label-md text-label-md border border-soft-border dark:border-outline-variant/30 text-on-surface dark:text-parchment-white hover:bg-surface-container dark:hover:bg-primary-container transition-colors flex items-center justify-center">
-                  Manage
-                </button>
-                
-                <!-- Dropdown Menu Content -->
-                <div id="manage-menu-${booking.id}" class="hidden absolute right-0 mt-2 w-48 bg-surface-container-lowest dark:bg-charcoal border border-soft-border dark:border-outline-variant/20 rounded-xl shadow-xl z-30 py-xs text-body-sm font-body-sm">
-                  <button onclick="viewDetails(${booking.id}); hideAllMenus();" class="w-full text-left px-md py-sm hover:bg-surface-container dark:hover:bg-primary-container text-on-surface dark:text-parchment-white flex items-center gap-xs transition-colors">
-                    <span class="material-symbols-outlined text-[18px]">visibility</span> View Details
-                  </button>
-                  <button onclick="rebookVendor(${booking.id}); hideAllMenus();" class="w-full text-left px-md py-sm hover:bg-surface-container dark:hover:bg-primary-container text-on-surface dark:text-parchment-white flex items-center gap-xs transition-colors">
-                    <span class="material-symbols-outlined text-[18px]">refresh</span> Rebook
-                  </button>
-                  <button onclick="reportIssue(${booking.id}); hideAllMenus();" class="w-full text-left px-md py-sm hover:bg-surface-container dark:hover:bg-primary-container text-on-surface dark:text-parchment-white flex items-center gap-xs transition-colors">
-                    <span class="material-symbols-outlined text-[18px]">flag</span> Report
-                  </button>
-                  ${cancelOptionDropdownHtml}
-                </div>
-              </div>
-
             </div>
-          </div>
-        `;
+          </article>`;
       }
     

@@ -1,4 +1,25 @@
+function requireCustomerAccess() {
+    const token = localStorage.getItem('glamoraToken');
+    const user = JSON.parse(localStorage.getItem('glamoraUser') || 'null');
+
+    if (!token || !user) {
+        sessionStorage.setItem('glamoraReturnTo', 'customer-dashboard.html');
+        window.location.href = 'Auth/login.html';
+        return false;
+    }
+
+    if (String(user.role || '').toUpperCase() !== 'CUSTOMER') {
+        window.location.href = 'vendor-dashboard.html';
+        return false;
+    }
+
+    return true;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    if (!requireCustomerAccess()) {
+        return;
+    }
     
     // 1. Theme Initialization
     const applyTheme = () => {

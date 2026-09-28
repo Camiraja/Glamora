@@ -1,3 +1,37 @@
+function readStoredSession() {
+    try {
+        const token = localStorage.getItem('glamoraToken');
+        const user = JSON.parse(localStorage.getItem('glamoraUser') || 'null');
+        return { token, user };
+    } catch (error) {
+        return { token: null, user: null };
+    }
+}
+
+function redirectSignedInUser() {
+    const { token, user } = readStoredSession();
+
+    if (!token || !user) {
+        return false;
+    }
+
+    return true;
+}
+
+function requireAuthForAction(event, fallbackPath = 'Auth/login.html', destination = null) {
+    const { token, user } = readStoredSession();
+
+    if (!token || !user) {
+        event.preventDefault();
+        const target = destination || window.location.pathname || 'landing page.html';
+        sessionStorage.setItem('glamoraReturnTo', target);
+        window.location.href = fallbackPath;
+        return false;
+    }
+
+    return true;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ==========================================================================
@@ -14,6 +48,25 @@ document.addEventListener('DOMContentLoaded', () => {
           mainContent.classList.remove("opacity-0");
           document.body.classList.remove("overflow-hidden");
         }, 5000); // 5000ms splash screen duration
+      });
+
+      document.querySelectorAll('[data-auth-required], .btn-view-profile, a[href="Auth/signup.html"], a[href="signup.html"], a[href="beautician-details.html"], a[href="booking.html"], a[href="marketplace.html"], a[href="cart.html"]').forEach((element) => {
+        element.addEventListener('click', (event) => {
+          const { token, user } = readStoredSession();
+
+          if (!token || !user) {
+            event.preventDefault();
+            const target = element.getAttribute('data-target') || element.getAttribute('href') || 'beautician-details.html';
+            sessionStorage.setItem('glamoraReturnTo', target.startsWith('http') ? target : target);
+            window.location.href = 'Auth/login.html';
+            return;
+          }
+
+          if (element.getAttribute('data-target')) {
+            event.preventDefault();
+            window.location.href = element.getAttribute('data-target');
+          }
+        });
       });
 
     /* ==========================================================================

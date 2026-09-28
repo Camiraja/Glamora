@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirming payment | Glamora</title>
+    <link rel="stylesheet" href="css/general.css" />
+    <style>
+      body { min-height: 100vh; display: grid; place-items: center; padding: 24px; background: #f8f7f4; color: #1b1c1a; font-family: Georgia, serif; }
+      main { width: min(100%, 520px); padding: 32px; border: 1px solid #deddd8; background: #fff; }
+      h1 { margin: 0 0 12px; font-size: 28px; }
+      p { font: 16px/1.5 Arial, sans-serif; }
+      a { color: #315a47; font: 15px Arial, sans-serif; }
+      [hidden] { display: none !important; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1 id="payment-title">Confirming your payment</h1>
+      <p id="payment-message" role="status" aria-live="polite">Please wait while we verify the transaction with Paystack.</p>
+      <a id="payment-link" href="customer-dashboard.html" hidden>Go to your dashboard</a>
+    </main>
+    <script src="js/payment-return.js"></script>
+  </body>
+</html>

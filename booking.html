@@ -211,6 +211,18 @@
               </p>
             </div>
 
+            <div class="flex flex-col gap-xs max-w-2xl">
+              <label for="booking-service" class="font-label-md text-label-md text-primary dark:text-parchment-white">Choose a service</label>
+              <select
+                id="booking-service"
+                disabled
+                class="w-full h-12 px-3 bg-surface-container-lowest dark:bg-primary-container border border-soft-border dark:border-outline-variant rounded-lg text-on-surface dark:text-parchment-white"
+              >
+                <option>Loading services...</option>
+              </select>
+              <p id="booking-message" class="text-sm text-on-surface-variant dark:text-outline-variant" role="status" aria-live="polite"></p>
+            </div>
+
             <!-- Calendar & Time Slots Block -->
             <div
               class="flex flex-col xl:flex-row gap-lg bg-surface-container-lowest dark:bg-primary-container rounded-2xl shadow-sm border border-soft-border dark:border-outline-variant p-md md:p-lg transition-colors duration-300"
@@ -460,7 +472,7 @@
                 <div
                   class="flex justify-between items-center font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant"
                 >
-                  <span>VAT (7.5%)</span>
+                  <span id="vat-rate-label">VAT</span>
                   <span id="summary-taxes">₦0.00</span>
                 </div>
                 <div

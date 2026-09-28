@@ -5,13 +5,9 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Vendor Appointments & Orders — GLAMORA</title>
 
-    <!-- Check Local Storage for Theme -->
     <script>
-      if (
-        localStorage.getItem("theme") === "dark" ||
-        (!("theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
+      const savedTheme = localStorage.getItem("themeMode") || localStorage.getItem("glamora_theme") || localStorage.getItem("theme") || "light";
+      if (savedTheme === "dark" || (savedTheme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
         document.documentElement.classList.add("dark");
       } else {
         document.documentElement.classList.remove("dark");
@@ -548,11 +544,9 @@
                   <p
                     class="font-body-sm text-body-sm text-on-surface-variant dark:text-neutral-400 max-w-3xl mt-xs"
                   >
-                    A non-refundable 25% deposit is held escrowed for every
-                    booked session. Cancellations within the &lt;30 min
-                    threshold release directly to your payout balance. Marking
-                    appointments complete disburses remaining studio fees within
-                    seconds.
+                    Appointment payment status is synced from verified backend
+                    payments. Unpaid bookings remain pending until payment is
+                    verified; vendors can release an unpaid slot at any time.
                   </p>
                 </div>
               </div>
@@ -589,13 +583,13 @@
                   <span
                     class="font-headline-lg text-headline-lg text-primary dark:text-parchment-white"
                     id="kpi-today-count"
-                    >4</span
+                    >0</span
                   >
                   <span
                     class="font-label-sm text-label-sm text-success-green dark:text-emerald-400 flex items-center gap-xs"
                   >
                     <span class="w-2 h-2 rounded-full bg-success-green"></span>
-                    2 Escrow Cleared
+                    <span id="kpi-confirmed-count">0 confirmed</span>
                   </span>
                 </div>
               </div>
@@ -606,7 +600,7 @@
                 <div class="flex items-center justify-between">
                   <span
                     class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400 uppercase tracking-wider"
-                    >Pending Release</span
+                    >Pending Deposit</span
                   >
                   <span
                     class="material-symbols-outlined text-[20px] text-warning-amber"
@@ -616,11 +610,13 @@
                 <div class="flex items-baseline justify-between">
                   <span
                     class="font-headline-lg text-headline-lg text-primary dark:text-parchment-white"
-                    >₦418,500</span
+                    id="kpi-pending-amount"
+                    >₦0</span
                   >
                   <span
                     class="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400"
-                    >5 client visits</span
+                    id="kpi-pending-count"
+                    >0 appointments</span
                   >
                 </div>
               </div>
@@ -697,7 +693,7 @@
                     <span
                       class="px-xs py-[2px] rounded-full bg-surface-container-high dark:bg-neutral-700 text-on-surface dark:text-parchment-white text-label-sm font-label-sm"
                       id="badge-appointments-count"
-                      >3</span
+                      >0</span
                     >
                   </button>
                   <button

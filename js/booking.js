@@ -1,5 +1,27 @@
+function requireCustomerSessionForBooking() {
+    const token = localStorage.getItem("glamoraToken");
+    const user = JSON.parse(localStorage.getItem("glamoraUser") || "null");
+
+    if (!token || !user) {
+        sessionStorage.setItem("glamoraReturnTo", "booking.html");
+        window.location.href = "Auth/login.html";
+        return false;
+    }
+
+    if (String(user.role || "").toUpperCase() !== "CUSTOMER") {
+        window.location.href = user.role === "VENDOR" ? "vendor-dashboard.html" : "landing page.html";
+        return false;
+    }
+
+    return true;
+}
+
 // --- Theme Switcher Logic (Passive Listener) ---
 document.addEventListener("DOMContentLoaded", () => {
+    if (!requireCustomerSessionForBooking()) {
+        return;
+    }
+
     const currentMode = localStorage.getItem("themeMode");
     if (currentMode === "dark") {
         document.documentElement.classList.add("dark");
@@ -7,16 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.documentElement.classList.remove("dark");
     }
 });
-
-// --- Vendor Capabilities & Logistics Config ---
-const vendorConfig = {
-    offersWalkIn: true,      // Set to false to test disabled Walk-In option
-    offersHomeService: true, // Set to false to test disabled Home Service option
-    travelFee: 5000          // Logistics / Travel / Call-Out fee in NGN
-};
-
-// --- Percentage Deposit Config ---
-const BREAKAGE_FEE_PERCENTAGE = 0.20; // 20% Breakage Fee required to lock slot
 
 // --- State Management ---
 const today = new Date();
@@ -26,7 +38,10 @@ let currentYear = today.getFullYear();
 let selectedDate = null;
 let selectedSlots = [];
 let selectedLocation = 'walk-in'; // 'walk-in' or 'home-service'
-const PRICE_PER_SLOT = 15000; // ₦15,000 per 30-min slot
+let selectedService = null;
+let bookingServices = [];
+let pendingAppointmentId = null;
+let vatRatePercent = 0;
 
 // Global record of booked slots
 let globallyBookedSlots = {};
@@ -41,6 +56,8 @@ const timeSlotsContainer = document.getElementById('time-slots-container');
 const clearSlotsBtn = document.getElementById('clear-slots-btn');
 const slotSelectionCount = document.getElementById('slot-selection-count');
 const checkoutBtn = document.getElementById('checkout-btn');
+const serviceSelect = document.getElementById('booking-service');
+const bookingMessage = document.getElementById('booking-message');
 
 // Location DOM Elements
 const walkInRadio = document.getElementById('radio-walkin');
@@ -56,6 +73,7 @@ const summarySubtotal = document.getElementById('summary-subtotal');
 const summaryTravelRow = document.getElementById('summary-travel-row');
 const summaryTravelFee = document.getElementById('summary-travel-fee');
 const summaryTaxes = document.getElementById('summary-taxes');
+const vatRateLabel = document.getElementById('vat-rate-label');
 const summaryTotal = document.getElementById('summary-total');
 const summaryDueNow = document.getElementById('summary-due-now');
 const summaryBalance = document.getElementById('summary-balance');
@@ -71,41 +89,111 @@ const formatDateObj = (dateObj) => {
     return dateObj.toLocaleDateString('en-NG', { weekday: 'short', month: 'short', day: 'numeric' });
 };
 
+function timeLabelToMinutes(timeLabel) {
+    const [time, period] = timeLabel.split(' ');
+    let [hours, minutes] = time.split(':').map(Number);
+    if (period === 'PM' && hours !== 12) hours += 12;
+    if (period === 'AM' && hours === 12) hours = 0;
+    return hours * 60 + minutes;
+}
+
+function minutesToTimeLabel(totalMinutes) {
+    const hour = Math.floor(totalMinutes / 60);
+    const minute = totalMinutes % 60;
+    const hour12 = hour % 12 || 12;
+    return `${hour12}:${String(minute).padStart(2, '0')} ${hour < 12 ? 'AM' : 'PM'}`;
+}
+
+function getAvailabilityForWeekday(dayOfWeek) {
+    if (!selectedService) return [];
+    const schedule = selectedService.business.owner.availability;
+    return schedule.filter((window) =>
+        window.dayOfWeek === dayOfWeek &&
+        window.staffMemberId === selectedService.staffMemberId
+    );
+}
+
+function hasValidSlotSelection() {
+    if (!selectedService || selectedService.durationMin % 30 !== 0) return false;
+    const requiredSlots = selectedService.durationMin / 30;
+    return selectedSlots.length === requiredSlots && selectedSlots.every((time, index) =>
+        index === 0 || timeLabelToMinutes(time) === timeLabelToMinutes(selectedSlots[index - 1]) + 30
+    );
+}
+
+function setBookingMessage(message, isError = false) {
+    bookingMessage.textContent = message;
+    bookingMessage.className = `text-sm ${isError ? 'text-error' : 'text-on-surface-variant dark:text-outline-variant'}`;
+}
+
+async function loadBookingCatalog() {
+    try {
+        const response = await fetch('http://localhost:3000/api/businesses');
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Could not load services.');
+        vatRatePercent = Number(data.vatRatePercent);
+        vatRateLabel.textContent = vatRatePercent > 0
+            ? `VAT (${vatRatePercent}%)`
+            : 'VAT (rate awaiting approval)';
+
+        const services = data.businesses.flatMap((business) =>
+            business.services.map((service) => ({ ...service, business }))
+        );
+        if (services.length === 0) throw new Error('No bookable services are available yet.');
+
+        bookingServices = services;
+        serviceSelect.replaceChildren();
+        services.forEach((service) => {
+            const option = document.createElement('option');
+            option.value = service.id;
+            option.textContent = `${service.business.name} - ${service.name} (${formatCurrency(service.priceKobo / 100)})`;
+            serviceSelect.appendChild(option);
+        });
+
+        const query = new URLSearchParams(window.location.search);
+        const requestedServiceId = query.get('serviceId');
+        const requestedBusinessId = query.get('businessId');
+        selectedService = services.find((service) =>
+            service.id === requestedServiceId && service.business.id === requestedBusinessId
+        ) || services.find((service) => service.id === requestedServiceId) || services[0];
+        serviceSelect.value = selectedService.id;
+        serviceSelect.disabled = false;
+        applyServiceDeliveryOptions();
+        renderCalendar(currentMonth, currentYear);
+        updateSummary();
+    } catch (error) {
+        setBookingMessage(error.message || 'Could not connect to the booking service.', true);
+    }
+}
+
 // --- Service Delivery Location Logic ---
 function initServiceLocation() {
-    if (homeFeeBadge) {
-        homeFeeBadge.textContent = `+${formatCurrency(vendorConfig.travelFee)} logistics`;
-    }
-
-    // Grey out Walk-In option if vendor doesn't accept studio visits
-    if (!vendorConfig.offersWalkIn) {
-        walkInRadio.disabled = true;
-        walkInRadio.checked = false;
-        walkInLabel.classList.add('opacity-40', 'cursor-not-allowed', 'bg-surface-container-low', 'dark:bg-primary-container');
-        walkInLabel.classList.remove('cursor-pointer', 'hover:border-primary', 'dark:hover:border-parchment-white');
-        
-        selectedLocation = 'home-service';
-        homeRadio.checked = true;
-    }
-
-    // Grey out Home Service option if vendor doesn't offer mobile services
-    if (!vendorConfig.offersHomeService) {
-        homeRadio.disabled = true;
-        homeRadio.checked = false;
-        homeLabel.classList.add('opacity-40', 'cursor-not-allowed', 'bg-surface-container-low', 'dark:bg-primary-container');
-        homeLabel.classList.remove('cursor-pointer', 'hover:border-primary', 'dark:hover:border-parchment-white');
-        
-        selectedLocation = 'walk-in';
-        walkInRadio.checked = true;
-    }
-
-    // Radio change handlers
     document.querySelectorAll('input[name="delivery_location"]').forEach((radio) => {
         radio.addEventListener('change', (e) => {
             selectedLocation = e.target.value;
             updateSummary();
         });
     });
+}
+
+function applyServiceDeliveryOptions() {
+    const mode = selectedService.business.deliveryMode;
+    const offersStudio = mode !== 'HOME_SERVICE_ONLY';
+    const offersHomeService = mode !== 'STUDIO_ONLY';
+
+    walkInLabel.classList.toggle('hidden', !offersStudio);
+    homeLabel.classList.toggle('hidden', !offersHomeService);
+    walkInRadio.disabled = !offersStudio;
+    homeRadio.disabled = !offersHomeService;
+
+    if (homeFeeBadge) {
+        homeFeeBadge.textContent = `+${formatCurrency(selectedService.business.logisticsFeeKobo / 100)} logistics`;
+    }
+
+    if (!offersStudio) selectedLocation = 'home-service';
+    else if (!offersHomeService) selectedLocation = 'walk-in';
+    walkInRadio.checked = selectedLocation === 'walk-in';
+    homeRadio.checked = selectedLocation === 'home-service';
 }
 
 // --- Calendar Logic ---
@@ -136,7 +224,10 @@ function renderCalendar(month, year) {
         dateBtn.className = "aspect-square rounded-lg flex items-center justify-center font-body-md text-body-md transition-colors relative";
         dateBtn.textContent = day;
 
-        if (loopDate < today && loopDateString !== todayString) {
+        const weekday = new Date(Date.UTC(year, month, day)).getUTCDay();
+        const hasAvailability = getAvailabilityForWeekday(weekday).length > 0;
+
+        if ((loopDate < today && loopDateString !== todayString) || !hasAvailability) {
             dateBtn.classList.add("text-outline-variant", "dark:text-surface-variant", "opacity-50", "cursor-not-allowed", "line-through", "decoration-outline-variant", "dark:decoration-surface-variant");
             dateBtn.disabled = true;
         } else {
@@ -166,7 +257,11 @@ function renderCalendar(month, year) {
 
 // --- Time Slots Logic ---
 function renderTimeSlots() {
-    if (!selectedDate) return;
+    if (!selectedDate) {
+        selectedDateLabel.textContent = 'Select a Date';
+        timeSlotsContainer.innerHTML = '<p class="font-body-sm text-on-surface-variant dark:text-outline-variant">Please select an available date.</p>';
+        return;
+    }
     
     selectedDateLabel.textContent = selectedDate.toLocaleDateString('en-NG', { month: 'short', day: 'numeric' });
     timeSlotsContainer.innerHTML = '';
@@ -174,49 +269,45 @@ function renderTimeSlots() {
     const dateKey = `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`;
     const bookedForDay = globallyBookedSlots[dateKey] || [];
 
-    const timeBlocks = {
-        'Morning': ['09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM'],
-        'Afternoon': ['12:00 PM', '12:30 PM', '01:00 PM', '01:30 PM', '02:00 PM', '02:30 PM', '03:00 PM', '03:30 PM', '04:00 PM']
-    };
+    const weekday = new Date(Date.UTC(
+        selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()
+    )).getUTCDay();
+    const availableTimes = new Set();
+    getAvailabilityForWeekday(weekday).forEach((window) => {
+        const [startHour, startMinute] = window.startTime.split(':').map(Number);
+        const [endHour, endMinute] = window.endTime.split(':').map(Number);
+        const start = startHour * 60 + startMinute;
+        const end = endHour * 60 + endMinute;
+        for (let minute = start; minute + 30 <= end; minute += 30) {
+            availableTimes.add(minutesToTimeLabel(minute));
+        }
+    });
 
-    for (const [period, times] of Object.entries(timeBlocks)) {
-        const periodDiv = document.createElement('div');
-        periodDiv.className = "flex flex-col gap-sm mb-md";
-        
-        const periodLabel = document.createElement('span');
-        periodLabel.className = "font-label-sm text-label-sm text-on-surface-variant dark:text-outline-variant tracking-wider uppercase";
-        periodLabel.textContent = period;
-        periodDiv.appendChild(periodLabel);
-
-        const gridDiv = document.createElement('div');
-        gridDiv.className = "grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-2 gap-sm";
-
-        times.forEach(time => {
-            const slotBtn = document.createElement('button');
-            
-            if (bookedForDay.includes(time)) {
-                slotBtn.className = "py-sm rounded-lg border border-soft-border dark:border-outline-variant font-body-sm text-body-sm text-outline-variant dark:text-surface-variant bg-surface-container-lowest dark:bg-primary-container opacity-50 cursor-not-allowed line-through decoration-outline-variant dark:decoration-surface-variant";
-                slotBtn.disabled = true;
-                slotBtn.textContent = time;
-            } else {
-                const isSelected = selectedSlots.includes(time);
-                if (isSelected) {
-                    slotBtn.className = "py-sm rounded-lg border-transparent font-body-sm text-body-sm bg-charcoal dark:bg-parchment-white text-on-primary dark:text-charcoal shadow-md transition-all";
-                } else {
-                    slotBtn.className = "py-sm rounded-lg border border-soft-border dark:border-outline-variant font-body-sm text-body-sm text-on-surface dark:text-parchment-white hover:border-primary dark:hover:border-parchment-white transition-all";
-                }
-                
-                slotBtn.textContent = time;
-                slotBtn.addEventListener('click', () => {
-                    toggleSlot(time);
-                });
-            }
-            gridDiv.appendChild(slotBtn);
-        });
-        
-        periodDiv.appendChild(gridDiv);
-        timeSlotsContainer.appendChild(periodDiv);
+    const times = Array.from(availableTimes).sort((left, right) =>
+        timeLabelToMinutes(left) - timeLabelToMinutes(right)
+    );
+    if (times.length === 0) {
+        timeSlotsContainer.innerHTML = '<p class="font-body-sm text-on-surface-variant dark:text-outline-variant">No times are available for this date.</p>';
+        return;
     }
+
+    const gridDiv = document.createElement('div');
+    gridDiv.className = 'grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-2 gap-sm';
+    times.forEach((time) => {
+        const slotBtn = document.createElement('button');
+        if (bookedForDay.includes(time)) {
+            slotBtn.className = 'py-sm rounded-lg border border-soft-border dark:border-outline-variant font-body-sm text-body-sm text-outline-variant dark:text-surface-variant bg-surface-container-lowest dark:bg-primary-container opacity-50 cursor-not-allowed line-through';
+            slotBtn.disabled = true;
+        } else {
+            slotBtn.className = selectedSlots.includes(time)
+                ? 'py-sm rounded-lg border-transparent font-body-sm text-body-sm bg-charcoal dark:bg-parchment-white text-on-primary dark:text-charcoal shadow-md transition-all'
+                : 'py-sm rounded-lg border border-soft-border dark:border-outline-variant font-body-sm text-body-sm text-on-surface dark:text-parchment-white hover:border-primary dark:hover:border-parchment-white transition-all';
+            slotBtn.addEventListener('click', () => toggleSlot(time));
+        }
+        slotBtn.textContent = time;
+        gridDiv.appendChild(slotBtn);
+    });
+    timeSlotsContainer.appendChild(gridDiv);
 }
 
 function toggleSlot(time) {
@@ -224,7 +315,7 @@ function toggleSlot(time) {
         selectedSlots = selectedSlots.filter(t => t !== time);
     } else {
         selectedSlots.push(time);
-        selectedSlots.sort((a, b) => new Date('1970/01/01 ' + a) - new Date('1970/01/01 ' + b));
+        selectedSlots.sort((a, b) => timeLabelToMinutes(a) - timeLabelToMinutes(b));
     }
     renderTimeSlots();
     updateSummary();
@@ -235,7 +326,9 @@ function updateSummary() {
     
     if (selectedSlots.length > 0) {
         clearSlotsBtn.classList.remove('hidden');
-        checkoutBtn.disabled = false;
+        checkoutBtn.disabled = pendingAppointmentId ? false : !hasValidSlotSelection();
+        const requiredSlots = selectedService.durationMin / 30;
+        slotSelectionCount.textContent = `${selectedSlots.length} of ${requiredSlots} required 30-minute slots selected`;
         
         const firstSlot = selectedSlots[0];
         const lastSlot = selectedSlots[selectedSlots.length - 1];
@@ -246,29 +339,29 @@ function updateSummary() {
         summaryServices.innerHTML = `
             <div class="flex justify-between items-start group">
               <div class="flex flex-col gap-xs pr-md">
-                <span class="font-label-md text-label-md text-primary dark:text-parchment-white">Precision Cut & Style${locationBadge}</span>
-                <span class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant">${selectedSlots.length * 30} mins</span>
+                <span class="font-label-md text-label-md text-primary dark:text-parchment-white">${selectedService.name}${locationBadge}</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant">${selectedService.durationMin} mins</span>
               </div>
               <div class="flex flex-col items-end gap-xs">
-                <span class="font-label-md text-label-md text-primary dark:text-parchment-white">${formatCurrency(PRICE_PER_SLOT * selectedSlots.length)}</span>
+                <span class="font-label-md text-label-md text-primary dark:text-parchment-white">${formatCurrency(selectedService.priceKobo / 100)}</span>
               </div>
             </div>
         `;
 
         // 1. Core Component Breakdown
-        const subtotal = PRICE_PER_SLOT * selectedSlots.length;
-        const travelFee = (selectedLocation === 'home-service') ? vendorConfig.travelFee : 0;
+        const subtotal = selectedService.priceKobo / 100;
+        const travelFee = selectedLocation === 'home-service'
+            ? selectedService.business.logisticsFeeKobo / 100
+            : 0;
         
         // 2. Full VAT (7.5%) on service + travel
-        const vat = (subtotal + travelFee) * 0.075; 
+        const vat = (subtotal + travelFee) * (vatRatePercent / 100);
         
         // 3. Gross Total
         const total = subtotal + travelFee + vat;
         
-        // 4. Base 20% Breakage Fee
-        const breakageFee = subtotal * BREAKAGE_FEE_PERCENTAGE; 
+        const breakageFee = subtotal * (selectedService.business.breakagePercent / 100);
         
-        // 5. Upfront Total: Breakage + 100% VAT (+ Logistics if applicable)
         let dueNow = breakageFee + vat;
 
         if (selectedLocation === 'home-service') {
@@ -277,17 +370,16 @@ function updateSummary() {
             summaryTravelFee.textContent = formatCurrency(travelFee);
             
             dueNow += travelFee;
-            dueNowLabel.textContent = "Due Now (Breakage + Logistics + VAT)";
-            dueNowDescription.innerHTML = `The <span class="font-bold text-muted-terracotta dark:text-tertiary-fixed">20% breakage fee, logistics, and full VAT</span> are paid upfront to secure your booking.`;
+            dueNowLabel.textContent = "Upfront Payment Required";
+            dueNowDescription.textContent = 'Breakage deposit, VAT, and home-service logistics are payable before the appointment is confirmed.';
         } else {
             summaryTravelRow.classList.add('hidden');
             summaryTravelRow.classList.remove('flex');
             
-            dueNowLabel.textContent = "Due Now (20% Breakage + VAT)";
-            dueNowDescription.innerHTML = `The <span class="font-bold text-muted-terracotta dark:text-tertiary-fixed">20% breakage fee and full VAT</span> are paid upfront to hold your time slot.`;
+            dueNowLabel.textContent = "Upfront Payment Required";
+            dueNowDescription.textContent = 'Breakage deposit and VAT are payable before the appointment is confirmed.';
         }
 
-        // 6. Remaining Balance (Always equals 80% of base service)
         const remainingBalance = total - dueNow;
 
         summarySubtotal.textContent = formatCurrency(subtotal);
@@ -297,20 +389,20 @@ function updateSummary() {
         summaryBalance.textContent = formatCurrency(remainingBalance);
 
         checkoutBtn.innerHTML = `
-            Pay Due Amount (${formatCurrency(dueNow)})
+            ${pendingAppointmentId ? 'Retry Deposit Payment' : 'Create Appointment'}
             <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
         `;
 
     } else {
         clearSlotsBtn.classList.add('hidden');
-        checkoutBtn.disabled = true;
+        checkoutBtn.disabled = !pendingAppointmentId;
         summaryDateTime.textContent = "Awaiting selection...";
         summaryServices.innerHTML = '<p class="font-body-sm text-on-surface-variant dark:text-outline-variant text-center py-md">Select time slots to view your total.</p>';
         summaryTravelRow.classList.add('hidden');
         summaryTravelRow.classList.remove('flex');
         
-        dueNowLabel.textContent = "Due Now (20% Breakage + VAT)";
-        dueNowDescription.innerHTML = `The <span class="font-bold text-muted-terracotta dark:text-tertiary-fixed">20% breakage fee and full VAT</span> are paid upfront to hold your time slot.`;
+        dueNowLabel.textContent = "Upfront Payment Required";
+        dueNowDescription.textContent = 'Breakage deposit and VAT are payable before the appointment is confirmed.';
 
         summarySubtotal.textContent = "₦0.00";
         summaryTaxes.textContent = "₦0.00";
@@ -319,7 +411,7 @@ function updateSummary() {
         summaryBalance.textContent = "₦0.00";
 
         checkoutBtn.innerHTML = `
-            Proceed to Payment
+            ${pendingAppointmentId ? 'Retry Deposit Payment' : 'Create Appointment'}
             <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
         `;
     }
@@ -348,26 +440,91 @@ clearSlotsBtn.addEventListener('click', () => {
     updateSummary();
 });
 
-checkoutBtn.addEventListener('click', () => {
-    if (selectedSlots.length === 0 || !selectedDate) return;
-    
-    const dateKey = `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`;
-    
-    if (!globallyBookedSlots[dateKey]) {
-        globallyBookedSlots[dateKey] = [];
-    }
-    
-    globallyBookedSlots[dateKey].push(...selectedSlots);
-    
-    const subtotal = PRICE_PER_SLOT * selectedSlots.length;
-    const travelFee = (selectedLocation === 'home-service') ? vendorConfig.travelFee : 0;
-    const breakageFee = subtotal * BREAKAGE_FEE_PERCENTAGE;
-    const dueNow = selectedLocation === 'home-service' ? breakageFee + travelFee : breakageFee;
+async function startDepositPayment(appointmentId, token) {
+    const response = await fetch(`http://localhost:3000/api/payments/appointments/${appointmentId}/deposit`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message || 'Could not initialize deposit payment.');
+    if (!data.authorizationUrl) throw new Error('Paystack did not return a checkout URL.');
+    window.location.href = data.authorizationUrl;
+}
 
-    const locationType = selectedLocation === 'home-service' ? 'Home Service' : 'Studio Walk-In';
-    alert(`Payment of ${formatCurrency(dueNow)} successful! Your ${locationType} appointment on ${formatDateObj(selectedDate)} is confirmed.`);
-    
+checkoutBtn.addEventListener('click', async () => {
+    const token = localStorage.getItem('glamoraToken');
+    if (!token) {
+        sessionStorage.setItem('glamoraReturnTo', 'booking.html');
+        window.location.href = 'Auth/login.html';
+        return;
+    }
+
+    if (pendingAppointmentId) {
+        checkoutBtn.disabled = true;
+        try {
+            await startDepositPayment(pendingAppointmentId, token);
+        } catch (error) {
+            setBookingMessage(`Appointment ${pendingAppointmentId} is still pending deposit: ${error.message}`, true);
+            checkoutBtn.disabled = false;
+        }
+        return;
+    }
+
+    if (!selectedDate || !selectedService || !hasValidSlotSelection()) return;
+
+    const dateKey = `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`;
+    const dateParts = [selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()];
+    const slots = selectedSlots.map((time) => {
+        const startMinutes = timeLabelToMinutes(time);
+        const startsAt = new Date(Date.UTC(...dateParts, Math.floor(startMinutes / 60), startMinutes % 60));
+        return { startsAt: startsAt.toISOString(), endsAt: new Date(startsAt.getTime() + 30 * 60 * 1000).toISOString() };
+    });
+
+    checkoutBtn.disabled = true;
+    checkoutBtn.textContent = 'Creating appointment...';
+    setBookingMessage('');
+    try {
+        const response = await fetch('http://localhost:3000/api/appointments', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                serviceIds: [selectedService.id],
+                slots,
+                deliveryMode: selectedLocation === 'home-service' ? 'HOME_SERVICE' : 'STUDIO',
+                notes: `Delivery: ${selectedLocation}`,
+            }),
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Could not create appointment.');
+
+        pendingAppointmentId = data.appointment.id;
+        globallyBookedSlots[dateKey] = [...(globallyBookedSlots[dateKey] || []), ...selectedSlots];
+        setBookingMessage(`Appointment ${pendingAppointmentId} is pending deposit, VAT, and applicable logistics payment.`);
+        selectedSlots = [];
+        renderTimeSlots();
+        updateSummary();
+        try {
+            await startDepositPayment(pendingAppointmentId, token);
+        } catch (paymentError) {
+            checkoutBtn.disabled = false;
+            checkoutBtn.innerHTML = 'Retry Deposit Payment <span class="material-symbols-outlined text-[18px]">arrow_forward</span>';
+            setBookingMessage(`Appointment ${pendingAppointmentId} remains pending deposit: ${paymentError.message}`, true);
+        }
+    } catch (error) {
+        setBookingMessage(error.message || 'Could not connect to the booking service.', true);
+        updateSummary();
+    }
+});
+
+serviceSelect.addEventListener('change', () => {
+    selectedService = bookingServices.find((service) => service.id === serviceSelect.value) || selectedService;
+    applyServiceDeliveryOptions();
+    selectedDate = null;
     selectedSlots = [];
+    renderCalendar(currentMonth, currentYear);
     renderTimeSlots();
     updateSummary();
 });
@@ -375,3 +532,4 @@ checkoutBtn.addEventListener('click', () => {
 // --- Initialization ---
 initServiceLocation();
 renderCalendar(currentMonth, currentYear);
+loadBookingCatalog();

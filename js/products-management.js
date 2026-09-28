@@ -26,6 +26,7 @@
   const tableShowingCount = document.getElementById('tableShowingCount');
   const resetSearchFromEmpty = document.getElementById('resetSearchFromEmpty');
   const kpiTotalProducts = document.getElementById('kpiTotalProducts');
+  const API_BASE_URL = 'http://localhost:3000';
 
   // View Mode Elements
   const tableViewBtn = document.getElementById('tableViewBtn');
@@ -190,9 +191,101 @@
     `;
   }
 
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, (character) => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    })[character]);
+  }
+
+  function productRowStatus(product) {
+    if (product.status === 'DRAFT') return 'draft';
+    if (product.stockQuantity === 0) return 'out-of-stock';
+    return product.stockQuantity <= 15 ? 'low-stock' : 'in-stock';
+  }
+
+  function createProductRow(product) {
+    const price = product.priceKobo / 100;
+    const discount = product.discountPercent || 0;
+    const row = document.createElement('tr');
+    row.className = isGridView
+      ? 'product-row transition-colors flex flex-col border border-soft-border rounded-xl p-sm shadow-sm bg-surface-container-lowest gap-sm'
+      : 'product-row hover:bg-surface-container/50 transition-colors';
+    row.dataset.id = product.id;
+    row.dataset.category = product.category;
+    row.dataset.status = productRowStatus(product);
+    row.dataset.price = price;
+    row.dataset.stock = product.stockQuantity;
+    row.dataset.hasPromo = discount > 0 ? 'true' : 'false';
+    const imageUrl = product.imageUrl || DEFAULT_IMG;
+    const statusBadge = product.status === 'ACTIVE'
+      ? '<span class="px-sm py-xs bg-secondary-container text-on-secondary-container rounded-lg font-label-sm text-label-sm font-semibold">Active</span>'
+      : '<span class="px-sm py-xs bg-surface-container-high text-on-surface-variant rounded-lg font-label-sm text-label-sm font-semibold">Draft</span>';
+
+    row.innerHTML = `
+      <td class="py-md px-md"><div class="flex flex-col gap-xs w-full"><div class="flex items-center gap-sm"><img alt="${escapeHtml(product.name)}" class="w-20 h-20 rounded-xl object-cover shadow-sm flex-shrink-0 border border-soft-border ${product.stockQuantity === 0 ? 'grayscale' : ''}" src="${escapeHtml(imageUrl)}"/><span class="product-title font-body-md text-body-md text-charcoal font-semibold">${escapeHtml(product.name)}</span></div><span class="product-desc font-body-sm text-body-sm text-on-surface-variant line-clamp-2">${escapeHtml(product.description || '')}</span></div></td>
+      <td class="py-md px-md"><span class="px-sm py-xs bg-surface-container-high rounded-lg text-charcoal font-label-sm text-label-sm font-medium">${escapeHtml(product.category)}</span></td>
+      <td class="py-md px-md">${buildPriceHtml(price, discount)}</td>
+      <td class="py-md px-md">${buildStockHtml(product.stockQuantity)}</td>
+      <td class="py-md px-md">${statusBadge}</td>
+      <td class="py-md px-md text-right"><div class="flex items-center gap-xs actions-div justify-end"><button class="edit-row-btn p-xs rounded-lg hover:bg-surface-container text-on-surface-variant" title="Edit Product Details"><span class="material-symbols-outlined text-[18px]">edit</span></button><button class="restock-row-btn p-xs rounded-lg hover:bg-surface-container text-on-surface-variant" title="Restock 25 Units"><span class="material-symbols-outlined text-[18px]">inventory</span></button><button class="p-xs rounded-lg hover:bg-surface-container text-on-surface-variant" title="Manage Promo"><span class="material-symbols-outlined text-[18px]">percent</span></button><button class="delete-row-btn p-xs rounded-lg hover:bg-surface-container text-muted-terracotta" title="Archive Product"><span class="material-symbols-outlined text-[18px]">archive</span></button></div></td>`;
+
+    if (isGridView) row.querySelectorAll('td').forEach((cell) => cell.classList.add('block', 'py-xs', 'px-0'));
+    return row;
+  }
+
+  async function loadVendorProducts() {
+    tableBody.replaceChildren();
+    const token = localStorage.getItem('glamoraToken');
+    let user;
+    try { user = JSON.parse(localStorage.getItem('glamoraUser') || 'null'); } catch { user = null; }
+    if (!token || !user) {
+      sessionStorage.setItem('glamoraReturnTo', 'products-management.html');
+      window.location.href = 'Auth/login.html';
+      return;
+    }
+    if (String(user.role || '').toUpperCase() !== 'VENDOR') {
+      window.location.href = 'customer-dashboard.html';
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/vendor/products`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (response.status === 401) {
+        localStorage.removeItem('glamoraToken');
+        localStorage.removeItem('glamoraUser');
+        sessionStorage.setItem('glamoraReturnTo', 'products-management.html');
+        window.location.href = 'Auth/login.html';
+        return;
+      }
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || 'Could not load products.');
+      tableBody.replaceChildren(...data.products.map(createProductRow));
+      updateProductCounts();
+      filterTableRows();
+    } catch (error) {
+      showToast(error.message || 'Could not load products.');
+    }
+  }
+
+  async function updateVendorProduct(productId, payload) {
+    const response = await fetch(`${API_BASE_URL}/api/vendor/products/${encodeURIComponent(productId)}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('glamoraToken')}`,
+      },
+      body: JSON.stringify(payload),
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message || 'Could not update product.');
+    return data.product;
+  }
+
   // --- Add / Edit Product Form Submission ---
   if (saveBtn) {
-    saveBtn.addEventListener('click', function() {
+    saveBtn.addEventListener('click', async function() {
       const name = document.getElementById('newProductName').value.trim();
       const category = document.getElementById('newProductCategory').value;
       const price = parseFloat(document.getElementById('newProductPrice').value);
@@ -206,90 +299,35 @@
         return;
       }
 
-      let rowStatus = stock === 0 ? 'out-of-stock' : (stock <= 15 ? 'low-stock' : 'in-stock');
-      if (status === 'Draft') rowStatus = 'draft';
-      const hasPromo = discount > 0;
-      
-      const priceHtml = buildPriceHtml(price, discount);
-      const stockHtml = buildStockHtml(stock);
-      const statusBadge = status === 'Active' 
-        ? '<span class="px-sm py-xs bg-secondary-container text-on-secondary-container rounded-lg font-label-sm text-label-sm font-semibold">Active</span>'
-        : '<span class="px-sm py-xs bg-surface-container-high text-on-surface-variant rounded-lg font-label-sm text-label-sm font-semibold">Draft</span>';
-
-      const rowInnerHtml = `
-        <td class="py-md px-md transition-all ${isGridView ? 'block py-xs px-0' : ''}">
-          <div class="flex flex-col gap-xs w-full">
-            <div class="flex items-center gap-sm">
-              <img alt="${name}" class="w-20 h-20 rounded-xl object-cover shadow-sm flex-shrink-0 border border-soft-border ${stock===0?'grayscale':''}" src="${currentSelectedImage}"/>
-              <span class="product-title font-body-md text-body-md text-charcoal font-semibold hover:text-secondary cursor-pointer transition-colors">${name}</span>
-            </div>
-            <span class="product-desc font-body-sm text-body-sm text-on-surface-variant line-clamp-2 overflow-hidden text-ellipsis">${desc}</span>
-          </div>
-        </td>
-        <td class="py-md px-md transition-all ${isGridView ? 'block py-xs px-0' : ''}">
-          <span class="px-sm py-xs bg-surface-container-high rounded-lg text-charcoal font-label-sm text-label-sm font-medium">${category}</span>
-        </td>
-        <td class="py-md px-md transition-all ${isGridView ? 'block py-xs px-0' : ''}">
-          ${priceHtml}
-        </td>
-        <td class="py-md px-md transition-all ${isGridView ? 'block py-xs px-0' : ''}">
-          ${stockHtml}
-        </td>
-        <td class="py-md px-md transition-all ${isGridView ? 'block py-xs px-0' : ''}">
-          ${statusBadge}
-        </td>
-        <td class="py-md px-md transition-all ${isGridView ? 'block py-xs px-0' : 'text-right'}">
-          <div class="flex items-center gap-xs actions-div ${isGridView ? 'justify-start' : 'justify-end'}">
-            <button class="edit-row-btn p-xs rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-charcoal transition-colors" title="Edit Product Details">
-              <span class="material-symbols-outlined text-[18px]">edit</span>
-            </button>
-            <button class="p-xs rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-charcoal transition-colors" title="Update Stock Levels">
-              <span class="material-symbols-outlined text-[18px]">swap_vert</span>
-            </button>
-            <button class="p-xs rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-charcoal transition-colors" title="Manage Promo">
-              <span class="material-symbols-outlined text-[18px]">percent</span>
-            </button>
-            <button class="delete-row-btn p-xs rounded-lg hover:bg-surface-container text-muted-terracotta transition-colors" title="Archive/Delete">
-              <span class="material-symbols-outlined text-[18px]">delete</span>
-            </button>
-          </div>
-        </td>
-      `;
-
-      if (editingRowId) {
-        // UPDATE EXISTING ROW
-        const row = document.querySelector(`.product-row[data-id="${editingRowId}"]`);
-        if (row) {
-          row.dataset.category = category;
-          row.dataset.status = rowStatus;
-          row.dataset.price = price;
-          row.dataset.stock = stock;
-          row.dataset.hasPromo = hasPromo;
-          row.innerHTML = rowInnerHtml;
-          row.classList.add('animate-pulse');
-          setTimeout(() => row.classList.remove('animate-pulse'), 1000);
-          showToast(`"${name}" updated successfully!`);
-        }
-      } else {
-        // CREATE NEW ROW
-        const newRow = document.createElement('tr');
-        newRow.className = `product-row transition-colors animate-pulse ${isGridView ? 'flex flex-col border border-soft-border rounded-xl p-sm shadow-sm bg-surface-container-lowest gap-sm' : 'hover:bg-surface-container/50'}`;
-        newRow.setAttribute('data-id', Date.now());
-        newRow.setAttribute('data-category', category);
-        newRow.setAttribute('data-status', rowStatus);
-        newRow.setAttribute('data-price', price);
-        newRow.setAttribute('data-stock', stock);
-        newRow.setAttribute('data-hasPromo', hasPromo);
-        newRow.innerHTML = rowInnerHtml;
-        
-        tableBody.insertBefore(newRow, tableBody.firstChild);
-        setTimeout(() => newRow.classList.remove('animate-pulse'), 1000);
-        showToast(`"${name}" published successfully!`);
+      const token = localStorage.getItem('glamoraToken');
+      const isEditing = Boolean(editingRowId);
+      const payload = {
+        name,
+        category,
+        description: desc,
+        priceKobo: Math.round(price * 100),
+        discountPercent: Math.round(discount),
+        stockQuantity: stock,
+        status: status === 'Active' ? 'ACTIVE' : 'DRAFT',
+        ...(currentSelectedImage.startsWith('http') ? { imageUrl: currentSelectedImage } : {}),
+      };
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/vendor/products${isEditing ? `/${encodeURIComponent(editingRowId)}` : ''}`, {
+          method: isEditing ? 'PATCH' : 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+          body: JSON.stringify(payload),
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Could not save product.');
+        editingRowId = data.product.id;
+      } catch (error) {
+        showToast(error.message || 'Could not save product.');
+        return;
       }
-
       toggleModal(false);
-      updateProductCounts();
-      filterTableRows();
+      editingRowId = null;
+      await loadVendorProducts();
+      showToast(isEditing ? `"${name}" updated successfully!` : `"${name}" published successfully!`);
     });
   }
 
@@ -298,7 +336,7 @@
   let currentMarketingTarget = null;
 
   // --- Table Row Actions (Edit, Delete, Apply Promo, Restock) ---
-  tableBody.addEventListener('click', function(e) {
+  tableBody.addEventListener('click', async function(e) {
     const deleteBtn = e.target.closest('.delete-row-btn');
     if (deleteBtn) {
       rowActionTarget = deleteBtn.closest('.product-row');
@@ -310,8 +348,14 @@
     const restockBtn = e.target.closest('.restock-row-btn');
     if (restockBtn) {
       const row = restockBtn.closest('.product-row');
+      try {
+        await updateVendorProduct(row.dataset.id, { stockQuantity: 25 });
+      } catch (error) {
+        showToast(error.message || 'Could not update stock.');
+        return;
+      }
       row.dataset.stock = "25";
-      row.dataset.status = "in-stock";
+      row.dataset.status = row.dataset.status === 'draft' ? 'draft' : 'in-stock';
       
       const stockCell = row.querySelector('td:nth-child(4)');
       stockCell.innerHTML = buildStockHtml(25);
@@ -370,9 +414,20 @@
   });
 
   // --- Confirm Handlers for Row Operations ---
-  document.getElementById('confirmDeleteBtn').addEventListener('click', () => {
+  document.getElementById('confirmDeleteBtn').addEventListener('click', async () => {
       if(!rowActionTarget) return;
       const title = rowActionTarget.querySelector('.product-title').textContent;
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/vendor/products/${encodeURIComponent(rowActionTarget.dataset.id)}`, {
+          method: 'DELETE',
+          headers: { Authorization: `Bearer ${localStorage.getItem('glamoraToken')}` },
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Could not archive product.');
+      } catch (error) {
+        showToast(error.message || 'Could not archive product.');
+        return;
+      }
       rowActionTarget.remove();
       closeCustomModal(document.getElementById('deleteConfirmModal'));
       updateProductCounts();
@@ -380,11 +435,19 @@
       showToast(`"${title}" successfully deleted.`);
   });
 
-  document.getElementById('confirmUpdateStock').addEventListener('click', () => {
+  document.getElementById('confirmUpdateStock').addEventListener('click', async () => {
       if(!rowActionTarget) return;
       const newStock = parseInt(document.getElementById('modalStockInput').value, 10) || 0;
+      try {
+        await updateVendorProduct(rowActionTarget.dataset.id, { stockQuantity: newStock });
+      } catch (error) {
+        showToast(error.message || 'Could not update stock.');
+        return;
+      }
       rowActionTarget.dataset.stock = newStock;
-      rowActionTarget.dataset.status = newStock === 0 ? 'out-of-stock' : (newStock <= 15 ? 'low-stock' : 'in-stock');
+      rowActionTarget.dataset.status = rowActionTarget.dataset.status === 'draft'
+        ? 'draft'
+        : (newStock === 0 ? 'out-of-stock' : (newStock <= 15 ? 'low-stock' : 'in-stock'));
       const stockCell = rowActionTarget.querySelector('td:nth-child(4)');
       stockCell.innerHTML = buildStockHtml(newStock);
 
@@ -410,10 +473,16 @@
       showToast('Inventory limits successfully updated!');
   });
 
-  document.getElementById('confirmApplyPromo').addEventListener('click', () => {
+  document.getElementById('confirmApplyPromo').addEventListener('click', async () => {
       if(!rowActionTarget) return;
       const discount = parseFloat(document.getElementById('modalProductPromoInput').value) || 0;
       const price = parseFloat(rowActionTarget.dataset.price);
+      try {
+        await updateVendorProduct(rowActionTarget.dataset.id, { discountPercent: Math.round(discount) });
+      } catch (error) {
+        showToast(error.message || 'Could not update discount.');
+        return;
+      }
       rowActionTarget.dataset.hasPromo = discount > 0 ? 'true' : 'false';
       const priceCell = rowActionTarget.querySelector('td:nth-child(3)');
       priceCell.innerHTML = buildPriceHtml(price, discount);
@@ -726,6 +795,8 @@
       filterDropdownMenu.classList.add('hidden');
     });
   }
+
+  loadVendorProducts();
 })();
 
 /**

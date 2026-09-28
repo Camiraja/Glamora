@@ -2,17 +2,18 @@
  * Automatically applies dark/light theme based on system preference or saved preference.
  */
 function initThemeLogic() {
-  const savedTheme = localStorage.getItem("glamora_theme");
+  const savedTheme = localStorage.getItem("themeMode") || localStorage.getItem("glamora_theme") || "light";
   const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-  if (savedTheme === "dark" || (!savedTheme && systemPrefersDark)) {
+  if (savedTheme === "dark" || (savedTheme === "system" && systemPrefersDark)) {
     document.documentElement.classList.add("dark");
   } else {
     document.documentElement.classList.remove("dark");
   }
 
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-    if (!localStorage.getItem("glamora_theme")) {
+    const currentTheme = localStorage.getItem("themeMode") || localStorage.getItem("glamora_theme");
+    if (currentTheme === "system") {
       if (e.matches) {
         document.documentElement.classList.add("dark");
       } else {
@@ -295,6 +296,176 @@ function exportLedger() {
 function toggleMobileDrawer() {
   const drawer = document.getElementById("mobileDrawer");
   if (drawer) drawer.classList.toggle("hidden");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initThemeLogic();
+  loadVendorAppointments();
+});
+
+async function loadVendorAppointments() {
+  const token = localStorage.getItem("glamoraToken");
+  let user;
+  try {
+    user = JSON.parse(localStorage.getItem("glamoraUser") || "null");
+  } catch {
+    user = null;
+  }
+  const appointmentsView = document.getElementById("appointments-view");
+  if (!token || !user) {
+    sessionStorage.setItem("glamoraReturnTo", "vendor-appointments.html");
+    window.location.href = "Auth/login.html";
+    return;
+  }
+  if (String(user.role || "").toUpperCase() !== "VENDOR") {
+    window.location.href = "customer-dashboard.html";
+    return;
+  }
+  if (!appointmentsView) return;
+
+  try {
+    const response = await fetch("http://localhost:3000/api/appointments", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message || "Could not load appointments.");
+
+    appointmentsView.replaceChildren();
+    const appointments = data.appointments || [];
+    appointments.forEach((appointment) => appointmentsView.append(createVendorAppointmentCard(appointment)));
+    const upcomingCount = appointments.filter((appointment) => ["CONFIRMED", "CHECKED_IN"].includes(appointment.status)).length;
+    const pendingAppointments = appointments.filter((appointment) => appointment.status === "PENDING_PAYMENT");
+    const actionCount = pendingAppointments.length;
+    const today = new Date();
+    const todayCount = appointments.filter((appointment) =>
+      !["CANCELLED", "COMPLETED", "NO_SHOW"].includes(appointment.status) &&
+      new Date(appointment.startAt).toDateString() === today.toDateString()
+    ).length;
+    const confirmedCount = appointments.filter((appointment) => ["CONFIRMED", "CHECKED_IN"].includes(appointment.status)).length;
+    const pendingAmount = pendingAppointments.reduce(
+      (total, appointment) => total + appointment.depositKobo + appointment.vatKobo + appointment.logisticsFeeKobo,
+      0,
+    );
+    const formatNaira = (kobo) => new Intl.NumberFormat("en-NG", { style: "currency", currency: "NGN", maximumFractionDigits: 0 }).format(kobo / 100);
+    document.getElementById("badge-appointments-count").textContent = appointments.length;
+    document.getElementById("kpi-today-count").textContent = todayCount;
+    document.getElementById("kpi-confirmed-count").textContent = `${confirmedCount} confirmed`;
+    document.getElementById("kpi-pending-amount").textContent = formatNaira(pendingAmount);
+    document.getElementById("kpi-pending-count").textContent = `${actionCount} appointment${actionCount === 1 ? "" : "s"}`;
+    const upcomingChip = document.querySelector('.filter-chip[onclick*="upcoming"]');
+    if (upcomingChip) upcomingChip.textContent = `Upcoming (${upcomingCount})`;
+    const actionChip = document.querySelector('.filter-chip[onclick*="action"]');
+    if (actionChip) {
+      const label = actionChip.querySelector("span");
+      if (label) label.textContent = `Requires Action (${actionCount})`;
+    }
+    applyFilter("all", document.querySelector('.filter-chip[onclick*="all"]'));
+  } catch (error) {
+    appointmentsView.replaceChildren();
+    const message = document.createElement("p");
+    message.className = "py-lg text-center text-error";
+    message.textContent = error.message || "Could not load appointments.";
+    appointmentsView.append(message);
+    showToast(error.message || "Could not load pending appointments.", "error");
+  }
+}
+
+function createVendorAppointmentCard(appointment) {
+  const pending = appointment.status === "PENDING_PAYMENT";
+  const completed = appointment.status === "COMPLETED";
+  const cancelled = ["CANCELLED", "NO_SHOW"].includes(appointment.status);
+  const status = pending ? "action" : completed ? "completed" : cancelled ? "cancelled" : "upcoming";
+  const statusLabel = pending ? "Pending deposit" : completed ? "Completed" : cancelled ? appointment.status.replace("_", " ") : appointment.status === "CHECKED_IN" ? "Checked in" : "Confirmed";
+  const serviceNames = (appointment.services || []).map((service) => service.serviceName).join(", ") || "Appointment";
+  const start = new Date(appointment.startAt);
+  const end = new Date(appointment.endAt);
+  const formatDate = (date) => date.toLocaleString("en-NG", { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+  const formatNaira = (kobo) => new Intl.NumberFormat("en-NG", { style: "currency", currency: "NGN", maximumFractionDigits: 0 }).format(kobo / 100);
+  const upfrontKobo = appointment.depositKobo + appointment.vatKobo + appointment.logisticsFeeKobo;
+  const card = document.createElement("article");
+  card.className = "appointment-card bg-surface-container-lowest dark:bg-neutral-900 border border-soft-border dark:border-neutral-800 rounded-xl p-md shadow-sm relative overflow-hidden";
+  card.dataset.status = status;
+  card.dataset.search = `${appointment.customer?.name || ""} ${serviceNames} ${appointment.id}`.toLowerCase();
+
+  const accent = document.createElement("div");
+  accent.className = `absolute left-0 top-0 bottom-0 w-1.5 ${pending ? "bg-muted-terracotta" : completed ? "bg-sage" : cancelled ? "bg-outline-variant" : "bg-primary"}`;
+  const row = document.createElement("div");
+  row.className = "flex flex-col lg:flex-row lg:items-center justify-between gap-md pl-xs";
+  const details = document.createElement("div");
+  details.className = "flex flex-col gap-xs min-w-0";
+  const heading = document.createElement("div");
+  heading.className = "flex items-center gap-sm flex-wrap";
+  const client = document.createElement("strong");
+  client.className = "font-headline-md text-headline-md text-primary dark:text-parchment-white";
+  client.textContent = appointment.customer?.name || "Customer";
+  const badge = document.createElement("span");
+  badge.className = `px-sm py-[2px] rounded-full font-label-sm text-label-sm ${pending ? "bg-error-container dark:bg-red-950 text-on-error-container dark:text-red-300" : "bg-surface-container-high dark:bg-neutral-800 text-on-surface-variant dark:text-neutral-300"}`;
+  badge.textContent = statusLabel;
+  heading.append(client, badge);
+
+  const schedule = document.createElement("span");
+  schedule.className = "font-body-sm text-body-sm text-on-surface-variant dark:text-neutral-400";
+  schedule.textContent = `${formatDate(start)} - ${end.toLocaleTimeString("en-NG", { hour: "numeric", minute: "2-digit" })}`;
+  const service = document.createElement("span");
+  service.className = "font-label-md text-label-md text-primary dark:text-parchment-white";
+  service.textContent = serviceNames;
+  const mode = document.createElement("span");
+  mode.className = "font-body-sm text-body-sm text-on-surface-variant dark:text-neutral-400";
+  mode.textContent = `${appointment.deliveryMode === "HOME_SERVICE" ? "Home service" : "Studio walk-in"} · Ref ${appointment.id.slice(0, 8)}`;
+  details.append(heading, schedule, service, mode);
+
+  if (pending) {
+    const due = document.createElement("span");
+    due.className = "font-label-sm text-label-sm text-muted-terracotta";
+    due.textContent = `Deposit outstanding: ${formatNaira(upfrontKobo)} (${appointment.depositPercent}% breakage + VAT${appointment.logisticsFeeKobo ? " + logistics" : ""})`;
+    details.append(due);
+  }
+
+  const actions = document.createElement("div");
+  actions.className = "flex items-center gap-sm shrink-0";
+  if (pending) {
+    const release = document.createElement("button");
+    release.type = "button";
+    release.className = "px-sm py-xs rounded-lg text-error hover:bg-error-container/40 transition-colors font-label-md text-label-md";
+    release.textContent = "Release slot";
+    release.addEventListener("click", () => updateVendorAppointment(appointment.id, "cancel", release));
+    actions.append(release);
+  } else if (!completed && !cancelled) {
+    const complete = document.createElement("button");
+    complete.type = "button";
+    complete.className = "px-sm py-xs rounded-lg bg-primary text-on-primary hover:bg-primary-container transition-colors font-label-md text-label-md";
+    complete.textContent = "Mark completed";
+    complete.addEventListener("click", () => updateVendorAppointment(appointment.id, "complete", complete));
+    actions.append(complete);
+  }
+
+  row.append(details, actions);
+  card.append(accent, row);
+  return card;
+}
+
+async function updateVendorAppointment(appointmentId, action, button) {
+  const pending = action === "cancel";
+  const confirmation = pending
+    ? "Release this unpaid appointment slot? The customer will need to book again."
+    : "Mark this appointment as completed?";
+  if (!window.confirm(confirmation)) return;
+  const token = localStorage.getItem("glamoraToken");
+  button.disabled = true;
+  try {
+    const endpoint = pending ? "cancel" : "complete";
+    const response = await fetch(`http://localhost:3000/api/appointments/${appointmentId}/${endpoint}`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message || "Could not update appointment.");
+    showToast(pending ? "Pending appointment cancelled and slot released." : "Appointment marked as completed.", "success");
+    await loadVendorAppointments();
+  } catch (error) {
+    button.disabled = false;
+    showToast(error.message || "Could not update appointment.", "error");
+  }
 }
 
 // TOAST SYSTEM

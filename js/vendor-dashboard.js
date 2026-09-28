@@ -2,7 +2,28 @@
  * GLAMORA - Vendor Dashboard Logic
  */
 
+function requireVendorAccess() {
+  const token = localStorage.getItem("glamoraToken");
+  const user = JSON.parse(localStorage.getItem("glamoraUser") || "null");
+
+  if (!token || !user) {
+    sessionStorage.setItem("glamoraReturnTo", "vendor-dashboard.html");
+    window.location.href = "Auth/login.html";
+    return false;
+  }
+
+  if (String(user.role || "").toUpperCase() !== "VENDOR") {
+    window.location.href = "customer-dashboard.html";
+    return false;
+  }
+
+  return true;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  if (!requireVendorAccess()) {
+    return;
+  }
   initThemeLogic();
 });
 
