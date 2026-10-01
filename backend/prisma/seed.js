@@ -23,22 +23,24 @@ try {
   const passwordHash = await bcrypt.hash("DemoPassword123!", 12);
   const vendor = await prisma.user.upsert({
     where: { email: vendorEmail },
-    update: { role: "VENDOR" },
+    update: { role: "VENDOR", activeMode: "VENDOR", isActive: true },
     create: {
       name: "Demo Vendor",
       email: vendorEmail,
       passwordHash,
       role: "VENDOR",
+      activeMode: "VENDOR",
     },
   });
   const customer = await prisma.user.upsert({
     where: { email: customerEmail },
-    update: { role: "CUSTOMER" },
+    update: { role: "CUSTOMER", activeMode: "CUSTOMER", isActive: true },
     create: {
       name: "Demo Customer",
       email: customerEmail,
       passwordHash,
       role: "CUSTOMER",
+      activeMode: "CUSTOMER",
     },
   });
 
@@ -75,7 +77,6 @@ try {
         description: "Development-only demo service",
         durationMin: 60,
         priceKobo: 1500000,
-        depositPercent: 25,
       },
     });
   }
@@ -134,7 +135,7 @@ try {
   }
 
   const availability = await prisma.availability.findFirst({
-    where: { vendorId: vendor.id, dayOfWeek: 1, staffMemberId: null },
+    where: { vendorId: vendor.id, dayOfWeek: 1 },
   });
   if (!availability) {
     await prisma.availability.create({

@@ -9,6 +9,7 @@ datasource db {
 enum UserRole {
   CUSTOMER
   VENDOR
+  ADMIN
 }
 
 enum BusinessDeliveryMode {
@@ -40,6 +41,7 @@ enum PaymentType {
   DEPOSIT
   BALANCE
   PRODUCT_ORDER
+  WALLET_TOP_UP
 }
 
 enum PaymentStatus {
@@ -50,22 +52,106 @@ enum PaymentStatus {
   REFUNDED
 }
 
+enum ProductOrderStatus {
+  PENDING_PAYMENT
+  PAYMENT_FAILED
+  PROCESSING
+  PARTIALLY_DISPATCHED
+  DISPATCHED
+  COMPLETED
+  CANCELLED
+}
+
+enum ProductOrderFulfillmentStatus {
+  PROCESSING
+  DISPATCHED
+  COMPLETED
+}
+
+enum ChatMessageType {
+  TEXT
+  IMAGE
+  AUDIO
+}
+
+enum ChatMessageStatus {
+  SENT
+  READ
+}
+
+enum ConversationReportStatus {
+  OPEN
+  REVIEWED
+  RESOLVED
+}
+
+enum WalletTransactionType {
+  CUSTOMER_TOP_UP
+  APPOINTMENT_EARNING
+  PRODUCT_EARNING
+  WITHDRAWAL_HOLD
+  WITHDRAWAL_RELEASE
+  ORDER_PAYMENT
+  APPOINTMENT_PAYMENT
+}
+
+enum WalletWithdrawalStatus {
+  REQUESTED
+  PROCESSING
+  REJECTED
+  CANCELLED
+}
+
+enum AuthCredentialPurpose {
+  EMAIL_VERIFICATION
+  PASSWORD_RESET
+}
+
 model User {
   id           String   @id @default(uuid())
   name         String
   email        String   @unique
   passwordHash String
   role         UserRole
+  activeMode   UserRole @default(CUSTOMER)
+  isActive     Boolean  @default(true)
+  emailVerified Boolean @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
   businesses   Business[]
-  staffMembers StaffMember[]
+  customerFavorites CustomerFavorite[]
   availability Availability[]
   blockoutDates BlockoutDate[]
   appointmentsAsCustomer Appointment[] @relation("CustomerAppointments")
   appointmentsAsVendor Appointment[] @relation("VendorAppointments")
   payments Payment[]
+  productOrders ProductOrder[]
+  productOrderFulfillments ProductOrderFulfillment[]
+  customerConversations Conversation[] @relation("ConversationCustomer")
+  vendorConversations Conversation[] @relation("ConversationVendor")
+  sentMessages ChatMessage[]
+  conversationBlocksMade ConversationBlock[] @relation("ConversationBlocker")
+  conversationBlocksReceived ConversationBlock[] @relation("ConversationBlocked")
+  conversationReportsMade ConversationReport[] @relation("ConversationReporter")
+  conversationReportsReceived ConversationReport[] @relation("ConversationReported")
+  wallets Wallet[]
+  authCredentials AuthCredential[]
+}
+
+model AuthCredential {
+  id             String                @id @default(uuid())
+  userId         String
+  purpose        AuthCredentialPurpose
+  tokenHash      String
+  expiresAt      DateTime
+  consumedAt     DateTime?
+  failedAttempts Int                   @default(0)
+  createdAt      DateTime              @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, purpose, expiresAt])
 }
 
 model Business {
@@ -86,10 +172,24 @@ model Business {
   locations   BusinessLocation[]
   services    Service[]
   products    Product[]
-  staff       StaffMember[]
+  productOrderFulfillments ProductOrderFulfillment[]
+  conversations Conversation[]
+  favoritedByCustomers CustomerFavorite[]
   appointments Appointment[]
 
   @@index([ownerId])
+}
+
+model CustomerFavorite {
+  customerId String
+  businessId String
+  createdAt  DateTime @default(now())
+
+  customer User     @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@id([customerId, businessId])
+  @@index([businessId])
 }
 
 model BusinessLocation {
@@ -108,60 +208,32 @@ model BusinessLocation {
   @@index([businessId])
 }
 
-model StaffMember {
+model Availability {
   id         String   @id @default(uuid())
-  businessId String
-  userId     String?
-  name       String
-  email      String?
+  vendorId   String
+  dayOfWeek  Int
+  startTime  String
+  endTime    String
   isActive   Boolean  @default(true)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
-  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
-  user       User?    @relation(fields: [userId], references: [id])
-  services   Service[]
-  availability Availability[]
-  blockoutDates BlockoutDate[]
-  appointments Appointment[]
-  appointmentSlots AppointmentSlot[]
-
-  @@index([businessId])
-  @@index([userId])
-}
-
-model Availability {
-  id            String   @id @default(uuid())
-  vendorId      String
-  staffMemberId String?
-  dayOfWeek     Int
-  startTime     String
-  endTime       String
-  isActive      Boolean  @default(true)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  vendor        User        @relation(fields: [vendorId], references: [id], onDelete: Cascade)
-  staffMember   StaffMember? @relation(fields: [staffMemberId], references: [id], onDelete: Cascade)
+  vendor     User     @relation(fields: [vendorId], references: [id], onDelete: Cascade)
 
   @@index([vendorId, dayOfWeek])
-  @@index([staffMemberId, dayOfWeek])
 }
 
 model BlockoutDate {
-  id            String   @id @default(uuid())
-  vendorId      String
-  staffMemberId String?
-  startsAt      DateTime
-  endsAt        DateTime
-  reason        String?
-  createdAt     DateTime @default(now())
+  id        String   @id @default(uuid())
+  vendorId  String
+  startsAt  DateTime
+  endsAt    DateTime
+  reason    String?
+  createdAt DateTime @default(now())
 
-  vendor        User        @relation(fields: [vendorId], references: [id], onDelete: Cascade)
-  staffMember   StaffMember? @relation(fields: [staffMemberId], references: [id], onDelete: Cascade)
+  vendor    User     @relation(fields: [vendorId], references: [id], onDelete: Cascade)
 
   @@index([vendorId, startsAt, endsAt])
-  @@index([staffMemberId, startsAt, endsAt])
 }
 
 model ServiceCategory {
@@ -175,25 +247,21 @@ model Service {
   id             String          @id @default(uuid())
   businessId     String
   categoryId     String?
-  staffMemberId  String?
   name           String
   description    String?
   durationMin    Int
   priceKobo      Int
-  depositPercent Int
   isActive       Boolean         @default(true)
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
 
   business       Business        @relation(fields: [businessId], references: [id])
   category       ServiceCategory? @relation(fields: [categoryId], references: [id])
-  staffMember    StaffMember?    @relation(fields: [staffMemberId], references: [id])
   images         ServiceImage[]
   appointmentItems AppointmentService[]
 
   @@index([businessId])
   @@index([categoryId])
-  @@index([staffMemberId])
 }
 
 model ServiceImage {
@@ -224,6 +292,7 @@ model Product {
   updatedAt       DateTime      @updatedAt
 
   business        Business      @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  orderItems      ProductOrderItem[]
 
   @@index([businessId, status])
   @@index([category])
@@ -234,7 +303,6 @@ model Appointment {
   customerId  String
   vendorId    String
   businessId  String
-  staffMemberId String?
   status      AppointmentStatus @default(PENDING_PAYMENT)
   deliveryMode AppointmentDeliveryMode @default(STUDIO)
   startAt     DateTime
@@ -253,11 +321,11 @@ model Appointment {
   customer    User              @relation("CustomerAppointments", fields: [customerId], references: [id])
   vendor      User              @relation("VendorAppointments", fields: [vendorId], references: [id])
   business    Business          @relation(fields: [businessId], references: [id])
-  staffMember StaffMember?      @relation(fields: [staffMemberId], references: [id])
   services    AppointmentService[]
   slots       AppointmentSlot[]
   statusHistory AppointmentStatusHistory[]
   payments    Payment[]
+  conversationReports ConversationReport[]
 
   @@index([customerId, startAt])
   @@index([vendorId, startAt])
@@ -272,7 +340,6 @@ model AppointmentService {
   serviceName   String
   durationMin   Int
   priceKobo     Int
-  depositPercent Int
   createdAt     DateTime    @default(now())
 
   appointment    Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
@@ -285,15 +352,12 @@ model AppointmentService {
 model AppointmentSlot {
   id            String      @id @default(uuid())
   appointmentId String
-  staffMemberId String?
   startsAt      DateTime
   endsAt        DateTime
   createdAt     DateTime    @default(now())
 
   appointment   Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
-  staffMember   StaffMember? @relation(fields: [staffMemberId], references: [id])
 
-  @@unique([staffMemberId, startsAt])
   @@index([appointmentId])
   @@index([startsAt, endsAt])
 }
@@ -310,9 +374,81 @@ model AppointmentStatusHistory {
   @@index([appointmentId, createdAt])
 }
 
+model ProductOrder {
+  id              String             @id @default(uuid())
+  customerId      String
+  status          ProductOrderStatus @default(PENDING_PAYMENT)
+  paymentStatus   PaymentStatus      @default(INITIALIZED)
+  subtotalKobo    Int
+  discountKobo    Int                @default(0)
+  vatKobo         Int                @default(0)
+  shippingKobo    Int                @default(0)
+  totalKobo       Int
+  currency        String             @default("NGN")
+  shippingName    String
+  shippingPhone   String
+  shippingAddress String
+  shippingCity    String
+  inventoryReserved Boolean          @default(true)
+  expiresAt       DateTime
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  customer     User                        @relation(fields: [customerId], references: [id])
+  items        ProductOrderItem[]
+  fulfillments ProductOrderFulfillment[]
+  payments     Payment[]
+
+  @@index([customerId, createdAt])
+  @@index([status, expiresAt])
+}
+
+model ProductOrderFulfillment {
+  id          String                        @id @default(uuid())
+  orderId     String
+  businessId  String
+  vendorId    String
+  status      ProductOrderFulfillmentStatus @default(PROCESSING)
+  subtotalKobo Int
+  createdAt   DateTime                      @default(now())
+  updatedAt   DateTime                      @updatedAt
+
+  order    ProductOrder     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  business Business         @relation(fields: [businessId], references: [id])
+  vendor   User              @relation(fields: [vendorId], references: [id])
+  items    ProductOrderItem[]
+
+  @@unique([orderId, businessId])
+  @@index([vendorId, status, createdAt])
+}
+
+model ProductOrderItem {
+  id               String   @id @default(uuid())
+  orderId          String
+  fulfillmentId    String
+  productId        String?
+  productName      String
+  productCategory  String
+  imageUrl         String?  @db.Text
+  listPriceKobo    Int
+  unitPriceKobo    Int
+  discountPercent  Int      @default(0)
+  quantity         Int
+  createdAt        DateTime @default(now())
+
+  order       ProductOrder          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  fulfillment ProductOrderFulfillment @relation(fields: [fulfillmentId], references: [id], onDelete: Cascade)
+  product     Product?              @relation(fields: [productId], references: [id], onDelete: SetNull)
+
+  @@index([orderId])
+  @@index([fulfillmentId])
+  @@index([productId])
+}
+
 model Payment {
   id                String        @id @default(uuid())
   appointmentId     String?
+  orderId           String?
   userId            String
   type              PaymentType
   status            PaymentStatus @default(INITIALIZED)
@@ -325,9 +461,144 @@ model Payment {
   updatedAt         DateTime      @updatedAt
 
   appointment Appointment? @relation(fields: [appointmentId], references: [id])
+  order       ProductOrder? @relation(fields: [orderId], references: [id], onDelete: SetNull)
   user        User         @relation(fields: [userId], references: [id])
+  walletTransaction WalletTransaction?
 
   @@index([appointmentId])
   @@index([userId, status])
   @@unique([appointmentId, type])
+  @@unique([orderId, type])
+}
+
+model Wallet {
+  id          String   @id @default(uuid())
+  userId      String
+  mode        UserRole @default(VENDOR)
+  balanceKobo Int      @default(0)
+  currency    String   @default("NGN")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user         User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions WalletTransaction[]
+  withdrawals  WalletWithdrawal[]
+
+  @@unique([userId, mode])
+}
+
+model WalletTransaction {
+  id             String                @id @default(uuid())
+  walletId       String
+  type           WalletTransactionType
+  amountKobo     Int
+  balanceAfterKobo Int
+  sourceKey      String                @unique
+  description    String
+  paymentId      String?               @unique
+  withdrawalId   String?
+  createdAt      DateTime              @default(now())
+
+  wallet      Wallet           @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  payment     Payment?         @relation(fields: [paymentId], references: [id], onDelete: SetNull)
+  withdrawal  WalletWithdrawal? @relation(fields: [withdrawalId], references: [id], onDelete: SetNull)
+
+  @@index([walletId, createdAt])
+  @@index([type, createdAt])
+}
+
+model WalletWithdrawal {
+  id          String                @id @default(uuid())
+  walletId    String
+  amountKobo  Int
+  status      WalletWithdrawalStatus @default(REQUESTED)
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+
+  wallet       Wallet              @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  transactions WalletTransaction[]
+
+  @@index([walletId, status, createdAt])
+  @@index([status, createdAt])
+}
+
+model Conversation {
+  id           String   @id @default(uuid())
+  customerId   String
+  vendorId     String
+  businessId   String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  lastMessageAt DateTime @default(now())
+
+  customer User       @relation("ConversationCustomer", fields: [customerId], references: [id], onDelete: Cascade)
+  vendor   User       @relation("ConversationVendor", fields: [vendorId], references: [id], onDelete: Cascade)
+  business Business  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  messages ChatMessage[]
+  blocks   ConversationBlock[]
+  reports  ConversationReport[]
+
+  @@unique([customerId, businessId])
+  @@index([customerId, lastMessageAt])
+  @@index([vendorId, lastMessageAt])
+}
+
+model ChatMessage {
+  id                 String           @id @default(uuid())
+  conversationId     String
+  senderId           String
+  senderMode         UserRole
+  type               ChatMessageType  @default(TEXT)
+  status             ChatMessageStatus @default(SENT)
+  content            String?          @db.Text
+  attachmentData     String?          @db.Text
+  attachmentMimeType String?
+  durationSeconds    Int?
+  createdAt          DateTime         @default(now())
+  readAt             DateTime?
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender       User         @relation(fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId, createdAt])
+  @@index([senderId, status])
+}
+
+model ConversationBlock {
+  id            String   @id @default(uuid())
+  conversationId String
+  blockerId     String
+  blockedUserId String
+  createdAt     DateTime @default(now())
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  blocker      User         @relation("ConversationBlocker", fields: [blockerId], references: [id], onDelete: Cascade)
+  blockedUser  User         @relation("ConversationBlocked", fields: [blockedUserId], references: [id], onDelete: Cascade)
+
+  @@unique([conversationId, blockerId])
+  @@index([blockedUserId])
+}
+
+model ConversationReport {
+  id             String                  @id @default(uuid())
+  conversationId String
+  appointmentId  String?
+  reporterId     String
+  reportedUserId String
+  reason         String
+  details        String                  @db.Text
+  attachmentData String?                 @db.Text
+  attachmentMimeType String?
+  status         ConversationReportStatus @default(OPEN)
+  createdAt      DateTime                @default(now())
+  updatedAt      DateTime                @updatedAt
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  appointment  Appointment? @relation(fields: [appointmentId], references: [id], onDelete: SetNull)
+  reporter     User         @relation("ConversationReporter", fields: [reporterId], references: [id], onDelete: Cascade)
+  reportedUser User         @relation("ConversationReported", fields: [reportedUserId], references: [id], onDelete: Cascade)
+
+  @@index([status, createdAt])
+  @@index([reporterId, createdAt])
+  @@index([appointmentId])
 }

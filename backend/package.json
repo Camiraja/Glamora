@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "node --watch src/server.js",
     "start": "node src/server.js",
-    "db:seed": "node prisma/seed.js"
+    "db:seed": "node prisma/seed.js",
+    "admin:promote": "node prisma/promote-admin.js"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.0",
@@ -16,7 +17,8 @@
     "express": "^5.1.0",
     "express-validator": "^7.3.2",
     "jsonwebtoken": "^9.0.3",
-    "pg": "^8.23.0"
+    "pg": "^8.23.0",
+    "resend": "^6.31.0"
   },
   "devDependencies": {
     "prisma": "^7.10.0"
